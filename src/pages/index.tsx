@@ -1,15 +1,7 @@
 import { useCallback, useMemo, useState } from "react";
 import type { NextPage } from "next";
 import axios from "axios";
-import {
-  TextInput,
-  Button,
-  Box,
-  Loader,
-  Grid,
-  Card,
-  Image,
-} from "@mantine/core";
+import { TextInput, Button, Box, Loader } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Songs } from "@components/layout/Songs";
 
