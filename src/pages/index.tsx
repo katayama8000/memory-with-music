@@ -1,14 +1,6 @@
 import type { NextPage } from "next";
 import axios from "axios";
-import {
-  TextInput,
-  Checkbox,
-  Button,
-  Group,
-  Box,
-  Loader,
-  LoadingOverlay,
-} from "@mantine/core";
+import { TextInput, Button, Box, Loader } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useState } from "react";
 
