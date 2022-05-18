@@ -7,7 +7,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Head>
-        <title>Next.js</title>
+        <title>🧠memory with music</title>
       </Head>
       <main className="m-auto max-w-4xl">
         <MantineProvider
