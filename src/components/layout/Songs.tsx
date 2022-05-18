@@ -1,17 +1,5 @@
 import React from "react";
-import { useState } from "react";
-import type { NextPage } from "next";
-import axios from "axios";
-import {
-  TextInput,
-  Button,
-  Box,
-  Loader,
-  Grid,
-  Card,
-  Image,
-} from "@mantine/core";
-import { useForm } from "@mantine/form";
+import { Button, Grid, Card, Image } from "@mantine/core";
 
 type Props = {
   songsData: {
