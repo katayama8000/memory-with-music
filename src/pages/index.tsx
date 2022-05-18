@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useCallback, useMemo, useState } from "react";
 import type { NextPage } from "next";
 import axios from "axios";
 import {
@@ -51,17 +51,15 @@ const Home: NextPage = () => {
     },
   });
 
-  const handleSubmit = async (values: { music: string }) => {
-    console.log(values);
+  const handleSubmit = useCallback(async (values: { music: string }) => {
     setLoaderFlag(true);
     const { data } = await axios.get(
       `//itunes.apple.com/search?term=${values.music}&country=jp&entity=musicVideo`
     );
-    console.log(data);
     setSongsData(data);
     setLoaderFlag(false);
     console.log(songsData);
-  };
+  }, []);
 
   return (
     <div className="p-20">
