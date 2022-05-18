@@ -5,9 +5,6 @@ import {
   Button,
   Box,
   Loader,
-  Divider,
-  Group,
-  useMantineTheme,
   Grid,
   Card,
   Image,
@@ -98,23 +95,24 @@ const Home: NextPage = () => {
                 return (
                   <Grid.Col span={4} key={index}>
                     <div key={index} className="m-auto">
-                      <Card shadow="sm" p="lg">
-                        <Card.Section className="p-2">
+                      <Card shadow="sm" p="lg" radius="md">
+                        <Card.Section className="mx-auto py-2">
                           <Image
                             src={data.artworkUrl100}
                             alt={data.artistName}
                             radius="md"
+                            height={80}
                           />
                         </Card.Section>
 
                         <Button
                           variant="light"
-                          color="blue"
+                          color="cyan"
                           fullWidth
                           radius="md"
-                          style={{ marginTop: 14 }}
+                          className="mt-2"
                         >
-                          Book classic tour now
+                          Go to this song
                         </Button>
                       </Card>
                     </div>
