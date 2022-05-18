@@ -89,7 +89,9 @@ export const Songs: React.FC<Props> = ({ songsData }) => {
           </Grid>
         </div>
       ) : (
-        <div>There is no such a song</div>
+        <div className="pt-10 text-center text-xl font-bold">
+          There is no such a song
+        </div>
       )}
     </div>
   );
