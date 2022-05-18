@@ -1,3 +1,4 @@
+import { useState } from "react";
 import type { NextPage } from "next";
 import axios from "axios";
 import {
@@ -10,7 +11,8 @@ import {
   Image,
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useState } from "react";
+import { Songs } from "@components/layout/Songs";
+import { Sample } from "@components/Sample";
 
 type result = {
   resultCount: number;
@@ -62,10 +64,14 @@ const Home: NextPage = () => {
     console.log(result);
   };
 
+  const getYear = (releaseDate: string) => {
+    const date = new Date(releaseDate);
+    return date.getFullYear();
+  };
+
   return (
     <div className="p-20">
       {loaderFlag && <Loader color="cyan" size="xl" />}
-
       <div className="flex justify-center">
         <h1 className="pr-2 pb-2 text-center italic hover:not-italic">
           memory with music
@@ -86,7 +92,8 @@ const Home: NextPage = () => {
           </Button>
         </form>
       </Box>
-
+      <Songs />
+      <Sample child="hello" />
       <div className="mt-5">
         {result?.resultCount != 0 ? (
           <div>
@@ -104,6 +111,7 @@ const Home: NextPage = () => {
                             height={80}
                           />
                         </Card.Section>
+                        <div>{getYear(data.releaseDate)}</div>
 
                         <Button
                           variant="light"
