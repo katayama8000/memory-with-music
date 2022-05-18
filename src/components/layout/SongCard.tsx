@@ -5,6 +5,7 @@ type Props = {
   artistName: string;
   trackName: string;
   releaseDate: string;
+  loading: boolean;
 };
 const getYear = (releaseDate: string) => {
   const date = new Date(releaseDate);
@@ -15,8 +16,8 @@ export const SkeletonCard = () => {
   return (
     <div>
       <Card shadow="sm" p="lg" radius="md" className="h-[234px]">
-        <Card.Section className="mx-auto py-2">
-          <Image src={""} alt="" radius="md" height={80} withPlaceholder />
+        <Card.Section className="mx-auto rounded-lg py-2">
+          <Skeleton height={80} className="rounded-xl" />
         </Card.Section>
         <Skeleton height={80} />
         <Button
@@ -39,6 +40,7 @@ export const SongCard: React.FC<Props> = ({
   artistName,
   trackName,
   releaseDate,
+  loading,
 }) => {
   return (
     <div>

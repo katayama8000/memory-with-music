@@ -57,6 +57,7 @@ export const Songs: React.FC<Props> = ({ songsData, loading }) => {
                       artistName={data.artistName}
                       trackName={data.trackName}
                       releaseDate={data.releaseDate}
+                      loading={loading}
                     />
                   </div>
                 </Grid.Col>

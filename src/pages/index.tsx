@@ -53,7 +53,7 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <div className="p-20">
+    <div className="flex flex-col justify-center p-20">
       <div className="flex justify-center">
         <h1 className="pr-2 pb-2 text-center italic hover:not-italic">
           memory with music
@@ -75,7 +75,9 @@ const Home: NextPage = () => {
         </form>
       </Box>
       {loaderFlag && (
-        <Loader color="cyan" variant="dots" className="flex justify-center" />
+        <div className="flex flex-col py-20">
+          <Loader color="cyan" variant="dots" className="m-auto" />
+        </div>
       )}
       <div className="mt-5">
         <Songs songsData={songsData} loading={loaderFlag} />
