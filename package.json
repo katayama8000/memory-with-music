@@ -13,6 +13,7 @@
     "@mantine/form": "^4.2.5",
     "@mantine/hooks": "^4.2.5",
     "@mantine/next": "^4.2.5",
+    "@supabase/supabase-js": "^1.35.3",
     "axios": "^0.27.2",
     "next": "12.1.6",
     "react": "18.1.0",
