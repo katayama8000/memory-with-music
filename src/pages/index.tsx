@@ -10,7 +10,7 @@ const Home: NextPage = () => {
     },
   });
 
-  const handleSubmit = async (values) => {
+  const handleSubmit = async (values: { music: string }) => {
     console.log(values);
     const { data } = await axios.get(
       `//itunes.apple.com/search?term=${values}&country=jp&entity=musicVideo`
