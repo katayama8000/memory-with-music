@@ -9,9 +9,15 @@ function MyApp({ Component, pageProps }: AppProps) {
       <Head>
         <title>Next.js</title>
       </Head>
-      <MantineProvider withGlobalStyles withNormalizeCSS>
-        <Component {...pageProps} />
-      </MantineProvider>
+      <main className="m-auto max-w-4xl">
+        <MantineProvider
+          theme={{ colorScheme: "dark" }}
+          withGlobalStyles
+          withNormalizeCSS
+        >
+          <Component {...pageProps} />
+        </MantineProvider>
+      </main>
     </>
   );
 }
