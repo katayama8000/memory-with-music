@@ -11,7 +11,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <main className="m-auto max-w-4xl">
         <MantineProvider
-          theme={{ colorScheme: "dark" }}
+          theme={{ colorScheme: "dark", loader: "bars" }}
           withGlobalStyles
           withNormalizeCSS
         >
