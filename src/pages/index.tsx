@@ -49,7 +49,8 @@ const Home: NextPage = () => {
       `//itunes.apple.com/search?term=${values.music}&country=jp&entity=musicVideo`
     );
     setSongsData(data);
-    //setLoaderFlag(false);
+    setLoaderFlag(false);
+    form.reset();
   }, []);
 
   return (
@@ -66,7 +67,7 @@ const Home: NextPage = () => {
           className="mt-2 flex gap-x-2"
         >
           <TextInput
-            placeholder="searching for music"
+            placeholder="search for music"
             {...form.getInputProps("music")}
           />
           <Button type="submit" color="cyan">
