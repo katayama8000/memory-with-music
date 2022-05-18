@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Grid, Card, Image } from "@mantine/core";
+import { Grid } from "@mantine/core";
 import { SongCard, SkeletonCard } from "@components/layout/SongCard";
 
 type Props = {
