@@ -1,7 +1,9 @@
 import React from "react";
 import { Button, Grid, Card, Image } from "@mantine/core";
+import { SongCard, SkeletonCard } from "@components/layout/SongCard";
 
 type Props = {
+  loading: boolean;
   songsData: {
     resultCount: number;
     results: {
@@ -31,45 +33,31 @@ type Props = {
   };
 };
 
-const getYear = (releaseDate: string) => {
-  const date = new Date(releaseDate);
-  return date.getFullYear();
-};
-
-export const Songs: React.FC<Props> = ({ songsData }) => {
+export const Songs: React.FC<Props> = ({ songsData, loading }) => {
   console.log(songsData);
 
   return (
     <div>
-      {songsData?.resultCount != null ? (
+      {songsData?.resultCount > 0 ? (
         <div>
           <Grid>
+            {loading && (
+              <Grid.Col span={4}>
+                <div className="m-auto">
+                  <SkeletonCard />
+                </div>
+              </Grid.Col>
+            )}
             {songsData?.results?.map((data, index) => {
               return (
                 <Grid.Col span={4} key={index}>
                   <div key={index} className="m-auto">
-                    <Card shadow="sm" p="lg" radius="md">
-                      <Card.Section className="mx-auto py-2">
-                        <Image
-                          src={data.artworkUrl100}
-                          alt={data.artistName}
-                          radius="md"
-                          height={80}
-                        />
-                      </Card.Section>
-
-                      <div>{getYear(data.releaseDate)}</div>
-
-                      <Button
-                        variant="light"
-                        color="cyan"
-                        fullWidth
-                        radius="md"
-                        className="mt-2"
-                      >
-                        Go to this song
-                      </Button>
-                    </Card>
+                    <SongCard
+                      url={data.artworkUrl100}
+                      artistName={data.artistName}
+                      trackName={data.trackName}
+                      releaseDate={data.releaseDate}
+                    />
                   </div>
                 </Grid.Col>
               );

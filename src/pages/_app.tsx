@@ -22,7 +22,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:description" content="memory with music" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="" />
-        <meta property="og:image" content="img/brain.png" />
+        <meta property="og:image" content="img/rain.png" />
         <meta property="og:site_name" content="memory with music" />
         <meta property="og:locale" content="ja_JP" />
       </Head>

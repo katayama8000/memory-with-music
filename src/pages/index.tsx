@@ -49,13 +49,11 @@ const Home: NextPage = () => {
       `//itunes.apple.com/search?term=${values.music}&country=jp&entity=musicVideo`
     );
     setSongsData(data);
-    setLoaderFlag(false);
-    console.log(songsData);
+    //setLoaderFlag(false);
   }, []);
 
   return (
     <div className="p-20">
-      {loaderFlag && <Loader color="cyan" size="xl" />}
       <div className="flex justify-center">
         <h1 className="pr-2 pb-2 text-center italic hover:not-italic">
           memory with music
@@ -76,8 +74,11 @@ const Home: NextPage = () => {
           </Button>
         </form>
       </Box>
+      {loaderFlag && (
+        <Loader color="cyan" variant="dots" className="flex justify-center" />
+      )}
       <div className="mt-5">
-        <Songs songsData={songsData} />
+        <Songs songsData={songsData} loading={loaderFlag} />
       </div>
     </div>
   );
