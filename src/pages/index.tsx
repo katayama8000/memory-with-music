@@ -12,7 +12,6 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Songs } from "@components/layout/Songs";
-import { Sample } from "@components/Sample";
 
 type result = {
   resultCount: number;
@@ -44,7 +43,7 @@ type result = {
 
 const Home: NextPage = () => {
   const [loaderFlag, setLoaderFlag] = useState<boolean>(false);
-  const [result, setResult] = useState<result>();
+  const [songsData, setSongsData] = useState<result>();
 
   const form = useForm({
     initialValues: {
@@ -59,14 +58,9 @@ const Home: NextPage = () => {
       `//itunes.apple.com/search?term=${values.music}&country=jp&entity=musicVideo`
     );
     console.log(data);
-    setResult(data);
+    setSongsData(data);
     setLoaderFlag(false);
-    console.log(result);
-  };
-
-  const getYear = (releaseDate: string) => {
-    const date = new Date(releaseDate);
-    return date.getFullYear();
+    console.log(songsData);
   };
 
   return (
@@ -92,46 +86,8 @@ const Home: NextPage = () => {
           </Button>
         </form>
       </Box>
-      <Songs />
-      <Sample child="hello" />
       <div className="mt-5">
-        {result?.resultCount != 0 ? (
-          <div>
-            <Grid>
-              {result?.results.map((data, index) => {
-                return (
-                  <Grid.Col span={4} key={index}>
-                    <div key={index} className="m-auto">
-                      <Card shadow="sm" p="lg" radius="md">
-                        <Card.Section className="mx-auto py-2">
-                          <Image
-                            src={data.artworkUrl100}
-                            alt={data.artistName}
-                            radius="md"
-                            height={80}
-                          />
-                        </Card.Section>
-                        <div>{getYear(data.releaseDate)}</div>
-
-                        <Button
-                          variant="light"
-                          color="cyan"
-                          fullWidth
-                          radius="md"
-                          className="mt-2"
-                        >
-                          Go to this song
-                        </Button>
-                      </Card>
-                    </div>
-                  </Grid.Col>
-                );
-              })}
-            </Grid>
-          </div>
-        ) : (
-          <div>There is no such a song</div>
-        )}
+        <Songs songsData={songsData} />
       </div>
     </div>
   );
