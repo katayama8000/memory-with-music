@@ -1,6 +1,17 @@
 import type { NextPage } from "next";
 import axios from "axios";
-import { TextInput, Button, Box, Loader, Divider } from "@mantine/core";
+import {
+  TextInput,
+  Button,
+  Box,
+  Loader,
+  Divider,
+  Group,
+  useMantineTheme,
+  Grid,
+  Card,
+  Image,
+} from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useState } from "react";
 
@@ -79,15 +90,41 @@ const Home: NextPage = () => {
         </form>
       </Box>
 
-      <div>
+      <div className="mt-5">
         {result?.resultCount != 0 ? (
           <div>
-            {result?.results.map((data, index) => {
-              return <div key={index}>{data.artistName}</div>;
-            })}
+            <Grid>
+              {result?.results.map((data, index) => {
+                return (
+                  <Grid.Col span={4} key={index}>
+                    <div key={index} className="m-auto">
+                      <Card shadow="sm" p="lg">
+                        <Card.Section className="p-2">
+                          <Image
+                            src={data.artworkUrl100}
+                            alt={data.artistName}
+                            radius="md"
+                          />
+                        </Card.Section>
+
+                        <Button
+                          variant="light"
+                          color="blue"
+                          fullWidth
+                          radius="md"
+                          style={{ marginTop: 14 }}
+                        >
+                          Book classic tour now
+                        </Button>
+                      </Card>
+                    </div>
+                  </Grid.Col>
+                );
+              })}
+            </Grid>
           </div>
         ) : (
-          <div>There in nothing to listen to</div>
+          <div>There is no such a song</div>
         )}
       </div>
     </div>
