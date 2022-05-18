@@ -1,11 +1,41 @@
 import type { NextPage } from "next";
 import axios from "axios";
-import { TextInput, Button, Box, Loader } from "@mantine/core";
+import { TextInput, Button, Box, Loader, Divider } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useState } from "react";
 
+type result = {
+  resultCount: number;
+  results: {
+    artistId: number;
+    artistName: string;
+    artistViewUrl: string;
+    artworkUrl30: string;
+    artworkUrl60: string;
+    artworkUrl100: string;
+    collectionExplicitness: string;
+    collectionPrice: number;
+    country: string;
+    currency: string;
+    kind: string;
+    previewUrl: string;
+    primaryGenreName: string;
+    releaseDate: string;
+    trackCensoredName: string;
+    trackExplicitness: string;
+    trackId: number;
+    trackName: string;
+    trackPrice: number;
+    trackTimeMillis: number;
+    trackViewUrl: string;
+    wrapperType: string;
+  }[];
+};
+
 const Home: NextPage = () => {
   const [loaderFlag, setLoaderFlag] = useState<boolean>(false);
+  const [result, setResult] = useState<result>();
+
   const form = useForm({
     initialValues: {
       music: "",
@@ -16,10 +46,12 @@ const Home: NextPage = () => {
     console.log(values);
     setLoaderFlag(true);
     const { data } = await axios.get(
-      `//itunes.apple.com/search?term=${values}&country=jp&entity=musicVideo`
+      `//itunes.apple.com/search?term=${values.music}&country=jp&entity=musicVideo`
     );
     console.log(data);
+    setResult(data);
     setLoaderFlag(false);
+    console.log(result);
   };
 
   return (
@@ -46,6 +78,18 @@ const Home: NextPage = () => {
           </Button>
         </form>
       </Box>
+
+      <div>
+        {result?.resultCount != 0 ? (
+          <div>
+            {result?.results.map((data, index) => {
+              return <div key={index}>{data.artistName}</div>;
+            })}
+          </div>
+        ) : (
+          <div>There in nothing to listen to</div>
+        )}
+      </div>
     </div>
   );
 };
