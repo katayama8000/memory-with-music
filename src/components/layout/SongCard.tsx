@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Card, Image, Skeleton } from "@mantine/core";
+
 type Props = {
   url: string;
   artistName: string;
@@ -7,12 +8,14 @@ type Props = {
   releaseDate: string;
   loading: boolean;
 };
+
 const getYear = (releaseDate: string) => {
   const date = new Date(releaseDate);
   return date.getFullYear();
 };
 
-export const SkeletonCard = () => {
+//loading中に表示されるスケルトン
+export const SkeletonCard: React.FC = () => {
   return (
     <div>
       <Card shadow="sm" p="lg" radius="md" className="h-[234px]">
