@@ -2,7 +2,7 @@ import React from "react";
 import { config } from "../lib/supabase/supabase";
 
 const fetch = async () => {
-  const data = await config.supabase.from("song").select();
+  const data = await config.supabase.from("songs").select();
 
   console.log(data);
 };
