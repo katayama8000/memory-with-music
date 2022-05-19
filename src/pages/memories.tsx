@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { config } from "../lib/supabase/supabase";
+import { Memory } from "@components/layout/card/Memory";
 import { showNotification } from "@mantine/notifications";
-import { Card, Image, Text } from "@mantine/core";
+import { Card, Image, Grid, Text } from "@mantine/core";
 
 type Props = {
   id: number;
@@ -41,31 +42,24 @@ export const Memories = () => {
   return (
     <div>
       <button onClick={hello}>button</button>
+
       <div>
-        {data.map((item, index) => {
-          return (
-            <div key={index} className="py-5">
-              <Card shadow="sm">
-                <div className="flex">
-                  <Image
-                    src="img/brain.png"
-                    width={40}
-                    alt="No way!"
-                    radius="md"
-                    withPlaceholder
-                    className="p-2"
+        <Grid>
+          {data.map((item, index) => {
+            return (
+              <Grid.Col span={6} key={index}>
+                <div>
+                  <Memory
+                    song={item.song}
+                    image={item.image}
+                    artist={item.artist}
+                    memory={item.memory}
                   />
-                  song:{item.song}
-                  <br />
-                  artist:{item.artist}
-                  <br />
-                  memory:{item.memory}
-                  <br />
                 </div>
-              </Card>
-            </div>
-          );
-        })}
+              </Grid.Col>
+            );
+          })}
+        </Grid>
       </div>
     </div>
   );
