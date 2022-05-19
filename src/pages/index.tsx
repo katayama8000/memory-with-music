@@ -54,13 +54,7 @@ const Home: NextPage = () => {
   }, []);
 
   return (
-    <div className="flex flex-col justify-center p-20">
-      <div className="flex justify-center">
-        <h1 className="pr-2 pb-2 text-center italic hover:not-italic">
-          memory with music
-        </h1>
-        <Loader color="cyan" size="sm" />
-      </div>
+    <div className="flex flex-col justify-center">
       <Box sx={{ maxWidth: 300 }} mx="auto">
         <form
           onSubmit={form.onSubmit((values) => handleSubmit(values))}

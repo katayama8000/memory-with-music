@@ -2,6 +2,7 @@ import "src/lib/tailwind.css";
 import type { AppProps } from "next/app";
 import { MantineProvider } from "@mantine/core";
 import Head from "next/head";
+import { Title } from "@components/layout/header/Title";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -27,6 +28,8 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:locale" content="ja_JP" />
       </Head>
       <main className="m-auto max-w-4xl">
+        <Title />
+
         <MantineProvider
           theme={{ colorScheme: "dark", loader: "bars" }}
           withGlobalStyles
