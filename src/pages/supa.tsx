@@ -1,9 +1,9 @@
 import { NextPage } from "next";
 import React, { useState } from "react";
-import { config } from "../lib/supabase/supabase";
 import { TextInput, Button, Box, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
+import { config } from "../lib/supabase/supabase";
 
 const Supa: NextPage = () => {
   const form = useForm({

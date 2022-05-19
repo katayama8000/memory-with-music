@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid } from "@mantine/core";
-import { SongCard, SkeletonCard } from "@components/layout/SongCard";
+import { SongCard, SkeletonCard } from "@components/layout/card/Song";
 
 type Props = {
   loading: boolean;
