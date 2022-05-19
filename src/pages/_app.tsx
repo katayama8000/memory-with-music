@@ -36,7 +36,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           withGlobalStyles
           withNormalizeCSS
         >
-          <NotificationsProvider position="top-right" zIndex={2077}>
+          <NotificationsProvider position="bottom-right" zIndex={2077}>
             <Component {...pageProps} />
           </NotificationsProvider>
         </MantineProvider>

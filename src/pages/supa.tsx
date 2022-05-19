@@ -25,6 +25,11 @@ const Supa: NextPage = () => {
         song: values.song,
       },
     ]);
+    showNotification({
+      title: "Success",
+      message: "Your memories have been saved with music 🤥",
+      color: "cyan",
+    });
   };
   return (
     <div className="flex flex-col justify-center">
@@ -56,30 +61,13 @@ const Supa: NextPage = () => {
             showNotification({
               title: "Default notification",
               message: "Hey there, your code is awesome! 🤥",
-              styles: (theme) => ({
-                root: {
-                  backgroundColor: theme.colors.blue[6],
-                  borderColor: theme.colors.blue[6],
-
-                  "&::before": { backgroundColor: theme.white },
-                },
-
-                title: { color: theme.white },
-                description: { color: theme.white },
-                closeButton: {
-                  color: theme.white,
-                  "&:hover": { backgroundColor: theme.colors.blue[7] },
-                },
-              }),
+              color: "cyan",
             })
           }
         >
           Show customized notification
         </Button>
       </Group>
-      {/* <Notification title="Default notification">
-        This is default notification with title and body
-      </Notification> */}
     </div>
   );
 };

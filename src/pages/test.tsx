@@ -1,7 +1,6 @@
 import React from "react";
 import { Group, Button } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
-import { NotificationsProvider } from "@mantine/notifications";
 
 export const Test = () => {
   return (
@@ -13,6 +12,7 @@ export const Test = () => {
             showNotification({
               title: "Default notification",
               message: "Hey there, your code is awesome! 🤥",
+              color: "cyan",
             })
           }
         >
