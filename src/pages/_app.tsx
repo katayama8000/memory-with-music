@@ -1,8 +1,9 @@
-import "src/lib/tailwind.css";
 import type { AppProps } from "next/app";
-import { MantineProvider } from "@mantine/core";
 import Head from "next/head";
+import "src/lib/tailwind.css";
 import { Title } from "@components/layout/header/Title";
+import { MantineProvider } from "@mantine/core";
+import { NotificationsProvider } from "@mantine/notifications";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -35,7 +36,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           withGlobalStyles
           withNormalizeCSS
         >
-          <Component {...pageProps} />
+          <NotificationsProvider position="top-right" zIndex={2077}>
+            <Component {...pageProps} />
+          </NotificationsProvider>
         </MantineProvider>
       </main>
     </>
