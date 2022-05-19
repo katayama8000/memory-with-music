@@ -6,7 +6,6 @@ import { useForm } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
 
 const Supa: NextPage = () => {
-  const [data, setData] = useState([]);
   const form = useForm({
     initialValues: {
       song: "",
@@ -15,12 +14,6 @@ const Supa: NextPage = () => {
       image: "",
     },
   });
-  const fetch = async () => {
-    const { data } = await config.supabase.from("songs").select();
-
-    console.log(data);
-    setData(data);
-  };
 
   const insert = async (values: {
     artist: string;
@@ -90,12 +83,6 @@ const Supa: NextPage = () => {
           </Button>
         </form>
       </Box>
-      <div onClick={fetch}>fetch</div>
-      <div>
-        {data.map((a, index) => {
-          return <div key={index}>{a.song}</div>;
-        })}
-      </div>
     </div>
   );
 };
