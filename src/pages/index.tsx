@@ -4,6 +4,7 @@ import axios from "axios";
 import { TextInput, Button, Box, Loader } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Songs } from "@components/layout/Songs";
+import Link from "next/link";
 
 type result = {
   resultCount: number;
@@ -55,6 +56,9 @@ const Home: NextPage = () => {
 
   return (
     <div className="flex flex-col justify-center">
+      <Link href="/supa">
+        <a>supa</a>
+      </Link>
       <Box sx={{ maxWidth: 300 }} mx="auto">
         <form
           onSubmit={form.onSubmit((values) => handleSubmit(values))}

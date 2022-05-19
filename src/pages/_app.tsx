@@ -32,7 +32,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <Title />
 
         <MantineProvider
-          theme={{ colorScheme: "dark", loader: "bars" }}
+          theme={{ colorScheme: "dark" }}
           withGlobalStyles
           withNormalizeCSS
         >
