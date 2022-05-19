@@ -4,6 +4,7 @@ import "src/lib/tailwind.css";
 import { Title } from "@components/layout/header/Title";
 import { MantineProvider } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
+import Link from "next/link";
 
 function MyApp({ Component, pageProps }: AppProps) {
   return (
@@ -29,7 +30,19 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:locale" content="ja_JP" />
       </Head>
       <main className="m-auto max-w-4xl">
-        <Title />
+        {/* 開発中は便利なので残しておく */}
+        <div className="text-center">
+          <Title />
+          <Link href="/">
+            <a className="text-white no-underline">home/ </a>
+          </Link>
+          <Link href="/supa">
+            <a className="text-white no-underline">supa/ </a>
+          </Link>
+          <Link href="/memories">
+            <a className="text-white no-underline">memories/ </a>
+          </Link>
+        </div>
 
         <MantineProvider
           theme={{ colorScheme: "dark" }}

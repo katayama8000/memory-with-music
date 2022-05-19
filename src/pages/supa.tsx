@@ -3,8 +3,8 @@ import React, { useState } from "react";
 import { config } from "../lib/supabase/supabase";
 import { TextInput, Button, Box, Textarea } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { Notification } from "@mantine/core";
 import { showNotification } from "@mantine/notifications";
+
 const Supa: NextPage = () => {
   const [data, setData] = useState([]);
   const form = useForm({
