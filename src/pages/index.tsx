@@ -1,10 +1,9 @@
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useState } from "react";
 import type { NextPage } from "next";
 import axios from "axios";
-import { TextInput, Button, Box, Loader } from "@mantine/core";
+import { TextInput, Button, Box, LoadingOverlay } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Songs } from "@components/layout/Songs";
-import Link from "next/link";
 
 type result = {
   resultCount: number;
@@ -56,9 +55,6 @@ const Home: NextPage = () => {
 
   return (
     <div className="flex flex-col justify-center">
-      <Link href="/supa">
-        <a>supa</a>
-      </Link>
       <Box sx={{ maxWidth: 300 }} mx="auto">
         <form
           onSubmit={form.onSubmit((values) => handleSubmit(values))}
@@ -73,11 +69,11 @@ const Home: NextPage = () => {
           </Button>
         </form>
       </Box>
-      {loaderFlag && (
-        <div className="flex flex-col py-20">
-          <Loader color="cyan" variant="dots" className="m-auto" />
-        </div>
-      )}
+      <LoadingOverlay
+        visible={loaderFlag}
+        loaderProps={{ size: "lg", color: "cyan", variant: "dots" }}
+        overlayOpacity={0.3}
+      />
       <div className="mt-5">
         <Songs songsData={songsData} loading={loaderFlag} />
       </div>
