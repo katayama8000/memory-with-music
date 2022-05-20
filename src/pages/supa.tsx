@@ -47,6 +47,7 @@ const Supa: NextPage = () => {
         message: "Inserted",
         color: "cyan",
       });
+      router.push("/memories");
     }
     if (error) {
       showNotification({
@@ -56,7 +57,6 @@ const Supa: NextPage = () => {
       });
     }
     setOpened(false);
-    router.push("/memories");
   };
   return (
     <div className="flex flex-col justify-center">
