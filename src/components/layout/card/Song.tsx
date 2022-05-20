@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Card, Image, Skeleton } from "@mantine/core";
+import Link from "next/link";
 
 type Props = {
   url: string;
@@ -60,16 +61,24 @@ export const SongCard: React.FC<Props> = ({
         <div className="truncate">{trackName}</div>
         <div className="truncate">{artistName}</div>
         <div>{getYear(releaseDate)}</div>
-
-        <Button
-          variant="light"
-          color="cyan"
-          fullWidth
-          radius="md"
-          className="mt-2"
+        <Link
+          href={{
+            pathname: "/supa",
+            query: { artist: artistName, song: trackName, image: url },
+          }}
         >
-          Go to this song
-        </Button>
+          <a>
+            <Button
+              variant="light"
+              color="cyan"
+              fullWidth
+              radius="md"
+              className="mt-2"
+            >
+              Go to this song
+            </Button>
+          </a>
+        </Link>
       </Card>
     </div>
   );
