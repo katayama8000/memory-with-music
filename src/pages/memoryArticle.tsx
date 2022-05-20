@@ -16,7 +16,7 @@ const MemoryArticle = () => {
       <div>memoryArticle</div>
       <div className="whitespace-pre-wrap">
         <TypographyStylesProvider>
-          <div dangerouslySetInnerHTML={{ __html: initial.memory }} />
+          <div dangerouslySetInnerHTML={{ __html: initial.memory as string }} />
         </TypographyStylesProvider>
       </div>
     </div>
