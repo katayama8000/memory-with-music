@@ -2,6 +2,9 @@ export const pagesPath = {
   "memories": {
     $url: (url?: { hash?: string }) => ({ pathname: '/memories' as const, hash: url?.hash })
   },
+  "memoryArticle": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/memoryArticle' as const, hash: url?.hash })
+  },
   "supa": {
     $url: (url?: { hash?: string }) => ({ pathname: '/supa' as const, hash: url?.hash })
   },

@@ -42,6 +42,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Link href="/memories">
             <a className="text-white no-underline">memories/ </a>
           </Link>
+          <Link href="/memoryArticle">
+            <a className="text-white no-underline">Article/ </a>
+          </Link>
         </div>
 
         <MantineProvider
