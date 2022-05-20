@@ -32,7 +32,7 @@ export const SkeletonCard: React.FC = () => {
           className="mt-2"
           disabled={true}
         >
-          Go to this song
+          write a memory
         </Button>
       </Card>
     </div>
@@ -75,7 +75,7 @@ export const SongCard: React.FC<Props> = ({
               radius="md"
               className="mt-2"
             >
-              Go to this song
+              write a memory
             </Button>
           </a>
         </Link>
