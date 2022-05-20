@@ -13,12 +13,17 @@ export const Memory: React.FC<Props> = ({ song, artist, image, memory }) => {
   return (
     <div>
       <Card shadow="sm" className="m-auto w-[430px]  hover:opacity-70">
-        <Link href="/memoryArticle">
+        <Link
+          href={{
+            pathname: "/memoryArticle",
+            query: { artist: artist, song: song, image: image, memory: memory },
+          }}
+        >
           <a className="text-inherit no-underline">
             <div className="flex ">
               <Image
-                src={image}
-                //src="https://zukan.pokemon.co.jp/zukan-api/up/images/index/bc1a41e95d5545e3ac647ca03a42359a.jpg"
+                //src={image}
+                src="https://zukan.pokemon.co.jp/zukan-api/up/images/index/bc1a41e95d5545e3ac647ca03a42359a.jpg"
                 alt={artist}
                 height={60}
                 width={80}
