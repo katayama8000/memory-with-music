@@ -67,7 +67,7 @@ export const SongCard: React.FC<Props> = ({
             query: { artist: artistName, song: trackName, image: url },
           }}
         >
-          <a>
+          <a className="no-underline">
             <Button
               variant="light"
               color="cyan"
