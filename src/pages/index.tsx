@@ -34,7 +34,7 @@ type result = {
 };
 
 const Home: NextPage = () => {
-  const [loaderFlag, setLoaderFlag] = useState<boolean>(false);
+  const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
   const [songsData, setSongsData] = useState<result>();
 
   const form = useForm({
@@ -44,12 +44,12 @@ const Home: NextPage = () => {
   });
 
   const handleSubmit = useCallback(async (values: { music: string }) => {
-    setLoaderFlag(true);
+    setLoadingFlag(true);
     const { data } = await axios.get(
       `//itunes.apple.com/search?term=${values.music}&country=jp&entity=musicVideo`
     );
     setSongsData(data);
-    setLoaderFlag(false);
+    setLoadingFlag(false);
     form.reset();
   }, []);
 
@@ -70,12 +70,12 @@ const Home: NextPage = () => {
         </form>
       </Box>
       <LoadingOverlay
-        visible={loaderFlag}
+        visible={loadingFlag}
         loaderProps={{ size: "lg", color: "cyan", variant: "dots" }}
         overlayOpacity={0.3}
       />
       <div className="mt-5">
-        <Songs songsData={songsData} loading={loaderFlag} />
+        <Songs songsData={songsData} loading={loadingFlag} />
       </div>
     </div>
   );
