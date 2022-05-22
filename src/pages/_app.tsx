@@ -1,12 +1,18 @@
+import { useState } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import "src/lib/tailwind.css";
-import { Title } from "@components/layout/header/Title";
-import { MantineProvider } from "@mantine/core";
-import { NotificationsProvider } from "@mantine/notifications";
 import Link from "next/link";
+import "src/lib/tailwind.css";
+import { MantineProvider, ActionIcon } from "@mantine/core";
+import { NotificationsProvider } from "@mantine/notifications";
+import { Sun, MoonStars } from "tabler-icons-react";
+import { Title } from "@components/layout/header/Title";
 
 function MyApp({ Component, pageProps }: AppProps) {
+  const [color, setColor] = useState<"dark" | "light">("dark");
+  const toggleColorTheme = () => {
+    color === "dark" ? setColor("light") : setColor("dark");
+  };
   return (
     <>
       <Head>
@@ -30,25 +36,33 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:locale" content="ja_JP" />
       </Head>
       <main className="m-auto max-w-4xl">
+        <Title />
         {/* 開発中は便利なので残しておく */}
-        <div className="text-center">
-          <Title />
+        <div className="text-center ">
+          <ActionIcon
+            variant="outline"
+            color={color === "light" ? "yellow" : "blue"}
+            onClick={() => toggleColorTheme()}
+            title="Toggle color scheme"
+          >
+            {color === "light" ? <Sun size={18} /> : <MoonStars size={18} />}
+          </ActionIcon>
           <Link href="/">
-            <a className="text-white no-underline">home/ </a>
+            <a className="text-inherit no-underline">home/ </a>
           </Link>
           <Link href="/supa">
-            <a className="text-white no-underline">supa/ </a>
+            <a className="text-inherit no-underline">supa/ </a>
           </Link>
           <Link href="/memories">
-            <a className="text-white no-underline">memories/ </a>
+            <a className="text-inherit no-underline">memories/ </a>
           </Link>
           <Link href="/memoryArticle">
-            <a className="text-white no-underline">Article/ </a>
+            <a className="text-inherit no-underline">Article/ </a>
           </Link>
         </div>
 
         <MantineProvider
-          theme={{ colorScheme: "dark" }}
+          theme={{ colorScheme: color }}
           withGlobalStyles
           withNormalizeCSS
         >
