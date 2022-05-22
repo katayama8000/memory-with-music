@@ -48,8 +48,8 @@ export const SongCard: React.FC<Props> = ({
 }) => {
   return (
     <div>
-      <Card shadow="sm" p="lg" radius="md">
-        <Card.Section className="mx-auto py-2">
+      <Card p="lg" radius="md" withBorder={true} className=" hover:opacity-70">
+        <Card.Section className="mx-auto py-2 ">
           <Image
             src={url}
             alt={artistName}
