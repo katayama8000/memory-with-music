@@ -1,4 +1,4 @@
 memory with music
 
-**note**
+**Note**
 note
