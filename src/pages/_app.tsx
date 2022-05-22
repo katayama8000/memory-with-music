@@ -38,15 +38,7 @@ function MyApp({ Component, pageProps }: AppProps) {
       <main className="m-auto max-w-4xl">
         <Title />
         {/* 開発中は便利なので残しておく */}
-        <div className="text-center ">
-          <ActionIcon
-            variant="outline"
-            color={color === "light" ? "yellow" : "blue"}
-            onClick={() => toggleColorTheme()}
-            title="Toggle color scheme"
-          >
-            {color === "light" ? <Sun size={18} /> : <MoonStars size={18} />}
-          </ActionIcon>
+        <div className="flex justify-end">
           <Link href="/">
             <a className="text-inherit no-underline">home/ </a>
           </Link>
@@ -59,6 +51,14 @@ function MyApp({ Component, pageProps }: AppProps) {
           <Link href="/memoryArticle">
             <a className="text-inherit no-underline">Article/ </a>
           </Link>
+          <ActionIcon
+            variant="outline"
+            color={color === "light" ? "yellow" : "blue"}
+            onClick={() => toggleColorTheme()}
+            title="Toggle color scheme"
+          >
+            {color === "light" ? <Sun size={18} /> : <MoonStars size={18} />}
+          </ActionIcon>
         </div>
 
         <MantineProvider
