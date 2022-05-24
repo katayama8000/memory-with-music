@@ -3,6 +3,7 @@ import { config } from "../lib/supabase/supabase";
 import { Memory } from "@components/layout/card/Memory";
 import { showNotification } from "@mantine/notifications";
 import { Card, Image, Grid, Text, LoadingOverlay } from "@mantine/core";
+import { useLocale } from "@hooks/useLocale";
 
 type Props = {
   id: number;
@@ -16,6 +17,7 @@ type Props = {
 export const Memories = () => {
   const [data, setData] = useState<Props[]>([]);
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
+  const { t } = useLocale();
   useEffect(() => {
     setLoadingFlag(true);
     const fetch = async () => {
@@ -44,6 +46,8 @@ export const Memories = () => {
 
   return (
     <div>
+      <h1>{t.SUBTITLE}</h1>
+      <button>{t.TO_DASHBOARD}</button>
       <button onClick={hello}>button</button>
       <LoadingOverlay
         visible={loadingFlag}
