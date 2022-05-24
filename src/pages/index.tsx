@@ -5,34 +5,7 @@ import axios from "axios";
 import { TextInput, Button, Box, LoadingOverlay } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Songs } from "@components/layout/Songs";
-
-type result = {
-  resultCount: number;
-  results: {
-    artistId: number;
-    artistName: string;
-    artistViewUrl: string;
-    artworkUrl30: string;
-    artworkUrl60: string;
-    artworkUrl100: string;
-    collectionExplicitness: string;
-    collectionPrice: number;
-    country: string;
-    currency: string;
-    kind: string;
-    previewUrl: string;
-    primaryGenreName: string;
-    releaseDate: string;
-    trackCensoredName: string;
-    trackExplicitness: string;
-    trackId: number;
-    trackName: string;
-    trackPrice: number;
-    trackTimeMillis: number;
-    trackViewUrl: string;
-    wrapperType: string;
-  }[];
-};
+import { result } from "../types/typeRsult";
 
 const Home: NextPage = () => {
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
