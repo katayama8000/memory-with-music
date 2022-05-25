@@ -44,36 +44,42 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:locale" content="ja_JP" />
       </Head>
       <main className="m-auto max-w-4xl">
-        <Title />
-        {/* 開発中は便利なので残しておく */}
-        <div className="flex justify-end">
-          <Link href="/">
-            <a className="text-inherit no-underline">home/ </a>
-          </Link>
-          <Link href="/supa">
-            <a className="text-inherit no-underline">supa/ </a>
-          </Link>
-          <Link href="/memories">
-            <a className="text-inherit no-underline">memories/ </a>
-          </Link>
-          <Link href="/memoryArticle">
-            <a className="text-inherit no-underline">Article/ </a>
-          </Link>
-          <ActionIcon
-            variant="outline"
-            color={color === "light" ? "yellow" : "blue"}
-            onClick={() => toggleColorTheme()}
-            title="Toggle color scheme"
-          >
-            {color === "light" ? <Sun size={18} /> : <MoonStars size={18} />}
-          </ActionIcon>
-        </div>
         <MantineProvider
           theme={{ colorScheme: color }}
           withGlobalStyles
           withNormalizeCSS
         >
           <NotificationsProvider position="bottom-right" zIndex={2077}>
+            <div className="flex justify-end">
+              <SegmentedControl
+                onChange={(
+                  path: "/" | "/supa" | "memories" | "memoryArticle"
+                ) => {
+                  router.push(path);
+                }}
+                data={[
+                  { label: "home", value: "/" },
+                  { label: "supa", value: "/supa" },
+                  { label: "memories", value: "/memories" },
+                  { label: "article", value: "/memoryArticle" },
+                ]}
+              />
+            </div>
+            <Title />
+            <div className="flex justify-center">
+              <ActionIcon
+                variant="outline"
+                color={color === "light" ? "yellow" : "blue"}
+                onClick={() => toggleColorTheme()}
+                title="Toggle color scheme"
+              >
+                {color === "light" ? (
+                  <Sun size={18} />
+                ) : (
+                  <MoonStars size={18} />
+                )}
+              </ActionIcon>
+            </div>
             <div className="flex justify-end">
               <SegmentedControl
                 data={[
