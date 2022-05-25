@@ -46,8 +46,6 @@ export const Memories = () => {
 
   return (
     <div>
-      <h1>{t.SUBTITLE}</h1>
-      <button>{t.TO_DASHBOARD}</button>
       <button onClick={hello}>button</button>
       <LoadingOverlay
         visible={loadingFlag}

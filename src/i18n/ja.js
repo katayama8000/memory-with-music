@@ -1,7 +1,8 @@
 /* eslint-disable import/no-anonymous-default-export */
-
-
 export default {
-  SUBTITLE: "「満足」を可視化しよう",
-  TO_DASHBOARD: "ダッシュボードへ",
+  SAVE: "保存",
+  ARTIST: "アーティスト",
+  SONG: "曲名",
+  IMAGE: "画像",
+  YOURMEMORY: "思い出",
 }

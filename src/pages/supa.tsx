@@ -1,14 +1,16 @@
-import { NextPage } from "next";
 import React, { useState } from "react";
+import { NextPage } from "next";
+import { useRouter } from "next/router";
 import { TextInput, Button, Box, Textarea, Group, Modal } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
 import { config } from "../lib/supabase/supabase";
-import { useRouter } from "next/router";
+import { useLocale } from "@hooks/useLocale";
 
 const Supa: NextPage = () => {
   const router = useRouter();
   const [opened, setOpened] = useState(false);
+  const { t } = useLocale();
   const [initial] = useState({
     artist: router.query.artist,
     song: router.query.song,
@@ -66,24 +68,23 @@ const Supa: NextPage = () => {
       >
         <TextInput
           required
-          description="Song"
-          placeholder="artist"
+          placeholder={t.ARTIST}
           {...form.getInputProps("artist")}
           className="mt-2"
         />
         <TextInput
           required
-          placeholder="song"
+          placeholder={t.SONG}
           {...form.getInputProps("song")}
           className="mt-2"
         />
         <TextInput
-          placeholder="image"
+          placeholder={t.IMAGE}
           {...form.getInputProps("image")}
           className="mt-2"
         />
         <Textarea
-          placeholder="Your memory"
+          placeholder={t.YOURMEMORY}
           required
           autosize
           minRows={10}
@@ -122,7 +123,7 @@ const Supa: NextPage = () => {
 
         <Group position="right" mt="md">
           <Button color="cyan" className="mt-2" type="submit">
-            Save your memory
+            {t.SAVE}
           </Button>
         </Group>
       </form>
