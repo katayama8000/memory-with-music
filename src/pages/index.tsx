@@ -50,7 +50,7 @@ const Home: NextPage = () => {
         overlayOpacity={0.3}
       />
       <div className="mt-5">
-        <Songs songsData={songsData} loading={loadingFlag} />
+        <Songs songsData={songsData!} loading={loadingFlag} />
       </div>
     </div>
   );

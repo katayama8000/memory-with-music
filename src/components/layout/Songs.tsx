@@ -2,43 +2,18 @@ import React from "react";
 import { Grid } from "@mantine/core";
 import { SongCard, SkeletonCard } from "@components/layout/card/Song";
 import { useLocale } from "@hooks/useLocale";
+import { result } from "../../types/typeRsult";
 
 type Props = {
   loading: boolean;
-  songsData: {
-    resultCount: number;
-    results: {
-      artistId: number;
-      artistName: string;
-      artistViewUrl: string;
-      artworkUrl30: string;
-      artworkUrl60: string;
-      artworkUrl100: string;
-      collectionExplicitness: string;
-      collectionPrice: number;
-      country: string;
-      currency: string;
-      kind: string;
-      previewUrl: string;
-      primaryGenreName: string;
-      releaseDate: string;
-      trackCensoredName: string;
-      trackExplicitness: string;
-      trackId: number;
-      trackName: string;
-      trackPrice: number;
-      trackTimeMillis: number;
-      trackViewUrl: string;
-      wrapperType: string;
-    }[];
-  };
+  songsData: result;
 };
 
 export const Songs: React.FC<Props> = ({ songsData, loading }) => {
   const { t } = useLocale();
   return (
     <div>
-      {songsData?.resultCount > 0 ? (
+      {songsData?.resultCount !== 0 ? (
         <div>
           <Grid>
             {loading && (
@@ -66,9 +41,7 @@ export const Songs: React.FC<Props> = ({ songsData, loading }) => {
           </Grid>
         </div>
       ) : (
-        <div className="pt-10 text-center text-xl font-bold">
-          {t.NOSONG}
-        </div>
+        <div className="pt-10 text-center text-xl font-bold">{t.NOSONG}</div>
       )}
     </div>
   );
