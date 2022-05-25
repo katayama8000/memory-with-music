@@ -6,6 +6,6 @@ export default {
   SAVE: "Save your memory",
   ARTIST: "Artist",
   SONG: "Song",
-  IMAGE: "Image",
+  IMAGE: "input the link of the image starting with http",
   YOURMEMORY: "Your memory",
 };

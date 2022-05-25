@@ -6,6 +6,6 @@ export default {
   SAVE: "保存",
   ARTIST: "アーティスト",
   SONG: "曲名",
-  IMAGE: "画像",
+  IMAGE: "httpで始まる画像のリンクを入力してください",
   YOURMEMORY: "曲と思い出",
 };
