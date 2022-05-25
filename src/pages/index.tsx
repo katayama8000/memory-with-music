@@ -6,8 +6,8 @@ import { FaSearch } from "react-icons/fa";
 import { TextInput, Button, Box, LoadingOverlay } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Songs } from "@components/layout/Songs";
-import { result } from "@type/typeRsult";
 import { useLocale } from "@hooks/useLocale";
+import { result } from "@type/typeResult";
 
 const Home: NextPage = () => {
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);

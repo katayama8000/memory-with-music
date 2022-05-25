@@ -2,7 +2,7 @@ import React from "react";
 import { Grid } from "@mantine/core";
 import { SongCard, SkeletonCard } from "@components/layout/card/Song";
 import { useLocale } from "@hooks/useLocale";
-import { result } from "@type/typeRsult";
+import { result } from "@type/typeResult";
 
 type Props = {
   loading: boolean;
