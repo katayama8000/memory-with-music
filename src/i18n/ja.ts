@@ -7,5 +7,5 @@ export default {
   ARTIST: "アーティスト",
   SONG: "曲名",
   IMAGE: "画像",
-  YOURMEMORY: "思い出",
+  YOURMEMORY: "曲と思い出",
 };
