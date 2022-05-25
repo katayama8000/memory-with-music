@@ -1,14 +1,8 @@
 import React from "react";
-import { Button, Card, Image, Skeleton } from "@mantine/core";
 import Link from "next/link";
-
-type Props = {
-  url: string;
-  artistName: string;
-  trackName: string;
-  releaseDate: string;
-  loading: boolean;
-};
+import { Button, Card, Image, Skeleton } from "@mantine/core";
+import { Props } from "@type/typeSongCard";
+import { useLocale } from "@hooks/useLocale";
 
 const getYear = (releaseDate: string) => {
   const date = new Date(releaseDate);
@@ -46,6 +40,7 @@ export const SongCard: React.FC<Props> = ({
   releaseDate,
   loading,
 }) => {
+  const { t } = useLocale();
   return (
     <div>
       <Card p="lg" radius="md" withBorder={true} className=" hover:opacity-70">
@@ -75,7 +70,7 @@ export const SongCard: React.FC<Props> = ({
               radius="md"
               className="mt-2"
             >
-              write a memory
+              {t.SONGCARDBUTTON}
             </Button>
           </a>
         </Link>

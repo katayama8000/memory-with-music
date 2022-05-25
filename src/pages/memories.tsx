@@ -2,30 +2,19 @@ import React, { useEffect, useState } from "react";
 import { config } from "../lib/supabase/supabase";
 import { Memory } from "@components/layout/card/Memory";
 import { showNotification } from "@mantine/notifications";
-import { Card, Image, Grid, Text, LoadingOverlay } from "@mantine/core";
-import { useLocale } from "@hooks/useLocale";
-
-type Props = {
-  id: number;
-  created_at: string;
-  song: string;
-  image: string;
-  artist: string;
-  memory: string;
-};
+import { Grid, LoadingOverlay } from "@mantine/core";
+import { data } from "@type/typeSupabase";
 
 export const Memories = () => {
-  const [data, setData] = useState<Props[]>([]);
+  const [data, setData] = useState<data[]>([]);
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
   useEffect(() => {
     setLoadingFlag(true);
     const fetch = async () => {
       const { data, error } = await config.supabase.from("songs").select();
-
       if (data) {
         setData(data);
       }
-
       if (error) {
         showNotification({
           title: "Error",
@@ -34,24 +23,17 @@ export const Memories = () => {
         });
       }
     };
-
     fetch();
     setLoadingFlag(false);
   }, []);
 
-  const hello = () => {
-    console.log("data", typeof data[0].created_at);
-  };
-
   return (
     <div>
-      <button onClick={hello}>button</button>
       <LoadingOverlay
         visible={loadingFlag}
         loaderProps={{ size: "lg", color: "cyan", variant: "dots" }}
         overlayOpacity={0.3}
       />
-
       <div>
         <Grid>
           {data.map((item, index) => {
