@@ -1,21 +1,25 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import "src/lib/tailwind.css";
-import { MantineProvider, ActionIcon } from "@mantine/core";
+import { MantineProvider, ActionIcon, SegmentedControl } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
 import { Sun, MoonStars } from "tabler-icons-react";
 import { Title } from "@components/layout/header/Title";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [color, setColor] = useState<"dark" | "light">("dark");
+  const router = useRouter();
   const toggleColorTheme = () => {
     color === "dark" ? setColor("light") : setColor("dark");
   };
-
-  const router = useRouter();
+  const switchLanguage = (lang: "ja" | "en") => {
+    router.push(router.pathname, router.pathname, {
+      locale: lang,
+    });
+  };
 
   return (
     <>
@@ -41,13 +45,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <main className="m-auto max-w-4xl">
         <Title />
-        <Link href={router.route} locale="ja" passHref>
-          <a className="text-inherit no-underline">ja/</a>
-        </Link>
-        <br />
-        <Link href={router.route} locale="en" passHref>
-          <a className="text-inherit no-underline">en/</a>
-        </Link>
         {/* 開発中は便利なので残しておく */}
         <div className="flex justify-end">
           <Link href="/">
@@ -71,13 +68,21 @@ function MyApp({ Component, pageProps }: AppProps) {
             {color === "light" ? <Sun size={18} /> : <MoonStars size={18} />}
           </ActionIcon>
         </div>
-
         <MantineProvider
           theme={{ colorScheme: color }}
           withGlobalStyles
           withNormalizeCSS
         >
           <NotificationsProvider position="bottom-right" zIndex={2077}>
+            <div className="flex justify-end">
+              <SegmentedControl
+                data={[
+                  { value: "ja", label: "ja" },
+                  { value: "en", label: "en" },
+                ]}
+                onChange={(lang: "en" | "ja") => switchLanguage(lang)}
+              />
+            </div>
             <Component {...pageProps} />
           </NotificationsProvider>
         </MantineProvider>
