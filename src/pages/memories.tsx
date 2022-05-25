@@ -17,7 +17,6 @@ type Props = {
 export const Memories = () => {
   const [data, setData] = useState<Props[]>([]);
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
-  const { t } = useLocale();
   useEffect(() => {
     setLoadingFlag(true);
     const fetch = async () => {

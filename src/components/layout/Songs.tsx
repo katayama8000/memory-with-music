@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid } from "@mantine/core";
 import { SongCard, SkeletonCard } from "@components/layout/card/Song";
+import { useLocale } from "@hooks/useLocale";
 
 type Props = {
   loading: boolean;
@@ -34,6 +35,7 @@ type Props = {
 };
 
 export const Songs: React.FC<Props> = ({ songsData, loading }) => {
+  const { t } = useLocale();
   return (
     <div>
       {songsData?.resultCount > 0 ? (
@@ -65,7 +67,7 @@ export const Songs: React.FC<Props> = ({ songsData, loading }) => {
         </div>
       ) : (
         <div className="pt-10 text-center text-xl font-bold">
-          There is no such a song
+          {t.NOSONG}
         </div>
       )}
     </div>

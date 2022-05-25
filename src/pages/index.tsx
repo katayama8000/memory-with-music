@@ -6,10 +6,14 @@ import { TextInput, Button, Box, LoadingOverlay } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Songs } from "@components/layout/Songs";
 import { result } from "../types/typeRsult";
+import { useLocale } from "@hooks/useLocale";
+import { FaSearch } from "react-icons/fa";
 
 const Home: NextPage = () => {
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
   const [songsData, setSongsData] = useState<result>();
+
+  const { t } = useLocale();
 
   const form = useForm({
     initialValues: {
@@ -34,12 +38,9 @@ const Home: NextPage = () => {
           onSubmit={form.onSubmit((values) => handleSubmit(values))}
           className="mt-2 flex gap-x-2"
         >
-          <TextInput
-            placeholder="search for music"
-            {...form.getInputProps("music")}
-          />
+          <TextInput placeholder={t.SEARCH} {...form.getInputProps("music")} />
           <Button type="submit" color="cyan">
-            Serarch
+            <FaSearch />
           </Button>
         </form>
       </Box>
