@@ -34,8 +34,6 @@ type Props = {
 };
 
 export const Songs: React.FC<Props> = ({ songsData, loading }) => {
-  console.log(songsData);
-
   return (
     <div>
       {songsData?.resultCount > 0 ? (

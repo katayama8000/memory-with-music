@@ -2,8 +2,9 @@ import { useState } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Link from "next/link";
+import { useRouter } from "next/router";
 import "src/lib/tailwind.css";
-import { MantineProvider, ActionIcon, RadioGroup, Radio } from "@mantine/core";
+import { MantineProvider, ActionIcon } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
 import { Sun, MoonStars } from "tabler-icons-react";
 import { Title } from "@components/layout/header/Title";
@@ -13,7 +14,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   const toggleColorTheme = () => {
     color === "dark" ? setColor("light") : setColor("dark");
   };
-  const [value, setValue] = useState("react");
+
+  const router = useRouter();
 
   return (
     <>
@@ -39,20 +41,11 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <main className="m-auto max-w-4xl">
         <Title />
-        <RadioGroup
-          value={value}
-          onChange={setValue}
-          description="This is anonymous"
-          required
-        >
-          <Radio value="react" label="React" />
-          <Radio value="vue" label="Vue" />
-        </RadioGroup>
-        <Link href="/memories" locale="ja" passHref>
+        <Link href={router.route} locale="ja" passHref>
           <a className="text-inherit no-underline">ja/</a>
         </Link>
         <br />
-        <Link href="/memories" locale="en" passHref>
+        <Link href={router.route} locale="en" passHref>
           <a className="text-inherit no-underline">en/</a>
         </Link>
         {/* 開発中は便利なので残しておく */}
