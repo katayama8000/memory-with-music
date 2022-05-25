@@ -2,12 +2,12 @@
 import { useCallback, useState } from "react";
 import type { NextPage } from "next";
 import axios from "axios";
+import { FaSearch } from "react-icons/fa";
 import { TextInput, Button, Box, LoadingOverlay } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { Songs } from "@components/layout/Songs";
-import { result } from "../types/typeRsult";
+import { result } from "@type/typeRsult";
 import { useLocale } from "@hooks/useLocale";
-import { FaSearch } from "react-icons/fa";
 
 const Home: NextPage = () => {
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
