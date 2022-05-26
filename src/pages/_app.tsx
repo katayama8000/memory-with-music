@@ -13,6 +13,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [color, setColor] = useState<"dark" | "light">("dark");
   const { t } = useLocale();
   const router = useRouter();
+  console.log("router", router.locale);
+  console.log(router.pathname);
   const toggleColorTheme = () => {
     color === "dark" ? setColor("light") : setColor("dark");
   };
@@ -53,9 +55,9 @@ function MyApp({ Component, pageProps }: AppProps) {
           <NotificationsProvider position="bottom-right" zIndex={2077}>
             <div className="flex justify-end">
               <SegmentedControl
-                onChange={(
-                  path: "/" | "/supa" | "memories" | "memoryArticle"
-                ) => {
+                color="cyan"
+                defaultValue={router.pathname}
+                onChange={(path: "/" | "/form" | "list" | "article") => {
                   router.push(path);
                 }}
                 data={[
@@ -81,8 +83,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                 )}
               </ActionIcon>
             </div>
-            <div className="flex justify-end m-2">
+            <div className="m-2 flex justify-end">
               <SegmentedControl
+                color="cyan"
+                defaultValue={router.locale}
                 data={[
                   { value: "ja", label: "ja" },
                   { value: "en", label: "en" },
