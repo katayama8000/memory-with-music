@@ -22,6 +22,6 @@
       "@type/*": ["./src/type/*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/supa.tsx"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src/pages/form.tsx"],
   "exclude": ["node_modules"]
 }

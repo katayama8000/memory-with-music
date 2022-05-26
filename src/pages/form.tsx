@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { TextInput, Button, Box, Textarea, Group, Modal } from "@mantine/core";
+import { TextInput, Button, Textarea, Group, Modal } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { showNotification } from "@mantine/notifications";
 import { config } from "../lib/supabase/supabase";
 import { useLocale } from "@hooks/useLocale";
 
-const Supa: NextPage = () => {
+const Form: NextPage = () => {
   const router = useRouter();
   const [opened, setOpened] = useState(false);
   const { t } = useLocale();
@@ -131,4 +131,4 @@ const Supa: NextPage = () => {
   );
 };
 
-export default Supa;
+export default Form;
