@@ -28,7 +28,6 @@ const Home: NextPage = () => {
     );
     setSongsData(data);
     setLoadingFlag(false);
-    form.reset();
   }, []);
 
   return (

@@ -34,6 +34,7 @@ const Form: NextPage = () => {
     image: string | string[] | undefined;
   }) => {
     setLoading(true);
+
     const { data, error } = await config.supabase.from("songs").insert([
       {
         artist: values.artist,
