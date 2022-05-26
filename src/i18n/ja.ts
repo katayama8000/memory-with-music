@@ -3,7 +3,7 @@ export default {
   SEARCH: "検索",
   NOSONG: "そのような曲はありません",
   SONGCARDBUTTON: "記憶を書き留める",
-  SAVE: "保存",
+  SAVE: "投稿",
   APP: {
     SEACRCH: "検索",
     FORM: "入力",

@@ -3,7 +3,7 @@ export default {
   SEARCH: "Search",
   NOSONG: "There is no such a song",
   SONGCARDBUTTON: "Write a memory",
-  SAVE: "Save your memory",
+  SAVE: "Send your memory",
   APP: {
     SEACRCH: "Search",
     FORM: "Form",
