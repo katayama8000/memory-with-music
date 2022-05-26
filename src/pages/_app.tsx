@@ -57,6 +57,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               <SegmentedControl
                 color="cyan"
                 defaultValue={router.pathname}
+                value={router.pathname}
                 onChange={(path: "/" | "/form" | "list" | "article") => {
                   router.push(path);
                 }}
