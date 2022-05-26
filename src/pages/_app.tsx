@@ -63,7 +63,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                   { label: t.APP.SEACRCH, value: "/" },
                   { label: t.APP.FORM, value: "/form" },
                   { label: t.APP.LIST, value: "/list" },
-                  { label: t.APP.ARTICLE, value: "/article" },
+                  { label: t.APP.ARTICLE, value: "/article", disabled: true },
                 ]}
               />
             </div>
