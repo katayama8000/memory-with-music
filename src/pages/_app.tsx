@@ -1,16 +1,17 @@
 import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import "src/lib/tailwind.css";
 import { MantineProvider, ActionIcon, SegmentedControl } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
 import { Sun, MoonStars } from "tabler-icons-react";
 import { Title } from "@components/layout/header/Title";
+import { useLocale } from "@hooks/useLocale";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [color, setColor] = useState<"dark" | "light">("dark");
+  const { t } = useLocale();
   const router = useRouter();
   const toggleColorTheme = () => {
     color === "dark" ? setColor("light") : setColor("dark");
@@ -58,10 +59,10 @@ function MyApp({ Component, pageProps }: AppProps) {
                   router.push(path);
                 }}
                 data={[
-                  { label: "home", value: "/" },
-                  { label: "supa", value: "/supa" },
-                  { label: "memories", value: "/memories" },
-                  { label: "article", value: "/memoryArticle" },
+                  { label: t.APP.SEACRCH, value: "/" },
+                  { label: t.APP.FORM, value: "/form" },
+                  { label: t.APP.LIST, value: "/list" },
+                  { label: t.APP.ARTICLE, value: "/article" },
                 ]}
               />
             </div>
@@ -80,7 +81,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                 )}
               </ActionIcon>
             </div>
-            <div className="flex justify-end">
+            <div className="flex justify-end m-2">
               <SegmentedControl
                 data={[
                   { value: "ja", label: "ja" },

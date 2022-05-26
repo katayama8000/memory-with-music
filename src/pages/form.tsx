@@ -45,15 +45,15 @@ const Form: NextPage = () => {
 
     if (data) {
       showNotification({
-        title: "Success",
-        message: "Inserted",
+        title: t.Notification.SUCCESS,
+        message: t.Notification.MESSAGE,
         color: "cyan",
       });
-      router.push("/memories");
+      router.push("/list");
     }
     if (error) {
       showNotification({
-        title: "Error",
+        title: t.Notification.ERROR,
         message: error.message,
         color: "red",
       });
@@ -68,23 +68,23 @@ const Form: NextPage = () => {
       >
         <TextInput
           required
-          placeholder={t.ARTIST}
+          placeholder={t.FORM.ARTIST}
           {...form.getInputProps("artist")}
           className="mt-2"
         />
         <TextInput
           required
-          placeholder={t.SONG}
+          placeholder={t.FORM.SONG}
           {...form.getInputProps("song")}
           className="mt-2"
         />
         <TextInput
-          placeholder={t.IMAGE}
+          placeholder={t.FORM.IMAGE}
           {...form.getInputProps("image")}
           className="mt-2"
         />
         <Textarea
-          placeholder={t.YOURMEMORY}
+          placeholder={t.FORM.YOURMEMORY}
           required
           autosize
           minRows={10}

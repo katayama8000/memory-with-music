@@ -5,7 +5,7 @@ import { showNotification } from "@mantine/notifications";
 import { Grid, LoadingOverlay } from "@mantine/core";
 import { data } from "@type/typeSupabase";
 
-export const Memories = () => {
+export const List = () => {
   const [data, setData] = useState<data[]>([]);
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
   useEffect(() => {
@@ -56,4 +56,4 @@ export const Memories = () => {
   );
 };
 
-export default Memories;
+export default List;

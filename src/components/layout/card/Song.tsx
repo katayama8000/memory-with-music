@@ -25,9 +25,7 @@ export const SkeletonCard: React.FC = () => {
           radius="md"
           className="mt-2"
           disabled={true}
-        >
-          write a memory
-        </Button>
+        />
       </Card>
     </div>
   );
@@ -58,7 +56,7 @@ export const SongCard: React.FC<Props> = ({
         <div>{getYear(releaseDate)}</div>
         <Link
           href={{
-            pathname: "/supa",
+            pathname: "/form",
             query: { artist: artistName, song: trackName, image: url },
           }}
         >

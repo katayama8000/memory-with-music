@@ -2,7 +2,7 @@ import { TypographyStylesProvider } from "@mantine/core";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 
-const MemoryArticle = () => {
+const Article = () => {
   const router = useRouter();
   const [initial] = useState({
     artist: router.query.artist,
@@ -23,4 +23,4 @@ const MemoryArticle = () => {
   );
 };
 
-export default MemoryArticle;
+export default Article;

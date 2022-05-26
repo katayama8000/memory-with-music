@@ -15,7 +15,7 @@ export const Memory: React.FC<Props> = ({ song, artist, image, memory }) => {
       <Card withBorder={true} className="m-auto w-[430px]  hover:opacity-70">
         <Link
           href={{
-            pathname: "/memoryArticle",
+            pathname: "/article",
             query: { artist: artist, song: song, image: image, memory: memory },
           }}
         >
