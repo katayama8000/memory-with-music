@@ -9,17 +9,14 @@ import { useLocale } from "@hooks/useLocale";
 
 const Form: NextPage = () => {
   const router = useRouter();
-  const [opened, setOpened] = useState(false);
+  //const [opened, setOpened] = useState(false);
+  const [loading, setLoading] = useState<boolean>(false);
   const { t } = useLocale();
   const [initial] = useState({
     artist: router.query.artist,
     song: router.query.song,
     image: router.query.image,
   });
-
-  useEffect(() => {
-    console.log("hello");
-  }, [router]);
 
   const form = useForm({
     initialValues: {
@@ -36,6 +33,7 @@ const Form: NextPage = () => {
     memory: string | string[] | undefined;
     image: string | string[] | undefined;
   }) => {
+    setLoading(true);
     const { data, error } = await config.supabase.from("songs").insert([
       {
         artist: values.artist,
@@ -45,7 +43,7 @@ const Form: NextPage = () => {
       },
     ]);
 
-    form.reset();
+    setLoading(false);
 
     if (data) {
       showNotification({
@@ -62,7 +60,6 @@ const Form: NextPage = () => {
         color: "red",
       });
     }
-    setOpened(false);
   };
   return (
     <div className="flex flex-col justify-center">
@@ -97,7 +94,7 @@ const Form: NextPage = () => {
           className="mt-2"
         />
 
-        <Modal
+        {/* <Modal
           opened={opened}
           onClose={() => setOpened(false)}
           centered={true}
@@ -106,7 +103,7 @@ const Form: NextPage = () => {
           <div className="p-2 text-center text-xl font-bold">
             You can not edit this article,
             <br />
-            Do you save your memory?
+            Do you send your memory?
           </div>
           <Group position="center" mt="md">
             <Button
@@ -123,10 +120,16 @@ const Form: NextPage = () => {
               No
             </Button>
           </Group>
-        </Modal>
+        </Modal> */}
+
+        {/* <Group position="right" mt="md">
+          <Button color="cyan" className="mt-2" onClick={() => setOpened(true)}>
+            {t.SAVE}
+          </Button>
+        </Group> */}
 
         <Group position="right" mt="md">
-          <Button color="cyan" className="mt-2" type="submit">
+          <Button color="cyan" className="mt-2" type="submit" loading={loading}>
             {t.SAVE}
           </Button>
         </Group>
