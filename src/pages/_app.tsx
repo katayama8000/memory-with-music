@@ -88,6 +88,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               <SegmentedControl
                 color="cyan"
                 defaultValue={router.locale}
+                value={router.locale}
                 data={[
                   { value: "ja", label: "ja" },
                   { value: "en", label: "en" },
