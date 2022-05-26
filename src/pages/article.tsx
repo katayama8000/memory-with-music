@@ -14,7 +14,7 @@ const Article = () => {
   });
 
   return (
-    <div>
+    <div className="m-auto max-w-4xl">
       <div className="py-2 text-xl font-extrabold">{t.ARTICLE.TITLE}</div>
       <div className="whitespace-pre-wrap">
         <TypographyStylesProvider>
