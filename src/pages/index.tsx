@@ -1,6 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useState } from "react";
 import type { NextPage } from "next";
+import { useRouter } from "next/router";
 import axios from "axios";
 import { FaSearch } from "react-icons/fa";
 import { TextInput, Button, Box, LoadingOverlay } from "@mantine/core";
@@ -12,6 +13,14 @@ import { result } from "@type/typeResult";
 const Home: NextPage = () => {
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
   const [songsData, setSongsData] = useState<result>();
+  const router = useRouter();
+  let API_lang = "en_us";
+  console.log("changed");
+  if (router.locale === "en") {
+    console.log("en");
+    API_lang = "ja_jp";
+    console.log(API_lang);
+  }
 
   const { t } = useLocale();
 
@@ -24,7 +33,7 @@ const Home: NextPage = () => {
   const handleSubmit = useCallback(async (values: { music: string }) => {
     setLoadingFlag(true);
     const { data } = await axios.get(
-      `//itunes.apple.com/search?term=${values.music}&country=jp&lang=ja_jp&media=music&limit=50`
+      `//itunes.apple.com/search?term=${values.music}&country=jp&lang=en_us&media=music&limit=50`
     );
     setSongsData(data);
     setLoadingFlag(false);
