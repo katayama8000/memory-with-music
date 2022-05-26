@@ -24,7 +24,7 @@ const Home: NextPage = () => {
   const handleSubmit = useCallback(async (values: { music: string }) => {
     setLoadingFlag(true);
     const { data } = await axios.get(
-      `//itunes.apple.com/search?term=${values.music}&country=jp&entity=musicVideo`
+      `//itunes.apple.com/search?term=${values.music}&country=jp&lang=ja_jp&media=music&limit=50`
     );
     setSongsData(data);
     setLoadingFlag(false);
