@@ -1,9 +1,11 @@
-import { TypographyStylesProvider } from "@mantine/core";
-import { useRouter } from "next/router";
 import React, { useState } from "react";
+import { useRouter } from "next/router";
+import { TypographyStylesProvider } from "@mantine/core";
+import { useLocale } from "@hooks/useLocale";
 
 const Article = () => {
   const router = useRouter();
+  const { t } = useLocale();
   const [initial] = useState({
     artist: router.query.artist,
     song: router.query.song,
@@ -13,7 +15,7 @@ const Article = () => {
 
   return (
     <div>
-      <div>memoryArticle</div>
+      <div className="py-2 text-xl font-extrabold">{t.ARTICLE.TITLE}</div>
       <div className="whitespace-pre-wrap">
         <TypographyStylesProvider>
           <div dangerouslySetInnerHTML={{ __html: initial.memory as string }} />

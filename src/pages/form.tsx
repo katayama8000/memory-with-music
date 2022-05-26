@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { TextInput, Button, Textarea, Group, Modal } from "@mantine/core";
@@ -16,6 +16,10 @@ const Form: NextPage = () => {
     song: router.query.song,
     image: router.query.image,
   });
+
+  useEffect(() => {
+    console.log("hello");
+  }, [router]);
 
   const form = useForm({
     initialValues: {

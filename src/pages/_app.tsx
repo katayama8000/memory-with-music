@@ -13,8 +13,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   const [color, setColor] = useState<"dark" | "light">("dark");
   const { t } = useLocale();
   const router = useRouter();
-  console.log("router", router.locale);
-  console.log(router.pathname);
   const toggleColorTheme = () => {
     color === "dark" ? setColor("light") : setColor("dark");
   };

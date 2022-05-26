@@ -1,6 +1,7 @@
 import { Card, Image, Text } from "@mantine/core";
 import Link from "next/link";
 import React from "react";
+//import {useLocales} from "@hooks/useLocale";
 
 type Props = {
   song: string;
@@ -34,7 +35,7 @@ export const Memory: React.FC<Props> = ({ song, artist, image, memory }) => {
               <div className="truncate">
                 {song}/{artist}
                 <br />
-                memory:{memory}
+                {memory}
               </div>
             </div>
           </a>
