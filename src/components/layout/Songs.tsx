@@ -17,7 +17,7 @@ export const Songs: React.FC<Props> = ({ songsData, loading }) => {
         <div>
           <Grid>
             {loading && (
-              <Grid.Col span={4}>
+              <Grid.Col xs={6} sm={4} className="mx-1 sm:mx-0">
                 <div className="m-auto">
                   <SkeletonCard />
                 </div>
@@ -26,7 +26,7 @@ export const Songs: React.FC<Props> = ({ songsData, loading }) => {
             {songsData?.results?.map((data, index) => {
               return (
                 <Grid.Col xs={6} sm={4} key={index}>
-                  <div key={index} className="m-auto p-2">
+                  <div key={index} className="mx-1 sm:mx-0">
                     <SongCard
                       url={data.artworkUrl100}
                       artistName={data.artistName}
