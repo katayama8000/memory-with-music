@@ -46,12 +46,18 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <main className="m-auto max-w-4xl">
         <MantineProvider
-          theme={{ colorScheme: color }}
+          theme={{
+            colorScheme: color,
+            // breakpoints: {
+            //   sm: 800,
+            //   lg: 1275,
+            // },
+          }}
           withGlobalStyles
           withNormalizeCSS
         >
           <NotificationsProvider position="bottom-right" zIndex={2077}>
-            <div className="flex justify-end">
+            <div className="mt-2 flex justify-center xs:justify-end">
               <SegmentedControl
                 color="cyan"
                 defaultValue={router.pathname}

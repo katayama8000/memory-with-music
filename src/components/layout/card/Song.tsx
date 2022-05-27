@@ -41,13 +41,13 @@ export const SongCard: React.FC<Props> = ({
   const { t } = useLocale();
   return (
     <div>
-      <Card p="lg" radius="md" withBorder={true} className=" hover:opacity-70">
-        <Card.Section className="mx-auto py-2 ">
+      <Card radius="md" withBorder={true} className=" hover:opacity-70">
+        <Card.Section className="mx-auto py-2">
           <Image
             src={url}
             alt={artistName}
             radius="md"
-            height={80}
+            height={120}
             withPlaceholder
           />
         </Card.Section>
