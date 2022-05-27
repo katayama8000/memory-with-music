@@ -14,12 +14,12 @@ const Home: NextPage = () => {
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
   const [songsData, setSongsData] = useState<result>();
   const router = useRouter();
-  let API_lang = "en_us";
-  console.log("changed");
-  if (router.locale === "en") {
-    console.log("en");
+
+  let API_lang: "ja_jp" | "en_us" = "en_us";
+  let API_country: "jp" | "us" = "us";
+  if (router.locale === "ja") {
     API_lang = "ja_jp";
-    console.log(API_lang);
+    API_country = "jp";
   }
 
   const { t } = useLocale();
@@ -30,20 +30,29 @@ const Home: NextPage = () => {
     },
   });
 
-  const handleSubmit = useCallback(async (values: { music: string }) => {
-    setLoadingFlag(true);
-    const { data } = await axios.get(
-      `//itunes.apple.com/search?term=${values.music}&country=jp&lang=en_us&media=music&limit=50`
-    );
-    setSongsData(data);
-    setLoadingFlag(false);
-  }, []);
+  const handleSubmit = useCallback(
+    async (
+      values: { music: string },
+      lang: "ja_jp" | "en_us",
+      country: "jp" | "us"
+    ) => {
+      setLoadingFlag(true);
+      const { data } = await axios.get(
+        `//itunes.apple.com/search?term=${values.music}&country=${country}&lang=${lang}&media=music&limit=50`
+      );
+      setSongsData(data);
+      setLoadingFlag(false);
+    },
+    []
+  );
 
   return (
     <div className="flex flex-col justify-center">
       <Box sx={{ maxWidth: 300 }} mx="auto">
         <form
-          onSubmit={form.onSubmit((values) => handleSubmit(values))}
+          onSubmit={form.onSubmit((values) =>
+            handleSubmit(values, API_lang, API_country)
+          )}
           className="mt-2 flex gap-x-2"
         >
           <TextInput placeholder={t.SEARCH} {...form.getInputProps("music")} />
