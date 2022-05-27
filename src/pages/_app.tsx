@@ -46,7 +46,13 @@ function MyApp({ Component, pageProps }: AppProps) {
       </Head>
       <main className="m-auto max-w-4xl">
         <MantineProvider
-          theme={{ colorScheme: color }}
+          theme={{
+            colorScheme: color,
+            // breakpoints: {
+            //   sm: 800,
+            //   lg: 1275,
+            // },
+          }}
           withGlobalStyles
           withNormalizeCSS
         >

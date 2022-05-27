@@ -1,5 +1,5 @@
 import React from "react";
-import { Grid } from "@mantine/core";
+import { Grid, SimpleGrid } from "@mantine/core";
 import { SongCard, SkeletonCard } from "@components/layout/card/Song";
 import { useLocale } from "@hooks/useLocale";
 import { result } from "@type/typeResult";
@@ -25,8 +25,8 @@ export const Songs: React.FC<Props> = ({ songsData, loading }) => {
             )}
             {songsData?.results?.map((data, index) => {
               return (
-                <Grid.Col span={4} key={index}>
-                  <div key={index} className="m-auto">
+                <Grid.Col md={6} lg={4} key={index}>
+                  <div key={index} className="m-auto p-2">
                     <SongCard
                       url={data.artworkUrl100}
                       artistName={data.artistName}
