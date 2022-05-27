@@ -25,7 +25,7 @@ export const Songs: React.FC<Props> = ({ songsData, loading }) => {
             )}
             {songsData?.results?.map((data, index) => {
               return (
-                <Grid.Col md={6} lg={4} key={index}>
+                <Grid.Col xs={6} sm={4} key={index}>
                   <div key={index} className="m-auto p-2">
                     <SongCard
                       url={data.artworkUrl100}
