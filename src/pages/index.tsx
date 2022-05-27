@@ -38,8 +38,9 @@ const Home: NextPage = () => {
     ) => {
       setLoadingFlag(true);
       const { data } = await axios.get(
-        `//itunes.apple.com/search?term=${values.music}&country=${country}&lang=${lang}&media=music&limit=50`
+        `//itunes.apple.com/search?term=${values.music}&country=${country}&lang=${lang}&media=music&limit=4&offset=0`
       );
+      console.log(data);
       setSongsData(data);
       setLoadingFlag(false);
     },
@@ -68,6 +69,9 @@ const Home: NextPage = () => {
       />
       <div className="mt-5">
         <Songs songsData={songsData!} loading={loadingFlag} />
+        <Button color="cyan" className="m-5">
+          show more
+        </Button>
       </div>
     </div>
   );
