@@ -3,7 +3,7 @@ export default {
   SEARCH: "Search",
   NOSONG: "There is no such a song",
   SONGCARDBUTTON: "Write a memory",
-  SAVE: "Send your memory",
+  POST: "Send your memory",
   APP: {
     SEACRCH: "Search",
     FORM: "Form",
@@ -22,6 +22,6 @@ export default {
   Notification: {
     SUCCESS: "Success",
     ERROR: "Error",
-    MESSAGE: "Saved",
+    MESSAGE: "Posted",
   },
 };

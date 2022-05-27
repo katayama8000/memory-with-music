@@ -131,7 +131,7 @@ const Form: NextPage = () => {
 
         <Group position="right" mt="md">
           <Button color="cyan" className="mt-2" type="submit" loading={loading}>
-            {t.SAVE}
+            {t.POST}
           </Button>
         </Group>
       </form>

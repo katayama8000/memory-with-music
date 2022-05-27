@@ -3,7 +3,7 @@ export default {
   SEARCH: "検索",
   NOSONG: "そのような曲はありません",
   SONGCARDBUTTON: "記憶を書き留める",
-  SAVE: "投稿",
+  POST: "投稿",
   APP: {
     SEACRCH: "検索",
     FORM: "入力",
@@ -22,6 +22,6 @@ export default {
   Notification: {
     SUCCESS: "成功",
     ERROR: "失敗",
-    MESSAGE: "保存しました",
+    MESSAGE: "投稿しました",
   },
 };
