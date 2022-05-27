@@ -57,7 +57,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           withNormalizeCSS
         >
           <NotificationsProvider position="bottom-right" zIndex={2077}>
-            <div className="mt-2 flex justify-center md:justify-end">
+            <div className="mt-2 flex justify-center xs:justify-end">
               <SegmentedControl
                 color="cyan"
                 defaultValue={router.pathname}
