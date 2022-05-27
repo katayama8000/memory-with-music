@@ -63,7 +63,7 @@ const Form: NextPage = () => {
     }
   };
   return (
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center px-2">
       <form
         onSubmit={form.onSubmit((values) => insert(values))}
         className="mt-2"

@@ -13,7 +13,7 @@ type Props = {
 export const Memory: React.FC<Props> = ({ song, artist, image, memory }) => {
   return (
     <div>
-      <Card withBorder={true} className="m-auto w-[430px]  hover:opacity-70">
+      <Card withBorder={true} className="m-2 hover:opacity-70 ">
         <Link
           href={{
             pathname: "/article",
