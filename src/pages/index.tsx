@@ -38,7 +38,7 @@ const Home: NextPage = () => {
     ) => {
       setLoadingFlag(true);
       const { data } = await axios.get(
-        `//itunes.apple.com/search?term=${values.music}&country=${country}&lang=${lang}&media=music&limit=4&offset=0`
+        `//itunes.apple.com/search?term=${values.music}&country=${country}&lang=${lang}&media=music&limit=40&offset=0`
       );
       console.log(data);
       setSongsData(data);
