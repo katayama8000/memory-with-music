@@ -9,18 +9,15 @@ import { useForm } from "@mantine/form";
 import { Songs } from "@components/layout/Songs";
 import { useLocale } from "@hooks/useLocale";
 import { result } from "@type/typeResult";
+import { lang, country } from "@type/typeI18n";
+
+let API_lang: lang = "en_us";
+let API_country: country = "us";
 
 const Home: NextPage = () => {
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
   const [songsData, setSongsData] = useState<result>();
   const router = useRouter();
-
-  let API_lang: "ja_jp" | "en_us" = "en_us";
-  let API_country: "jp" | "us" = "us";
-  if (router.locale === "ja") {
-    API_lang = "ja_jp";
-    API_country = "jp";
-  }
 
   const { t } = useLocale();
 
@@ -30,12 +27,13 @@ const Home: NextPage = () => {
     },
   });
 
+  if (router.locale === "ja") {
+    API_lang = "ja_jp";
+    API_country = "jp";
+  }
+
   const handleSubmit = useCallback(
-    async (
-      values: { music: string },
-      lang: "ja_jp" | "en_us",
-      country: "jp" | "us"
-    ) => {
+    async (values: { music: string }, lang: lang, country: country) => {
       setLoadingFlag(true);
       const { data } = await axios.get(
         `//itunes.apple.com/search?term=${values.music}&country=${country}&lang=${lang}&media=music&limit=51&offset=0`
@@ -44,7 +42,7 @@ const Home: NextPage = () => {
       setSongsData(data);
       setLoadingFlag(false);
     },
-    []
+    [songsData, loadingFlag]
   );
 
   return (
@@ -56,7 +54,13 @@ const Home: NextPage = () => {
           )}
           className="mt-2 flex gap-x-2"
         >
-          <TextInput placeholder={t.SEARCH} {...form.getInputProps("music")} />
+          <TextInput
+            placeholder={t.SEARCH}
+            classNames={{
+              input: "text-base",
+            }}
+            {...form.getInputProps("music")}
+          />
           <Button type="submit" color="cyan">
             <FaSearch />
           </Button>

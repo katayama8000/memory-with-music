@@ -3,10 +3,10 @@ import { config } from "../lib/supabase/supabase";
 import { Memory } from "@components/layout/card/Memory";
 import { showNotification } from "@mantine/notifications";
 import { Grid, LoadingOverlay } from "@mantine/core";
-import { data } from "@type/typeSupabase";
+import { dataFromSupabase } from "@type/typeSupabase";
 
 export const List = () => {
-  const [data, setData] = useState<data[]>([]);
+  const [data, setData] = useState<dataFromSupabase[]>([]);
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
   useEffect(() => {
     setLoadingFlag(true);

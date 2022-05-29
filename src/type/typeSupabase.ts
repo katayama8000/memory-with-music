@@ -1,4 +1,4 @@
-export type data = {
+export type dataFromSupabase = {
   id: number;
   created_at: string;
   song: string;
