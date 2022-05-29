@@ -39,7 +39,7 @@ export const List = () => {
           {data.map((item, index) => {
             return (
               <Grid.Col xs={6} key={index}>
-                <div>
+                <div className="m-auto px-2">
                   <Memory
                     song={item.song}
                     image={item.image}
