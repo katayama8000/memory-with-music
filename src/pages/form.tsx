@@ -27,23 +27,23 @@ const Form: NextPage = () => {
     },
   });
 
-  const pageChangeHandler = () => {
-    if (form.values.artist !== undefined) {
-      const answer = window.confirm(
-        "フォームの内容がリセットされます、本当にページ遷移しますか？"
-      );
-      if (!answer) {
-        throw "Abort route";
-      }
-    }
-  };
+  // const pageChangeHandler = () => {
+  //   if (form.values.artist !== undefined) {
+  //     const answer = window.confirm(
+  //       "フォームの内容がリセットされます、本当にページ遷移しますか？"
+  //     );
+  //     if (!answer) {
+  //       throw "Abort route";
+  //     }
+  //   }
+  // };
 
-  useEffect(() => {
-    router.events.on("routeChangeStart", pageChangeHandler);
-    return () => {
-      router.events.off("routeChangeStart", pageChangeHandler);
-    };
-  }, []);
+  // useEffect(() => {
+  //   router.events.on("routeChangeStart", pageChangeHandler);
+  //   return () => {
+  //     router.events.off("routeChangeStart", pageChangeHandler);
+  //   };
+  // }, []);
 
   const insert = async (values: {
     artist: string | string[] | undefined;
@@ -70,7 +70,10 @@ const Form: NextPage = () => {
         message: t.Notification.MESSAGE,
         color: "cyan",
       });
-      router.push("/list");
+      //form.reset();
+      setTimeout(() => {
+        router.push("/list");
+      }, 1000);
     }
     if (error) {
       showNotification({
@@ -82,9 +85,6 @@ const Form: NextPage = () => {
   };
   return (
     <div className="flex flex-col justify-center px-2">
-      <button onClick={() => console.log(form.values)}>console</button>
-      {form.values.artist}
-      {form.values.song}
       <form
         onSubmit={form.onSubmit((values) => insert(values))}
         className="mt-2"
