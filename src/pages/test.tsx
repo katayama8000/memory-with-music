@@ -1,45 +1,29 @@
-import {
-  Group,
-  Box,
-  MediaQuery,
-  useMantineTheme,
-  CSSObject,
-} from "@mantine/core";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 function Demo() {
-  const theme = useMantineTheme();
+  const router = useRouter();
 
-  const highlight: CSSObject = {
-    backgroundColor:
-      theme.colorScheme === "dark"
-        ? theme.fn.rgba(theme.colors.blue[7], 0.25)
-        : theme.colors.blue[0],
-    border: `1px solid ${
-      theme.colorScheme === "dark" ? theme.colors.blue[6] : theme.colors.blue[3]
-    }`,
+  const pageChangeHandler = () => {
+    const answer = window.confirm(
+      "コメント内容がリセットされます、本当にページ遷移しますか？"
+    );
+    if (!answer) {
+      throw "Abort route";
+    }
   };
 
-  const boxStyles = {
-    borderRadius: 3,
-    padding: "3px 5px",
-    border: "1px solid transparent",
-  };
+  useEffect(() => {
+    router.events.on("routeChangeStart", pageChangeHandler);
+    return () => {
+      router.events.off("routeChangeStart", pageChangeHandler);
+    };
+  }, []);
 
   return (
-    <Group direction="column" spacing={5}>
-      <MediaQuery largerThan="lg" styles={highlight}>
-        <Box sx={boxStyles}>- larger than lg</Box>
-      </MediaQuery>
-      <MediaQuery smallerThan="lg" styles={highlight}>
-        <Box sx={boxStyles}>- Smaller than lg</Box>
-      </MediaQuery>
-      <MediaQuery smallerThan="xl" largerThan="sm" styles={highlight}>
-        <Box sx={boxStyles}>- Smaller than xl, larger than sm</Box>
-      </MediaQuery>
-      <MediaQuery smallerThan={1500} largerThan={800} styles={highlight}>
-        <Box sx={boxStyles}>- Smaller than 1500px, larger than 800px</Box>
-      </MediaQuery>
-    </Group>
+    <div>
+      <div>aa</div>
+    </div>
   );
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useState, useEffect } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
@@ -9,7 +10,6 @@ import { useLocale } from "@hooks/useLocale";
 
 const Form: NextPage = () => {
   const router = useRouter();
-  //const [opened, setOpened] = useState(false);
   const [loading, setLoading] = useState<boolean>(false);
   const { t } = useLocale();
   const [initial] = useState({
@@ -26,6 +26,24 @@ const Form: NextPage = () => {
       memory: "",
     },
   });
+
+  const pageChangeHandler = () => {
+    if (form.values.artist !== undefined) {
+      const answer = window.confirm(
+        "フォームの内容がリセットされます、本当にページ遷移しますか？"
+      );
+      if (!answer) {
+        throw "Abort route";
+      }
+    }
+  };
+
+  useEffect(() => {
+    router.events.on("routeChangeStart", pageChangeHandler);
+    return () => {
+      router.events.off("routeChangeStart", pageChangeHandler);
+    };
+  }, []);
 
   const insert = async (values: {
     artist: string | string[] | undefined;
@@ -64,6 +82,9 @@ const Form: NextPage = () => {
   };
   return (
     <div className="flex flex-col justify-center px-2">
+      <button onClick={() => console.log(form.values)}>console</button>
+      {form.values.artist}
+      {form.values.song}
       <form
         onSubmit={form.onSubmit((values) => insert(values))}
         className="mt-2"
@@ -94,41 +115,6 @@ const Form: NextPage = () => {
           {...form.getInputProps("memory")}
           className="mt-2"
         />
-
-        {/* <Modal
-          opened={opened}
-          onClose={() => setOpened(false)}
-          centered={true}
-          withCloseButton={false}
-        >
-          <div className="p-2 text-center text-xl font-bold">
-            You can not edit this article,
-            <br />
-            Do you send your memory?
-          </div>
-          <Group position="center" mt="md">
-            <Button
-              className="mt-2"
-              onClick={form.onSubmit((values) => insert(values))}
-            >
-              Yes
-            </Button>
-            <Button
-              color="red"
-              className="mt-2"
-              onClick={() => setOpened(false)}
-            >
-              No
-            </Button>
-          </Group>
-        </Modal> */}
-
-        {/* <Group position="right" mt="md">
-          <Button color="cyan" className="mt-2" onClick={() => setOpened(true)}>
-            {t.SAVE}
-          </Button>
-        </Group> */}
-
         <Group position="right" mt="md">
           <Button color="cyan" className="mt-2" type="submit" loading={loading}>
             {t.POST}
