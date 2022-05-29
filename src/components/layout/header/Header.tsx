@@ -1,8 +1,8 @@
 import React from "react";
 import { Loader } from "@mantine/core";
-import { Lang } from "@components/layout/language/Lang";
-import { ColorTheme } from "@components/layout/theme/ColorTheme";
-import { Router } from "@components/layout/router/Router";
+import { Lang } from "./headerComp/Lang";
+import { ColorTheme } from "./headerComp/ColorTheme";
+import { Router } from "./headerComp/Router";
 
 type Props = {
   onClick: () => void;

@@ -1,6 +1,7 @@
 import React from "react";
 import { Grid } from "@mantine/core";
-import { SongCard, SkeletonCard } from "@components/layout/card/Song";
+import { SongCard } from "@components/layout/card/SongCard";
+import { SkeletonCard } from "@components/layout/card/SkeletonCard";
 import { useLocale } from "@hooks/useLocale";
 import { result } from "@type/typeResult";
 

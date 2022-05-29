@@ -1,7 +1,6 @@
-import { Card, Image, Text } from "@mantine/core";
+import { Card, Image } from "@mantine/core";
 import Link from "next/link";
 import React from "react";
-//import {useLocales} from "@hooks/useLocale";
 
 type Props = {
   song: string;
@@ -10,7 +9,12 @@ type Props = {
   memory: string;
 };
 
-export const Memory: React.FC<Props> = ({ song, artist, image, memory }) => {
+export const MemoryCard: React.FC<Props> = ({
+  song,
+  artist,
+  image,
+  memory,
+}) => {
   return (
     <div>
       <Card withBorder={true} className="hover:opacity-70 sm:m-0 ">

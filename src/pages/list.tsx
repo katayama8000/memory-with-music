@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { config } from "../lib/supabase/supabase";
-import { Memory } from "@components/layout/card/Memory";
+import { MemoryCard } from "@components/layout/card/MemoryCard";
 import { showNotification } from "@mantine/notifications";
 import { Grid, LoadingOverlay } from "@mantine/core";
 import { dataFromSupabase } from "@type/typeSupabase";
@@ -40,7 +40,7 @@ export const List = () => {
             return (
               <Grid.Col xs={6} key={index}>
                 <div className="m-auto px-2">
-                  <Memory
+                  <MemoryCard
                     song={item.song}
                     image={item.image}
                     artist={item.artist}
