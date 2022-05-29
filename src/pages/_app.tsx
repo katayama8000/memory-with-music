@@ -1,25 +1,18 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
-import { useRouter } from "next/router";
 import "src/lib/tailwind.css";
 import { MantineProvider, ActionIcon, SegmentedControl } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
-import { Sun, MoonStars } from "tabler-icons-react";
 import { Title } from "@components/layout/header/Title";
-import { useLocale } from "@hooks/useLocale";
+import { Router } from "@components/layout/router/Router";
+import { Lang } from "@components/layout/language/Lang";
+import { ColorTheme } from "@components/layout/theme/ColorTheme";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [color, setColor] = useState<"dark" | "light">("dark");
-  const { t } = useLocale();
-  const router = useRouter();
   const toggleColorTheme = () => {
     color === "dark" ? setColor("light") : setColor("dark");
-  };
-  const switchLanguage = (lang: "ja" | "en") => {
-    router.push(router.pathname, router.pathname, {
-      locale: lang,
-    });
   };
 
   return (
@@ -40,7 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:description" content="memory with music" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="" />
-        <meta property="og:image" content="img/rain.png" />
+        <meta property="og:image" content="img/brain.png" />
         <meta property="og:site_name" content="memory with music" />
         <meta property="og:locale" content="ja_JP" />
       </Head>
@@ -48,57 +41,20 @@ function MyApp({ Component, pageProps }: AppProps) {
         <MantineProvider
           theme={{
             colorScheme: color,
-            // breakpoints: {
-            //   sm: 800,
-            //   lg: 1275,
-            // },
           }}
           withGlobalStyles
           withNormalizeCSS
         >
           <NotificationsProvider position="bottom-right" zIndex={2077}>
             <div className="mt-2 flex justify-center xs:justify-end">
-              <SegmentedControl
-                color="cyan"
-                defaultValue={router.pathname}
-                value={router.pathname}
-                onChange={(path: "/" | "/form" | "list" | "article") => {
-                  router.push(path);
-                }}
-                data={[
-                  { label: t.APP.SEACRCH, value: "/" },
-                  { label: t.APP.FORM, value: "/form" },
-                  { label: t.APP.LIST, value: "/list" },
-                  { label: t.APP.ARTICLE, value: "/article", disabled: true },
-                ]}
-              />
+              <Router />
             </div>
             <Title />
             <div className="flex justify-center">
-              <ActionIcon
-                variant="outline"
-                color={color === "light" ? "yellow" : "blue"}
-                onClick={() => toggleColorTheme()}
-                title="Toggle color scheme"
-              >
-                {color === "light" ? (
-                  <Sun size={18} />
-                ) : (
-                  <MoonStars size={18} />
-                )}
-              </ActionIcon>
+              <ColorTheme onClick={() => toggleColorTheme()} color={color} />
             </div>
             <div className="m-2 flex justify-end">
-              <SegmentedControl
-                color="cyan"
-                defaultValue={router.locale}
-                value={router.locale}
-                data={[
-                  { value: "ja", label: "ja" },
-                  { value: "en", label: "en" },
-                ]}
-                onChange={(lang: "en" | "ja") => switchLanguage(lang)}
-              />
+              <Lang />
             </div>
             <Component {...pageProps} />
           </NotificationsProvider>
