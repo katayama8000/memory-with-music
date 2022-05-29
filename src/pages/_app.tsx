@@ -2,12 +2,9 @@ import { useState } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import "src/lib/tailwind.css";
-import { MantineProvider, ActionIcon, SegmentedControl } from "@mantine/core";
+import { MantineProvider } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
-import { Title } from "@components/layout/header/Title";
-import { Router } from "@components/layout/router/Router";
-import { Lang } from "@components/layout/language/Lang";
-import { ColorTheme } from "@components/layout/theme/ColorTheme";
+import { Header } from "@components/layout/header/Header";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [color, setColor] = useState<"dark" | "light">("dark");
@@ -46,16 +43,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           withNormalizeCSS
         >
           <NotificationsProvider position="bottom-right" zIndex={2077}>
-            <div className="mt-2 flex justify-center xs:justify-end">
-              <Router />
-            </div>
-            <Title />
-            <div className="flex justify-center">
-              <ColorTheme onClick={() => toggleColorTheme()} color={color} />
-            </div>
-            <div className="m-2 flex justify-end">
-              <Lang />
-            </div>
+            <Header onClick={() => toggleColorTheme()} color={color} />
             <Component {...pageProps} />
           </NotificationsProvider>
         </MantineProvider>
