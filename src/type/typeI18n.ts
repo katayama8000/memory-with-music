@@ -1,2 +1,4 @@
-export type lang = "ja_jp" | "en_us";
-export type country = "jp" | "us";
+type lang = "ja_jp" | "en_us";
+type country = "jp" | "us";
+
+export type { lang, country };

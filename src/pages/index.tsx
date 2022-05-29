@@ -6,7 +6,7 @@ import axios from "axios";
 import { FaSearch } from "react-icons/fa";
 import { TextInput, Button, Box, LoadingOverlay } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { Songs } from "@components/layout/Songs";
+import { SongList } from "@components/layout/SongList";
 import { useLocale } from "@hooks/useLocale";
 import { result } from "@type/typeResult";
 import { lang, country } from "@type/typeI18n";
@@ -16,7 +16,7 @@ let API_country: country = "us";
 
 const Home: NextPage = () => {
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
-  const [songsData, setSongsData] = useState<result>();
+  const [songList, setSongList] = useState<result>();
   const router = useRouter();
 
   const { t } = useLocale();
@@ -39,10 +39,10 @@ const Home: NextPage = () => {
         `//itunes.apple.com/search?term=${values.music}&country=${country}&lang=${lang}&media=music&limit=51&offset=0`
       );
       console.log(data);
-      setSongsData(data);
+      setSongList(data);
       setLoadingFlag(false);
     },
-    [songsData, loadingFlag]
+    [songList, loadingFlag]
   );
 
   return (
@@ -72,7 +72,7 @@ const Home: NextPage = () => {
         overlayOpacity={0.3}
       />
       <div className="mt-5">
-        <Songs songsData={songsData!} loading={loadingFlag} />
+        <SongList songList={songList!} loading={loadingFlag} />
         {/* <Button color="cyan" className="m-5">
           show more
         </Button> */}

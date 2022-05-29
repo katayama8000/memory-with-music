@@ -7,14 +7,14 @@ import { result } from "@type/typeResult";
 
 type Props = {
   loading: boolean;
-  songsData: result;
+  songList: result;
 };
 
-export const Songs: React.FC<Props> = ({ songsData, loading }) => {
+export const SongList: React.FC<Props> = ({ songList, loading }) => {
   const { t } = useLocale();
   return (
     <div>
-      {songsData?.resultCount !== 0 ? (
+      {songList?.resultCount !== 0 ? (
         <div>
           <Grid>
             {loading && (
@@ -24,15 +24,15 @@ export const Songs: React.FC<Props> = ({ songsData, loading }) => {
                 </div>
               </Grid.Col>
             )}
-            {songsData?.results?.map((data, index) => {
+            {songList?.results?.map((song, index) => {
               return (
                 <Grid.Col xs={6} sm={4} key={index}>
-                  <div key={index} className="px-1 sm:mx-0">
+                  <div className="px-1 sm:mx-0">
                     <SongCard
-                      url={data.artworkUrl100}
-                      artistName={data.artistName}
-                      trackName={data.trackName}
-                      releaseDate={data.releaseDate}
+                      url={song.artworkUrl100}
+                      artistName={song.artistName}
+                      trackName={song.trackName}
+                      releaseDate={song.releaseDate}
                       loading={loading}
                     />
                   </div>
