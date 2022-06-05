@@ -1,7 +1,11 @@
 memory with music
 
 >**Note**
->note
+>React.js</br>
+>TypeScript</br>
+>Next.js</br>
+>Mantine</br>
+>supabase</br>
 
 
 >**Warning**
