@@ -8,5 +8,5 @@ memory with music
 >supabase</br>
 
 
->**Warning**
->Warning
+>**Warning**</br>
+>マージするときはレビューもらってからすること</br>
