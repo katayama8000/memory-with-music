@@ -1,6 +1,6 @@
 memory with music
 
->**Note**
+>**Note**</br>
 >React.js</br>
 >TypeScript</br>
 >Next.js</br>
