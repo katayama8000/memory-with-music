@@ -9,7 +9,7 @@ type Props = {
   color: "dark" | "light";
 };
 
-export const Header: React.FC<Props> = ({ onClick, color }) => {
+export const HeaderTitle: React.FC<Props> = ({ onClick, color }) => {
   return (
     <div>
       <div className="mt-2 flex justify-center xs:justify-end">
