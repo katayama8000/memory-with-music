@@ -1,15 +1,16 @@
 import { NextPage } from "next";
 import { config } from "../lib/supabase/supabase";
+import { toast } from "@function/toast";
 import { useForm } from "@mantine/form";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
 
-type IForm = {
+type Form = {
   email: string;
   password: string;
 };
 
 const Signin: NextPage = () => {
-  const handleSignin = async (value: { email: string; password: string }) => {
+  const handleSignin = async (value: Form) => {
     console.log(value);
     const { user, session, error } = await config.supabase.auth.signUp({
       email: value.email,
@@ -18,6 +19,7 @@ const Signin: NextPage = () => {
 
     if (user) {
       console.log(user);
+      toast("success", "ユーザー登録に成功しました", "cyan");
     }
     if (session) {
       console.log(session);
