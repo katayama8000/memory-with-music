@@ -1,10 +1,33 @@
 import { useState } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
+import Link from "next/link";
+import { useRouter } from "next/router";
 import "src/lib/tailwind.css";
-import { MantineProvider } from "@mantine/core";
+import { MoonStars, Sun } from "tabler-icons-react";
+import {
+  ActionIcon,
+  Loader,
+  MantineProvider,
+  SegmentedControl,
+  AppShell,
+  Navbar,
+  Header,
+} from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
-import { Header } from "@components/layout/header/Header";
+import { useLocale } from "@hooks/useLocale";
+import { User } from "@components/layout/user/User";
+
+type LinksType = {
+  url: string;
+  label: string;
+};
+const Links: LinksType[] = [
+  { url: "/", label: "Search" },
+  { url: "/form", label: "Form" },
+  { url: "/list", label: "List" },
+  { url: "/article", label: "Article" },
+];
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [color, setColor] = useState<"dark" | "light">("dark");
@@ -12,6 +35,16 @@ function MyApp({ Component, pageProps }: AppProps) {
     color === "dark" ? setColor("light") : setColor("dark");
   };
 
+  const switchLanguage = (lang: "ja" | "en") => {
+    router.push(router.pathname, router.pathname, {
+      locale: lang,
+    });
+  };
+
+  const { t } = useLocale();
+  const router = useRouter();
+
+  console.log(router.pathname);
   return (
     <>
       <Head>
@@ -34,20 +67,105 @@ function MyApp({ Component, pageProps }: AppProps) {
         <meta property="og:site_name" content="memory with music" />
         <meta property="og:locale" content="ja_JP" />
       </Head>
-      <main className="m-auto max-w-4xl">
-        <MantineProvider
-          theme={{
-            colorScheme: color,
-          }}
-          withGlobalStyles
-          withNormalizeCSS
+
+      <MantineProvider
+        theme={{
+          colorScheme: color,
+        }}
+        withGlobalStyles
+        withNormalizeCSS
+      >
+        <AppShell
+          padding="md"
+          navbar={
+            <Navbar
+              p="xs"
+              width={{ base: 300 }}
+              hidden={true}
+              hiddenBreakpoint={1000}
+              fixed={true}
+            >
+              <Navbar.Section grow mt="md">
+                {Links.map((link) => {
+                  return (
+                    <div key={link.label}>
+                      {link.url === router.pathname ? (
+                        <Link href={link.url}>
+                          <div
+                            className={
+                              "my-1 rounded-lg  bg-[#0c8599] py-2 pl-2  text-inherit "
+                            }
+                          >
+                            <a>{link.label}</a>
+                          </div>
+                        </Link>
+                      ) : (
+                        <Link href={link.url}>
+                          <div
+                            className={
+                              "my-1 rounded-lg  py-2 pl-2 text-inherit  hover:bg-[#273030]"
+                            }
+                          >
+                            <a>{link.label}</a>
+                          </div>
+                        </Link>
+                      )}
+                    </div>
+                  );
+                })}
+              </Navbar.Section>
+              <Navbar.Section>
+                <User />
+              </Navbar.Section>
+            </Navbar>
+          }
+          header={
+            <Header height={70} p="xs" fixed={true} zIndex={200}>
+              <div className="relative flex justify-center ">
+                <div className="pr-2 pb-2 text-4xl  font-bold italic hover:not-italic">
+                  memory with music
+                </div>
+                <Loader color="cyan" size="sm" variant="bars" />
+                <div className=" absolute right-0 flex">
+                  <div>
+                    <ActionIcon
+                      variant="outline"
+                      color={color === "light" ? "yellow" : "blue"}
+                      onClick={() => toggleColorTheme()}
+                      title="Toggle color scheme"
+                      className="m-[6px]"
+                    >
+                      {color === "light" ? (
+                        <Sun size={20} />
+                      ) : (
+                        <MoonStars size={20} />
+                      )}
+                    </ActionIcon>
+                  </div>
+                  <div>
+                    <SegmentedControl
+                      color="cyan"
+                      defaultValue={router.locale}
+                      value={router.locale}
+                      data={[
+                        { value: "ja", label: "ja" },
+                        { value: "en", label: "en" },
+                      ]}
+                      onChange={(lang: "en" | "ja") => switchLanguage(lang)}
+                    />
+                  </div>
+                </div>
+              </div>
+            </Header>
+          }
         >
           <NotificationsProvider position="bottom-right" zIndex={2077}>
-            <Header onClick={() => toggleColorTheme()} color={color} />
-            <Component {...pageProps} />
+            <main className="m-auto mt-[100px] max-w-6xl pl-[300px]">
+              <Component {...pageProps} />
+            </main>
           </NotificationsProvider>
-        </MantineProvider>
-      </main>
+        </AppShell>
+      </MantineProvider>
     </>
   );
 }
