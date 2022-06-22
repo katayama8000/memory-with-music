@@ -23,6 +23,7 @@ const Signin: NextPage = () => {
     }
     if (session) {
       console.log(session);
+      toast("success", "this is session", "cyan");
     }
     if (error) {
       console.log(error);
@@ -51,6 +52,7 @@ const Signin: NextPage = () => {
         />
 
         <PasswordInput
+          required
           label="Password"
           placeholder="Password"
           {...form.getInputProps("password")}
