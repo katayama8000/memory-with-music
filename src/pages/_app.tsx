@@ -101,14 +101,14 @@ function MyApp({ Component, pageProps }: AppProps) {
                       {link.url === router.pathname ? (
                         <Link href={link.url}>
                           <div className="my-1 flex rounded-lg  bg-[#0c8599] py-2 pl-2  text-inherit ">
-                            <span className="pr-2">{link.icon}</span>
+                            <span className="mt-[2px] pr-2">{link.icon}</span>
                             <a className="text-lg">{link.label}</a>
                           </div>
                         </Link>
                       ) : (
                         <Link href={link.url}>
                           <div className="my-1 flex rounded-lg  py-2 pl-2 text-lg  text-inherit hover:bg-[#273030]">
-                            <span className="pr-2">{link.icon}</span>
+                            <span className="mt-[2px] pr-2">{link.icon}</span>
                             <a className="text-lg">{link.label}</a>
                           </div>
                         </Link>
