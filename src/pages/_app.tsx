@@ -17,19 +17,26 @@ import {
 import { NotificationsProvider } from "@mantine/notifications";
 import { useLocale } from "@hooks/useLocale";
 import { User } from "@components/layout/user/User";
+import { FaSearch } from "react-icons/fa";
+import { AiOutlineForm } from "react-icons/ai";
+import { FaRegListAlt } from "react-icons/Fa";
+import { MdArticle } from "react-icons/Md";
+import { BiLogIn } from "react-icons/Bi";
+import { MdManageAccounts } from "react-icons/Md";
 
 type LinksType = {
   url: string;
   label: string;
+  icon: any;
 };
 const Links: LinksType[] = [
-  { url: "/", label: "Search" },
-  { url: "/form", label: "Form" },
-  { url: "/list", label: "List" },
-  { url: "/article", label: "Article" },
-  { url: "/signup", label: "SignUp" },
-  { url: "/signin", label: "SignIn" },
-  { url: "/account", label: "Account" },
+  { url: "/", label: "Search", icon: <FaSearch /> },
+  { url: "/form", label: "Form", icon: <AiOutlineForm /> },
+  { url: "/list", label: "List", icon: <FaRegListAlt /> },
+  { url: "/article", label: "Article", icon: <MdArticle /> },
+  { url: "/signup", label: "SignUp", icon: <BiLogIn /> },
+  { url: "/signin", label: "SignIn", icon: <BiLogIn /> },
+  { url: "/account", label: "Account", icon: <MdManageAccounts /> },
 ];
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -94,22 +101,16 @@ function MyApp({ Component, pageProps }: AppProps) {
                     <div key={link.label}>
                       {link.url === router.pathname ? (
                         <Link href={link.url}>
-                          <div
-                            className={
-                              "my-1 rounded-lg  bg-[#0c8599] py-2 pl-2  text-inherit "
-                            }
-                          >
-                            <a>{link.label}</a>
+                          <div className="my-1 flex rounded-lg  bg-[#0c8599] py-2 pl-2  text-inherit ">
+                            <span className="pr-2">{link.icon}</span>
+                            <a className="text-lg">{link.label}</a>
                           </div>
                         </Link>
                       ) : (
                         <Link href={link.url}>
-                          <div
-                            className={
-                              "my-1 rounded-lg  py-2 pl-2 text-inherit  hover:bg-[#273030]"
-                            }
-                          >
-                            <a>{link.label}</a>
+                          <div className="my-1 flex rounded-lg  py-2 pl-2 text-lg  text-inherit hover:bg-[#273030]">
+                            <span className="pr-2">{link.icon}</span>
+                            <a className="text-lg">{link.label}</a>
                           </div>
                         </Link>
                       )}
