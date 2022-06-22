@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { ReactElement, useState } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Link from "next/link";
@@ -27,7 +27,7 @@ import { MdManageAccounts } from "react-icons/Md";
 type LinksType = {
   url: string;
   label: string;
-  icon: any;
+  icon: ReactElement;
 };
 const Links: LinksType[] = [
   { url: "/", label: "Search", icon: <FaSearch /> },
@@ -54,7 +54,6 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { t } = useLocale();
   const router = useRouter();
 
-  console.log(router.pathname);
   return (
     <>
       <Head>
