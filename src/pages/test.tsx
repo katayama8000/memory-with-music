@@ -18,6 +18,7 @@ function Demo() {
     return () => {
       router.events.off("routeChangeStart", pageChangeHandler);
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

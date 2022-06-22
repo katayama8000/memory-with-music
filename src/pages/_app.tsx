@@ -27,6 +27,8 @@ const Links: LinksType[] = [
   { url: "/form", label: "Form" },
   { url: "/list", label: "List" },
   { url: "/article", label: "Article" },
+  { url: "/signup", label: "SignUp" },
+  { url: "/signin", label: "SignIn" },
 ];
 
 function MyApp({ Component, pageProps }: AppProps) {
