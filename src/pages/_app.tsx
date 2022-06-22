@@ -29,6 +29,7 @@ const Links: LinksType[] = [
   { url: "/article", label: "Article" },
   { url: "/signup", label: "SignUp" },
   { url: "/signin", label: "SignIn" },
+  { url: "/account", label: "Account" },
 ];
 
 function MyApp({ Component, pageProps }: AppProps) {
