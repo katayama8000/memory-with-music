@@ -9,7 +9,7 @@ type Form = {
   password: string;
 };
 
-const Signin: NextPage = () => {
+const Signup: NextPage = () => {
   const handleSignin = async (value: Form) => {
     console.log(value);
     const { user, session, error } = await config.supabase.auth.signUp({
@@ -27,6 +27,7 @@ const Signin: NextPage = () => {
     }
     if (error) {
       console.log(error);
+      toast("success", "失敗", "red");
     }
   };
 
@@ -69,4 +70,4 @@ const Signin: NextPage = () => {
   );
 };
 
-export default Signin;
+export default Signup;

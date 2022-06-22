@@ -1,4 +1,5 @@
 import { NextPage } from "next";
+import { useRouter } from "next/router";
 import { config } from "../lib/supabase/supabase";
 import { toast } from "@function/toast";
 import { useForm } from "@mantine/form";
@@ -10,6 +11,7 @@ type Form = {
 };
 
 const Signin: NextPage = () => {
+  const router = useRouter();
   const handleSignin = async (value: Form) => {
     console.log(value);
     const { user, session, error } = await config.supabase.auth.signIn({
@@ -20,6 +22,7 @@ const Signin: NextPage = () => {
     if (user) {
       console.log(user);
       toast("success", "ログインに成功しました", "cyan");
+      router.push("/");
     }
     if (session) {
       toast("success", "this is session", "cyan");
