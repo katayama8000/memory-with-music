@@ -9,6 +9,7 @@ type Form = {
   password: string;
 };
 
+//emailで認証しなければならないらしい
 const Signup: NextPage = () => {
   const handleSignin = async (value: Form) => {
     console.log(value);
