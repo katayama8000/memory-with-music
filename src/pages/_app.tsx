@@ -29,6 +29,7 @@ type LinksType = {
   label: string;
   icon: ReactElement;
 };
+
 const Links: LinksType[] = [
   { url: "/", label: "Search", icon: <FaSearch /> },
   { url: "/form", label: "Form", icon: <AiOutlineForm /> },
@@ -38,6 +39,16 @@ const Links: LinksType[] = [
   { url: "/signin", label: "SignIn", icon: <BiLogIn /> },
   { url: "/account", label: "Account", icon: <MdManageAccounts /> },
 ];
+
+const colorSet = (url: string, pathname: string): string => {
+  let color: string = "";
+  if (url === pathname) {
+    color = "#0c8599";
+  } else {
+    color = "#273030";
+  }
+  return color;
+};
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [color, setColor] = useState<"dark" | "light">("dark");
@@ -53,16 +64,6 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const { t } = useLocale();
   const router = useRouter();
-
-  const colorSet = (url: string, pathname: string): string => {
-    let color: string = "";
-    if (url === pathname) {
-      color = "#0c8599";
-    } else {
-      color = "#273030";
-    }
-    return color;
-  };
 
   return (
     <>
