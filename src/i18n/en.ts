@@ -1,14 +1,19 @@
+import Account from "@pages/account";
+
 // eslint-disable-next-line import/no-anonymous-default-export
 export default {
   SEARCH: "Search",
   NOSONG: "There is no such a song",
   SONGCARDBUTTON: "Write a memory",
   POST: "Post your memory",
-  APP: {
+  LINKS: {
     SEACRCH: "Search",
     FORM: "Form",
     LIST: "List",
     ARTICLE: "Article",
+    SIGNUP: "SignUp",
+    SIGNIN: "SignIn",
+    ACCOUNT: "Account",
   },
   FORM: {
     ARTIST: "Artist",

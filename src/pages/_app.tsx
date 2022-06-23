@@ -26,19 +26,9 @@ import { MdManageAccounts } from "react-icons/Md";
 
 type LinksType = {
   url: string;
-  label: string;
+  label: any;
   icon: ReactElement;
 };
-
-const Links: LinksType[] = [
-  { url: "/", label: "Search", icon: <FaSearch /> },
-  { url: "/form", label: "Form", icon: <AiOutlineForm /> },
-  { url: "/list", label: "List", icon: <FaRegListAlt /> },
-  { url: "/article", label: "Article", icon: <MdArticle /> },
-  { url: "/signup", label: "SignUp", icon: <BiLogIn /> },
-  { url: "/signin", label: "SignIn", icon: <BiLogIn /> },
-  { url: "/account", label: "Account", icon: <MdManageAccounts /> },
-];
 
 const colorSet = (url: string, pathname: string): string => {
   let color: string = "";
@@ -64,6 +54,16 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const { t } = useLocale();
   const router = useRouter();
+
+  const Links: LinksType[] = [
+    { url: "/", label: t.LINKS.SEACRCH, icon: <FaSearch /> },
+    { url: "/form", label: t.LINKS.FORM, icon: <AiOutlineForm /> },
+    { url: "/list", label: t.LINKS.LIST, icon: <FaRegListAlt /> },
+    { url: "/article", label: t.LINKS.ARTICLE, icon: <MdArticle /> },
+    { url: "/signup", label: t.LINKS.SIGNUP, icon: <BiLogIn /> },
+    { url: "/signin", label: t.LINKS.SIGNIN, icon: <BiLogIn /> },
+    { url: "/account", label: t.LINKS.ACCOUNT, icon: <MdManageAccounts /> },
+  ];
 
   return (
     <>

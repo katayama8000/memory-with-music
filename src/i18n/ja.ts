@@ -4,11 +4,14 @@ export default {
   NOSONG: "そのような曲はありません",
   SONGCARDBUTTON: "記憶を書き留める",
   POST: "投稿",
-  APP: {
+  LINKS: {
     SEACRCH: "検索",
     FORM: "入力",
     LIST: "記事一覧",
     ARTICLE: "記事",
+    SIGNUP: "新規登録",
+    SIGNIN: "ログイン",
+    ACCOUNT: "アカウント",
   },
   FORM: {
     ARTIST: "アーティスト",
