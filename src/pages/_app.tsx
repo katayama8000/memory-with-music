@@ -1,4 +1,4 @@
-import { ReactElement, useEffect, useState } from "react";
+import { ReactElement, useState } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Link from "next/link";
@@ -23,12 +23,7 @@ import { FaRegListAlt } from "react-icons/Fa";
 import { MdArticle } from "react-icons/Md";
 import { BiLogIn } from "react-icons/Bi";
 import { MdManageAccounts } from "react-icons/Md";
-
-type LinksType = {
-  url: string;
-  label: any;
-  icon: ReactElement;
-};
+import { links } from "@type/typeLinks";
 
 const colorSet = (url: string, pathname: string): string => {
   let color: string = "";
@@ -45,6 +40,8 @@ function MyApp({ Component, pageProps }: AppProps) {
   const toggleColorTheme = () => {
     color === "dark" ? setColor("light") : setColor("dark");
   };
+  const { t } = useLocale();
+  const router = useRouter();
 
   const switchLanguage = (lang: "ja" | "en") => {
     router.push(router.pathname, router.pathname, {
@@ -52,10 +49,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     });
   };
 
-  const { t } = useLocale();
-  const router = useRouter();
-
-  const Links: LinksType[] = [
+  const Links: links[] = [
     { url: "/", label: t.LINKS.SEACRCH, icon: <FaSearch /> },
     { url: "/form", label: t.LINKS.FORM, icon: <AiOutlineForm /> },
     { url: "/list", label: t.LINKS.LIST, icon: <FaRegListAlt /> },
