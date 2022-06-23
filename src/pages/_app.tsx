@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { ReactElement, useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Link from "next/link";
@@ -54,6 +54,16 @@ function MyApp({ Component, pageProps }: AppProps) {
   const { t } = useLocale();
   const router = useRouter();
 
+  const colorSet = (url: string, pathname: string): string => {
+    let color: string = "";
+    if (url === pathname) {
+      color = "#0c8599";
+    } else {
+      color = "#273030";
+    }
+    return color;
+  };
+
   return (
     <>
       <Head>
@@ -97,23 +107,20 @@ function MyApp({ Component, pageProps }: AppProps) {
               <Navbar.Section grow mt="md">
                 {Links.map((link) => {
                   return (
-                    <div key={link.label}>
-                      {link.url === router.pathname ? (
-                        <Link href={link.url}>
-                          <div className="my-1 flex rounded-lg  bg-[#0c8599] py-2 pl-2  text-inherit ">
-                            <span className="mt-[2px] pr-2">{link.icon}</span>
-                            <a className="text-lg">{link.label}</a>
-                          </div>
-                        </Link>
-                      ) : (
-                        <Link href={link.url}>
-                          <div className="my-1 flex rounded-lg  py-2 pl-2 text-lg  text-inherit hover:bg-[#273030]">
-                            <span className="mt-[2px] pr-2">{link.icon}</span>
-                            <a className="text-lg">{link.label}</a>
-                          </div>
-                        </Link>
-                      )}
-                    </div>
+                    <Link href={link.url} key={link.label}>
+                      <div
+                        className={`bg-[${colorSet(
+                          link.url,
+                          router.pathname
+                        )}] my-1 flex rounded-lg py-2 pl-2  text-inherit hover:bg-[${colorSet(
+                          link.url,
+                          router.pathname
+                        )}]`}
+                      >
+                        <span className="mt-[2px] pr-2">{link.icon}</span>
+                        <a className="text-lg">{link.label}</a>
+                      </div>
+                    </Link>
                   );
                 })}
               </Navbar.Section>
