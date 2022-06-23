@@ -66,8 +66,8 @@ const Form: NextPage = () => {
 
     if (data) {
       showNotification({
-        title: t.Notification.SUCCESS,
-        message: t.Notification.MESSAGE,
+        title: t.NOTIFICATION.SUCCESS,
+        message: t.NOTIFICATION.MESSAGE,
         color: "cyan",
       });
       //form.reset();
@@ -77,7 +77,7 @@ const Form: NextPage = () => {
     }
     if (error) {
       showNotification({
-        title: t.Notification.ERROR,
+        title: t.NOTIFICATION.ERROR,
         message: error.message,
         color: "red",
       });

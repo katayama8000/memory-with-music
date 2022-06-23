@@ -22,7 +22,7 @@ export default {
   ARTICLE: {
     TITLE: "曲と思い出",
   },
-  Notification: {
+  NOTIFICATION: {
     SUCCESS: "成功",
     ERROR: "失敗",
     MESSAGE: "投稿しました",

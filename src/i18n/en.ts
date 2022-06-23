@@ -24,7 +24,7 @@ export default {
   ARTICLE: {
     TITLE: "memory with music",
   },
-  Notification: {
+  NOTIFICATION: {
     SUCCESS: "Success",
     ERROR: "Error",
     MESSAGE: "Posted",
