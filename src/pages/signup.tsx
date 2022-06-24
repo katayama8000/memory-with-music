@@ -21,7 +21,9 @@ const Signup: NextPage = () => {
 
     if (user) {
       console.log(user);
+      console.log(user.id);
       toast("success", "ユーザー登録に成功しました", "cyan");
+      registerUserName(value.name, user.id);
     }
     if (session) {
       console.log(session);
@@ -31,6 +33,17 @@ const Signup: NextPage = () => {
       console.log(error);
       toast("success", "失敗", "red");
     }
+  };
+
+  const registerUserName = async (userName: string, userId: string) => {
+    const { data, error } = await config.supabase.from("users").insert([
+      {
+        name: userName,
+        userId: userId,
+      },
+    ]);
+
+    console.log(data, error);
   };
 
   const form = useForm({
@@ -48,7 +61,7 @@ const Signup: NextPage = () => {
     <Box sx={{ maxWidth: 300 }} mx="auto">
       <form onSubmit={form.onSubmit((values) => handleSignin(values))}>
         <TextInput
-          required
+          //required
           label="Name"
           placeholder="name"
           {...form.getInputProps("name")}
