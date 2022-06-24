@@ -9,7 +9,7 @@ import {
   useMantineTheme,
 } from "@mantine/core";
 import { useSnapshot } from "valtio";
-import { state } from "../../../state/state";
+import { state } from "@state/state";
 
 export const User = () => {
   const snap = useSnapshot(state);

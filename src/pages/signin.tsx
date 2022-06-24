@@ -5,7 +5,7 @@ import { toast } from "@function/toast";
 import { useForm } from "@mantine/form";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
 import { useSnapshot } from "valtio";
-import { state, saveUserId } from "../state/state";
+import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 
 type Form = {
   email: string;
@@ -21,18 +21,31 @@ const Signin: NextPage = () => {
     });
 
     if (user) {
-      console.log(user.id);
+      console.log(user);
       saveUserId(user.id);
+      saveUserEmail(value.email);
+      let userName: Promise<string> = getUserName(user.id);
       toast("success", "ログインに成功しました", "cyan");
       //router.push("/");
     }
     if (session) {
-      toast("success", "this is session", "cyan");
+      //toast("success", "this is session", "cyan");
     }
     if (error) {
       console.log(error);
-      toast("success", "失敗", "red");
+      toast("error", error.message, "red");
     }
+  };
+
+  const getUserName = async (userId: string) => {
+    const { data, error } = await config.supabase
+      .from("users")
+      .select("name")
+      .match({ userId: userId });
+
+    const userName = data![0].name;
+    saveUserName(userName);
+    return userName;
   };
 
   const form = useForm({

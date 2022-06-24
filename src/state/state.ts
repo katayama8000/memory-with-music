@@ -14,7 +14,7 @@ export const saveUserId = (id: string) => {
   state.userId = id;
 };
 
-export const saveUserInfo = (name: string) => {
+export const saveUserName = (name: string) => {
   state.userName = name;
 };
 

@@ -100,7 +100,6 @@ function MyApp({ Component, pageProps }: AppProps) {
               fixed={true}
             >
               <Navbar.Section grow mt="md">
-                {colorSet("/form", router.pathname)}
                 {Links.map((link) => {
                   return (
                     <Link href={link.url} key={link.label}>

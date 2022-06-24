@@ -3,7 +3,7 @@ import { config } from "../lib/supabase/supabase";
 import { toast } from "@function/toast";
 import { useForm } from "@mantine/form";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
-import { saveUserEmail, saveUserInfo } from "../state/state";
+import { saveUserEmail, saveUserName } from "@state/state";
 import { useState } from "react";
 
 type Form = {
@@ -28,16 +28,15 @@ const Signup: NextPage = () => {
       console.log(user.id);
       toast("success", "ユーザー登録に成功しました", "cyan");
       registerUserName(value.name, user.id);
-      saveUserInfo(value.name);
+      saveUserName(value.name);
       saveUserEmail(value.email);
     }
     if (session) {
-      console.log(session);
-      toast("success", "this is session", "cyan");
+      console.log("session", session);
     }
     if (error) {
       console.log(error);
-      toast("success", "失敗", "red");
+      toast("error", error.message, "red");
     }
     setLoading(false);
   };
@@ -68,7 +67,7 @@ const Signup: NextPage = () => {
     <Box sx={{ maxWidth: 300 }} mx="auto">
       <form onSubmit={form.onSubmit((values) => handleSignin(values))}>
         <TextInput
-          //required
+          required
           label="Name"
           placeholder="name"
           {...form.getInputProps("name")}

@@ -27,24 +27,6 @@ const Form: NextPage = () => {
     },
   });
 
-  // const pageChangeHandler = () => {
-  //   if (form.values.artist !== undefined) {
-  //     const answer = window.confirm(
-  //       "フォームの内容がリセットされます、本当にページ遷移しますか？"
-  //     );
-  //     if (!answer) {
-  //       throw "Abort route";
-  //     }
-  //   }
-  // };
-
-  // useEffect(() => {
-  //   router.events.on("routeChangeStart", pageChangeHandler);
-  //   return () => {
-  //     router.events.off("routeChangeStart", pageChangeHandler);
-  //   };
-  // }, []);
-
   const insert = async (values: {
     artist: string | string[] | undefined;
     song: string | string[] | undefined;
