@@ -5,6 +5,7 @@ import { useForm } from "@mantine/form";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
 
 type Form = {
+  name: string;
   email: string;
   password: string;
 };
@@ -34,6 +35,7 @@ const Signup: NextPage = () => {
 
   const form = useForm({
     initialValues: {
+      name: "",
       email: "",
       password: "",
     },
@@ -45,6 +47,14 @@ const Signup: NextPage = () => {
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
       <form onSubmit={form.onSubmit((values) => handleSignin(values))}>
+        <TextInput
+          required
+          label="Name"
+          placeholder="name"
+          {...form.getInputProps("name")}
+          className="my-4"
+        />
+
         <TextInput
           required
           label="Email"
