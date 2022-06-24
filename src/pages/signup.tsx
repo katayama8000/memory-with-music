@@ -5,12 +5,7 @@ import { useForm } from "@mantine/form";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
 import { saveUserEmail, saveUserName } from "@state/state";
 import { useState } from "react";
-
-type Form = {
-  name: string;
-  email: string;
-  password: string;
-};
+import { Form } from "@type/typeForm";
 
 //emailで認証しなければならないらしい
 const Signup: NextPage = () => {
@@ -27,8 +22,8 @@ const Signup: NextPage = () => {
       console.log(user);
       console.log(user.id);
       toast("success", "ユーザー登録に成功しました", "cyan");
-      registerUserName(value.name, user.id);
-      saveUserName(value.name);
+      registerUserName(value.name!, user.id);
+      saveUserName(value.name!);
       saveUserEmail(value.email);
     }
     if (session) {
