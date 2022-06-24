@@ -1,4 +1,4 @@
-import { ReactElement, useState } from "react";
+import { useState } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
 import Link from "next/link";
@@ -25,16 +25,6 @@ import { BiLogIn } from "react-icons/Bi";
 import { MdManageAccounts } from "react-icons/Md";
 import { links } from "@type/typeLinks";
 
-const colorSet = (url: string, pathname: string): string => {
-  let color: string = "";
-  if (url === pathname) {
-    color = "#0c8599";
-  } else {
-    color = "#273030";
-  }
-  return color;
-};
-
 function MyApp({ Component, pageProps }: AppProps) {
   const [color, setColor] = useState<"dark" | "light">("dark");
   const toggleColorTheme = () => {
@@ -58,6 +48,16 @@ function MyApp({ Component, pageProps }: AppProps) {
     { url: "/signin", label: t.LINKS.SIGNIN, icon: <BiLogIn /> },
     { url: "/account", label: t.LINKS.ACCOUNT, icon: <MdManageAccounts /> },
   ];
+
+  const colorSet = (url: string, pathname: string): string => {
+    let color: string = "";
+    if (url === pathname) {
+      color = "#0c8599";
+    } else {
+      color = "#273030";
+    }
+    return color;
+  };
 
   return (
     <>
@@ -100,14 +100,15 @@ function MyApp({ Component, pageProps }: AppProps) {
               fixed={true}
             >
               <Navbar.Section grow mt="md">
+                {colorSet("/form", router.pathname)}
                 {Links.map((link) => {
                   return (
                     <Link href={link.url} key={link.label}>
                       <div
-                        className={`bg-[${colorSet(
+                        className={`my-1 flex rounded-lg bg-[${colorSet(
                           link.url,
                           router.pathname
-                        )}] my-1 flex rounded-lg py-2 pl-2  text-inherit hover:bg-[${colorSet(
+                        )}] py-2 pl-2  text-inherit hover:bg-[${colorSet(
                           link.url,
                           router.pathname
                         )}]`}
