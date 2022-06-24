@@ -110,7 +110,7 @@ function MyApp({ Component, pageProps }: AppProps) {
                         )}] py-2 pl-2  text-inherit hover:bg-[${colorSet(
                           link.url,
                           router.pathname
-                        )}]`}
+                        )}] cursor-pointer`}
                       >
                         <span className="mt-[2px] pr-2">{link.icon}</span>
                         <a className="text-lg">{link.label}</a>

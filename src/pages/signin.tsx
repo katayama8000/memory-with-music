@@ -6,11 +6,7 @@ import { useForm } from "@mantine/form";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
 import { useSnapshot } from "valtio";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
-
-type Form = {
-  email: string;
-  password: string;
-};
+import { Form } from "@type/typeForm";
 
 const Signin: NextPage = () => {
   const router = useRouter();

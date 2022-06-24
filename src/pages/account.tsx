@@ -1,16 +1,8 @@
 import { NextPage } from "next";
-import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useSnapshot } from "valtio";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
-import {
-  Avatar,
-  Button,
-  Group,
-  Modal,
-  PasswordInput,
-  TextInput,
-} from "@mantine/core";
+import { Avatar, Button, Group, Modal, TextInput } from "@mantine/core";
 import { toast } from "@function/toast";
 import { config } from "src/lib/supabase/supabase";
 import { useForm } from "@mantine/form";
