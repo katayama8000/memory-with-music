@@ -3,6 +3,8 @@ import { config } from "../lib/supabase/supabase";
 import { toast } from "@function/toast";
 import { useForm } from "@mantine/form";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
+import { saveUserEmail, saveUserInfo } from "../state/state";
+import { useState } from "react";
 
 type Form = {
   name: string;
@@ -12,7 +14,9 @@ type Form = {
 
 //emailで認証しなければならないらしい
 const Signup: NextPage = () => {
+  const [loading, setLoading] = useState<boolean>(false);
   const handleSignin = async (value: Form) => {
+    setLoading(true);
     console.log(value);
     const { user, session, error } = await config.supabase.auth.signUp({
       email: value.email,
@@ -24,6 +28,8 @@ const Signup: NextPage = () => {
       console.log(user.id);
       toast("success", "ユーザー登録に成功しました", "cyan");
       registerUserName(value.name, user.id);
+      saveUserInfo(value.name);
+      saveUserEmail(value.email);
     }
     if (session) {
       console.log(session);
@@ -33,6 +39,7 @@ const Signup: NextPage = () => {
       console.log(error);
       toast("success", "失敗", "red");
     }
+    setLoading(false);
   };
 
   const registerUserName = async (userName: string, userId: string) => {
@@ -85,7 +92,7 @@ const Signup: NextPage = () => {
         />
 
         <Group position="center" mt="xl">
-          <Button type="submit" color="cyan">
+          <Button type="submit" color="cyan" loading={loading}>
             SignUp
           </Button>
         </Group>

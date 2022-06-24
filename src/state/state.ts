@@ -1,26 +1,23 @@
 import { proxy } from "valtio";
 
 export const state = proxy<{
-  todoList: string[];
-  name: string;
   userId: string;
+  userName: string;
+  userEmail: string;
 }>({
-  todoList: [],
-  name: "initName",
-  userId: "aaa",
+  userId: "initId",
+  userName: "unknownUser",
+  userEmail: "unknownEmail",
 });
 
 export const saveUserId = (id: string) => {
   state.userId = id;
 };
 
-export const changeName = (name: string) => {
-  state.name = name;
+export const saveUserInfo = (name: string) => {
+  state.userName = name;
 };
 
-export const addItem = (item: string) => {
-  if (!item) {
-    return;
-  }
-  state.todoList.push(item);
+export const saveUserEmail = (email: string) => {
+  state.userEmail = email;
 };

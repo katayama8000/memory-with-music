@@ -8,8 +8,11 @@ import {
   Box,
   useMantineTheme,
 } from "@mantine/core";
+import { useSnapshot } from "valtio";
+import { state } from "../../../state/state";
 
-export function User() {
+export const User = () => {
+  const snap = useSnapshot(state);
   const theme = useMantineTheme();
 
   return (
@@ -47,10 +50,10 @@ export function User() {
           />
           <Box sx={{ flex: 1 }}>
             <Text size="sm" weight={500}>
-              Amy Horsefighter
+              {snap.userName}
             </Text>
             <Text color="dimmed" size="xs">
-              ahorsefighter@gmail.com
+              {snap.userEmail}
             </Text>
           </Box>
 
@@ -63,4 +66,4 @@ export function User() {
       </UnstyledButton>
     </Box>
   );
-}
+};
