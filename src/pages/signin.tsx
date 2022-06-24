@@ -4,6 +4,8 @@ import { config } from "../lib/supabase/supabase";
 import { toast } from "@function/toast";
 import { useForm } from "@mantine/form";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
+import { useSnapshot } from "valtio";
+import { state, saveLoginId } from "../state/state";
 
 type Form = {
   email: string;
@@ -13,16 +15,16 @@ type Form = {
 const Signin: NextPage = () => {
   const router = useRouter();
   const handleSignin = async (value: Form) => {
-    console.log(value);
     const { user, session, error } = await config.supabase.auth.signIn({
       email: value.email,
       password: value.password,
     });
 
     if (user) {
-      console.log(user);
+      console.log(user.id);
+      saveLoginId(user.id);
       toast("success", "ログインに成功しました", "cyan");
-      router.push("/");
+      //router.push("/");
     }
     if (session) {
       toast("success", "this is session", "cyan");
