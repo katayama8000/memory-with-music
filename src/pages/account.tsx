@@ -18,13 +18,13 @@ const Account: NextPage = () => {
     setLoading(true);
     const { data, error } = await config.supabase
       .from("users")
-      .update({ name: value.name })
+      .update({ userName: value.name })
       .match({ userId: snap.userId });
 
     console.log(data, error);
     if (data) {
       toast("success", "編集しました", "cyan");
-      saveUserName(data[0].name);
+      saveUserName(data[0].userName);
     }
     if (error) {
       toast("error", error.message, "red");

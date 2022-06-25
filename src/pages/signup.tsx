@@ -39,7 +39,7 @@ const Signup: NextPage = () => {
   const registerUserName = async (userName: string, userId: string) => {
     const { data, error } = await config.supabase.from("users").insert([
       {
-        name: userName,
+        userName: userName,
         userId: userId,
       },
     ]);

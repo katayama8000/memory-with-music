@@ -1,14 +1,17 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { TextInput, Button, Textarea, Group, Modal } from "@mantine/core";
+import { TextInput, Button, Textarea, Group } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { showNotification } from "@mantine/notifications";
 import { config } from "../lib/supabase/supabase";
 import { useLocale } from "@hooks/useLocale";
+import { toast } from "@function/toast";
+import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
+import { useSnapshot } from "valtio";
 
 const Form: NextPage = () => {
+  const snap = useSnapshot(state);
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const { t } = useLocale();
@@ -41,29 +44,21 @@ const Form: NextPage = () => {
         song: values.song,
         memory: values.memory,
         image: values.image,
+        userId: snap.userId,
       },
     ]);
 
-    setLoading(false);
-
     if (data) {
-      showNotification({
-        title: t.NOTIFICATION.SUCCESS,
-        message: t.NOTIFICATION.MESSAGE,
-        color: "cyan",
-      });
+      toast(t.NOTIFICATION.SUCCESS, t.NOTIFICATION.MESSAGE, "cyan");
       //form.reset();
       setTimeout(() => {
         router.push("/list");
       }, 1000);
     }
     if (error) {
-      showNotification({
-        title: t.NOTIFICATION.ERROR,
-        message: error.message,
-        color: "red",
-      });
+      toast(t.NOTIFICATION.ERROR, error.message, "red");
     }
+    setLoading(false);
   };
   return (
     <div className="flex flex-col justify-center px-2">

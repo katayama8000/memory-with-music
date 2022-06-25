@@ -2,8 +2,8 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { config } from "../lib/supabase/supabase";
 import { toast } from "@function/toast";
-import { useForm } from "@mantine/form";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
 import { useSnapshot } from "valtio";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 import { Form } from "@type/typeForm";
@@ -25,7 +25,6 @@ const Signin: NextPage = () => {
       //router.push("/");
     }
     if (session) {
-      //toast("success", "this is session", "cyan");
     }
     if (error) {
       console.log(error);
@@ -36,10 +35,10 @@ const Signin: NextPage = () => {
   const getUserName = async (userId: string) => {
     const { data, error } = await config.supabase
       .from("users")
-      .select("name")
+      .select("userName")
       .match({ userId: userId });
 
-    const userName = data![0].name;
+    const userName = data![0].userName;
     saveUserName(userName);
     return userName;
   };
@@ -54,6 +53,7 @@ const Signin: NextPage = () => {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
     },
   });
+
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
       <form onSubmit={form.onSubmit((values) => handleSignin(values))}>
