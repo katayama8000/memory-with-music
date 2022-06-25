@@ -127,7 +127,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           header={
             <Header height={70} p="xs" fixed={true} zIndex={200}>
               <div className="relative flex justify-center ">
-                <div className="pr-2 pb-2 text-4xl  font-bold italic hover:not-italic">
+                <div className="ml-[284px] pr-2 pb-2  text-4xl font-bold italic hover:not-italic">
                   memory with music
                 </div>
                 <Loader color="cyan" size="sm" variant="bars" />

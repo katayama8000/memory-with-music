@@ -2,17 +2,28 @@ import { NextPage } from "next";
 import { useState } from "react";
 import { useSnapshot } from "valtio";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
-import { Avatar, Button, Group, Modal, TextInput } from "@mantine/core";
+import {
+  Avatar,
+  Button,
+  Grid,
+  Group,
+  Modal,
+  Spoiler,
+  TextInput,
+} from "@mantine/core";
 import { toast } from "@function/toast";
 import { config } from "src/lib/supabase/supabase";
 import { useForm } from "@mantine/form";
 import { AiTwotoneSetting } from "react-icons/Ai";
 import { Form } from "@type/typeForm";
+import { MemoryCard } from "@components/layout/card";
+import { dataFromSupabase } from "@type/typeSupabase";
 
 const Account: NextPage = () => {
   const snap = useSnapshot(state);
   const [opened, setOpened] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [data, setData] = useState<dataFromSupabase[]>();
 
   const handleSignin = async (value: Form) => {
     setLoading(true);
@@ -32,6 +43,18 @@ const Account: NextPage = () => {
     setLoading(false);
     setOpened(false);
   };
+
+  const getSongs = async () => {
+    const { data, error } = await config.supabase
+      .from("songs")
+      .select("id,song, artist,image,memory")
+      .match({ userId: snap.userId });
+
+    console.log(data, error);
+    setData(data!);
+  };
+
+  getSongs();
 
   const form = useForm({
     initialValues: {
@@ -93,6 +116,27 @@ const Account: NextPage = () => {
       <div>name:{snap.userName}</div>
       <div>email:{snap.userEmail}</div>
       <div>id:{snap.userId}</div>
+      <Spoiler maxHeight={100} showLabel="Show more" hideLabel="Hide">
+        <div>
+          <Grid>
+            {data?.map((item) => {
+              return (
+                <Grid.Col xs={6} key={item.id}>
+                  <div className="m-auto px-2">
+                    <MemoryCard
+                      id={item.id}
+                      song={item.song}
+                      image={item.image}
+                      artist={item.artist}
+                      memory={item.memory}
+                    />
+                  </div>
+                </Grid.Col>
+              );
+            })}
+          </Grid>
+        </div>
+      </Spoiler>
     </div>
   );
 };

@@ -6,8 +6,8 @@ export const state = proxy<{
   userEmail: string;
 }>({
   userId: "initId",
-  userName: "unknownUser",
-  userEmail: "unknownEmail",
+  userName: "unknownuser",
+  userEmail: "unknownemail",
 });
 
 export const saveUserId = (id: string) => {

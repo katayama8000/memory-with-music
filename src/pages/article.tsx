@@ -1,11 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { TypographyStylesProvider } from "@mantine/core";
 import { useLocale } from "@hooks/useLocale";
 import { config } from "src/lib/supabase/supabase";
 
 const Article = () => {
-  const [userId, setUserId] = useState<string>("");
   const [userName, setUserName] = useState<string>("");
   const router = useRouter();
   const { t } = useLocale();
@@ -23,12 +22,19 @@ const Article = () => {
       .select("userId")
       .match({ id: router.query.id });
 
-    console.log(data, error);
-    const userId = data![0].userId;
-    setUserId(userId);
+    if (data) {
+      console.log(data, error);
+      const userId = data![0].userId;
+      console.log(typeof userId);
+      getUserName(userId);
+    }
+
+    if (error) {
+      console.log(error);
+    }
   };
 
-  const getUserName = async (userId: any) => {
+  const getUserName = async (userId: string) => {
     const { data, error } = await config.supabase
       .from("users")
       .select("userName")
@@ -40,18 +46,13 @@ const Article = () => {
     setUserName(userName);
   };
 
+  getUserId();
+
   return (
     <div className="m-auto max-w-4xl px-2">
       <button
         onClick={() => {
           getUserId();
-        }}
-      >
-        get
-      </button>
-      <button
-        onClick={() => {
-          getUserName(userId);
         }}
       >
         get
