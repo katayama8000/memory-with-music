@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { TextInput, Button, Textarea, Group } from "@mantine/core";
@@ -10,25 +10,60 @@ import { toast } from "@function/toast";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 import { useSnapshot } from "valtio";
 
+type initType = {
+  artist: string;
+  song: string;
+  image: string;
+  memory: string;
+};
+
 const Form: NextPage = () => {
   const snap = useSnapshot(state);
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const { t } = useLocale();
-  const [initial] = useState({
-    artist: router.query.artist,
-    song: router.query.song,
-    image: router.query.image,
+  const [initForm, setInitForm] = useState<initType>({
+    artist: "",
+    song: "",
+    image: "",
+    memory: "",
   });
 
   const form = useForm({
     initialValues: {
-      artist: initial.artist,
-      song: initial.song,
-      image: initial.image,
+      artist: initForm.artist,
+      song: initForm.song,
+      image: initForm.image,
       memory: "",
     },
   });
+
+  useEffect(() => {
+    if (router.isReady) {
+      if (
+        typeof router.query.artist === "string" &&
+        typeof router.query.song === "string" &&
+        typeof router.query.image === "string" &&
+        typeof router.query.memory === "string"
+      ) {
+        setInitForm({
+          artist: router.query.artist,
+          song: router.query.song,
+          image: router.query.image,
+          memory: "",
+        });
+      }
+    }
+  }, [router]);
+
+  useEffect(() => {
+    form.setValues({
+      artist: initForm.artist,
+      song: initForm.song,
+      image: initForm.image,
+      memory: initForm.memory,
+    });
+  }, [initForm]);
 
   const insert = async (values: {
     artist: string | string[] | undefined;
@@ -50,7 +85,6 @@ const Form: NextPage = () => {
 
     if (data) {
       toast(t.NOTIFICATION.SUCCESS, t.NOTIFICATION.MESSAGE, "cyan");
-      //form.reset();
       setTimeout(() => {
         router.push("/list");
       }, 1000);

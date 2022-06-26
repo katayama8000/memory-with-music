@@ -17,13 +17,43 @@ const Article = () => {
   const router = useRouter();
   const { t } = useLocale();
   const snap = snapshot(state);
-  const [initial] = useState({
-    id: router.query.id,
-    artist: router.query.artist,
-    song: router.query.song,
-    image: router.query.image,
-    memory: router.query.memory,
+  const [initArticle, setInitArticle] = useState({
+    id: "",
+    artist: "",
+    song: "",
+    image: "",
+    memory: "",
   });
+
+  useEffect(() => {
+    if (router.isReady) {
+      if (
+        typeof router.query.id === "string" &&
+        typeof router.query.artist === "string" &&
+        typeof router.query.song === "string" &&
+        typeof router.query.image === "string" &&
+        typeof router.query.memory === "string"
+      ) {
+        setInitArticle({
+          id: router.query.id,
+          artist: router.query.artist,
+          song: router.query.song,
+          image: router.query.image,
+          memory: router.query.memory,
+        });
+      }
+    }
+  }, [router]);
+
+  // useEffect(() => {
+  //   setInitArticle({
+  //     id: router.query.id,
+  //     artist: router.query.artist,
+  //     song: router.query.song,
+  //     image: router.query.image,
+  //     memory: router.query.memory,
+  //   });
+  // }, [initArticle]);
 
   const getUserId = async () => {
     const { data, error } = await config.supabase
@@ -77,8 +107,10 @@ const Article = () => {
   };
   return (
     <div className="m-auto max-w-4xl px-2">
-      <div className="py-2 text-xl font-extrabold">{t.ARTICLE.TITLE}</div>
-      <div>written by : {userName}</div>
+      <div className="flex justify-between">
+        <div className="py-2 text-xl font-extrabold">{t.ARTICLE.TITLE}</div>
+        <div>written by : {userName}</div>
+      </div>
       {userName === snap.userName ? (
         <div>
           <RiDeleteBin6Line
@@ -92,7 +124,7 @@ const Article = () => {
       )}
       <div className="whitespace-pre-wrap">
         <TypographyStylesProvider>
-          <div dangerouslySetInnerHTML={{ __html: initial.memory as string }} />
+          <div dangerouslySetInnerHTML={{ __html: initArticle.memory }} />
         </TypographyStylesProvider>
       </div>
       <Modal opened={opened} onClose={() => setOpened(false)} size={500}>
