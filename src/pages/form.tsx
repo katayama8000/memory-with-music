@@ -31,9 +31,9 @@ const Form: NextPage = () => {
 
   const form = useForm({
     initialValues: {
-      artist: initForm.artist,
-      song: initForm.song,
-      image: initForm.image,
+      artist: "",
+      song: "",
+      image: "",
       memory: "",
     },
   });
@@ -43,8 +43,7 @@ const Form: NextPage = () => {
       if (
         typeof router.query.artist === "string" &&
         typeof router.query.song === "string" &&
-        typeof router.query.image === "string" &&
-        typeof router.query.memory === "string"
+        typeof router.query.image === "string"
       ) {
         setInitForm({
           artist: router.query.artist,
@@ -57,6 +56,7 @@ const Form: NextPage = () => {
   }, [router]);
 
   useEffect(() => {
+    console.log(initForm);
     form.setValues({
       artist: initForm.artist,
       song: initForm.song,

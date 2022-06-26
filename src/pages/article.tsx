@@ -18,7 +18,7 @@ const Article = () => {
   const { t } = useLocale();
   const snap = snapshot(state);
   const [initArticle, setInitArticle] = useState({
-    id: "",
+    id: 0,
     artist: "",
     song: "",
     image: "",
@@ -35,7 +35,7 @@ const Article = () => {
         typeof router.query.memory === "string"
       ) {
         setInitArticle({
-          id: router.query.id,
+          id: router.query.id as unknown as number,
           artist: router.query.artist,
           song: router.query.song,
           image: router.query.image,
@@ -86,8 +86,10 @@ const Article = () => {
   };
 
   useEffect(() => {
-    getUserId();
-  }, []);
+    if (router.isReady) {
+      getUserId();
+    }
+  }, [router]);
 
   const handleDelete = async () => {
     console.log("delete");
