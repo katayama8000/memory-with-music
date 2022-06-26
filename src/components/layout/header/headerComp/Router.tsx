@@ -16,10 +16,10 @@ export const Router: React.FC = () => {
           router.push(path);
         }}
         data={[
-          { label: t.APP.SEACRCH, value: "/" },
-          { label: t.APP.FORM, value: "/form" },
-          { label: t.APP.LIST, value: "/list" },
-          { label: t.APP.ARTICLE, value: "/article", disabled: true },
+          { label: t.LINKS.SEACRCH, value: "/" },
+          { label: t.LINKS.FORM, value: "/form" },
+          { label: t.LINKS.LIST, value: "/list" },
+          { label: t.LINKS.ARTICLE, value: "/article", disabled: true },
         ]}
       />
     </div>
