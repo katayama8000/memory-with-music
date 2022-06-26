@@ -26,7 +26,7 @@ const Account: NextPage = () => {
   const [loading, setLoading] = useState(false);
   const [data, setData] = useState<dataFromSupabase[]>();
 
-  const handleSignin = async (value: Form) => {
+  const handleEdit = async (value: Form) => {
     setLoading(true);
     const { data, error } = await config.supabase
       .from("users")
@@ -57,7 +57,12 @@ const Account: NextPage = () => {
 
   useEffect(() => {
     getSongs();
-  }, []);
+    form.setValues({
+      name: snap.userName,
+      email: snap.userEmail,
+      password: "",
+    });
+  }, [snap]);
 
   const form = useForm({
     initialValues: {
@@ -111,7 +116,7 @@ const Account: NextPage = () => {
               type="submit"
               color="cyan"
               loading={loading}
-              onClick={form.onSubmit((values) => handleSignin(values))}
+              onClick={form.onSubmit((values) => handleEdit(values))}
             >
               save
             </Button>

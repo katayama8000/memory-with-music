@@ -54,6 +54,12 @@ const Signin: NextPage = () => {
     },
   });
 
+  const local = async () => {
+    const session = config.supabase.auth.session();
+
+    console.log(session?.user?.id);
+  };
+
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
       <form onSubmit={form.onSubmit((values) => handleSignin(values))}>

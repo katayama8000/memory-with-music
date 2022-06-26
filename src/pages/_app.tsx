@@ -24,6 +24,8 @@ import { MdArticle } from "react-icons/Md";
 import { BiLogIn } from "react-icons/Bi";
 import { MdManageAccounts } from "react-icons/Md";
 import { links } from "@type/typeLinks";
+import { config } from "src/lib/supabase/supabase";
+import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [color, setColor] = useState<"dark" | "light">("dark");
@@ -57,6 +59,26 @@ function MyApp({ Component, pageProps }: AppProps) {
       color = "#273030";
     }
     return color;
+  };
+
+  useEffect(() => {
+    const session = config.supabase.auth.session();
+    saveUserId(session?.user?.id!);
+    console.log(session?.user?.id);
+    getUserInfo(session?.user?.id!);
+  }, []);
+
+  const getUserInfo = async (userId: string) => {
+    const { data, error } = await config.supabase
+      .from("users")
+      .select("userName, userEmail")
+      .match({ userId: userId });
+
+    console.log("KOKOKOKO", data, error);
+    const userName = data![0].userName;
+    const userEmail = data![0].userEmail;
+    saveUserName(userName);
+    saveUserEmail(userEmail);
   };
 
   return (

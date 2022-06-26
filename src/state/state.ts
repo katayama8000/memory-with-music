@@ -10,8 +10,9 @@ export const state = proxy<{
   userEmail: "unknownemail",
 });
 
-export const saveUserId = (id: string) => {
-  state.userId = id;
+export const saveUserId = (userId: string) => {
+  state.userId = userId;
+  localStorage.setItem("userId", userId);
 };
 
 export const saveUserName = (name: string) => {

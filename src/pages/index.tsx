@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useCallback, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import type { NextPage } from "next";
 import { useRouter } from "next/router";
 import axios from "axios";
@@ -10,6 +10,8 @@ import { SongList } from "@components/layout/SongList";
 import { useLocale } from "@hooks/useLocale";
 import { result } from "@type/typeResult";
 import { lang, country } from "@type/typeI18n";
+import { config } from "src/lib/supabase/supabase";
+import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 
 let API_lang: lang = "en_us";
 let API_country: country = "us";
@@ -43,6 +45,26 @@ const Home: NextPage = () => {
     },
     [songList, loadingFlag]
   );
+
+  // useEffect(() => {
+  //   const session = config.supabase.auth.session();
+  //   saveUserId(session?.user?.id!);
+  //   console.log(session?.user?.id);
+  //   getUserInfo(session?.user?.id!);
+  // }, []);
+
+  // const getUserInfo = async (userId: string) => {
+  //   const { data, error } = await config.supabase
+  //     .from("users")
+  //     .select("userName, userEmail")
+  //     .match({ userId: userId });
+
+  //   console.log(data, error);
+  //   const userName = data![0].userName;
+  //   const userEmail = data![0].userEmail;
+  //   saveUserName(userName);
+  //   saveUserEmail(userEmail);
+  // };
 
   return (
     <div className="flex flex-col justify-center">
