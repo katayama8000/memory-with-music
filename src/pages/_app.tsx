@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -17,9 +18,8 @@ import {
 import { NotificationsProvider } from "@mantine/notifications";
 import { useLocale } from "@hooks/useLocale";
 import { User } from "@components/layout/user/User";
-import { FaSearch } from "react-icons/fa";
+import { FaSearch, FaRegListAlt } from "react-icons/fa";
 import { AiOutlineForm } from "react-icons/ai";
-import { FaRegListAlt } from "react-icons/Fa";
 import { MdArticle } from "react-icons/Md";
 import { BiLogIn } from "react-icons/Bi";
 import { MdManageAccounts } from "react-icons/Md";
@@ -74,11 +74,21 @@ function MyApp({ Component, pageProps }: AppProps) {
       .select("userName, userEmail")
       .match({ userId: userId });
 
-    console.log("KOKOKOKO", data, error);
-    const userName = data![0].userName;
-    const userEmail = data![0].userEmail;
-    saveUserName(userName);
-    saveUserEmail(userEmail);
+    console.log(data, error);
+    if (data) {
+      if (data.length === 0) {
+        router.push("/signin");
+      } else {
+        const userName = data![0].userName;
+        const userEmail = data![0].userEmail;
+        saveUserName(userName);
+        saveUserEmail(userEmail);
+      }
+    }
+
+    if (error) {
+      router.push("/signin");
+    }
   };
 
   return (
