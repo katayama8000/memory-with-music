@@ -1,5 +1,7 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { NextPage } from "next";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { config } from "src/lib/supabase/supabase";
 import { useSnapshot } from "valtio";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 import {
@@ -11,12 +13,11 @@ import {
   Spoiler,
   TextInput,
 } from "@mantine/core";
-import { toast } from "@function/toast";
-import { config } from "src/lib/supabase/supabase";
 import { useForm } from "@mantine/form";
+import { toast } from "@function/toast";
 import { AiTwotoneSetting } from "react-icons/Ai";
-import { Form } from "@type/typeForm";
 import { MemoryCard } from "@components/layout/card";
+import { Form } from "@type/typeForm";
 import { dataFromSupabase } from "@type/typeSupabase";
 
 const Account: NextPage = () => {
@@ -54,7 +55,9 @@ const Account: NextPage = () => {
     setData(data!);
   };
 
-  getSongs();
+  useEffect(() => {
+    getSongs();
+  }, []);
 
   const form = useForm({
     initialValues: {
@@ -69,17 +72,20 @@ const Account: NextPage = () => {
   });
   return (
     <div>
-      <Avatar
-        src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
-        radius="xl"
-      />
-      <Button
-        leftIcon={<AiTwotoneSetting />}
-        color="cyan"
-        onClick={() => setOpened(true)}
-      >
-        edit
-      </Button>
+      <div className="flex justify-between">
+        <Avatar
+          src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
+          radius="xl"
+          size="lg"
+        />
+        <Button
+          leftIcon={<AiTwotoneSetting />}
+          color="cyan"
+          onClick={() => setOpened(true)}
+        >
+          edit
+        </Button>
+      </div>
       <Modal
         opened={opened}
         onClose={() => setOpened(false)}

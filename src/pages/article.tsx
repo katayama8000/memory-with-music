@@ -1,13 +1,22 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { TypographyStylesProvider } from "@mantine/core";
+import { Group, Modal, TypographyStylesProvider } from "@mantine/core";
 import { useLocale } from "@hooks/useLocale";
 import { config } from "src/lib/supabase/supabase";
+import { snapshot } from "valtio";
+import { state } from "@state/state";
+import { RiDeleteBin6Line } from "react-icons/Ri";
+import { FiEdit } from "react-icons/Fi";
+import { Button } from "src/lib/mantine";
+import { toast } from "@function/toast";
 
 const Article = () => {
   const [userName, setUserName] = useState<string>("");
+  const [opened, setOpened] = useState<boolean>(false);
   const router = useRouter();
   const { t } = useLocale();
+  const snap = snapshot(state);
   const [initial] = useState({
     id: router.query.id,
     artist: router.query.artist,
@@ -46,24 +55,60 @@ const Article = () => {
     setUserName(userName);
   };
 
-  getUserId();
+  useEffect(() => {
+    getUserId();
+  }, []);
 
+  const handleDelete = async () => {
+    console.log("delete");
+    const { data, error } = await config.supabase
+      .from("songs")
+      .delete()
+      .match({ id: router.query.id });
+
+    console.log(data, error);
+    if (data) {
+      router.push("/");
+    }
+    if (error) {
+      toast("error", error.message, "red");
+    }
+    setOpened(false);
+  };
   return (
     <div className="m-auto max-w-4xl px-2">
-      <button
-        onClick={() => {
-          getUserId();
-        }}
-      >
-        get
-      </button>
       <div className="py-2 text-xl font-extrabold">{t.ARTICLE.TITLE}</div>
       <div>written by : {userName}</div>
+      {userName === snap.userName ? (
+        <div>
+          <RiDeleteBin6Line
+            className="h-6 w-6"
+            onClick={() => setOpened(true)}
+          />
+          <FiEdit />
+        </div>
+      ) : (
+        <div>nooooooo</div>
+      )}
       <div className="whitespace-pre-wrap">
         <TypographyStylesProvider>
           <div dangerouslySetInnerHTML={{ __html: initial.memory as string }} />
         </TypographyStylesProvider>
       </div>
+      <Modal opened={opened} onClose={() => setOpened(false)} size={500}>
+        <Group position="center">
+          <div className="text-xl font-bold">
+            Are you sure you want to delete this article?
+          </div>
+          <Button
+            color="red"
+            className="m-3 w-20"
+            onClick={() => handleDelete()}
+          >
+            delete
+          </Button>
+        </Group>
+      </Modal>
     </div>
   );
 };
