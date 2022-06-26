@@ -6,8 +6,8 @@ import { useLocale } from "@hooks/useLocale";
 import { config } from "src/lib/supabase/supabase";
 import { snapshot } from "valtio";
 import { state } from "@state/state";
-import { RiDeleteBin6Line } from "react-icons/Ri";
-import { FiEdit } from "react-icons/Fi";
+import { RiDeleteBin6Line } from "react-icons/ri";
+import { FiEdit } from "react-icons/fi";
 import { Button } from "src/lib/mantine";
 import { toast } from "@function/toast";
 

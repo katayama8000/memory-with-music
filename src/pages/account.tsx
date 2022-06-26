@@ -15,7 +15,7 @@ import {
 } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { toast } from "@function/toast";
-import { AiTwotoneSetting } from "react-icons/Ai";
+import { AiTwotoneSetting } from "react-icons/ai";
 import { MemoryCard } from "@components/layout/card";
 import { Form } from "@type/typeForm";
 import { dataFromSupabase } from "@type/typeSupabase";
