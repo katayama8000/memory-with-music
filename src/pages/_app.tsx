@@ -20,7 +20,7 @@ import { useLocale } from "@hooks/useLocale";
 import { User } from "@components/layout/user/User";
 import { FaSearch, FaRegListAlt } from "react-icons/fa";
 import { AiOutlineForm } from "react-icons/ai";
-import { MdArticle } from "react-icons/Md";
+import { RiArticleLine } from "react-icons/Ri";
 import { BiLogIn } from "react-icons/Bi";
 import { MdManageAccounts } from "react-icons/Md";
 import { links } from "@type/typeLinks";
@@ -45,7 +45,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     { url: "/", label: t.LINKS.SEACRCH, icon: <FaSearch /> },
     { url: "/form", label: t.LINKS.FORM, icon: <AiOutlineForm /> },
     { url: "/list", label: t.LINKS.LIST, icon: <FaRegListAlt /> },
-    { url: "/article", label: t.LINKS.ARTICLE, icon: <MdArticle /> },
+    { url: "/article", label: t.LINKS.ARTICLE, icon: <RiArticleLine /> },
     { url: "/signup", label: t.LINKS.SIGNUP, icon: <BiLogIn /> },
     { url: "/signin", label: t.LINKS.SIGNIN, icon: <BiLogIn /> },
     { url: "/account", label: t.LINKS.ACCOUNT, icon: <MdManageAccounts /> },
