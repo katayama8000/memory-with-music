@@ -1,15 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { Group, Modal, TypographyStylesProvider } from "@mantine/core";
+import { Group, Modal, Tooltip, TypographyStylesProvider } from "@mantine/core";
 import { useLocale } from "@hooks/useLocale";
 import { config } from "src/lib/supabase/supabase";
 import { snapshot } from "valtio";
 import { state } from "@state/state";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
-import { Button } from "src/lib/mantine";
 import { toast } from "@function/toast";
+import { DeleteArticleModal } from "@components/layout/modal/DeleteArticleModal";
+import Link from "next/link";
 
 const Article = () => {
   const [userName, setUserName] = useState<string>("");
@@ -44,16 +45,6 @@ const Article = () => {
       }
     }
   }, [router]);
-
-  // useEffect(() => {
-  //   setInitArticle({
-  //     id: router.query.id,
-  //     artist: router.query.artist,
-  //     song: router.query.song,
-  //     image: router.query.image,
-  //     memory: router.query.memory,
-  //   });
-  // }, [initArticle]);
 
   const getUserId = async () => {
     const { data, error } = await config.supabase
@@ -91,7 +82,7 @@ const Article = () => {
     }
   }, [router]);
 
-  const handleDelete = async () => {
+  const handleClick = async () => {
     console.log("delete");
     const { data, error } = await config.supabase
       .from("songs")
@@ -100,7 +91,8 @@ const Article = () => {
 
     console.log(data, error);
     if (data) {
-      router.push("/");
+      toast("成功", "削除しました", "cyan");
+      router.push("/list");
     }
     if (error) {
       toast("error", error.message, "red");
@@ -109,40 +101,56 @@ const Article = () => {
   };
   return (
     <div className="m-auto max-w-4xl px-2">
-      <div className="flex justify-between">
-        <div className="py-2 text-xl font-extrabold">{t.ARTICLE.TITLE}</div>
-        <div>written by : {userName}</div>
-      </div>
-      {userName === snap.userName ? (
-        <div>
-          <RiDeleteBin6Line
-            className="h-6 w-6"
-            onClick={() => setOpened(true)}
-          />
-          <FiEdit />
+      <div className="flex justify-between py-4">
+        <div className="truncate text-3xl font-extrabold">
+          {initArticle.song}/{initArticle.artist}
         </div>
-      ) : (
-        <div>nooooooo</div>
-      )}
-      <div className="whitespace-pre-wrap">
+        <div>
+          {userName === snap.userName && (
+            <div className="flex px-4">
+              <div className="mx-1">
+                <Tooltip withArrow label="Delete this Article">
+                  <RiDeleteBin6Line
+                    className="h-8 w-8 "
+                    onClick={() => setOpened(true)}
+                  />
+                </Tooltip>
+              </div>
+              <Link
+                href={{
+                  pathname: "/form",
+                  query: {
+                    id: initArticle.id,
+                    artist: initArticle.artist,
+                    song: initArticle.song,
+                    image: initArticle.image,
+                    memory: initArticle.memory,
+                  },
+                }}
+              >
+                <a className="text-inherit">
+                  <div className="mx-1">
+                    <Tooltip withArrow label="Edit this Article">
+                      <FiEdit className="h-8 w-8 " />
+                    </Tooltip>
+                  </div>
+                </a>
+              </Link>
+            </div>
+          )}
+        </div>
+      </div>
+      <div>written by : {userName}</div>
+      <div className="mt-10 whitespace-pre-wrap">
         <TypographyStylesProvider>
           <div dangerouslySetInnerHTML={{ __html: initArticle.memory }} />
         </TypographyStylesProvider>
       </div>
-      <Modal opened={opened} onClose={() => setOpened(false)} size={500}>
-        <Group position="center">
-          <div className="text-xl font-bold">
-            Are you sure you want to delete this article?
-          </div>
-          <Button
-            color="red"
-            className="m-3 w-20"
-            onClick={() => handleDelete()}
-          >
-            delete
-          </Button>
-        </Group>
-      </Modal>
+      <DeleteArticleModal
+        opened={opened}
+        setOpened={setOpened}
+        handleClick={handleClick}
+      />
     </div>
   );
 };
