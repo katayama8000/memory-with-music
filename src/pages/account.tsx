@@ -77,12 +77,20 @@ const Account: NextPage = () => {
   });
   return (
     <div>
-      <div className="flex justify-between">
-        <Avatar
-          src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
-          radius="xl"
-          size="lg"
-        />
+      <div className="flex justify-between px-2">
+        <div className="flex">
+          <div>
+            <Avatar
+              src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
+              radius="xl"
+              size="lg"
+            />
+          </div>
+          <div className="pl-6">
+            <div>name : {snap.userName}</div>
+            <div>email : {snap.userEmail}</div>
+          </div>
+        </div>
         <Button
           leftIcon={<AiTwotoneSetting />}
           color="cyan"
@@ -95,8 +103,8 @@ const Account: NextPage = () => {
         opened={opened}
         onClose={() => setOpened(false)}
         closeOnClickOutside={false}
+        title="edit"
       >
-        <div className="text-center text-2xl font-semibold">edit</div>
         <form>
           <TextInput
             label="Name"
@@ -123,31 +131,29 @@ const Account: NextPage = () => {
           </Group>
         </form>
       </Modal>
-
-      <div>name:{snap.userName}</div>
-      <div>email:{snap.userEmail}</div>
-      <div>id:{snap.userId}</div>
-      <Spoiler maxHeight={100} showLabel="Show more" hideLabel="Hide">
-        <div>
-          <Grid>
-            {data?.map((item) => {
-              return (
-                <Grid.Col xs={6} key={item.id}>
-                  <div className="m-auto px-2">
-                    <MemoryCard
-                      id={item.id}
-                      song={item.song}
-                      image={item.image}
-                      artist={item.artist}
-                      memory={item.memory}
-                    />
-                  </div>
-                </Grid.Col>
-              );
-            })}
-          </Grid>
-        </div>
-      </Spoiler>
+      <div className="mt-10">
+        <Spoiler maxHeight={100} showLabel="Show more" hideLabel="Hide">
+          <div>
+            <Grid>
+              {data?.map((item) => {
+                return (
+                  <Grid.Col xs={6} key={item.id}>
+                    <div className="m-auto px-2">
+                      <MemoryCard
+                        id={item.id}
+                        song={item.song}
+                        image={item.image}
+                        artist={item.artist}
+                        memory={item.memory}
+                      />
+                    </div>
+                  </Grid.Col>
+                );
+              })}
+            </Grid>
+          </div>
+        </Spoiler>
+      </div>
     </div>
   );
 };
