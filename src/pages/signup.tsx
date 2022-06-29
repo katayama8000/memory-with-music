@@ -22,7 +22,7 @@ const Signup: NextPage = () => {
       console.log(user);
       console.log(user.id);
       toast("success", "ユーザー登録に成功しました", "cyan");
-      registerUserName(value.name!, user.id);
+      registerUserName(value.name!, user.id, value.email);
       saveUserName(value.name!);
       saveUserEmail(value.email);
     }
@@ -36,11 +36,16 @@ const Signup: NextPage = () => {
     setLoading(false);
   };
 
-  const registerUserName = async (userName: string, userId: string) => {
+  const registerUserName = async (
+    userName: string,
+    userId: string,
+    userEmail: string
+  ) => {
     const { data, error } = await config.supabase.from("users").insert([
       {
         userName: userName,
         userId: userId,
+        userEmail: userEmail,
       },
     ]);
 
