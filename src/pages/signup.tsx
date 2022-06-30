@@ -3,7 +3,7 @@ import { config } from "../lib/supabase/supabase";
 import { toast } from "@function/toast";
 import { useForm } from "@mantine/form";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
-import { saveUserEmail, saveUserName } from "@state/state";
+import { saveUserEmail, saveUserId, saveUserName } from "@state/state";
 import { useState } from "react";
 import { Form } from "@type/typeForm";
 
@@ -23,6 +23,7 @@ const Signup: NextPage = () => {
       console.log(user.id);
       toast("success", "ユーザー登録に成功しました", "cyan");
       registerUserName(value.name!, user.id, value.email);
+      saveUserId(user.id);
       saveUserName(value.name!);
       saveUserEmail(value.email);
     }

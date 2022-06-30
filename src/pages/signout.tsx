@@ -1,8 +1,8 @@
-import { Button } from "@mantine/core";
 import { NextPage } from "next";
 import React from "react";
 import { config } from "src/lib/supabase/supabase";
 import { resetUserInfo } from "@state/state";
+import { Button } from "@mantine/core";
 
 const Signout: NextPage = () => {
   const signout = async () => {
