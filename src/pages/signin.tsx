@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { config } from "../lib/supabase/supabase";
@@ -7,6 +8,7 @@ import { useForm } from "@mantine/form";
 import { useSnapshot } from "valtio";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 import { Form } from "@type/typeForm";
+import Link from "next/link";
 
 const Signin: NextPage = () => {
   const router = useRouter();
@@ -85,6 +87,12 @@ const Signin: NextPage = () => {
           </Button>
         </Group>
       </form>
+      <div>
+        If you don't have an account , Click
+        <Link href="/signup">
+          <a className="pl-1 text-xl font-bold text-inherit">here</a>
+        </Link>
+      </div>
     </Box>
   );
 };
