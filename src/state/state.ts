@@ -12,6 +12,7 @@ export const state = proxy<{
 
 export const saveUserId = (userId: string) => {
   state.userId = userId;
+  console.log("stateのuserid", state.userId);
   localStorage.setItem("userId", userId);
 };
 
@@ -21,4 +22,10 @@ export const saveUserName = (name: string) => {
 
 export const saveUserEmail = (email: string) => {
   state.userEmail = email;
+};
+
+export const resetUserInfo = () => {
+  state.userId = "initId";
+  state.userName = "unknownuser";
+  state.userEmail = "unknownemail";
 };

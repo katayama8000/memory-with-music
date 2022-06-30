@@ -13,6 +13,7 @@ export default {
     ARTICLE: "Article",
     SIGNUP: "SignUp",
     SIGNIN: "SignIn",
+    SIGNOUT: "SignOut",
     ACCOUNT: "Account",
   },
   FORM: {

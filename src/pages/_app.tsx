@@ -48,6 +48,7 @@ function MyApp({ Component, pageProps }: AppProps) {
     { url: "/article", label: t.LINKS.ARTICLE, icon: <MdOutlineArticle /> },
     { url: "/signup", label: t.LINKS.SIGNUP, icon: <BiLogIn /> },
     { url: "/signin", label: t.LINKS.SIGNIN, icon: <BiLogIn /> },
+    { url: "/signout", label: t.LINKS.SIGNOUT, icon: <BiLogIn /> },
     { url: "/account", label: t.LINKS.ACCOUNT, icon: <MdManageAccounts /> },
   ];
 

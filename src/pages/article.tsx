@@ -53,9 +53,7 @@ const Article = () => {
       .match({ id: router.query.id });
 
     if (data) {
-      console.log(data, error);
       const userId = data![0].userId;
-      console.log(typeof userId);
       getUserName(userId);
     }
 

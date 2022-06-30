@@ -11,6 +11,7 @@ export default {
     ARTICLE: "記事",
     SIGNUP: "新規登録",
     SIGNIN: "ログイン",
+    SIGNOUT: "ログアウト",
     ACCOUNT: "アカウント",
   },
   FORM: {
