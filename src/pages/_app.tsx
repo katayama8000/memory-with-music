@@ -4,8 +4,8 @@ import type { AppProps } from "next/app";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import { config } from "src/lib/supabase/supabase";
 import "src/lib/tailwind.css";
-import { MoonStars, Sun } from "tabler-icons-react";
 import {
   ActionIcon,
   Loader,
@@ -16,16 +16,11 @@ import {
   Header,
 } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
-import { useLocale } from "@hooks/useLocale";
-import { User } from "@components/layout/user/User";
-import { FaSearch, FaRegListAlt } from "react-icons/fa";
-import { AiOutlineForm } from "react-icons/ai";
-import { MdOutlineArticle } from "react-icons/md";
-import { BiLogIn } from "react-icons/bi";
-import { MdManageAccounts } from "react-icons/md";
-import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
-import { links } from "@type/typeLinks";
-import { config } from "src/lib/supabase/supabase";
+import { HeadContents } from "@components/global/head/HeadContents";
+import { Sidebar } from "@components/global/sideBar/Sidebar";
+import { User } from "@components/global/sideBar/User";
+import { ColorTheme } from "@components/global/Header";
+import { Lang } from "@components/global/Header";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -33,40 +28,11 @@ function MyApp({ Component, pageProps }: AppProps) {
   const toggleColorTheme = () => {
     color === "dark" ? setColor("light") : setColor("dark");
   };
-  const { t } = useLocale();
   const router = useRouter();
-
-  const switchLanguage = (lang: "ja" | "en") => {
-    router.push(router.pathname, router.pathname, {
-      locale: lang,
-    });
-  };
-
-  const Links: links[] = [
-    { url: "/", label: t.LINKS.SEACRCH, icon: <FaSearch /> },
-    { url: "/form", label: t.LINKS.FORM, icon: <AiOutlineForm /> },
-    { url: "/list", label: t.LINKS.LIST, icon: <FaRegListAlt /> },
-    { url: "/article", label: t.LINKS.ARTICLE, icon: <MdOutlineArticle /> },
-    { url: "/signup", label: t.LINKS.SIGNUP, icon: <BiLogIn /> },
-    { url: "/signin", label: t.LINKS.SIGNIN, icon: <FaSignInAlt /> },
-    { url: "/signout", label: t.LINKS.SIGNOUT, icon: <FaSignOutAlt /> },
-    { url: "/account", label: t.LINKS.ACCOUNT, icon: <MdManageAccounts /> },
-  ];
-
-  const colorSet = (url: string, pathname: string): string => {
-    let color: string = "";
-    if (url === pathname) {
-      color = "#0c8599";
-    } else {
-      color = "#273030";
-    }
-    return color;
-  };
 
   useEffect(() => {
     const session = config.supabase.auth.session();
     saveUserId(session?.user?.id!);
-    console.log(session?.user?.id);
     getUserInfo(session?.user?.id!);
   }, []);
 
@@ -78,6 +44,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     console.log(data, error);
     if (data) {
+      //ユーザーがいない場合、サインインに飛ばす
       if (data.length === 0) {
         router.push("/signin");
       } else {
@@ -95,27 +62,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Head>
-        <title>🧠memory with music</title>
-        <link rel="icon" href="img/logo_icon_white.png" />
-        <meta name="viewport" content="user-scalable=no" />
-        <meta name="robots" content="noindex" />
-        <meta name="robots" content="nofollow" />
-        <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1.0,minimum-scale=1.0"
-        ></meta>
-        <meta name="description" content="memory with music" />
-        <meta name="keywords" content="HTML,CSS,Tailwind.css"></meta>
-        <meta property="og:title" content="" />
-        <meta property="og:description" content="memory with music" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="" />
-        <meta property="og:image" content="img/brain.png" />
-        <meta property="og:site_name" content="memory with music" />
-        <meta property="og:locale" content="ja_JP" />
-      </Head>
-
+      <HeadContents />
       <MantineProvider
         theme={{
           colorScheme: color,
@@ -134,57 +81,7 @@ function MyApp({ Component, pageProps }: AppProps) {
               fixed={true}
             >
               <Navbar.Section grow mt="md">
-                {Links.map((link) => {
-                  return (
-                    <div key={link.label}>
-                      {color === "dark" ? (
-                        <div>
-                          {link.url === router.pathname ? (
-                            <Link href={link.url}>
-                              <div className="my-1 flex rounded-lg  bg-[#0c8599] py-2 pl-2  text-white ">
-                                <span className="mt-[2px] pr-2">
-                                  {link.icon}
-                                </span>
-                                <a className="text-lg">{link.label}</a>
-                              </div>
-                            </Link>
-                          ) : (
-                            <Link href={link.url}>
-                              <div className="my-1 flex rounded-lg  py-2 pl-2 text-lg  text-inherit hover:bg-[#232323]">
-                                <span className="mt-[2px] pr-2">
-                                  {link.icon}
-                                </span>
-                                <a className="text-lg">{link.label}</a>
-                              </div>
-                            </Link>
-                          )}
-                        </div>
-                      ) : (
-                        <div>
-                          {link.url === router.pathname ? (
-                            <Link href={link.url}>
-                              <div className="my-1 flex rounded-lg  bg-[#0c8599] py-2 pl-2  text-white ">
-                                <span className="mt-[2px] pr-2">
-                                  {link.icon}
-                                </span>
-                                <a className="text-lg">{link.label}</a>
-                              </div>
-                            </Link>
-                          ) : (
-                            <Link href={link.url}>
-                              <div className="my-1 flex rounded-lg  py-2 pl-2 text-lg  text-inherit hover:bg-[#f0f0f0]">
-                                <span className="mt-[2px] pr-2">
-                                  {link.icon}
-                                </span>
-                                <a className="text-lg">{link.label}</a>
-                              </div>
-                            </Link>
-                          )}
-                        </div>
-                      )}
-                    </div>
-                  );
-                })}
+                <Sidebar color={color} />
               </Navbar.Section>
               <Navbar.Section>
                 <User />
@@ -199,32 +96,11 @@ function MyApp({ Component, pageProps }: AppProps) {
                 </div>
                 <Loader color="cyan" size="sm" variant="bars" />
                 <div className=" absolute right-0 flex">
-                  <div>
-                    <ActionIcon
-                      variant="outline"
-                      color={color === "light" ? "yellow" : "blue"}
-                      onClick={() => toggleColorTheme()}
-                      title="Toggle color scheme"
-                      className="m-[6px]"
-                    >
-                      {color === "light" ? (
-                        <Sun size={20} />
-                      ) : (
-                        <MoonStars size={20} />
-                      )}
-                    </ActionIcon>
+                  <div className="mt-[6px]">
+                    <ColorTheme color={color} onClick={toggleColorTheme} />
                   </div>
                   <div>
-                    <SegmentedControl
-                      color="cyan"
-                      defaultValue={router.locale}
-                      value={router.locale}
-                      data={[
-                        { value: "ja", label: "ja" },
-                        { value: "en", label: "en" },
-                      ]}
-                      onChange={(lang: "en" | "ja") => switchLanguage(lang)}
-                    />
+                    <Lang />
                   </div>
                 </div>
               </div>
