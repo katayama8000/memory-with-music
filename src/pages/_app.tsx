@@ -1,26 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
-import Head from "next/head";
-import Link from "next/link";
 import { useRouter } from "next/router";
 import { config } from "src/lib/supabase/supabase";
 import "src/lib/tailwind.css";
-import {
-  ActionIcon,
-  Loader,
-  MantineProvider,
-  SegmentedControl,
-  AppShell,
-  Navbar,
-  Header,
-} from "@mantine/core";
+import { MantineProvider, AppShell, Navbar, Header } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
+import { HeaderComp } from "@components/global/Header/HeaderComp";
 import { HeadContents } from "@components/global/head/HeadContents";
 import { Sidebar } from "@components/global/sideBar/Sidebar";
 import { User } from "@components/global/sideBar/User";
-import { ColorTheme } from "@components/global/Header";
-import { Lang } from "@components/global/Header";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 
 function MyApp({ Component, pageProps }: AppProps) {
@@ -90,20 +79,7 @@ function MyApp({ Component, pageProps }: AppProps) {
           }
           header={
             <Header height={70} p="xs" fixed={true} zIndex={200}>
-              <div className="relative flex justify-center ">
-                <div className="ml-[284px] pr-2 pb-2  text-4xl font-bold italic hover:not-italic">
-                  memory with music
-                </div>
-                <Loader color="cyan" size="sm" variant="bars" />
-                <div className=" absolute right-0 flex">
-                  <div className="mt-[6px]">
-                    <ColorTheme color={color} onClick={toggleColorTheme} />
-                  </div>
-                  <div>
-                    <Lang />
-                  </div>
-                </div>
-              </div>
+              <HeaderComp color={color} toggleColorTheme={toggleColorTheme} />
             </Header>
           }
         >
