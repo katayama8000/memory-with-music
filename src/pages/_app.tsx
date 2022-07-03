@@ -1,53 +1,95 @@
-import { useState } from "react";
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
-import Head from "next/head";
+import { useRouter } from "next/router";
+import { config } from "src/lib/supabase/supabase";
 import "src/lib/tailwind.css";
-import { MantineProvider } from "@mantine/core";
+import { MantineProvider, AppShell, Navbar, Header } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
-import { Header } from "@components/layout/header/Header";
+import { HeaderComp } from "@components/global/Header/HeaderComp";
+import { HeadContents } from "@components/global/head/HeadContents";
+import { Sidebar } from "@components/global/sideBar/Sidebar";
+import { User } from "@components/global/sideBar/User";
+import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 
 function MyApp({ Component, pageProps }: AppProps) {
   const [color, setColor] = useState<"dark" | "light">("dark");
   const toggleColorTheme = () => {
     color === "dark" ? setColor("light") : setColor("dark");
   };
+  const router = useRouter();
+
+  useEffect(() => {
+    const session = config.supabase.auth.session();
+    saveUserId(session?.user?.id!);
+    getUserInfo(session?.user?.id!);
+  }, []);
+
+  const getUserInfo = async (userId: string) => {
+    const { data, error } = await config.supabase
+      .from("users")
+      .select("userName, userEmail")
+      .match({ userId: userId });
+
+    console.log(data, error);
+    if (data) {
+      //ユーザーがいない場合、サインインページに移動
+      if (data.length === 0) {
+        router.push("/signin");
+      } else {
+        const userName = data![0].userName;
+        const userEmail = data![0].userEmail;
+        saveUserName(userName);
+        saveUserEmail(userEmail);
+      }
+    }
+
+    if (error) {
+      router.push("/signin");
+    }
+  };
 
   return (
     <>
-      <Head>
-        <title>🧠memory with music</title>
-        <link rel="icon" href="img/logo_icon_white.png" />
-        <meta name="viewport" content="user-scalable=no" />
-        <meta name="robots" content="noindex" />
-        <meta name="robots" content="nofollow" />
-        <meta
-          name="viewport"
-          content="width=device-width,initial-scale=1.0,minimum-scale=1.0"
-        ></meta>
-        <meta name="description" content="memory with music" />
-        <meta name="keywords" content="HTML,CSS,Tailwind.css"></meta>
-        <meta property="og:title" content="" />
-        <meta property="og:description" content="memory with music" />
-        <meta property="og:type" content="website" />
-        <meta property="og:url" content="" />
-        <meta property="og:image" content="img/brain.png" />
-        <meta property="og:site_name" content="memory with music" />
-        <meta property="og:locale" content="ja_JP" />
-      </Head>
-      <main className="m-auto max-w-4xl">
-        <MantineProvider
-          theme={{
-            colorScheme: color,
-          }}
-          withGlobalStyles
-          withNormalizeCSS
+      <HeadContents />
+      <MantineProvider
+        theme={{
+          colorScheme: color,
+        }}
+        withGlobalStyles
+        withNormalizeCSS
+      >
+        <AppShell
+          padding="md"
+          navbar={
+            <Navbar
+              p="xs"
+              width={{ base: 300 }}
+              hidden={true}
+              hiddenBreakpoint={1000}
+              fixed={true}
+            >
+              <Navbar.Section grow mt="md">
+                <Sidebar color={color} />
+              </Navbar.Section>
+              <Navbar.Section>
+                <User />
+              </Navbar.Section>
+            </Navbar>
+          }
+          header={
+            <Header height={70} p="xs" fixed={true} zIndex={200}>
+              <HeaderComp color={color} toggleColorTheme={toggleColorTheme} />
+            </Header>
+          }
         >
           <NotificationsProvider position="bottom-right" zIndex={2077}>
-            <Header onClick={() => toggleColorTheme()} color={color} />
-            <Component {...pageProps} />
+            <main className="m-auto mt-[100px] max-w-6xl pl-[300px]">
+              <Component {...pageProps} />
+            </main>
           </NotificationsProvider>
-        </MantineProvider>
-      </main>
+        </AppShell>
+      </MantineProvider>
     </>
   );
 }

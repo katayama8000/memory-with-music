@@ -6,6 +6,7 @@ memory with music
 >Next.js</br>
 >Mantine</br>
 >supabase</br>
+>valtio</br>
 
 
 >**Warning**</br>

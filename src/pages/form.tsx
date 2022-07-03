@@ -1,49 +1,74 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { TextInput, Button, Textarea, Group, Modal } from "@mantine/core";
+import { TextInput, Button, Textarea, Group } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { showNotification } from "@mantine/notifications";
 import { config } from "../lib/supabase/supabase";
 import { useLocale } from "@hooks/useLocale";
+import { toast } from "@function/toast";
+import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
+import { useSnapshot } from "valtio";
+import { Id } from "tabler-icons-react";
+
+type initType = {
+  artist: string;
+  song: string;
+  image: string;
+  memory: string;
+  isEdit: string;
+};
 
 const Form: NextPage = () => {
+  const snap = useSnapshot(state);
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
   const { t } = useLocale();
-  const [initial] = useState({
-    artist: router.query.artist,
-    song: router.query.song,
-    image: router.query.image,
+  const [initForm, setInitForm] = useState<initType>({
+    artist: "",
+    song: "",
+    image: "",
+    memory: "",
+    isEdit: "",
   });
 
   const form = useForm({
     initialValues: {
-      artist: initial.artist,
-      song: initial.song,
-      image: initial.image,
+      artist: "",
+      song: "",
+      image: "",
       memory: "",
     },
   });
 
-  // const pageChangeHandler = () => {
-  //   if (form.values.artist !== undefined) {
-  //     const answer = window.confirm(
-  //       "フォームの内容がリセットされます、本当にページ遷移しますか？"
-  //     );
-  //     if (!answer) {
-  //       throw "Abort route";
-  //     }
-  //   }
-  // };
+  useEffect(() => {
+    if (router.isReady) {
+      if (
+        typeof router.query.artist === "string" &&
+        typeof router.query.song === "string" &&
+        typeof router.query.image === "string" &&
+        typeof router.query.isEdit === "string"
+      ) {
+        setInitForm({
+          artist: router.query.artist,
+          song: router.query.song,
+          image: router.query.image,
+          memory: "",
+          isEdit: router.query.isEdit,
+        });
+      }
+    }
+  }, [router]);
 
-  // useEffect(() => {
-  //   router.events.on("routeChangeStart", pageChangeHandler);
-  //   return () => {
-  //     router.events.off("routeChangeStart", pageChangeHandler);
-  //   };
-  // }, []);
+  useEffect(() => {
+    console.log(initForm);
+    form.setValues({
+      artist: initForm.artist,
+      song: initForm.song,
+      image: initForm.image,
+      memory: initForm.memory,
+    });
+  }, [initForm]);
 
   const insert = async (values: {
     artist: string | string[] | undefined;
@@ -59,34 +84,73 @@ const Form: NextPage = () => {
         song: values.song,
         memory: values.memory,
         image: values.image,
+        userId: snap.userId,
       },
     ]);
 
-    setLoading(false);
-
     if (data) {
-      showNotification({
-        title: t.Notification.SUCCESS,
-        message: t.Notification.MESSAGE,
-        color: "cyan",
-      });
-      //form.reset();
+      toast(t.NOTIFICATION.SUCCESS, t.NOTIFICATION.MESSAGE, "cyan");
       setTimeout(() => {
         router.push("/list");
       }, 1000);
     }
     if (error) {
-      showNotification({
-        title: t.Notification.ERROR,
-        message: error.message,
-        color: "red",
+      toast(t.NOTIFICATION.ERROR, error.message, "red");
+    }
+    setLoading(false);
+  };
+
+  const upDate = async (values: {
+    artist: string | string[] | undefined;
+    song: string | string[] | undefined;
+    memory: string | string[] | undefined;
+  }) => {
+    const { data, error } = await config.supabase
+      .from("songs")
+      .update({ memory: values.memory })
+      .match({
+        artist: values.artist,
+        song: values.song,
+        userId: snap.userId,
       });
+
+    if (data) {
+      console.log(data);
+      toast(t.NOTIFICATION.SUCCESS, t.NOTIFICATION.MESSAGE, "cyan");
+      setTimeout(() => {
+        router.push("/list");
+      }, 1000);
+    }
+
+    if (error) {
+      console.log(error.message);
     }
   };
+
+  const handleSubmit = (values: {
+    artist: string | string[] | undefined;
+    song: string | string[] | undefined;
+    memory: string | string[] | undefined;
+    image: string | string[] | undefined;
+  }) => {
+    if (initForm.isEdit == "true") {
+      upDate(values);
+    } else {
+      insert(values);
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center px-2">
+      <Group position="right" mt="md">
+        {initForm.isEdit == "true" && (
+          <Button color="pink" onClick={() => console.log(initForm.isEdit)}>
+            {t.FORM.EDIT}
+          </Button>
+        )}
+      </Group>
       <form
-        onSubmit={form.onSubmit((values) => insert(values))}
+        onSubmit={form.onSubmit((values) => handleSubmit(values))}
         className="mt-2"
       >
         <TextInput

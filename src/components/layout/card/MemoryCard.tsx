@@ -3,6 +3,7 @@ import Link from "next/link";
 import React from "react";
 
 type Props = {
+  id: number;
   song: string;
   artist: string;
   image: string;
@@ -10,6 +11,7 @@ type Props = {
 };
 
 export const MemoryCard: React.FC<Props> = ({
+  id,
   song,
   artist,
   image,
@@ -21,7 +23,13 @@ export const MemoryCard: React.FC<Props> = ({
         <Link
           href={{
             pathname: "/article",
-            query: { artist: artist, song: song, image: image, memory: memory },
+            query: {
+              id: id,
+              artist: artist,
+              song: song,
+              image: image,
+              memory: memory,
+            },
           }}
         >
           <a className="text-inherit no-underline">

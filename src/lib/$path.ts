@@ -1,4 +1,7 @@
 export const pagesPath = {
+  "account": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/account' as const, hash: url?.hash })
+  },
   "article": {
     $url: (url?: { hash?: string }) => ({ pathname: '/article' as const, hash: url?.hash })
   },
@@ -7,6 +10,15 @@ export const pagesPath = {
   },
   "list": {
     $url: (url?: { hash?: string }) => ({ pathname: '/list' as const, hash: url?.hash })
+  },
+  "signin": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/signin' as const, hash: url?.hash })
+  },
+  "signout": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/signout' as const, hash: url?.hash })
+  },
+  "signup": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/signup' as const, hash: url?.hash })
   },
   "test": {
     $url: (url?: { hash?: string }) => ({ pathname: '/test' as const, hash: url?.hash })

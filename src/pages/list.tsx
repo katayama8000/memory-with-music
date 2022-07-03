@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { config } from "../lib/supabase/supabase";
 import { MemoryCard } from "@components/layout/card/MemoryCard";
-import { showNotification } from "@mantine/notifications";
 import { Grid, LoadingOverlay } from "@mantine/core";
 import { dataFromSupabase } from "@type/typeSupabase";
+import { toast } from "@function/toast";
 
 export const List = () => {
   const [data, setData] = useState<dataFromSupabase[]>([]);
@@ -16,11 +16,7 @@ export const List = () => {
         setData(data);
       }
       if (error) {
-        showNotification({
-          title: "Error",
-          message: error.message + "try again later",
-          color: "red",
-        });
+        toast("Error", error.message + "try again later", "red");
       }
     };
     fetch();
@@ -36,11 +32,12 @@ export const List = () => {
       />
       <div>
         <Grid>
-          {data.map((item, index) => {
+          {data.map((item) => {
             return (
-              <Grid.Col xs={6} key={index}>
+              <Grid.Col xs={6} key={item.id}>
                 <div className="m-auto px-2">
                   <MemoryCard
+                    id={item.id}
                     song={item.song}
                     image={item.image}
                     artist={item.artist}

@@ -19,6 +19,8 @@
       "@components/*": ["./src/components/*"],
       "@pages/*": ["./src/pages/*"],
       "@hooks/*": ["./src/hooks/*"],
+      "@function/*": ["./src/function/*"],
+      "@state/*": ["./src/state/*"],
       "@type/*": ["./src/type/*"]
     }
   },
