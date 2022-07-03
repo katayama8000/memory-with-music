@@ -33,7 +33,7 @@ function MyApp({ Component, pageProps }: AppProps) {
 
     console.log(data, error);
     if (data) {
-      //ユーザーがいない場合、サインインに飛ばす
+      //ユーザーがいない場合、サインインページに移動
       if (data.length === 0) {
         router.push("/signin");
       } else {

@@ -28,4 +28,8 @@ export default {
     ERROR: "失敗",
     MESSAGE: "投稿しました",
   },
+  ACCOUNT: {
+    NAME: "名前",
+    EMAIL: "メール",
+  },
 };

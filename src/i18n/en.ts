@@ -30,4 +30,8 @@ export default {
     ERROR: "Error",
     MESSAGE: "Posted",
   },
+  ACCOUNT: {
+    NAME: "Name",
+    EMAIL: "Email",
+  },
 };
