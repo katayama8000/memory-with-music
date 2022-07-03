@@ -123,6 +123,7 @@ const Article = () => {
                     song: initArticle.song,
                     image: initArticle.image,
                     memory: initArticle.memory,
+                    isEdit: true,
                   },
                 }}
               >

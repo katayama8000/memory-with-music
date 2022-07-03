@@ -19,6 +19,7 @@ export default {
     SONG: "曲名",
     IMAGE: "httpで始まる画像のリンクを入力してください",
     YOURMEMORY: "曲と思い出",
+    EDIT: "編集中",
   },
   ARTICLE: {
     TITLE: "曲と思い出",

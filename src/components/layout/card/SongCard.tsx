@@ -34,7 +34,12 @@ export const SongCard: React.FC<Props> = ({
         <Link
           href={{
             pathname: "/form",
-            query: { artist: artistName, song: trackName, image: url },
+            query: {
+              artist: artistName,
+              song: trackName,
+              image: url,
+              isEdit: false,
+            },
           }}
         >
           <a className="no-underline">

@@ -21,6 +21,7 @@ export default {
     SONG: "Song",
     IMAGE: "input the link of the image starting with http",
     YOURMEMORY: "Your memory",
+    EDIT: "editting",
   },
   ARTICLE: {
     TITLE: "memory with music",

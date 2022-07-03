@@ -9,12 +9,14 @@ import { useLocale } from "@hooks/useLocale";
 import { toast } from "@function/toast";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 import { useSnapshot } from "valtio";
+import { Id } from "tabler-icons-react";
 
 type initType = {
   artist: string;
   song: string;
   image: string;
   memory: string;
+  isEdit: string;
 };
 
 const Form: NextPage = () => {
@@ -27,6 +29,7 @@ const Form: NextPage = () => {
     song: "",
     image: "",
     memory: "",
+    isEdit: "",
   });
 
   const form = useForm({
@@ -43,13 +46,15 @@ const Form: NextPage = () => {
       if (
         typeof router.query.artist === "string" &&
         typeof router.query.song === "string" &&
-        typeof router.query.image === "string"
+        typeof router.query.image === "string" &&
+        typeof router.query.isEdit === "string"
       ) {
         setInitForm({
           artist: router.query.artist,
           song: router.query.song,
           image: router.query.image,
           memory: "",
+          isEdit: router.query.isEdit,
         });
       }
     }
@@ -94,10 +99,58 @@ const Form: NextPage = () => {
     }
     setLoading(false);
   };
+
+  const upDate = async (values: {
+    artist: string | string[] | undefined;
+    song: string | string[] | undefined;
+    memory: string | string[] | undefined;
+  }) => {
+    const { data, error } = await config.supabase
+      .from("songs")
+      .update({ memory: values.memory })
+      .match({
+        artist: values.artist,
+        song: values.song,
+        userId: snap.userId,
+      });
+
+    if (data) {
+      console.log(data);
+      toast(t.NOTIFICATION.SUCCESS, t.NOTIFICATION.MESSAGE, "cyan");
+      setTimeout(() => {
+        router.push("/list");
+      }, 1000);
+    }
+
+    if (error) {
+      console.log(error.message);
+    }
+  };
+
+  const handleSubmit = (values: {
+    artist: string | string[] | undefined;
+    song: string | string[] | undefined;
+    memory: string | string[] | undefined;
+    image: string | string[] | undefined;
+  }) => {
+    if (initForm.isEdit == "true") {
+      upDate(values);
+    } else {
+      insert(values);
+    }
+  };
+
   return (
     <div className="flex flex-col justify-center px-2">
+      <Group position="right" mt="md">
+        {initForm.isEdit == "true" && (
+          <Button color="pink" onClick={() => console.log(initForm.isEdit)}>
+            {t.FORM.EDIT}
+          </Button>
+        )}
+      </Group>
       <form
-        onSubmit={form.onSubmit((values) => insert(values))}
+        onSubmit={form.onSubmit((values) => handleSubmit(values))}
         className="mt-2"
       >
         <TextInput
