@@ -2,14 +2,14 @@
 import React, { useEffect, useState } from "react";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { TextInput, Button, Textarea, Group } from "@mantine/core";
+import { TextInput, Button, Textarea, Group, Modal } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { config } from "../lib/supabase/supabase";
 import { useLocale } from "@hooks/useLocale";
 import { toast } from "@function/toast";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 import { useSnapshot } from "valtio";
-import { Id } from "tabler-icons-react";
+import { NoUserIdModal } from "@components/modal/nouserIdModal";
 
 type initType = {
   artist: string;
@@ -20,6 +20,7 @@ type initType = {
 };
 
 const Form: NextPage = () => {
+  const [opened, setOpened] = useState<boolean>(false);
   const snap = useSnapshot(state);
   const router = useRouter();
   const [loading, setLoading] = useState<boolean>(false);
@@ -61,13 +62,15 @@ const Form: NextPage = () => {
   }, [router]);
 
   useEffect(() => {
-    console.log(initForm);
     form.setValues({
       artist: initForm.artist,
       song: initForm.song,
       image: initForm.image,
       memory: initForm.memory,
     });
+    if (snap.userId === "unknownid") {
+      setOpened(true);
+    }
   }, [initForm]);
 
   const insert = async (values: {
@@ -142,6 +145,8 @@ const Form: NextPage = () => {
 
   return (
     <div className="flex flex-col justify-center px-2">
+      <NoUserIdModal opened={opened} setOpened={setOpened} />
+      <div onClick={() => console.log(snap.userId)}>{snap.userEmail}</div>
       <Group position="right" mt="md">
         {initForm.isEdit == "true" && (
           <Button color="pink" onClick={() => console.log(initForm.isEdit)}>
