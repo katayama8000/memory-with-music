@@ -9,7 +9,6 @@ import { useLocale } from "@hooks/useLocale";
 import { toast } from "@function/toast";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 import { useSnapshot } from "valtio";
-//>>>>>/???????
 import { NoUserIdModal } from "@components/modal/NoUserIdModal";
 
 type initType = {
