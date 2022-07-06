@@ -20,6 +20,7 @@ function MyApp({ Component, pageProps }: AppProps) {
   const router = useRouter();
 
   useEffect(() => {
+    //sessionにユーザーがいる場合それを使用
     const session = config.supabase.auth.session();
     console.log("session", session?.user?.id!);
     if (session?.user?.id! === undefined) {
