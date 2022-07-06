@@ -21,8 +21,13 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   useEffect(() => {
     const session = config.supabase.auth.session();
-    saveUserId(session?.user?.id!);
-    getUserInfo(session?.user?.id!);
+    console.log("session", session?.user?.id!);
+    if (session?.user?.id! === undefined) {
+      router.push("/signin");
+    } else {
+      saveUserId(session?.user?.id!);
+      getUserInfo(session?.user?.id!);
+    }
   }, []);
 
   const getUserInfo = async (userId: string) => {

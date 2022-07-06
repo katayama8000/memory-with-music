@@ -5,14 +5,13 @@ export const state = proxy<{
   userName: string;
   userEmail: string;
 }>({
-  userId: "unKnownid",
+  userId: "unknownid",
   userName: "unknownuser",
   userEmail: "unknownemail",
 });
 
 export const saveUserId = (userId: string) => {
   state.userId = userId;
-  console.log("stateのuserid", state.userId);
   localStorage.setItem("userId", userId);
 };
 
@@ -26,7 +25,7 @@ export const saveUserEmail = (email: string) => {
 
 //ログアウトしたときに使う
 export const resetUserInfo = () => {
-  state.userId = "initId";
+  state.userId = "unknownid";
   state.userName = "unknownuser";
   state.userEmail = "unknownemail";
 };
