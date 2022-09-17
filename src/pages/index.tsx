@@ -8,8 +8,8 @@ import { TextInput, Button, Box, LoadingOverlay } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { SongList } from "@components/layout/SongList";
 import { useLocale } from "@hooks/useLocale";
-import { result } from "@type/typeResult";
-import { lang, country } from "@type/typeI18n";
+import { result } from "@type/typeResult.model";
+import { lang, country } from "@type/typeI18n.model";
 import { config } from "src/lib/supabase/supabase";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 

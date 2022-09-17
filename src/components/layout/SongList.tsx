@@ -3,7 +3,7 @@ import { Grid } from "@mantine/core";
 import { SongCard } from "@components/layout/card/SongCard";
 import { SkeletonCard } from "@components/layout/card/SkeletonCard";
 import { useLocale } from "@hooks/useLocale";
-import { result } from "@type/typeResult";
+import { result } from "@type/typeResult.model";
 
 type Props = {
   loading: boolean;

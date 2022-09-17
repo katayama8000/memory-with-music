@@ -7,7 +7,7 @@ import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useSnapshot } from "valtio";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
-import { Form } from "@type/typeForm";
+import { Form } from "@type/typeForm.model";
 import Link from "next/link";
 
 const Signin: NextPage = () => {

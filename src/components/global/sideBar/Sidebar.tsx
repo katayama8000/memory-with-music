@@ -1,5 +1,5 @@
 import React from "react";
-import { links } from "@type/typeLinks";
+import { links } from "@type/typeLinks.model";
 import { useLocale } from "@hooks/useLocale";
 import Link from "next/link";
 import { FaSearch, FaRegListAlt } from "react-icons/fa";

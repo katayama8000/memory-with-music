@@ -5,7 +5,7 @@ import { useForm } from "@mantine/form";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
 import { saveUserEmail, saveUserId, saveUserName } from "@state/state";
 import { useState } from "react";
-import { Form } from "@type/typeForm";
+import { Form } from "@type/typeForm.model";
 
 //emailで認証しなければならないらしい
 const Signup: NextPage = () => {

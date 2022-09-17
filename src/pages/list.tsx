@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { config } from "../lib/supabase/supabase";
 import { MemoryCard } from "@components/layout/card/MemoryCard";
 import { Grid, LoadingOverlay } from "@mantine/core";
-import { dataFromSupabase } from "@type/typeSupabase";
+import { dataFromSupabase } from "@type/typeSupabase.model";
 import { toast } from "@function/toast";
 
 export const List = () => {
