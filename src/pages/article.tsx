@@ -13,6 +13,7 @@ import { DeleteArticleModal } from "@components/layout/modal/DeleteArticleModal"
 import Link from "next/link";
 import { useGetUserName } from "@hooks/useGetUserName";
 import { NextPage } from "next";
+import { SongModel } from "@type/song.model";
 
 const Article: NextPage = () => {
   const [opened, setOpened] = useState<boolean>(false);
@@ -48,13 +49,12 @@ const Article: NextPage = () => {
   }, [router]);
 
   const handleClick = async () => {
-    console.log("delete");
     const { data, error } = await config.supabase
-      .from("songs")
+      .from<SongModel>("songs")
       .delete()
       .match({ id: router.query.id });
 
-    console.log(data, error);
+    console.log("delete", data, error);
     if (data) {
       toast("成功", "削除しました", "cyan");
       router.push("/list");

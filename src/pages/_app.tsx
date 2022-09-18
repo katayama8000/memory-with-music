@@ -33,11 +33,10 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   const getUserInfo = async (userId: string) => {
     const { data, error } = await config.supabase
-      .from("users")
+      .from<{ userName: string; userEmail: string }>("users")
       .select("userName, userEmail")
       .match({ userId: userId });
 
-    console.log(data, error);
     if (data) {
       //ユーザーがいない場合、サインインページに移動
       if (data.length === 0) {

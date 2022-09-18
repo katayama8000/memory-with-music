@@ -10,11 +10,10 @@ export const useGetUserName = (): {
   const userID = useGetUserId();
   const getUserName = useCallback(async () => {
     const { data, error } = await config.supabase
-      .from("users")
+      .from<{ userName: string }>("users")
       .select("userName")
       .match({ userId: userID });
 
-    console.log(data, error);
     const userName = data![0].userName;
     console.log(userName);
     setUserName(userName);

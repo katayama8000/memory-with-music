@@ -31,7 +31,7 @@ const Account: NextPage = () => {
   const handleEdit = async (value: FormModel) => {
     setLoading(true);
     const { data, error } = await config.supabase
-      .from("users")
+      .from<{ userName: string }>("users")
       .update({ userName: value.name })
       .match({ userId: snap.userId });
 
@@ -69,7 +69,6 @@ const Account: NextPage = () => {
   return (
     <div>
       <div className="flex justify-between px-2">
-        {/* <div>{songList}</div> */}
         <div className="flex">
           <div>
             <Avatar

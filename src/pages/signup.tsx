@@ -49,8 +49,6 @@ const Signup: NextPage = () => {
         userEmail: userEmail,
       },
     ]);
-
-    console.log(data, error);
   };
 
   const form = useForm({

@@ -36,7 +36,7 @@ const Signin: NextPage = () => {
 
   const getUserName = async (userId: string) => {
     const { data, error } = await config.supabase
-      .from("users")
+      .from<{ userName: string }>("users")
       .select("userName")
       .match({ userId: userId });
 
