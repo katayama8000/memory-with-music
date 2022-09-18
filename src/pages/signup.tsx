@@ -42,13 +42,15 @@ const Signup: NextPage = () => {
     userId: string,
     userEmail: string
   ) => {
-    const { data, error } = await config.supabase.from("users").insert([
-      {
-        userName: userName,
-        userId: userId,
-        userEmail: userEmail,
-      },
-    ]);
+    const { data, error } = await config.supabase
+      .from<{ userName: string; userId: string; userEmail: string }>("users")
+      .insert([
+        {
+          userName: userName,
+          userId: userId,
+          userEmail: userEmail,
+        },
+      ]);
   };
 
   const form = useForm({
