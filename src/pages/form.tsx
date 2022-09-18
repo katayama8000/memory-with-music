@@ -10,6 +10,7 @@ import { toast } from "@function/toast";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 import { useSnapshot } from "valtio";
 import { NoUserIdModal } from "@components/modal/NoUserIdModal";
+import { SongModel } from "@type/song.model";
 
 type initType = {
   artist: string;
@@ -104,12 +105,12 @@ const Form: NextPage = () => {
   };
 
   const upDate = async (values: {
-    artist: string | string[] | undefined;
-    song: string | string[] | undefined;
-    memory: string | string[] | undefined;
+    artist: string;
+    song: string;
+    memory: string;
   }) => {
     const { data, error } = await config.supabase
-      .from("songs")
+      .from<SongModel>("songs")
       .update({ memory: values.memory })
       .match({
         artist: values.artist,
@@ -118,7 +119,7 @@ const Form: NextPage = () => {
       });
 
     if (data) {
-      console.log(data);
+      console.log("sss", data);
       toast(t.NOTIFICATION.SUCCESS, t.NOTIFICATION.MESSAGE, "cyan");
       setTimeout(() => {
         router.push("/list");
@@ -131,16 +132,12 @@ const Form: NextPage = () => {
   };
 
   const handleSubmit = (values: {
-    artist: string | string[] | undefined;
-    song: string | string[] | undefined;
-    memory: string | string[] | undefined;
-    image: string | string[] | undefined;
+    artist: string;
+    song: string;
+    memory: string;
+    image: string;
   }) => {
-    if (initForm.isEdit == "true") {
-      upDate(values);
-    } else {
-      insert(values);
-    }
+    initForm.isEdit === "true" ? upDate(values) : insert(values);
   };
 
   return (

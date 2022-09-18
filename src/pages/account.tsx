@@ -17,21 +17,21 @@ import { useForm } from "@mantine/form";
 import { toast } from "@function/toast";
 import { AiTwotoneSetting } from "react-icons/ai";
 import { MemoryCard } from "@components/layout/card";
-import { Form } from "@type/typeForm";
-import { dataFromSupabase } from "@type/typeSupabase";
+import { FormModel } from "@type/form.model";
 import { useLocale } from "@hooks/useLocale";
+import { useGetUserSongs } from "@hooks/useGetUserSongs";
 
 const Account: NextPage = () => {
   const snap = useSnapshot(state);
   const [opened, setOpened] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [data, setData] = useState<dataFromSupabase[]>();
+  const { songList } = useGetUserSongs();
   const { t } = useLocale();
 
-  const handleEdit = async (value: Form) => {
+  const handleEdit = async (value: FormModel) => {
     setLoading(true);
     const { data, error } = await config.supabase
-      .from("users")
+      .from<{ userName: string }>("users")
       .update({ userName: value.name })
       .match({ userId: snap.userId });
 
@@ -47,18 +47,7 @@ const Account: NextPage = () => {
     setOpened(false);
   };
 
-  const getSongs = async () => {
-    const { data, error } = await config.supabase
-      .from("songs")
-      .select("id,song, artist,image,memory")
-      .match({ userId: snap.userId });
-
-    console.log(data, error);
-    setData(data!);
-  };
-
   useEffect(() => {
-    getSongs();
     form.setValues({
       name: snap.userName,
       email: snap.userEmail,
@@ -138,27 +127,31 @@ const Account: NextPage = () => {
         </form>
       </Modal>
       <div className="mt-10">
-        <Spoiler maxHeight={100} showLabel="Show more" hideLabel="Hide">
-          <div>
-            <Grid>
-              {data?.map((item) => {
-                return (
-                  <Grid.Col xs={6} key={item.id}>
-                    <div className="m-auto px-2">
-                      <MemoryCard
-                        id={item.id}
-                        song={item.song}
-                        image={item.image}
-                        artist={item.artist}
-                        memory={item.memory}
-                      />
-                    </div>
-                  </Grid.Col>
-                );
-              })}
-            </Grid>
-          </div>
-        </Spoiler>
+        {songList.length > 0 ? (
+          <Spoiler maxHeight={100} showLabel="Show more" hideLabel="Hide">
+            <div>
+              <Grid>
+                {songList?.map((item) => {
+                  return (
+                    <Grid.Col xs={6} key={item.id}>
+                      <div className="m-auto px-2">
+                        <MemoryCard
+                          id={item.id}
+                          song={item.song}
+                          image={item.image}
+                          artist={item.artist}
+                          memory={item.memory}
+                        />
+                      </div>
+                    </Grid.Col>
+                  );
+                })}
+              </Grid>
+            </div>
+          </Spoiler>
+        ) : (
+          <div>There are no memories</div>
+        )}
       </div>
     </div>
   );

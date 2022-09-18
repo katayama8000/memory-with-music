@@ -5,12 +5,12 @@ import { useForm } from "@mantine/form";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
 import { saveUserEmail, saveUserId, saveUserName } from "@state/state";
 import { useState } from "react";
-import { Form } from "@type/typeForm";
+import { FormModel } from "@type/form.model";
 
 //emailで認証しなければならないらしい
 const Signup: NextPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
-  const handleSignin = async (value: Form) => {
+  const handleSignin = async (value: FormModel) => {
     setLoading(true);
     console.log(value);
     const { user, session, error } = await config.supabase.auth.signUp({
@@ -42,15 +42,15 @@ const Signup: NextPage = () => {
     userId: string,
     userEmail: string
   ) => {
-    const { data, error } = await config.supabase.from("users").insert([
-      {
-        userName: userName,
-        userId: userId,
-        userEmail: userEmail,
-      },
-    ]);
-
-    console.log(data, error);
+    const { data, error } = await config.supabase
+      .from<{ userName: string; userId: string; userEmail: string }>("users")
+      .insert([
+        {
+          userName: userName,
+          userId: userId,
+          userEmail: userEmail,
+        },
+      ]);
   };
 
   const form = useForm({

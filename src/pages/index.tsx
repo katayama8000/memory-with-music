@@ -8,17 +8,15 @@ import { TextInput, Button, Box, LoadingOverlay } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { SongList } from "@components/layout/SongList";
 import { useLocale } from "@hooks/useLocale";
-import { result } from "@type/typeResult";
-import { lang, country } from "@type/typeI18n";
-import { config } from "src/lib/supabase/supabase";
-import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
+import { ResultModel } from "@type/result.model";
+import { LangModel, CountryModel } from "@type/i18n.model";
 
-let API_lang: lang = "en_us";
-let API_country: country = "us";
+let API_lang: LangModel = "en_us";
+let API_country: CountryModel = "us";
 
 const Home: NextPage = () => {
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
-  const [songList, setSongList] = useState<result>();
+  const [songList, setSongList] = useState<ResultModel>();
   const router = useRouter();
 
   const { t } = useLocale();
@@ -35,7 +33,11 @@ const Home: NextPage = () => {
   }
 
   const handleSubmit = useCallback(
-    async (values: { music: string }, lang: lang, country: country) => {
+    async (
+      values: { music: string },
+      lang: LangModel,
+      country: CountryModel
+    ) => {
       setLoadingFlag(true);
       const { data } = await axios.get(
         `//itunes.apple.com/search?term=${values.music}&country=${country}&lang=${lang}&media=music&limit=51&offset=0`
@@ -45,26 +47,6 @@ const Home: NextPage = () => {
     },
     [songList, loadingFlag]
   );
-
-  // useEffect(() => {
-  //   const session = config.supabase.auth.session();
-  //   saveUserId(session?.user?.id!);
-  //   console.log(session?.user?.id);
-  //   getUserInfo(session?.user?.id!);
-  // }, []);
-
-  // const getUserInfo = async (userId: string) => {
-  //   const { data, error } = await config.supabase
-  //     .from("users")
-  //     .select("userName, userEmail")
-  //     .match({ userId: userId });
-
-  //   console.log(data, error);
-  //   const userName = data![0].userName;
-  //   const userEmail = data![0].userEmail;
-  //   saveUserName(userName);
-  //   saveUserEmail(userEmail);
-  // };
 
   return (
     <div className="flex flex-col justify-center">
@@ -94,9 +76,6 @@ const Home: NextPage = () => {
       />
       <div className="mt-5">
         <SongList songList={songList!} loading={loadingFlag} />
-        {/* <Button color="cyan" className="m-5">
-          show more
-        </Button> */}
       </div>
     </div>
   );

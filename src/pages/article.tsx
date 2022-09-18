@@ -11,13 +11,15 @@ import { FiEdit } from "react-icons/fi";
 import { toast } from "@function/toast";
 import { DeleteArticleModal } from "@components/layout/modal/DeleteArticleModal";
 import Link from "next/link";
+import { useGetUserName } from "@hooks/useGetUserName";
+import { NextPage } from "next";
+import { SongModel } from "@type/song.model";
 
-const Article = () => {
-  const [userName, setUserName] = useState<string>("");
+const Article: NextPage = () => {
   const [opened, setOpened] = useState<boolean>(false);
   const router = useRouter();
-  const { t } = useLocale();
   const snap = snapshot(state);
+  const { userName } = useGetUserName();
   const [initArticle, setInitArticle] = useState({
     id: 0,
     artist: "",
@@ -46,48 +48,13 @@ const Article = () => {
     }
   }, [router]);
 
-  const getUserId = async () => {
-    const { data, error } = await config.supabase
-      .from("songs")
-      .select("userId")
-      .match({ id: router.query.id });
-
-    if (data) {
-      const userId = data![0].userId;
-      getUserName(userId);
-    }
-
-    if (error) {
-      console.log(error);
-    }
-  };
-
-  const getUserName = async (userId: string) => {
-    const { data, error } = await config.supabase
-      .from("users")
-      .select("userName")
-      .match({ userId: userId });
-
-    console.log(data, error);
-    const userName = data![0].userName;
-    console.log(userName);
-    setUserName(userName);
-  };
-
-  useEffect(() => {
-    if (router.isReady) {
-      getUserId();
-    }
-  }, [router]);
-
   const handleClick = async () => {
-    console.log("delete");
     const { data, error } = await config.supabase
-      .from("songs")
+      .from<SongModel>("songs")
       .delete()
       .match({ id: router.query.id });
 
-    console.log(data, error);
+    console.log("delete", data, error);
     if (data) {
       toast("成功", "削除しました", "cyan");
       router.push("/list");
