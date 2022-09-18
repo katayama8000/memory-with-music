@@ -1,5 +1,5 @@
 import React from "react";
-import { links } from "@type/typeLinks.model";
+import { LinksModel } from "@type/links.model";
 import { useLocale } from "@hooks/useLocale";
 import Link from "next/link";
 import { FaSearch, FaRegListAlt } from "react-icons/fa";
@@ -17,7 +17,7 @@ type Props = {
 export const Sidebar: React.FC<Props> = ({ color }) => {
   const { t } = useLocale();
   const router = useRouter();
-  const Links: links[] = [
+  const Links: LinksModel[] = [
     { url: "/", label: t.LINKS.SEACRCH, icon: <FaSearch /> },
     { url: "/form", label: t.LINKS.FORM, icon: <AiOutlineForm /> },
     { url: "/list", label: t.LINKS.LIST, icon: <FaRegListAlt /> },

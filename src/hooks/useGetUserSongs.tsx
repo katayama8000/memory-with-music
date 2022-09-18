@@ -18,8 +18,6 @@ export const useGetUserSongs = () => {
         .from("songs")
         .select("id,song, artist,image,memory")
         .match({ userId: userID });
-
-      //setSongList(data!);
       if (data) {
         console.log("aaa", data);
         setSongList(data);

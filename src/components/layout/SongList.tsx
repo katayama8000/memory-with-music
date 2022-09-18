@@ -3,11 +3,11 @@ import { Grid } from "@mantine/core";
 import { SongCard } from "@components/layout/card/SongCard";
 import { SkeletonCard } from "@components/layout/card/SkeletonCard";
 import { useLocale } from "@hooks/useLocale";
-import { result } from "@type/typeResult.model";
+import { ResultModel } from "@type/result.model";
 
 type Props = {
   loading: boolean;
-  songList: result;
+  songList: ResultModel;
 };
 
 export const SongList: React.FC<Props> = ({ songList, loading }) => {

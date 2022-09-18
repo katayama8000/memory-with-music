@@ -17,7 +17,7 @@ import { useForm } from "@mantine/form";
 import { toast } from "@function/toast";
 import { AiTwotoneSetting } from "react-icons/ai";
 import { MemoryCard } from "@components/layout/card";
-import { Form } from "@type/typeForm.model";
+import { FormModel } from "@type/form.model";
 import { SongModel } from "@type/song.model";
 import { useLocale } from "@hooks/useLocale";
 import { useGetUserSongs } from "@hooks/useGetUserSongs";
@@ -29,7 +29,7 @@ const Account: NextPage = () => {
   const { songList } = useGetUserSongs();
   const { t } = useLocale();
 
-  const handleEdit = async (value: Form) => {
+  const handleEdit = async (value: FormModel) => {
     setLoading(true);
     const { data, error } = await config.supabase
       .from("users")

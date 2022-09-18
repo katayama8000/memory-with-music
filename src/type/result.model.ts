@@ -1,4 +1,4 @@
-export type result = {
+export type ResultModel = {
   resultCount: number;
   results: {
     artistId: number;

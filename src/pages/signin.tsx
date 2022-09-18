@@ -7,12 +7,12 @@ import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { useSnapshot } from "valtio";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
-import { Form } from "@type/typeForm.model";
+import { FormModel } from "@type/form.model";
 import Link from "next/link";
 
 const Signin: NextPage = () => {
   const router = useRouter();
-  const handleSignin = async (value: Form) => {
+  const handleSignin = async (value: FormModel) => {
     const { user, session, error } = await config.supabase.auth.signIn({
       email: value.email,
       password: value.password,
