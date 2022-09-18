@@ -46,26 +46,6 @@ const Home: NextPage = () => {
     [songList, loadingFlag]
   );
 
-  // useEffect(() => {
-  //   const session = config.supabase.auth.session();
-  //   saveUserId(session?.user?.id!);
-  //   console.log(session?.user?.id);
-  //   getUserInfo(session?.user?.id!);
-  // }, []);
-
-  // const getUserInfo = async (userId: string) => {
-  //   const { data, error } = await config.supabase
-  //     .from("users")
-  //     .select("userName, userEmail")
-  //     .match({ userId: userId });
-
-  //   console.log(data, error);
-  //   const userName = data![0].userName;
-  //   const userEmail = data![0].userEmail;
-  //   saveUserName(userName);
-  //   saveUserEmail(userEmail);
-  // };
-
   return (
     <div className="flex flex-col justify-center">
       <Box sx={{ maxWidth: 300 }} mx="auto">
@@ -94,9 +74,6 @@ const Home: NextPage = () => {
       />
       <div className="mt-5">
         <SongList songList={songList!} loading={loadingFlag} />
-        {/* <Button color="cyan" className="m-5">
-          show more
-        </Button> */}
       </div>
     </div>
   );
