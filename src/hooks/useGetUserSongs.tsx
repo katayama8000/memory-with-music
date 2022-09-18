@@ -7,7 +7,11 @@ import { useCallback, useEffect, useState } from "react";
 import { config } from "src/lib/supabase/supabase";
 import { useSnapshot } from "valtio";
 
-export const useGetUserSongs = () => {
+export const useGetUserSongs = (): {
+  songList: SongModel[];
+  loadingFlag: boolean;
+  getUserSongs: () => void;
+} => {
   const [songList, setSongList] = useState<SongModel[]>([]);
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
   const userID = useGetUserId();
@@ -15,11 +19,10 @@ export const useGetUserSongs = () => {
     setLoadingFlag(true);
     try {
       const { data, error } = await config.supabase
-        .from("songs")
+        .from<SongModel>("songs")
         .select("id,song, artist,image,memory")
         .match({ userId: userID });
       if (data) {
-        console.log("aaa", data);
         setSongList(data);
       }
       if (error || !data) {

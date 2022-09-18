@@ -18,7 +18,6 @@ import { toast } from "@function/toast";
 import { AiTwotoneSetting } from "react-icons/ai";
 import { MemoryCard } from "@components/layout/card";
 import { FormModel } from "@type/form.model";
-import { SongModel } from "@type/song.model";
 import { useLocale } from "@hooks/useLocale";
 import { useGetUserSongs } from "@hooks/useGetUserSongs";
 

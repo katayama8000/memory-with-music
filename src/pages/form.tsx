@@ -136,11 +136,7 @@ const Form: NextPage = () => {
     memory: string | string[] | undefined;
     image: string | string[] | undefined;
   }) => {
-    if (initForm.isEdit == "true") {
-      upDate(values);
-    } else {
-      insert(values);
-    }
+    initForm.isEdit === "true" ? upDate(values) : insert(values);
   };
 
   return (

@@ -10,7 +10,9 @@ export const useGetAllSongs = () => {
   const getAllSongs = useCallback(async () => {
     setLoadingFlag(true);
     try {
-      const { data, error } = await config.supabase.from("songs").select();
+      const { data, error } = await config.supabase
+        .from<SongModel>("songs")
+        .select();
       if (data) {
         setSongList(data);
       }

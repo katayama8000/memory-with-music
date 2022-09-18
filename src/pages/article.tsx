@@ -11,13 +11,14 @@ import { FiEdit } from "react-icons/fi";
 import { toast } from "@function/toast";
 import { DeleteArticleModal } from "@components/layout/modal/DeleteArticleModal";
 import Link from "next/link";
+import { useGetUserName } from "@hooks/useGetUserName";
+import { NextPage } from "next";
 
-const Article = () => {
-  const [userName, setUserName] = useState<string>("");
+const Article: NextPage = () => {
   const [opened, setOpened] = useState<boolean>(false);
   const router = useRouter();
-  const { t } = useLocale();
   const snap = snapshot(state);
+  const { userName } = useGetUserName();
   const [initArticle, setInitArticle] = useState({
     id: 0,
     artist: "",
@@ -43,40 +44,6 @@ const Article = () => {
           memory: router.query.memory,
         });
       }
-    }
-  }, [router]);
-
-  const getUserId = async () => {
-    const { data, error } = await config.supabase
-      .from("songs")
-      .select("userId")
-      .match({ id: router.query.id });
-
-    if (data) {
-      const userId = data![0].userId;
-      getUserName(userId);
-    }
-
-    if (error) {
-      console.log(error);
-    }
-  };
-
-  const getUserName = async (userId: string) => {
-    const { data, error } = await config.supabase
-      .from("users")
-      .select("userName")
-      .match({ userId: userId });
-
-    console.log(data, error);
-    const userName = data![0].userName;
-    console.log(userName);
-    setUserName(userName);
-  };
-
-  useEffect(() => {
-    if (router.isReady) {
-      getUserId();
     }
   }, [router]);
 

@@ -6,7 +6,7 @@ type Form = {
   password: string;
 };
 
-export const useSignIn = async (value: Form) => {
+export const useSignIn = async (value: Form): Promise<void> => {
   console.log(value);
   const { user, session, error } = await config.supabase.auth.signIn({
     email: value.email,
