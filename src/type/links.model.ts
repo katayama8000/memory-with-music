@@ -1,7 +1,7 @@
 import { ReactElement } from "react";
 
 export type LinksModel = {
-  url: string;
-  label: string;
-  icon: ReactElement;
+  readonly url: string;
+  readonly label: string;
+  readonly icon: ReactElement;
 };
