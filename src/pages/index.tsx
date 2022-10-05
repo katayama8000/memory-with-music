@@ -37,7 +37,7 @@ const Home: NextPage = () => {
       values: { music: string },
       lang: LangModel,
       country: CountryModel
-    ) => {
+    ): Promise<void> => {
       setLoadingFlag(true);
       const { data } = await axios.get(
         `//itunes.apple.com/search?term=${values.music}&country=${country}&lang=${lang}&media=music&limit=51&offset=0`
