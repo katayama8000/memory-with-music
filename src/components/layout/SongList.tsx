@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 
 const SkeletonCard = dynamic<{}>(() =>
   import("@components/layout/card/SkeletonCard").then(
-    (module) => module.default
+    (module) => module.SkeletonCard
   )
 );
 

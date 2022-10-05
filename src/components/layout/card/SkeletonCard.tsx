@@ -1,7 +1,7 @@
 import React from "react";
 import { Button, Card, Image, Skeleton } from "@mantine/core";
 
-const SkeletonCard: React.FC = () => {
+export const SkeletonCard: React.FC = () => {
   return (
     <div>
       <Card shadow="sm" p="lg" radius="md" className="h-[234px]">
@@ -22,4 +22,4 @@ const SkeletonCard: React.FC = () => {
   );
 };
 
-export default SkeletonCard;
+//export default SkeletonCard;
