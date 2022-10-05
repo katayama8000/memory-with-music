@@ -21,3 +21,5 @@ export const SkeletonCard: React.FC = () => {
     </div>
   );
 };
+
+//export default SkeletonCard;

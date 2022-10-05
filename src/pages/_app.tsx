@@ -4,15 +4,22 @@ import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
 import { config } from "src/lib/supabase/supabase";
 import "src/lib/tailwind.css";
-import { MantineProvider, AppShell, Navbar, Header } from "@mantine/core";
+import { MantineProvider } from "@mantine/core";
+import { AppShell, Navbar, Header } from "@mantine/core";
 import { NotificationsProvider } from "@mantine/notifications";
-import { HeaderComp } from "@components/global/Header/HeaderComp";
+//import { HeaderComp } from "@components/global/Header/HeaderComp";
 import { HeadContents } from "@components/global/head/HeadContents";
 import { Sidebar } from "@components/global/sideBar/Sidebar";
 import { User } from "@components/global/sideBar/User";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
+import dynamic from "next/dynamic";
 
-function MyApp({ Component, pageProps }: AppProps) {
+const HeaderComp = dynamic(async () => {
+  const { HeaderComp } = await import("@components/global/Header/HeaderComp");
+  return HeaderComp;
+});
+
+const MyApp = ({ Component, pageProps }: AppProps) => {
   const [color, setColor] = useState<"dark" | "light">("dark");
   const toggleColorTheme = () => {
     color === "dark" ? setColor("light") : setColor("dark");
@@ -97,6 +104,6 @@ function MyApp({ Component, pageProps }: AppProps) {
       </MantineProvider>
     </>
   );
-}
+};
 
 export default MyApp;

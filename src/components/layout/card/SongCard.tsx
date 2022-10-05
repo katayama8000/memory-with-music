@@ -4,7 +4,7 @@ import { Button, Card, Image } from "@mantine/core";
 import { Props } from "@type/songCard.model";
 import { useLocale } from "@hooks/useLocale";
 
-const getYear = (releaseDate: string) => {
+const getYear = (releaseDate: string): number => {
   const date = new Date(releaseDate);
   return date.getFullYear();
 };
