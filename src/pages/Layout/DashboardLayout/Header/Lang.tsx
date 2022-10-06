@@ -4,11 +4,14 @@ import { SegmentedControl } from "@mantine/core";
 
 export const Lang: React.FC = memo(() => {
   const router = useRouter();
-  const switchLanguage = useCallback((lang: "ja" | "en"): void => {
-    router.push(router.pathname, router.pathname, {
-      locale: lang,
-    });
-  }, []);
+  const switchLanguage = useCallback(
+    (lang: "ja" | "en"): void => {
+      router.push(router.pathname, router.pathname, {
+        locale: lang,
+      });
+    },
+    [router]
+  );
   return (
     <div>
       <SegmentedControl

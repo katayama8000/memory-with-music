@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { ChevronRight, ChevronLeft } from "tabler-icons-react";
 import {
   UnstyledButton,
@@ -11,7 +11,7 @@ import {
 import { useSnapshot } from "valtio";
 import { state } from "@state/state";
 
-export const User = () => {
+export const User = memo(() => {
   const snap = useSnapshot(state);
   const theme = useMantineTheme();
 
@@ -70,4 +70,6 @@ export const User = () => {
       </UnstyledButton>
     </Box>
   );
-};
+});
+
+User.displayName = "User";

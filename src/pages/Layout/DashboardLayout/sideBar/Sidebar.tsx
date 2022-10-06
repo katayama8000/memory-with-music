@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import { useLocale } from "@hooks/useLocale";
 import Link from "next/link";
 import { FaSearch, FaRegListAlt } from "react-icons/fa";
@@ -13,7 +13,7 @@ type Props = {
   color: "light" | "dark";
 };
 
-export const Sidebar: React.FC<Props> = ({ color }) => {
+export const Sidebar: React.FC<Props> = memo(({ color }) => {
   const { t } = useLocale();
   const router = useRouter();
   const Links = [
@@ -77,4 +77,6 @@ export const Sidebar: React.FC<Props> = ({ color }) => {
       })}
     </div>
   );
-};
+});
+
+Sidebar.displayName = "Sidebar";

@@ -1,13 +1,9 @@
 import { ColorTheme } from "./ColorTheme";
 import { Lang } from "./Lang";
 import { Loader } from "@mantine/core";
-import React from "react";
+import React, { memo } from "react";
 
-type Props = {
-  color: "dark" | "light";
-  toggleColorTheme: () => void;
-};
-export const HeaderComp: React.FC<Props> = ({ color, toggleColorTheme }) => {
+export const HeaderComp: React.FC = memo(() => {
   return (
     <div className="relative flex justify-center ">
       <div className="ml-[284px] pr-2 pb-2  text-4xl font-bold italic hover:not-italic">
@@ -16,7 +12,7 @@ export const HeaderComp: React.FC<Props> = ({ color, toggleColorTheme }) => {
       <Loader color="cyan" size="sm" variant="bars" />
       <div className=" absolute right-0 flex">
         <div className="mt-[6px]">
-          <ColorTheme color={color} onClick={toggleColorTheme} />
+          <ColorTheme />
         </div>
         <div>
           <Lang />
@@ -24,4 +20,6 @@ export const HeaderComp: React.FC<Props> = ({ color, toggleColorTheme }) => {
       </div>
     </div>
   );
-};
+});
+
+HeaderComp.displayName = "HeaderComp";

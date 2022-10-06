@@ -1,22 +1,15 @@
 import { ActionIcon } from "@mantine/core";
 import { state, toggleColor } from "@state/state";
-import React from "react";
+import React, { memo } from "react";
 import { MoonStars, Sun } from "tabler-icons-react";
 import { useSnapshot } from "valtio";
 
-type Props = {
-  onClick: () => void;
-  color?: "dark" | "light";
-};
-
 const changeColorTheme = (color: "dark" | "light") => {
-  console.log(color, "color");
   const theme = color === "dark" ? "light" : "dark";
-  console.log(theme, "theme");
   toggleColor(theme);
 };
 
-export const ColorTheme: React.FC<Props> = ({ onClick }) => {
+export const ColorTheme: React.FC = memo(() => {
   const { color } = useSnapshot(state);
   return (
     <ActionIcon
@@ -28,4 +21,6 @@ export const ColorTheme: React.FC<Props> = ({ onClick }) => {
       {color === "light" ? <Sun size={18} /> : <MoonStars size={18} />}
     </ActionIcon>
   );
-};
+});
+
+ColorTheme.displayName = "ColorTheme";

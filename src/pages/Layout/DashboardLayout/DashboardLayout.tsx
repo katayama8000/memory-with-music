@@ -84,7 +84,7 @@ export const DashboardLayout: CustomLayout = (page) => {
         }
         header={
           <Header height={70} p="xs" fixed={true} zIndex={200}>
-            <HeaderComp color={color} toggleColorTheme={toggleColorTheme} />
+            <HeaderComp />
           </Header>
         }
       >
