@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { NextPage } from "next";
+import { CustomNextPage, NextPage } from "next";
 import { useCallback, useEffect, useState } from "react";
 import { supabase } from "src/lib/supabase/supabase";
 import { useSnapshot } from "valtio";
@@ -20,8 +20,9 @@ import { MemoryCard } from "@components/layout/card";
 import { FormModel } from "@type/form.model";
 import { useLocale } from "@hooks/useLocale";
 import { useGetUserSongs } from "@hooks/useGetUserSongs";
+import { DashboardLayout } from "@pages/Layout";
 
-const Account: NextPage = () => {
+const Account: CustomNextPage = () => {
   const snap = useSnapshot(state);
   const [opened, setOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -152,4 +153,5 @@ const Account: NextPage = () => {
   );
 };
 
+Account.getLayout = DashboardLayout;
 export default Account;

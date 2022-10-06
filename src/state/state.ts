@@ -4,11 +4,17 @@ export const state = proxy<{
   userId: string;
   userName: string;
   userEmail: string;
+  color: "light" | "dark";
 }>({
   userId: "unknownid",
   userName: "unknownuser",
   userEmail: "unknownemail",
+  color: "light",
 });
+
+export const toggleColor = (color: "light" | "dark") => {
+  state.color = color;
+};
 
 export const saveUserId = (userId: string) => {
   state.userId = userId;

@@ -1,5 +1,5 @@
-import { ColorTheme } from "@components/global/Header/ColorTheme";
-import { Lang } from "@components/global/Header/Lang";
+import { ColorTheme } from "./ColorTheme";
+import { Lang } from "./Lang";
 import { Loader } from "@mantine/core";
 import React from "react";
 

@@ -1,7 +1,7 @@
-import React from "react";
+import React, { FC } from "react";
 import Head from "next/head";
 
-export const HeadContents = () => {
+export const HeadContents: FC = () => {
   return (
     <Head>
       <title>🧠memory with music</title>

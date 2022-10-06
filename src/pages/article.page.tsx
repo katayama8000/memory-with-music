@@ -12,10 +12,11 @@ import { toast } from "@function/toast";
 import { DeleteArticleModal } from "@components/layout/modal/DeleteArticleModal";
 import Link from "next/link";
 import { useGetUserName } from "@hooks/useGetUserName";
-import { NextPage } from "next";
+import { CustomNextPage, NextPage } from "next";
 import { SongModel } from "@type/song.model";
+import { DashboardLayout } from "@pages/Layout";
 
-const Article: NextPage = () => {
+const Article: CustomNextPage = () => {
   const [opened, setOpened] = useState<boolean>(false);
   const router = useRouter();
   const snap = snapshot(state);
@@ -121,4 +122,5 @@ const Article: NextPage = () => {
   );
 };
 
+Article.getLayout = DashboardLayout;
 export default Article;

@@ -28,13 +28,7 @@ export const Sidebar: React.FC<Props> = ({ color }) => {
   ] as const;
 
   const colorSet = (url: string, pathname: string): string => {
-    let color: string = "";
-    if (url === pathname) {
-      color = "#0c8599";
-    } else {
-      color = "#273030";
-    }
-    return color;
+    return url === pathname ? "#0c8599" : "#273030";
   };
   return (
     <div>

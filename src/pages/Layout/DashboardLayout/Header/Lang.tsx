@@ -1,14 +1,14 @@
-import React from "react";
+import React, { memo, useCallback } from "react";
 import { useRouter } from "next/router";
 import { SegmentedControl } from "@mantine/core";
 
-export const Lang: React.FC = () => {
+export const Lang: React.FC = memo(() => {
   const router = useRouter();
-  const switchLanguage = (lang: "ja" | "en") => {
+  const switchLanguage = useCallback((lang: "ja" | "en"): void => {
     router.push(router.pathname, router.pathname, {
       locale: lang,
     });
-  };
+  }, []);
   return (
     <div>
       <SegmentedControl
@@ -23,4 +23,6 @@ export const Lang: React.FC = () => {
       />
     </div>
   );
-};
+});
+
+Lang.displayName = "Lang";

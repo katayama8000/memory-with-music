@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
-import { NextPage } from "next";
+import { CustomNextPage, NextPage } from "next";
 import { useRouter } from "next/router";
 import { TextInput, Button, Textarea, Group, Modal } from "@mantine/core";
 import { useForm } from "@mantine/form";
@@ -11,6 +11,7 @@ import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 import { useSnapshot } from "valtio";
 import { NoUserIdModal } from "@components/modal/NoUserIdModal";
 import { SongModel } from "@type/song.model";
+import { DashboardLayout } from "@pages/Layout";
 
 type initType = {
   artist: string;
@@ -20,7 +21,7 @@ type initType = {
   isEdit: string;
 };
 
-const Form: NextPage = () => {
+const Form: CustomNextPage = () => {
   const [opened, setOpened] = useState<boolean>(false);
   const snap = useSnapshot(state);
   const router = useRouter();
@@ -191,4 +192,5 @@ const Form: NextPage = () => {
   );
 };
 
+Form.getLayout = DashboardLayout;
 export default Form;

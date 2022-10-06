@@ -1,4 +1,4 @@
-import { NextPage } from "next";
+import { CustomNextPage, NextPage } from "next";
 import { supabase } from "../lib/supabase/supabase";
 import { toast } from "@function/toast";
 import { useForm } from "@mantine/form";
@@ -6,9 +6,10 @@ import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
 import { saveUserEmail, saveUserId, saveUserName } from "@state/state";
 import { useState } from "react";
 import { FormModel } from "@type/form.model";
+import { AuthLayout } from "@pages/Layout";
 
 //emailで認証しなければならないらしい
-const Signup: NextPage = () => {
+const Signup: CustomNextPage = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const handleSignin = async (value: FormModel) => {
     setLoading(true);
@@ -101,4 +102,5 @@ const Signup: NextPage = () => {
   );
 };
 
+Signup.getLayout = AuthLayout;
 export default Signup;

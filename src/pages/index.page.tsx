@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useState } from "react";
-import type { NextPage } from "next";
+import type { CustomNextPage, NextPage } from "next";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { FaSearch } from "react-icons/fa";
@@ -10,11 +10,12 @@ import { SongList } from "@components/layout/SongList";
 import { useLocale } from "@hooks/useLocale";
 import { ResultModel } from "@type/result.model";
 import { LangModel, CountryModel } from "@type/i18n.model";
+import { DashboardLayout } from "@pages/Layout";
 
 let API_lang: LangModel = "en_us";
 let API_country: CountryModel = "us";
 
-const Home: NextPage = () => {
+const Home: CustomNextPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [songList, setSongList] = useState<ResultModel>();
   const router = useRouter();
@@ -81,4 +82,5 @@ const Home: NextPage = () => {
   );
 };
 
+Home.getLayout = DashboardLayout;
 export default Home;

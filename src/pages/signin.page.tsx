@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { NextPage } from "next";
+import { CustomNextPage, NextPage } from "next";
 import { useRouter } from "next/router";
 import { supabase } from "../lib/supabase/supabase";
 import { toast } from "@function/toast";
@@ -9,8 +9,9 @@ import { useSnapshot } from "valtio";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 import { FormModel } from "@type/form.model";
 import Link from "next/link";
+import { AuthLayout } from "@pages/Layout";
 
-const Signin: NextPage = () => {
+const Signin: CustomNextPage = () => {
   const router = useRouter();
   const handleSignin = async (value: FormModel) => {
     const { user, session, error } = await supabase.auth.signIn({
@@ -24,7 +25,7 @@ const Signin: NextPage = () => {
       saveUserEmail(value.email);
       let userName: Promise<string> = getUserName(user.id);
       toast("success", "ログインに成功しました", "cyan");
-      //router.push("/");
+      router.push("/");
     }
     if (session) {
     }
@@ -97,4 +98,5 @@ const Signin: NextPage = () => {
   );
 };
 
+Signin.getLayout = AuthLayout;
 export default Signin;

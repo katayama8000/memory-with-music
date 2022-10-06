@@ -4,8 +4,10 @@ import { Grid, LoadingOverlay } from "@mantine/core";
 import { SongModel } from "@type/song.model";
 import { toast } from "@function/toast";
 import { useGetAllSongs } from "@hooks/useGetAllSongs";
+import { CustomNextPage } from "next";
+import { DashboardLayout } from "@pages/Layout";
 
-export const List = () => {
+const List: CustomNextPage = () => {
   const { songList, isLoading } = useGetAllSongs();
 
   return (
@@ -38,4 +40,5 @@ export const List = () => {
   );
 };
 
+List.getLayout = DashboardLayout;
 export default List;
