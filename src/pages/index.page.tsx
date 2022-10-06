@@ -15,7 +15,7 @@ let API_lang: LangModel = "en_us";
 let API_country: CountryModel = "us";
 
 const Home: NextPage = () => {
-  const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const [songList, setSongList] = useState<ResultModel>();
   const router = useRouter();
 
@@ -38,14 +38,14 @@ const Home: NextPage = () => {
       lang: LangModel,
       country: CountryModel
     ): Promise<void> => {
-      setLoadingFlag(true);
+      setIsLoading(true);
       const { data } = await axios.get(
         `//itunes.apple.com/search?term=${values.music}&country=${country}&lang=${lang}&media=music&limit=51&offset=0`
       );
       setSongList(data);
-      setLoadingFlag(false);
+      setIsLoading(false);
     },
-    [songList, loadingFlag]
+    [songList, isLoading]
   );
 
   return (
@@ -70,12 +70,12 @@ const Home: NextPage = () => {
         </form>
       </Box>
       <LoadingOverlay
-        visible={loadingFlag}
+        visible={isLoading}
         loaderProps={{ size: "lg", color: "cyan", variant: "dots" }}
         overlayOpacity={0.3}
       />
       <div className="mt-5">
-        <SongList songList={songList!} loading={loadingFlag} />
+        <SongList songList={songList!} loading={isLoading} />
       </div>
     </div>
   );

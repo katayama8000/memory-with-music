@@ -1,5 +1,5 @@
 import { toast } from "@function/toast";
-import { config } from "src/lib/supabase/supabase";
+import { supabase } from "src/lib/supabase/supabase";
 
 type Form = {
   email: string;
@@ -8,7 +8,7 @@ type Form = {
 
 export const useSignIn = async (value: Form): Promise<void> => {
   console.log(value);
-  const { user, session, error } = await config.supabase.auth.signIn({
+  const { user, session, error } = await supabase.auth.signIn({
     email: value.email,
     password: value.password,
   });

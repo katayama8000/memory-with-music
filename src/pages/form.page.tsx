@@ -4,7 +4,7 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import { TextInput, Button, Textarea, Group, Modal } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { config } from "../lib/supabase/supabase";
+import { supabase } from "../lib/supabase/supabase";
 import { useLocale } from "@hooks/useLocale";
 import { toast } from "@function/toast";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
@@ -82,7 +82,7 @@ const Form: NextPage = () => {
   }) => {
     setLoading(true);
 
-    const { data, error } = await config.supabase.from("songs").insert([
+    const { data, error } = await supabase.from("songs").insert([
       {
         artist: values.artist,
         song: values.song,
@@ -109,7 +109,7 @@ const Form: NextPage = () => {
     song: string;
     memory: string;
   }) => {
-    const { data, error } = await config.supabase
+    const { data, error } = await supabase
       .from<SongModel>("songs")
       .update({ memory: values.memory })
       .match({

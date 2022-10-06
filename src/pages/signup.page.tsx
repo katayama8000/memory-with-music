@@ -1,5 +1,5 @@
 import { NextPage } from "next";
-import { config } from "../lib/supabase/supabase";
+import { supabase } from "../lib/supabase/supabase";
 import { toast } from "@function/toast";
 import { useForm } from "@mantine/form";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
@@ -13,7 +13,7 @@ const Signup: NextPage = () => {
   const handleSignin = async (value: FormModel) => {
     setLoading(true);
     console.log(value);
-    const { user, session, error } = await config.supabase.auth.signUp({
+    const { user, session, error } = await supabase.auth.signUp({
       email: value.email,
       password: value.password,
     });
@@ -42,7 +42,7 @@ const Signup: NextPage = () => {
     userId: string,
     userEmail: string
   ) => {
-    const { data, error } = await config.supabase
+    const { data, error } = await supabase
       .from<{ userName: string; userId: string; userEmail: string }>("users")
       .insert([
         {

@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import { config } from "../lib/supabase/supabase";
 import { MemoryCard } from "@components/layout/card/MemoryCard";
 import { Grid, LoadingOverlay } from "@mantine/core";
 import { SongModel } from "@type/song.model";
@@ -7,12 +6,12 @@ import { toast } from "@function/toast";
 import { useGetAllSongs } from "@hooks/useGetAllSongs";
 
 export const List = () => {
-  const { songList, loadingFlag } = useGetAllSongs();
+  const { songList, isLoading } = useGetAllSongs();
 
   return (
     <div>
       <LoadingOverlay
-        visible={loadingFlag}
+        visible={isLoading}
         loaderProps={{ size: "lg", color: "cyan", variant: "dots" }}
         overlayOpacity={0.3}
       />

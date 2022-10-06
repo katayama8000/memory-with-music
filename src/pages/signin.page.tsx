@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unescaped-entities */
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { config } from "../lib/supabase/supabase";
+import { supabase } from "../lib/supabase/supabase";
 import { toast } from "@function/toast";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
@@ -13,7 +13,7 @@ import Link from "next/link";
 const Signin: NextPage = () => {
   const router = useRouter();
   const handleSignin = async (value: FormModel) => {
-    const { user, session, error } = await config.supabase.auth.signIn({
+    const { user, session, error } = await supabase.auth.signIn({
       email: value.email,
       password: value.password,
     });
@@ -35,7 +35,7 @@ const Signin: NextPage = () => {
   };
 
   const getUserName = async (userId: string) => {
-    const { data, error } = await config.supabase
+    const { data, error } = await supabase
       .from<{ userName: string }>("users")
       .select("userName")
       .match({ userId: userId });
@@ -57,7 +57,7 @@ const Signin: NextPage = () => {
   });
 
   const local = async () => {
-    const session = config.supabase.auth.session();
+    const session = supabase.auth.session();
 
     console.log(session?.user?.id);
   };

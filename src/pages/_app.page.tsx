@@ -2,7 +2,7 @@
 import { useEffect, useState } from "react";
 import type { AppProps } from "next/app";
 import { useRouter } from "next/router";
-import { config } from "src/lib/supabase/supabase";
+import { supabase } from "src/lib/supabase/supabase";
 import "src/lib/tailwind.css";
 import { MantineProvider } from "@mantine/core";
 import { AppShell, Navbar, Header } from "@mantine/core";
@@ -28,7 +28,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
 
   useEffect(() => {
     //sessionにユーザーがいる場合それを使用
-    const session = config.supabase.auth.session();
+    const session = supabase.auth.session();
     console.log("session", session?.user?.id!);
     if (session?.user?.id! === undefined) {
       router.push("/signin");
@@ -39,7 +39,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
   }, []);
 
   const getUserInfo = async (userId: string) => {
-    const { data, error } = await config.supabase
+    const { data, error } = await supabase
       .from<{ userName: string; userEmail: string }>("users")
       .select("userName, userEmail")
       .match({ userId: userId });
@@ -96,7 +96,7 @@ const MyApp = ({ Component, pageProps }: AppProps) => {
           }
         >
           <NotificationsProvider position="bottom-right" zIndex={2077}>
-            <main className="m-auto mt-[100px] max-w-6xl pl-[300px]">
+            <main className="m-auto mt-[50px] max-w-6xl ">
               <Component {...pageProps} />
             </main>
           </NotificationsProvider>

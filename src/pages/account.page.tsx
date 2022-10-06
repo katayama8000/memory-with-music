@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { NextPage } from "next";
-import { useEffect, useState } from "react";
-import { config } from "src/lib/supabase/supabase";
+import { useCallback, useEffect, useState } from "react";
+import { supabase } from "src/lib/supabase/supabase";
 import { useSnapshot } from "valtio";
 import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 import {
@@ -24,13 +24,13 @@ import { useGetUserSongs } from "@hooks/useGetUserSongs";
 const Account: NextPage = () => {
   const snap = useSnapshot(state);
   const [opened, setOpened] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
   const { songList } = useGetUserSongs();
   const { t } = useLocale();
 
-  const handleEdit = async (value: FormModel) => {
-    setLoading(true);
-    const { data, error } = await config.supabase
+  const handleEdit = useCallback(async (value: FormModel) => {
+    setIsLoading(true);
+    const { data, error } = await supabase
       .from<{ userName: string }>("users")
       .update({ userName: value.name })
       .match({ userId: snap.userId });
@@ -43,9 +43,9 @@ const Account: NextPage = () => {
     if (error) {
       toast("error", error.message, "red");
     }
-    setLoading(false);
+    setIsLoading(false);
     setOpened(false);
-  };
+  }, []);
 
   useEffect(() => {
     form.setValues({
@@ -100,7 +100,7 @@ const Account: NextPage = () => {
         closeOnClickOutside={false}
         title="edit"
       >
-        <form>
+        <form onSubmit={form.onSubmit((values) => handleEdit(values))}>
           <TextInput
             label="Name"
             placeholder={snap.userName}
@@ -115,12 +115,7 @@ const Account: NextPage = () => {
             className="my-4"
           />
           <Group position="center" mt="xl">
-            <Button
-              type="submit"
-              color="cyan"
-              loading={loading}
-              onClick={form.onSubmit((values) => handleEdit(values))}
-            >
+            <Button type="submit" color="cyan" loading={isLoading}>
               save
             </Button>
           </Group>

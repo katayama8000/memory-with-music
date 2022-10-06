@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { Group, Modal, Tooltip, TypographyStylesProvider } from "@mantine/core";
 import { useLocale } from "@hooks/useLocale";
-import { config } from "src/lib/supabase/supabase";
+import { supabase } from "src/lib/supabase/supabase";
 import { snapshot } from "valtio";
 import { state } from "@state/state";
 import { RiDeleteBin6Line } from "react-icons/ri";
@@ -48,8 +48,8 @@ const Article: NextPage = () => {
     }
   }, [router]);
 
-  const handleClick = async () => {
-    const { data, error } = await config.supabase
+  const handleDelete = async () => {
+    const { data, error } = await supabase
       .from<SongModel>("songs")
       .delete()
       .match({ id: router.query.id });
@@ -115,7 +115,7 @@ const Article: NextPage = () => {
       <DeleteArticleModal
         opened={opened}
         setOpened={setOpened}
-        handleClick={handleClick}
+        handleDelete={handleDelete}
       />
     </div>
   );

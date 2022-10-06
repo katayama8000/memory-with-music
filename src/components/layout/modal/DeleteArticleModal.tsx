@@ -4,13 +4,13 @@ import { Button, Group, Modal } from "@mantine/core";
 type DeleteArticleModalType = {
   opened: boolean;
   setOpened: React.Dispatch<React.SetStateAction<boolean>>;
-  handleClick: () => Promise<void>;
+  handleDelete: () => Promise<void>;
 };
 
 export const DeleteArticleModal: React.FC<DeleteArticleModalType> = ({
   opened,
   setOpened,
-  handleClick,
+  handleDelete,
 }) => {
   return (
     <Modal opened={opened} onClose={() => setOpened(false)} size={500}>
@@ -18,7 +18,7 @@ export const DeleteArticleModal: React.FC<DeleteArticleModalType> = ({
         <div className="text-xl font-bold">
           Are you sure you want to delete this article?
         </div>
-        <Button color="red" className="m-3 w-20" onClick={() => handleClick()}>
+        <Button color="red" className="m-3 w-20" onClick={() => handleDelete()}>
           delete
         </Button>
       </Group>
