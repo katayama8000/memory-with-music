@@ -1,13 +1,11 @@
-import React, { useEffect, useState } from "react";
-import { MemoryCard } from "@components/layout/card/MemoryCard";
+import React from "react";
+import { MemoryCard } from "../account/MemoryCard";
 import { Grid, LoadingOverlay } from "@mantine/core";
-import { SongModel } from "@type/song.model";
-import { toast } from "@function/toast";
 import { useGetAllSongs } from "@hooks/useGetAllSongs";
 import { CustomNextPage } from "next";
 import { DashboardLayout } from "@pages/Layout";
 
-const List: CustomNextPage = () => {
+const Articles: CustomNextPage = () => {
   const { songList, isLoading } = useGetAllSongs();
 
   return (
@@ -40,5 +38,5 @@ const List: CustomNextPage = () => {
   );
 };
 
-List.getLayout = DashboardLayout;
-export default List;
+Articles.getLayout = DashboardLayout;
+export default Articles;

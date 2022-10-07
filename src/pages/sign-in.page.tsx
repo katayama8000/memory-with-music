@@ -1,12 +1,10 @@
 /* eslint-disable react/no-unescaped-entities */
-import { CustomNextPage, NextPage } from "next";
+import { CustomNextPage } from "next";
 import { useRouter } from "next/router";
 import { supabase } from "../lib/supabase/supabase";
 import { toast } from "@function/toast";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { useSnapshot } from "valtio";
-import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 import { FormModel } from "@type/form.model";
 import Link from "next/link";
 import { AuthLayout } from "@pages/Layout";
@@ -21,8 +19,6 @@ const SignIn: CustomNextPage = () => {
 
     if (user) {
       console.log(user);
-      saveUserId(user.id);
-      saveUserEmail(value.email);
       let userName: Promise<string> = getUserName(user.id);
       toast("success", "ログインに成功しました", "cyan");
       router.push("/");
@@ -42,7 +38,6 @@ const SignIn: CustomNextPage = () => {
       .match({ userId: userId });
 
     const userName = data![0].userName;
-    saveUserName(userName);
     return userName;
   };
 
@@ -56,12 +51,6 @@ const SignIn: CustomNextPage = () => {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
     },
   });
-
-  const local = async () => {
-    const session = supabase.auth.session();
-
-    console.log(session?.user?.id);
-  };
 
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">

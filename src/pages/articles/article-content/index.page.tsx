@@ -9,7 +9,7 @@ import { state } from "@state/state";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { FiEdit } from "react-icons/fi";
 import { toast } from "@function/toast";
-import { DeleteArticleModal } from "@components/layout/modal/DeleteArticleModal";
+import { DeleteArticleModal } from "./DeleteArticleModal";
 import Link from "next/link";
 import { useGetUserName } from "@hooks/useGetUserName";
 import { CustomNextPage, NextPage } from "next";

@@ -22,7 +22,7 @@ export const MemoryCard: React.FC<Props> = ({
       <Card withBorder={true} className="hover:opacity-70 sm:m-0 ">
         <Link
           href={{
-            pathname: "/article",
+            pathname: "/articles/article-content",
             query: {
               id: id,
               artist: artist,

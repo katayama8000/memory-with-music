@@ -1,14 +1,12 @@
 import React from "react";
 import { Grid } from "@mantine/core";
-import { SongCard } from "@components/layout/card/SongCard";
+import { SongCard } from "@pages/home/SongCard";
 import { useLocale } from "@hooks/useLocale";
 import { ResultModel } from "@type/result.model";
 import dynamic from "next/dynamic";
 
-const SkeletonCard = dynamic<{}>(() =>
-  import("@components/layout/card/SkeletonCard").then(
-    (module) => module.SkeletonCard
-  )
+const SkeletonCard = dynamic(() =>
+  import("./SongCard").then((module) => module.SkeletonCard)
 );
 
 type Props = {

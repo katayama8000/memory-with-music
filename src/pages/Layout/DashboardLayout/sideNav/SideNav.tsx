@@ -15,19 +15,26 @@ type SideNavProps = {
   color?: "light" | "dark";
 };
 
-export const Sidebar: React.FC<SideNavProps> = memo(() => {
+export const SideNav: React.FC<SideNavProps> = memo(() => {
   const { color } = useSnapshot(state);
   const { t } = useLocale();
-  const router = useRouter();
+  const { pathname } = useRouter();
   const Links = [
-    { url: "/", label: t.LINKS.SEACRCH, icon: <FaSearch /> },
-    { url: "/form", label: t.LINKS.FORM, icon: <AiOutlineForm /> },
-    { url: "/list", label: t.LINKS.LIST, icon: <FaRegListAlt /> },
-    { url: "/article", label: t.LINKS.ARTICLE, icon: <MdOutlineArticle /> },
-    { url: "/sign-up", label: t.LINKS.SIGNUP, icon: <BiLogIn /> },
-    { url: "/sign-in", label: t.LINKS.SIGNIN, icon: <FaSignInAlt /> },
-    { url: "/sign-out", label: t.LINKS.SIGNOUT, icon: <FaSignOutAlt /> },
+    { url: "/home", label: t.LINKS.SEACRCH, icon: <FaSearch /> },
+    { url: "/write-article", label: t.LINKS.FORM, icon: <AiOutlineForm /> },
+    { url: "/articles", label: t.LINKS.LIST, icon: <FaRegListAlt /> },
     { url: "/account", label: t.LINKS.ACCOUNT, icon: <MdManageAccounts /> },
+    {
+      url: "/articles/article-content",
+      label: t.LINKS.ARTICLE + "(開発中)",
+      icon: <MdOutlineArticle />,
+    },
+    { url: "/sign-up", label: t.LINKS.SIGNUP + "(開発中)", icon: <BiLogIn /> },
+    {
+      url: "/sign-in",
+      label: t.LINKS.SIGNIN + "(開発中)",
+      icon: <FaSignInAlt />,
+    },
   ] as const;
 
   const colorSet = (url: string, pathname: string): string => {
@@ -40,7 +47,7 @@ export const Sidebar: React.FC<SideNavProps> = memo(() => {
           <div key={link.label}>
             {color === "dark" ? (
               <div>
-                {link.url === router.pathname ? (
+                {link.url === pathname ? (
                   <Link href={link.url}>
                     <div className="my-1 flex cursor-pointer  rounded-lg bg-[#0c8599] py-2  pl-2 text-white">
                       <span className="mt-[2px] pr-2">{link.icon}</span>
@@ -58,7 +65,7 @@ export const Sidebar: React.FC<SideNavProps> = memo(() => {
               </div>
             ) : (
               <div>
-                {link.url === router.pathname ? (
+                {link.url === pathname ? (
                   <Link href={link.url}>
                     <div className="my-1 flex cursor-pointer  rounded-lg bg-[#0c8599] py-2  pl-2 text-white">
                       <span className="mt-[2px] pr-2">{link.icon}</span>
@@ -82,4 +89,4 @@ export const Sidebar: React.FC<SideNavProps> = memo(() => {
   );
 });
 
-Sidebar.displayName = "Sidebar";
+SideNav.displayName = "SideNav";

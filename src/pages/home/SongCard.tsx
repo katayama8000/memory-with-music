@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import { Button, Card, Image } from "@mantine/core";
+import { Button, Card, Image, Skeleton } from "@mantine/core";
 import { Props } from "@type/songCard.model";
 import { useLocale } from "@hooks/useLocale";
 
@@ -54,6 +54,27 @@ export const SongCard: React.FC<Props> = ({
             </Button>
           </a>
         </Link>
+      </Card>
+    </div>
+  );
+};
+
+export const SkeletonCard: React.FC = () => {
+  return (
+    <div>
+      <Card shadow="sm" p="lg" radius="md" className="h-[234px]">
+        <Card.Section className="mx-auto rounded-lg py-2">
+          <Skeleton height={80} className="rounded-xl" />
+        </Card.Section>
+        <Skeleton height={80} />
+        <Button
+          variant="light"
+          color="cyan"
+          fullWidth
+          radius="md"
+          className="mt-2"
+          disabled={true}
+        />
       </Card>
     </div>
   );

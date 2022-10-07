@@ -4,12 +4,12 @@ import { CustomNextPage, NextPage } from "next";
 import { useRouter } from "next/router";
 import { TextInput, Button, Textarea, Group, Modal } from "@mantine/core";
 import { useForm } from "@mantine/form";
-import { supabase } from "../lib/supabase/supabase";
+import { supabase } from "../../lib/supabase/supabase";
 import { useLocale } from "@hooks/useLocale";
 import { toast } from "@function/toast";
-import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
+import { state } from "@state/state";
 import { useSnapshot } from "valtio";
-import { NoUserIdModal } from "@components/modal/NoUserIdModal";
+import { NoUserIdModal } from "@components/NoUserIdModal";
 import { SongModel } from "@type/song.model";
 import { DashboardLayout } from "@pages/Layout";
 
@@ -21,7 +21,7 @@ type initType = {
   isEdit: string;
 };
 
-const Form: CustomNextPage = () => {
+const WriteArticle: CustomNextPage = () => {
   const [opened, setOpened] = useState<boolean>(false);
   const snap = useSnapshot(state);
   const router = useRouter();
@@ -63,88 +63,87 @@ const Form: CustomNextPage = () => {
     }
   }, [router]);
 
-  useEffect(() => {
-    form.setValues({
-      artist: initForm.artist,
-      song: initForm.song,
-      image: initForm.image,
-      memory: initForm.memory,
-    });
-    if (snap.userId === "unknownid") {
-      setOpened(true);
-    }
-  }, [initForm]);
+  // useEffect(() => {
+  //   form.setValues({
+  //     artist: initForm.artist,
+  //     song: initForm.song,
+  //     image: initForm.image,
+  //     memory: initForm.memory,
+  //   });
+  //   if (snap.userId === "unknownid") {
+  //     setOpened(true);
+  //   }
+  // }, [initForm]);
 
-  const insert = async (values: {
-    artist: string | string[] | undefined;
-    song: string | string[] | undefined;
-    memory: string | string[] | undefined;
-    image: string | string[] | undefined;
-  }) => {
-    setLoading(true);
+  // const insert = async (values: {
+  //   artist: string | string[] | undefined;
+  //   song: string | string[] | undefined;
+  //   memory: string | string[] | undefined;
+  //   image: string | string[] | undefined;
+  // }) => {
+  //   setLoading(true);
 
-    const { data, error } = await supabase.from("songs").insert([
-      {
-        artist: values.artist,
-        song: values.song,
-        memory: values.memory,
-        image: values.image,
-        userId: snap.userId,
-      },
-    ]);
+  //   const { data, error } = await supabase.from("songs").insert([
+  //     {
+  //       artist: values.artist,
+  //       song: values.song,
+  //       memory: values.memory,
+  //       image: values.image,
+  //       userId: snap.userId,
+  //     },
+  //   ]);
 
-    if (data) {
-      toast(t.NOTIFICATION.SUCCESS, t.NOTIFICATION.MESSAGE, "cyan");
-      setTimeout(() => {
-        router.push("/list");
-      }, 1000);
-    }
-    if (error) {
-      toast(t.NOTIFICATION.ERROR, error.message, "red");
-    }
-    setLoading(false);
-  };
+  //   if (data) {
+  //     toast(t.NOTIFICATION.SUCCESS, t.NOTIFICATION.MESSAGE, "cyan");
+  //     setTimeout(() => {
+  //       router.push("/list");
+  //     }, 1000);
+  //   }
+  //   if (error) {
+  //     toast(t.NOTIFICATION.ERROR, error.message, "red");
+  //   }
+  //   setLoading(false);
+  // };
 
-  const upDate = async (values: {
-    artist: string;
-    song: string;
-    memory: string;
-  }) => {
-    const { data, error } = await supabase
-      .from<SongModel>("songs")
-      .update({ memory: values.memory })
-      .match({
-        artist: values.artist,
-        song: values.song,
-        userId: snap.userId,
-      });
+  // const upDate = async (values: {
+  //   artist: string;
+  //   song: string;
+  //   memory: string;
+  // }) => {
+  //   const { data, error } = await supabase
+  //     .from<SongModel>("songs")
+  //     .update({ memory: values.memory })
+  //     .match({
+  //       artist: values.artist,
+  //       song: values.song,
+  //       userId: snap.userId,
+  //     });
 
-    if (data) {
-      console.log("sss", data);
-      toast(t.NOTIFICATION.SUCCESS, t.NOTIFICATION.MESSAGE, "cyan");
-      setTimeout(() => {
-        router.push("/list");
-      }, 1000);
-    }
+  //   if (data) {
+  //     console.log("sss", data);
+  //     toast(t.NOTIFICATION.SUCCESS, t.NOTIFICATION.MESSAGE, "cyan");
+  //     setTimeout(() => {
+  //       router.push("/list");
+  //     }, 1000);
+  //   }
 
-    if (error) {
-      console.log(error.message);
-    }
-  };
+  //   if (error) {
+  //     console.log(error.message);
+  //   }
+  // };
 
-  const handleSubmit = (values: {
-    artist: string;
-    song: string;
-    memory: string;
-    image: string;
-  }) => {
-    initForm.isEdit === "true" ? upDate(values) : insert(values);
-  };
+  // const handleSubmit = (values: {
+  //   artist: string;
+  //   song: string;
+  //   memory: string;
+  //   image: string;
+  // }) => {
+  //   initForm.isEdit === "true" ? upDate(values) : insert(values);
+  // };
 
   return (
     <div className="flex flex-col justify-center px-2">
       <NoUserIdModal opened={opened} setOpened={setOpened} />
-      <div onClick={() => console.log(snap.userId)}>{snap.userEmail}</div>
       <Group position="right" mt="md">
         {initForm.isEdit == "true" && (
           <Button color="pink" onClick={() => console.log(initForm.isEdit)}>
@@ -192,5 +191,5 @@ const Form: CustomNextPage = () => {
   );
 };
 
-Form.getLayout = DashboardLayout;
-export default Form;
+WriteArticle.getLayout = DashboardLayout;
+export default WriteArticle;

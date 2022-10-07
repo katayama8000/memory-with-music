@@ -3,16 +3,15 @@ import { supabase } from "../lib/supabase/supabase";
 import { toast } from "@function/toast";
 import { useForm } from "@mantine/form";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
-import { saveUserEmail, saveUserId, saveUserName } from "@state/state";
 import { useState } from "react";
 import { FormModel } from "@type/form.model";
 import { AuthLayout } from "@pages/Layout";
 
 //emailで認証しなければならないらしい
 const SignUp: CustomNextPage = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const handleSignin = async (value: FormModel) => {
-    setLoading(true);
+    setIsLoading(true);
     console.log(value);
     const { user, session, error } = await supabase.auth.signUp({
       email: value.email,
@@ -20,13 +19,8 @@ const SignUp: CustomNextPage = () => {
     });
 
     if (user) {
-      console.log(user);
-      console.log(user.id);
       toast("success", "ユーザー登録に成功しました", "cyan");
       registerUserName(value.name!, user.id, value.email);
-      saveUserId(user.id);
-      saveUserName(value.name!);
-      saveUserEmail(value.email);
     }
     if (session) {
       console.log("session", session);
@@ -35,7 +29,7 @@ const SignUp: CustomNextPage = () => {
       console.log(error);
       toast("error", error.message, "red");
     }
-    setLoading(false);
+    setIsLoading(false);
   };
 
   const registerUserName = async (
@@ -93,7 +87,7 @@ const SignUp: CustomNextPage = () => {
         />
 
         <Group position="center" mt="xl">
-          <Button type="submit" color="cyan" loading={loading}>
+          <Button type="submit" color="cyan" loading={isLoading}>
             SignUp
           </Button>
         </Group>

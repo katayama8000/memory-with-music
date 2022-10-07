@@ -24,7 +24,7 @@ export const NoUserIdModal: React.FC<Props> = ({ opened, setOpened }) => {
           <Button
             color={"red"}
             className="mx-1"
-            onClick={() => router.push("/signin")}
+            onClick={() => router.push("/sign-in")}
           >
             OK
           </Button>
