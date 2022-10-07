@@ -1,62 +1,53 @@
+/* eslint-disable react/no-unescaped-entities */
 import { CustomNextPage, NextPage } from "next";
+import { useRouter } from "next/router";
 import { supabase } from "../lib/supabase/supabase";
 import { toast } from "@function/toast";
-import { useForm } from "@mantine/form";
 import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
-import { saveUserEmail, saveUserId, saveUserName } from "@state/state";
-import { useState } from "react";
+import { useForm } from "@mantine/form";
+import { useSnapshot } from "valtio";
+import { state, saveUserId, saveUserEmail, saveUserName } from "@state/state";
 import { FormModel } from "@type/form.model";
+import Link from "next/link";
 import { AuthLayout } from "@pages/Layout";
 
-//emailで認証しなければならないらしい
-const Signup: CustomNextPage = () => {
-  const [loading, setLoading] = useState<boolean>(false);
+const SignIn: CustomNextPage = () => {
+  const router = useRouter();
   const handleSignin = async (value: FormModel) => {
-    setLoading(true);
-    console.log(value);
-    const { user, session, error } = await supabase.auth.signUp({
+    const { user, session, error } = await supabase.auth.signIn({
       email: value.email,
       password: value.password,
     });
 
     if (user) {
       console.log(user);
-      console.log(user.id);
-      toast("success", "ユーザー登録に成功しました", "cyan");
-      registerUserName(value.name!, user.id, value.email);
       saveUserId(user.id);
-      saveUserName(value.name!);
       saveUserEmail(value.email);
+      let userName: Promise<string> = getUserName(user.id);
+      toast("success", "ログインに成功しました", "cyan");
+      router.push("/");
     }
     if (session) {
-      console.log("session", session);
     }
     if (error) {
       console.log(error);
       toast("error", error.message, "red");
     }
-    setLoading(false);
   };
 
-  const registerUserName = async (
-    userName: string,
-    userId: string,
-    userEmail: string
-  ) => {
+  const getUserName = async (userId: string) => {
     const { data, error } = await supabase
-      .from<{ userName: string; userId: string; userEmail: string }>("users")
-      .insert([
-        {
-          userName: userName,
-          userId: userId,
-          userEmail: userEmail,
-        },
-      ]);
+      .from<{ userName: string }>("users")
+      .select("userName")
+      .match({ userId: userId });
+
+    const userName = data![0].userName;
+    saveUserName(userName);
+    return userName;
   };
 
   const form = useForm({
     initialValues: {
-      name: "",
       email: "",
       password: "",
     },
@@ -65,17 +56,16 @@ const Signup: CustomNextPage = () => {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
     },
   });
+
+  const local = async () => {
+    const session = supabase.auth.session();
+
+    console.log(session?.user?.id);
+  };
+
   return (
     <Box sx={{ maxWidth: 300 }} mx="auto">
       <form onSubmit={form.onSubmit((values) => handleSignin(values))}>
-        <TextInput
-          required
-          label="Name"
-          placeholder="name"
-          {...form.getInputProps("name")}
-          className="my-4"
-        />
-
         <TextInput
           required
           label="Email"
@@ -93,14 +83,21 @@ const Signup: CustomNextPage = () => {
         />
 
         <Group position="center" mt="xl">
-          <Button type="submit" color="cyan" loading={loading}>
-            SignUp
+          <Button type="submit" color="cyan">
+            SignIn
           </Button>
         </Group>
       </form>
+      <div>
+        If you don't have an account , Click
+        <Link href="/signup">
+          <a className="pl-1 text-xl font-bold text-inherit">here</a>
+        </Link>
+      </div>
     </Box>
   );
 };
 
-Signup.getLayout = AuthLayout;
-export default Signup;
+SignIn.getLayout = AuthLayout;
+
+export default SignIn;

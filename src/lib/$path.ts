@@ -11,14 +11,14 @@ export const pagesPath = {
   "list": {
     $url: (url?: { hash?: string }) => ({ pathname: '/list' as const, hash: url?.hash })
   },
-  "signin": {
-    $url: (url?: { hash?: string }) => ({ pathname: '/signin' as const, hash: url?.hash })
+  "sign_in": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/sign-in' as const, hash: url?.hash })
   },
-  "signout": {
-    $url: (url?: { hash?: string }) => ({ pathname: '/signout' as const, hash: url?.hash })
+  "sign_out": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/sign-out' as const, hash: url?.hash })
   },
-  "signup": {
-    $url: (url?: { hash?: string }) => ({ pathname: '/signup' as const, hash: url?.hash })
+  "sign_up": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/sign-up' as const, hash: url?.hash })
   },
   "test": {
     $url: (url?: { hash?: string }) => ({ pathname: '/test' as const, hash: url?.hash })

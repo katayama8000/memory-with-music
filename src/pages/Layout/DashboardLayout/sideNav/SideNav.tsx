@@ -8,12 +8,15 @@ import { BiLogIn } from "react-icons/bi";
 import { MdManageAccounts } from "react-icons/md";
 import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
 import { useRouter } from "next/router";
+import { useSnapshot } from "valtio";
+import { state } from "@state/state";
 
-type Props = {
-  color: "light" | "dark";
+type SideNavProps = {
+  color?: "light" | "dark";
 };
 
-export const Sidebar: React.FC<Props> = memo(({ color }) => {
+export const Sidebar: React.FC<SideNavProps> = memo(() => {
+  const { color } = useSnapshot(state);
   const { t } = useLocale();
   const router = useRouter();
   const Links = [
@@ -21,9 +24,9 @@ export const Sidebar: React.FC<Props> = memo(({ color }) => {
     { url: "/form", label: t.LINKS.FORM, icon: <AiOutlineForm /> },
     { url: "/list", label: t.LINKS.LIST, icon: <FaRegListAlt /> },
     { url: "/article", label: t.LINKS.ARTICLE, icon: <MdOutlineArticle /> },
-    { url: "/signup", label: t.LINKS.SIGNUP, icon: <BiLogIn /> },
-    { url: "/signin", label: t.LINKS.SIGNIN, icon: <FaSignInAlt /> },
-    { url: "/signout", label: t.LINKS.SIGNOUT, icon: <FaSignOutAlt /> },
+    { url: "/sign-up", label: t.LINKS.SIGNUP, icon: <BiLogIn /> },
+    { url: "/sign-in", label: t.LINKS.SIGNIN, icon: <FaSignInAlt /> },
+    { url: "/sign-out", label: t.LINKS.SIGNOUT, icon: <FaSignOutAlt /> },
     { url: "/account", label: t.LINKS.ACCOUNT, icon: <MdManageAccounts /> },
   ] as const;
 
