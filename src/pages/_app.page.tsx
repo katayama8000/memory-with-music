@@ -18,15 +18,6 @@ const App: CustomAppPage = ({ Component, pageProps }) => {
       return page;
     });
 
-  const router = useRouter();
-  useEffect(() => {
-    if (router.isReady) {
-      if (router.pathname === "/") {
-        router.push("/home");
-      }
-    }
-  }, [router]);
-
   return (
     <>
       <HeadContents />

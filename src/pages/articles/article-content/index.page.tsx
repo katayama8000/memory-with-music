@@ -38,9 +38,7 @@ const Article: CustomNextPage = () => {
 
     if (data) {
       if (data[0].userId === userId) {
-        console.log("true");
         setIsMyArticle(true);
-        console.log("isMyArticle", data[0].userId);
       } else {
         setIsMyArticle(false);
       }
@@ -54,13 +52,11 @@ const Article: CustomNextPage = () => {
 
   const getUserNameRelatedToArticle = useCallback(async () => {
     const { data, error } = await supabase
-
       .from<UserModel>("users")
       .select("userName")
       .match({ userId: userIdRelatedArticle });
 
     if (data) {
-      console.log(data, "katayama", userIdRelatedArticle);
       setUserName(data[0]?.userName);
     }
 

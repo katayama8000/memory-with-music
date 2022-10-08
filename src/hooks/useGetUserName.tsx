@@ -15,7 +15,6 @@ export const useGetUserName = (): {
       .match({ userId: userID });
 
     const userName = data![0].userName;
-    console.log(userName);
     setUserName(userName);
   }, [userID]);
 
