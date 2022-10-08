@@ -6,7 +6,7 @@ import { LayoutErrorBoundary } from "@pages/Layout/LayoutErrorBoundary";
 import { useIsLoggedIn } from "@hooks/useIsLoggedIn";
 
 const HeaderComp = dynamic(async () => {
-  const { HeaderComp } = await import("./header");
+  const { HeaderComp } = await import("./Header");
   return HeaderComp;
 });
 

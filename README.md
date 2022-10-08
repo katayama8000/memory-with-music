@@ -1,5 +1,7 @@
 ## memory with music
 
+### 技術スタック
+
 - React.js
 - TypeScript
 - Next.js
