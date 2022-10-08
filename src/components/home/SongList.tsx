@@ -1,6 +1,6 @@
 import React from "react";
 import { Grid } from "@mantine/core";
-import { SongCard } from "@pages/home/SongCard";
+import { SongCard } from "@components/home/SongCard";
 import { useLocale } from "@hooks/useLocale";
 import { ResultModel } from "@type/result.model";
 import dynamic from "next/dynamic";

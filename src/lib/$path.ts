@@ -8,9 +8,6 @@ export const pagesPath = {
     },
     $url: (url?: { hash?: string }) => ({ pathname: '/articles' as const, hash: url?.hash })
   },
-  "home": {
-    $url: (url?: { hash?: string }) => ({ pathname: '/home' as const, hash: url?.hash })
-  },
   "sign_in": {
     $url: (url?: { hash?: string }) => ({ pathname: '/sign-in' as const, hash: url?.hash })
   },

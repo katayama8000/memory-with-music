@@ -6,8 +6,6 @@ export const useIsLoggedIn = () => {
   const { pathname, push, isReady } = useRouter();
   if (isReady) {
     const user: User | null = supabase.auth.user();
-    console.log("useIsLoggedIn!!!!!", user);
-    console.log("session!!!!!", supabase.auth.session());
     //ユーザーがあるかつログイン画面にいるとき
     if (user && pathname === "/sign-in") {
       push("/");

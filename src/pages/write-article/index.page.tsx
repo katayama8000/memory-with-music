@@ -49,12 +49,6 @@ const WriteArticle: CustomNextPage = () => {
         typeof router.query.image === "string" &&
         typeof router.query.isEdit === "string"
       ) {
-        console.log(
-          router.query.artist,
-          router.query.song,
-          router.query.image,
-          router.query.isEdit
-        );
         setInitForm({
           artist: router.query.artist,
           song: router.query.song,
@@ -120,7 +114,6 @@ const WriteArticle: CustomNextPage = () => {
       });
 
     if (data) {
-      console.log("sss", data);
       toast(t.NOTIFICATION.SUCCESS, t.NOTIFICATION.MESSAGE, "cyan");
       setTimeout(() => {
         router.push("/articles");

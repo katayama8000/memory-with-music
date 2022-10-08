@@ -15,7 +15,6 @@ export const useGetMember = (userID: string): Result => {
         .from("member")
         .select()
         .match({ userID: userID });
-      console.log(data, error);
       if (!data || error) {
         console.error(error);
         return;

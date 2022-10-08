@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import { CustomLayout } from "next";
 import { LayoutErrorBoundary } from "@pages/Layout/LayoutErrorBoundary";
 import { useIsLoggedIn } from "@hooks/useIsLoggedIn";
+import { useEffect } from "react";
 
 const HeaderComp = dynamic(async () => {
   const { HeaderComp } = await import("./Header");
@@ -17,11 +18,6 @@ const SideNav = dynamic(async () => {
 
 export const DashboardLayout: CustomLayout = (page) => {
   useIsLoggedIn();
-
-  //ここでuseEffectを使うと,エラーが出る
-  // useEffect(() => {
-  //   console.log("useEffect");
-  // }, []);
 
   return (
     <>

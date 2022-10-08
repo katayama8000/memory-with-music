@@ -15,7 +15,6 @@ const SignUp: CustomNextPage = () => {
   const { push } = useRouter();
   const handleSignin = async (value: FormModel) => {
     setIsLoading(true);
-    console.log(value);
     const { user, session, error } = await supabase.auth.signUp({
       email: value.email,
       password: value.password,
@@ -24,7 +23,7 @@ const SignUp: CustomNextPage = () => {
     if (user) {
       toast("success", "ユーザー登録に成功しました", "cyan");
       registerUserName(value.name!, user.id, value.email);
-      push("/home");
+      push("/");
     }
     if (session) {
       console.log("session", session);

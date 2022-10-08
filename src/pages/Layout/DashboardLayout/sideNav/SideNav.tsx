@@ -20,7 +20,7 @@ export const SideNav: React.FC<SideNavProps> = memo(() => {
   const { t } = useLocale();
   const { pathname } = useRouter();
   const Links = [
-    { url: "/home", label: t.LINKS.SEACRCH, icon: <FaSearch /> },
+    { url: "/", label: t.LINKS.SEACRCH, icon: <FaSearch /> },
     { url: "/write-article", label: t.LINKS.FORM, icon: <AiOutlineForm /> },
     { url: "/articles", label: t.LINKS.LIST, icon: <FaRegListAlt /> },
     { url: "/account", label: t.LINKS.ACCOUNT, icon: <MdManageAccounts /> },
