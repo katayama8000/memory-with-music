@@ -24,17 +24,17 @@ export const SideNav: React.FC<SideNavProps> = memo(() => {
     { url: "/write-article", label: t.LINKS.FORM, icon: <AiOutlineForm /> },
     { url: "/articles", label: t.LINKS.LIST, icon: <FaRegListAlt /> },
     { url: "/account", label: t.LINKS.ACCOUNT, icon: <MdManageAccounts /> },
-    {
-      url: "/articles/article-content",
-      label: t.LINKS.ARTICLE + "(開発中)",
-      icon: <MdOutlineArticle />,
-    },
-    { url: "/sign-up", label: t.LINKS.SIGNUP + "(開発中)", icon: <BiLogIn /> },
-    {
-      url: "/sign-in",
-      label: t.LINKS.SIGNIN + "(開発中)",
-      icon: <FaSignInAlt />,
-    },
+    // {
+    //   url: "/articles/article-content",
+    //   label: t.LINKS.ARTICLE + "(開発中)",
+    //   icon: <MdOutlineArticle />,
+    // },
+    // { url: "/sign-up", label: t.LINKS.SIGNUP + "(開発中)", icon: <BiLogIn /> },
+    // {
+    //   url: "/sign-in",
+    //   label: t.LINKS.SIGNIN + "(開発中)",
+    //   icon: <FaSignInAlt />,
+    // },
   ] as const;
 
   const colorSet = (url: string, pathname: string): string => {
