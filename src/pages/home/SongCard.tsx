@@ -33,7 +33,7 @@ export const SongCard: React.FC<Props> = ({
         <div>{getYear(releaseDate)}</div>
         <Link
           href={{
-            pathname: "/form",
+            pathname: "/write-article",
             query: {
               artist: artistName,
               song: trackName,

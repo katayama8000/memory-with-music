@@ -8,7 +8,7 @@ export const useGetUserName = (): {
 } => {
   const [userName, setUserName] = useState<string | null>(null);
   const userID = useGetUserId();
-  const getUserName = useCallback(async () => {
+  const getUserName = useCallback(async (): Promise<void> => {
     const { data, error } = await supabase
       .from<{ userName: string }>("users")
       .select("userName")
