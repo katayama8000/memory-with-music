@@ -5,4 +5,5 @@ export type SongModel = {
   image: string;
   artist: string;
   memory: string;
+  userId?: string;
 };

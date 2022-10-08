@@ -1,6 +1,6 @@
 import { useGetUserId } from "@hooks/useGetUserId";
 import React, { useState, useEffect, useCallback } from "react";
-import { config } from "src/lib/supabase/supabase";
+import { supabase } from "src/lib/supabase/supabase";
 
 export const useGetUserName = (): {
   userName: string | null;
@@ -8,8 +8,8 @@ export const useGetUserName = (): {
 } => {
   const [userName, setUserName] = useState<string | null>(null);
   const userID = useGetUserId();
-  const getUserName = useCallback(async () => {
-    const { data, error } = await config.supabase
+  const getUserName = useCallback(async (): Promise<void> => {
+    const { data, error } = await supabase
       .from<{ userName: string }>("users")
       .select("userName")
       .match({ userId: userID });
@@ -22,5 +22,6 @@ export const useGetUserName = (): {
   useEffect(() => {
     getUserName();
   }, []);
+
   return { userName, getUserName };
 };

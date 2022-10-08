@@ -6,4 +6,5 @@ module.exports = {
     locales: ["en", "ja"],
     defaultLocale: "ja",
   },
+  pageExtensions: ["page.tsx", "page.ts"],
 };

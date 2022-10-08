@@ -4,7 +4,7 @@ import { state } from "@state/state";
 import { Session } from "@supabase/supabase-js";
 import { SongModel } from "@type/song.model";
 import { useCallback, useEffect, useState } from "react";
-import { config } from "src/lib/supabase/supabase";
+import { supabase } from "src/lib/supabase/supabase";
 import { useSnapshot } from "valtio";
 
 export const useGetUserSongs = (): {
@@ -18,7 +18,7 @@ export const useGetUserSongs = (): {
   const getUserSongs = async () => {
     setLoadingFlag(true);
     try {
-      const { data, error } = await config.supabase
+      const { data, error } = await supabase
         .from<SongModel>("songs")
         .select("id,song, artist,image,memory")
         .match({ userId: userID });
