@@ -15,11 +15,11 @@ export const SongCard: React.FC<Props> = memo(
     return (
       <div>
         <Card radius="md" withBorder={true} className=" hover:opacity-70">
-          <Card.Section className="mx-auto py-2">
+          <Card.Section className="mx-auto">
             <Image
               src={url}
               alt={artistName}
-              radius="md"
+              radius="xs"
               height={120}
               withPlaceholder
             />
