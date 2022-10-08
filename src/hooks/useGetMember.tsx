@@ -1,14 +1,14 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { supabase } from "src/lib/supabase/supabase";
-import { MemberModel } from "@type/index";
+import { UserModel } from "@type/user.model";
 
 type Result = {
-  member: MemberModel | undefined;
+  member: UserModel | undefined;
   getMember: () => void;
 };
 export const useGetMember = (userID: string): Result => {
-  const [member, setMember] = useState<MemberModel>();
+  const [member, setMember] = useState<UserModel>();
   const getMember = async (): Promise<void> => {
     try {
       const { data, error } = await supabase
