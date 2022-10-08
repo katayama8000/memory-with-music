@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import Link from "next/link";
 import { Button, Card, Image, Skeleton } from "@mantine/core";
 import { Props } from "@type/songCard.model";
@@ -9,57 +9,55 @@ const getYear = (releaseDate: string): number => {
   return date.getFullYear();
 };
 
-export const SongCard: React.FC<Props> = ({
-  url,
-  artistName,
-  trackName,
-  releaseDate,
-}) => {
-  const { t } = useLocale();
-  return (
-    <div>
-      <Card radius="md" withBorder={true} className=" hover:opacity-70">
-        <Card.Section className="mx-auto py-2">
-          <Image
-            src={url}
-            alt={artistName}
-            radius="md"
-            height={120}
-            withPlaceholder
-          />
-        </Card.Section>
-        <div className="truncate">{trackName}</div>
-        <div className="truncate">{artistName}</div>
-        <div>{getYear(releaseDate)}</div>
-        <Link
-          href={{
-            pathname: "/write-article",
-            query: {
-              artist: artistName,
-              song: trackName,
-              image: url,
-              isEdit: false,
-            },
-          }}
-        >
-          <a className="no-underline">
-            <Button
-              variant="light"
-              color="cyan"
-              fullWidth
+export const SongCard: React.FC<Props> = memo(
+  ({ url, artistName, trackName, releaseDate }) => {
+    const { t } = useLocale();
+    return (
+      <div>
+        <Card radius="md" withBorder={true} className=" hover:opacity-70">
+          <Card.Section className="mx-auto py-2">
+            <Image
+              src={url}
+              alt={artistName}
               radius="md"
-              className="mt-2"
-            >
-              {t.SONGCARDBUTTON}
-            </Button>
-          </a>
-        </Link>
-      </Card>
-    </div>
-  );
-};
+              height={120}
+              withPlaceholder
+            />
+          </Card.Section>
+          <div className="truncate">{trackName}</div>
+          <div className="truncate">{artistName}</div>
+          <div>{getYear(releaseDate)}</div>
+          <Link
+            href={{
+              pathname: "/write-article",
+              query: {
+                artist: artistName,
+                song: trackName,
+                image: url,
+                isEdit: false,
+              },
+            }}
+          >
+            <a className="no-underline">
+              <Button
+                variant="light"
+                color="cyan"
+                fullWidth
+                radius="md"
+                className="mt-2"
+              >
+                {t.SONGCARDBUTTON}
+              </Button>
+            </a>
+          </Link>
+        </Card>
+      </div>
+    );
+  }
+);
+SongCard.displayName = "SongCard";
 
-export const SkeletonCard: React.FC = () => {
+export const SkeletonCard: React.FC = memo(() => {
   return (
     <div>
       <Card shadow="sm" p="lg" radius="md" className="h-[234px]">
@@ -78,4 +76,6 @@ export const SkeletonCard: React.FC = () => {
       </Card>
     </div>
   );
-};
+});
+
+SkeletonCard.displayName = "SkeletonCard";

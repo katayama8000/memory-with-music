@@ -25,7 +25,7 @@ export const HeaderComp: React.FC = memo(() => {
           <Lang />
         </div>
       </div>
-      <div className="ml-[284px] pr-2 pb-2  text-4xl font-bold italic hover:not-italic">
+      <div className="ml-[200px] pr-2 pb-2  text-4xl font-bold italic hover:not-italic">
         memory with music
       </div>
       <Loader color="cyan" size="sm" variant="bars" />

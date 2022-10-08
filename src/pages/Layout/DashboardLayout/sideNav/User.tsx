@@ -8,12 +8,9 @@ import {
   Box,
   useMantineTheme,
 } from "@mantine/core";
-import { useSnapshot } from "valtio";
-import { state } from "@state/state";
 import { useGetUserName } from "@hooks/useGetUserName";
 
 export const User = memo(() => {
-  const snap = useSnapshot(state);
   const theme = useMantineTheme();
   const { userName } = useGetUserName();
 

@@ -6,10 +6,13 @@ import { TextInput, Button, Group, Box, PasswordInput } from "@mantine/core";
 import { useState } from "react";
 import { FormModel } from "@type/form.model";
 import { AuthLayout } from "@pages/Layout";
+import { useRouter } from "next/router";
+import Link from "next/link";
 
 //emailで認証しなければならないらしい
 const SignUp: CustomNextPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const { push } = useRouter();
   const handleSignin = async (value: FormModel) => {
     setIsLoading(true);
     console.log(value);
@@ -21,6 +24,7 @@ const SignUp: CustomNextPage = () => {
     if (user) {
       toast("success", "ユーザー登録に成功しました", "cyan");
       registerUserName(value.name!, user.id, value.email);
+      push("/home");
     }
     if (session) {
       console.log("session", session);
@@ -60,7 +64,7 @@ const SignUp: CustomNextPage = () => {
     },
   });
   return (
-    <Box sx={{ maxWidth: 300 }} mx="auto">
+    <Box sx={{ maxWidth: 320 }} mx="auto">
       <form onSubmit={form.onSubmit((values) => handleSignin(values))}>
         <TextInput
           required
@@ -92,6 +96,12 @@ const SignUp: CustomNextPage = () => {
           </Button>
         </Group>
       </form>
+      <div>
+        Already have an account? , Click
+        <span className="px-2 text-xl font-bold text-inherit">
+          <Link href="/sign-in">here</Link>
+        </span>
+      </div>
     </Box>
   );
 };

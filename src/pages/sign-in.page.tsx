@@ -18,8 +18,6 @@ const SignIn: CustomNextPage = () => {
     });
 
     if (user) {
-      console.log(user);
-      let userName: Promise<string> = getUserName(user.id);
       toast("success", "ログインに成功しました", "cyan");
       router.push("/");
     }
@@ -29,16 +27,6 @@ const SignIn: CustomNextPage = () => {
       console.log(error);
       toast("error", error.message, "red");
     }
-  };
-
-  const getUserName = async (userId: string) => {
-    const { data, error } = await supabase
-      .from<{ userName: string }>("users")
-      .select("userName")
-      .match({ userId: userId });
-
-    const userName = data![0].userName;
-    return userName;
   };
 
   const form = useForm({
@@ -53,7 +41,7 @@ const SignIn: CustomNextPage = () => {
   });
 
   return (
-    <Box sx={{ maxWidth: 300 }} mx="auto">
+    <Box sx={{ maxWidth: 320 }} mx="auto">
       <form onSubmit={form.onSubmit((values) => handleSignin(values))}>
         <TextInput
           required
@@ -79,9 +67,9 @@ const SignIn: CustomNextPage = () => {
       </form>
       <div>
         If you don't have an account , Click
-        <Link href="/signup">
-          <a className="pl-1 text-xl font-bold text-inherit">here</a>
-        </Link>
+        <span className="px-2 text-xl font-bold text-inherit">
+          <Link href="/sign-up">here</Link>
+        </span>
       </div>
     </Box>
   );
