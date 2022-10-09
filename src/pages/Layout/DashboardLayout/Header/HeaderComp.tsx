@@ -16,23 +16,21 @@ import { Logout } from "tabler-icons-react";
 
 export const HeaderComp: React.FC = memo(() => {
   return (
-    <div className="relative flex justify-center ">
-      <div className=" absolute left-0 flex">
-        <div className="mt-[6px]">
+    <div className="relative flex  justify-center">
+      <div className=" absolute left-0 mt-[6px]  flex items-center">
+        <div className=" mr-2">
           <ColorTheme />
         </div>
         <div>
           <Lang />
         </div>
       </div>
-      <div className="ml-[200px] pr-2 pb-2  text-4xl font-bold italic hover:not-italic">
+      <div className="ml-[200px] pr-2  text-4xl font-bold italic hover:not-italic">
         memory with music
       </div>
-      <Loader color="cyan" size="sm" variant="bars" />
-      <div className=" absolute right-0 flex">
-        <div className="mt-[6px]">
-          <UserMenu />
-        </div>
+      <Loader color="cyan" size="sm" variant="bars" className="mt-[8px]" />
+      <div className=" absolute right-0 mt-[6px] flex">
+        <UserMenu />
       </div>
     </div>
   );

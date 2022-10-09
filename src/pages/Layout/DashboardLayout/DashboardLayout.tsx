@@ -1,10 +1,9 @@
 import { AppShell, Navbar, Header } from "@mantine/core";
-import { User } from "@pages/Layout/DashboardLayout/sideNav/User";
 import dynamic from "next/dynamic";
 import { CustomLayout } from "next";
 import { LayoutErrorBoundary } from "@pages/Layout/LayoutErrorBoundary";
 import { useIsLoggedIn } from "@hooks/useIsLoggedIn";
-import { useEffect } from "react";
+import { Suspense } from "react";
 
 const HeaderComp = dynamic(async () => {
   const { HeaderComp } = await import("./Header");
@@ -14,6 +13,11 @@ const HeaderComp = dynamic(async () => {
 const SideNav = dynamic(async () => {
   const { SideNav } = await import("./sideNav/SideNav");
   return SideNav;
+});
+
+const User = dynamic(async () => {
+  const { User } = await import("./sideNav/User");
+  return User;
 });
 
 export const DashboardLayout: CustomLayout = (page) => {
@@ -32,10 +36,14 @@ export const DashboardLayout: CustomLayout = (page) => {
             fixed={true}
           >
             <Navbar.Section grow mt="md">
-              <SideNav />
+              <Suspense fallback={<p id="loading">Loading...</p>}>
+                <SideNav />
+              </Suspense>
             </Navbar.Section>
             <Navbar.Section>
-              <User />
+              <Suspense fallback={<p id="loading">Loading...</p>}>
+                <User />
+              </Suspense>
             </Navbar.Section>
           </Navbar>
         }

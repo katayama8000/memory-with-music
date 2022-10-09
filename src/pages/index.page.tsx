@@ -1,10 +1,9 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useCallback, useEffect, useState } from "react";
-import type { CustomNextPage, NextPage } from "next";
+import type { CustomNextPage } from "next";
 import { useRouter } from "next/router";
 import axios from "axios";
 import { FaSearch } from "react-icons/fa";
-import { TextInput, Button, Box, LoadingOverlay } from "@mantine/core";
+import { TextInput, Button, Box } from "@mantine/core";
 import { useForm } from "@mantine/form";
 import { SongList } from "@components/home/SongList";
 import { useLocale } from "@hooks/useLocale";
@@ -46,7 +45,7 @@ const Home: CustomNextPage = () => {
       setSongList(data);
       setIsLoading(false);
     },
-    [songList, isLoading]
+    []
   );
 
   return (
@@ -70,11 +69,6 @@ const Home: CustomNextPage = () => {
           </Button>
         </form>
       </Box>
-      <LoadingOverlay
-        visible={isLoading}
-        loaderProps={{ size: "lg", color: "cyan", variant: "dots" }}
-        overlayOpacity={0.3}
-      />
       <div className="mt-5">
         <SongList songList={songList!} loading={isLoading} />
       </div>

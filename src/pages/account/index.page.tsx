@@ -1,5 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { CustomNextPage, NextPage } from "next";
+import { CustomNextPage } from "next";
 import { useCallback, useEffect, useState } from "react";
 import { supabase } from "src/lib/supabase/supabase";
 import {
@@ -14,7 +14,7 @@ import {
 import { useForm } from "@mantine/form";
 import { toast } from "@function/toast";
 import { AiTwotoneSetting } from "react-icons/ai";
-import { MemoryCard } from "./MemoryCard";
+import { MemoryCard } from "../../components/Memory/MemoryCard";
 import { useLocale } from "@hooks/useLocale";
 import { useGetUserSongs } from "@hooks/useGetUserSongs";
 import { DashboardLayout } from "@pages/Layout";
