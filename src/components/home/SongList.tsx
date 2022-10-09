@@ -14,6 +14,8 @@ type Props = {
   songList: ResultModel;
 };
 
+const NUMBER_OF_SKELETONS = Array.from(Array(9).keys());
+
 export const SongList: React.FC<Props> = ({ songList, loading }) => {
   const { t } = useLocale();
   return (
@@ -21,13 +23,16 @@ export const SongList: React.FC<Props> = ({ songList, loading }) => {
       {songList?.resultCount !== 0 ? (
         <div>
           <Grid>
-            {loading && (
-              <Grid.Col xs={6} sm={4} className="mx-1 sm:mx-0">
-                <div className="m-auto">
-                  <SkeletonCard />
-                </div>
-              </Grid.Col>
-            )}
+            {loading &&
+              NUMBER_OF_SKELETONS.map((item) => {
+                return (
+                  <Grid.Col xs={6} sm={4} className="mx-1 sm:mx-0" key={item}>
+                    <div className="px-1 sm:mx-0">
+                      <SkeletonCard />
+                    </div>
+                  </Grid.Col>
+                );
+              })}
             {songList?.results?.map((song, index) => {
               return (
                 <Grid.Col xs={6} sm={4} key={index}>

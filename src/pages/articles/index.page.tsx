@@ -1,22 +1,30 @@
 import React from "react";
-import { MemoryCard } from "../account/MemoryCard";
+import { MemoryCard, SkeletonCard } from "@components/Memory/MemoryCard";
 import { Grid, LoadingOverlay } from "@mantine/core";
 import { useGetAllSongs } from "@hooks/useGetAllSongs";
 import { CustomNextPage } from "next";
 import { DashboardLayout } from "@pages/Layout";
+
+const NUMBER_OF_SKELETONS = Array.from(Array(20).keys());
 
 const Articles: CustomNextPage = () => {
   const { songList, isLoading } = useGetAllSongs();
 
   return (
     <div>
-      <LoadingOverlay
-        visible={isLoading}
-        loaderProps={{ size: "lg", color: "cyan", variant: "dots" }}
-        overlayOpacity={0.3}
-      />
       <div>
         <Grid>
+          {isLoading &&
+            NUMBER_OF_SKELETONS.map((item) => {
+              return (
+                <Grid.Col xs={6} sm={4} className="mx-1 sm:mx-0" key={item}>
+                  <div className="px-1 sm:mx-0">
+                    <SkeletonCard />
+                  </div>
+                </Grid.Col>
+              );
+            })}
+
           {songList.map((item) => {
             return (
               <Grid.Col xs={6} key={item.id}>

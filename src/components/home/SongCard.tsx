@@ -15,7 +15,7 @@ export const SongCard: React.FC<Props> = memo(
     return (
       <div>
         <Card radius="md" withBorder={true} className=" hover:opacity-70">
-          <Card.Section className="mx-auto">
+          <Card.Section className="mx-auto pb-4">
             <Image
               src={url}
               alt={artistName}
@@ -60,11 +60,11 @@ SongCard.displayName = "SongCard";
 export const SkeletonCard: React.FC = memo(() => {
   return (
     <div>
-      <Card shadow="sm" p="lg" radius="md" className="h-[234px]">
-        <Card.Section className="mx-auto rounded-lg py-2">
-          <Skeleton height={80} className="rounded-xl" />
+      <Card radius="md" withBorder={true} className="h-[320px]">
+        <Card.Section className="mx-auto rounded-lg pb-4">
+          <Skeleton height={120} className="rounded-xl" />
         </Card.Section>
-        <Skeleton height={80} />
+        <Skeleton height={120} />
         <Button
           variant="light"
           color="cyan"
