@@ -1,7 +1,7 @@
 import React, { memo } from "react";
 import Link from "next/link";
 import { Button, Card, Image, Skeleton } from "@mantine/core";
-import { Props } from "@type/songCard.model";
+import { Props } from "@type/articleCard.model";
 import { useLocale } from "@hooks/useLocale";
 
 const getYear = (releaseDate: string): number => {
