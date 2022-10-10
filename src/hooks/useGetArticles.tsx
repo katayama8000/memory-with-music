@@ -5,7 +5,7 @@ const fetcher = async (args: string) => {
   const ret = await fetch(args);
   return ret.json();
 };
-export const useApi = () => {
+export const useGetArticles = () => {
   const { data, error } = useSWR<SongModel[]>("./api/articles", fetcher);
   return {
     articles: data,

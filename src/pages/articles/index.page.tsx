@@ -3,12 +3,12 @@ import { MemoryCard, SkeletonCard } from "@components/Memory/MemoryCard";
 import { Grid } from "@mantine/core";
 import { CustomNextPage } from "next";
 import { DashboardLayout } from "@pages/Layout";
-import { useApi } from "@hooks/useGetArticles";
+import { useGetArticles } from "@hooks/useGetArticles";
 
 const NUMBER_OF_SKELETONS = Array.from(Array(20).keys());
 
 const Articles: CustomNextPage = () => {
-  const { articles, isLoading, isError } = useApi();
+  const { articles, isLoading, isError } = useGetArticles();
 
   return (
     <div>
@@ -17,7 +17,7 @@ const Articles: CustomNextPage = () => {
           {isLoading &&
             NUMBER_OF_SKELETONS.map((item) => {
               return (
-                <Grid.Col xs={6} sm={4} className="mx-1 sm:mx-0" key={item}>
+                <Grid.Col xs={6} className="mx-1 sm:mx-0" key={item}>
                   <div className="px-1 sm:mx-0">
                     <SkeletonCard />
                   </div>
