@@ -1,6 +1,6 @@
 # memory with music
 
-### Stack
+### Stacks
 
 - React.js
 - TypeScript
