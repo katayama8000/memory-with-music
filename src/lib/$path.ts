@@ -8,14 +8,14 @@ export const pagesPath = {
     },
     $url: (url?: { hash?: string }) => ({ pathname: '/articles' as const, hash: url?.hash })
   },
+  "demo": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/demo' as const, hash: url?.hash })
+  },
   "sign_in": {
     $url: (url?: { hash?: string }) => ({ pathname: '/sign-in' as const, hash: url?.hash })
   },
   "sign_up": {
     $url: (url?: { hash?: string }) => ({ pathname: '/sign-up' as const, hash: url?.hash })
-  },
-  "test": {
-    $url: (url?: { hash?: string }) => ({ pathname: '/test' as const, hash: url?.hash })
   },
   "write_article": {
     $url: (url?: { hash?: string }) => ({ pathname: '/write-article' as const, hash: url?.hash })

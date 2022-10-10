@@ -51,17 +51,12 @@ const Account: CustomNextPage = () => {
     []
   );
 
-  useEffect(() => {
-    form.setValues({
-      name: userName,
-    });
-  }, []);
-
   const form = useForm({
     initialValues: {
       name: userName,
     },
   });
+
   return (
     <div>
       <div className="flex justify-between px-2">

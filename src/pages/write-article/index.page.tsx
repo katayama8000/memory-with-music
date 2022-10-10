@@ -7,7 +7,7 @@ import { useForm } from "@mantine/form";
 import { supabase } from "../../lib/supabase/supabase";
 import { useLocale } from "@hooks/useLocale";
 import { toast } from "@function/toast";
-import type { SongModel } from "@type/song.model";
+import type { SongModel } from "@type/article.model";
 import { DashboardLayout } from "@pages/Layout";
 import { useGetUserId } from "@hooks/useGetUserId";
 
