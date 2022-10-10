@@ -1,12 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useApi } from "@hooks/useGetArticles";
+import { useGetArticles } from "@hooks/useGetArticles";
 import { AuthLayout } from "@pages/Layout";
 import { CustomNextPage } from "next";
 import { useRouter } from "next/router";
 import { useEffect } from "react";
 
 const Demo: CustomNextPage = () => {
-  const { articles, isError, isLoading } = useApi();
+  const { articles, isError, isLoading } = useGetArticles();
   const router = useRouter();
 
   const pageChangeHandler = () => {
