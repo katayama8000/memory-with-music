@@ -1,8 +1,12 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useGetArticles } from "@hooks/useGetArticles";
+import { AuthLayout } from "@pages/Layout";
+import { CustomNextPage } from "next";
 import { useRouter } from "next/router";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-function Demo() {
+const Demo: CustomNextPage = () => {
+  const { articles, isError, isLoading } = useGetArticles();
   const router = useRouter();
 
   const pageChangeHandler = () => {
@@ -23,9 +27,17 @@ function Demo() {
 
   return (
     <div>
-      <div>aa</div>
+      <div>demo</div>
+      <button
+        onClick={() => {
+          console.log(articles);
+        }}
+      >
+        button
+      </button>
     </div>
   );
-}
+};
 
+Demo.getLayout = AuthLayout;
 export default Demo;

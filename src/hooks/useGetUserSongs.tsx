@@ -2,7 +2,7 @@ import { toast } from "@function/toast";
 import { useGetUserId } from "@hooks/useGetUserId";
 import { state } from "@state/state";
 import { Session } from "@supabase/supabase-js";
-import { SongModel } from "@type/song.model";
+import { SongModel } from "@type/article.model";
 import { useCallback, useEffect, useState } from "react";
 import { supabase } from "src/lib/supabase/supabase";
 import { useSnapshot } from "valtio";

@@ -10,7 +10,7 @@ import { toast } from "@function/toast";
 import { DeleteArticleModal } from "./DeleteArticleModal";
 import Link from "next/link";
 import { CustomNextPage } from "next";
-import { SongModel } from "@type/song.model";
+import { SongModel } from "@type/article.model";
 import { DashboardLayout } from "@pages/Layout";
 import { useGetUserId } from "@hooks/useGetUserId";
 import { UserModel } from "@type/user.model";

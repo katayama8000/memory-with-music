@@ -1,14 +1,14 @@
 import React from "react";
 import { MemoryCard, SkeletonCard } from "@components/Memory/MemoryCard";
-import { Grid, LoadingOverlay } from "@mantine/core";
-import { useGetAllSongs } from "@hooks/useGetAllSongs";
+import { Grid } from "@mantine/core";
 import { CustomNextPage } from "next";
 import { DashboardLayout } from "@pages/Layout";
+import { useGetArticles } from "@hooks/useGetArticles";
 
 const NUMBER_OF_SKELETONS = Array.from(Array(20).keys());
 
 const Articles: CustomNextPage = () => {
-  const { songList, isLoading } = useGetAllSongs();
+  const { articles, isLoading, isError } = useGetArticles();
 
   return (
     <div>
@@ -17,7 +17,7 @@ const Articles: CustomNextPage = () => {
           {isLoading &&
             NUMBER_OF_SKELETONS.map((item) => {
               return (
-                <Grid.Col xs={6} sm={4} className="mx-1 sm:mx-0" key={item}>
+                <Grid.Col xs={6} className="mx-1 sm:mx-0" key={item}>
                   <div className="px-1 sm:mx-0">
                     <SkeletonCard />
                   </div>
@@ -25,7 +25,7 @@ const Articles: CustomNextPage = () => {
               );
             })}
 
-          {songList.map((item) => {
+          {articles?.map((item) => {
             return (
               <Grid.Col xs={6} key={item.id}>
                 <div className="m-auto px-2">
@@ -48,3 +48,6 @@ const Articles: CustomNextPage = () => {
 
 Articles.getLayout = DashboardLayout;
 export default Articles;
+function useGetApi(): { songList: any; isLoading: any } {
+  throw new Error("Function not implemented.");
+}
