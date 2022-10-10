@@ -1,4 +1,4 @@
-## memory with music
+# memory with music
 
 ### 技術スタック
 
@@ -10,4 +10,4 @@
 - valtio
 
 
-![save your memory !!!](memory-with-music.vercel.app/)
+[Save Your Memory :)](memory-with-music.vercel.app/)
