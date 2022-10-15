@@ -137,55 +137,57 @@ const WriteArticle: CustomNextPage = () => {
   };
 
   return (
-    <div className="flex flex-col justify-center px-2">
-      <Group position="right" mt="md">
-        {initForm.isEdit == "true" && (
-          <Button color="pink" onClick={() => console.log(initForm.isEdit)}>
-            {t.FORM.EDIT}
-          </Button>
-        )}
-      </Group>
-      <form
-        onSubmit={form.onSubmit((values) => handleSubmit(values))}
-        className="mt-2"
-      >
-        <TextInput
-          required
-          placeholder={t.FORM.ARTIST}
-          {...form.getInputProps("artist")}
-          className="mt-2"
-        />
-        <TextInput
-          required
-          placeholder={t.FORM.SONG}
-          {...form.getInputProps("song")}
-          className="mt-2"
-        />
-        <TextInput
-          placeholder={t.FORM.IMAGE}
-          {...form.getInputProps("image")}
-          className="mt-2"
-        />
-        <Textarea
-          placeholder={t.FORM.YOURMEMORY}
-          required
-          autosize
-          minRows={10}
-          maxRows={13}
-          {...form.getInputProps("memory")}
-          className="mt-2"
-        />
+    <div className="m-auto max-w-6xl">
+      <div className="flex flex-col justify-center px-2">
         <Group position="right" mt="md">
-          <Button
-            color="cyan"
-            className="mt-2"
-            type="submit"
-            loading={isLoading}
-          >
-            {t.POST}
-          </Button>
+          {initForm.isEdit == "true" && (
+            <Button color="pink" onClick={() => console.log(initForm.isEdit)}>
+              {t.FORM.EDIT}
+            </Button>
+          )}
         </Group>
-      </form>
+        <form
+          onSubmit={form.onSubmit((values) => handleSubmit(values))}
+          className="mt-2"
+        >
+          <TextInput
+            required
+            placeholder={t.FORM.ARTIST}
+            {...form.getInputProps("artist")}
+            className="mt-2"
+          />
+          <TextInput
+            required
+            placeholder={t.FORM.SONG}
+            {...form.getInputProps("song")}
+            className="mt-2"
+          />
+          <TextInput
+            placeholder={t.FORM.IMAGE}
+            {...form.getInputProps("image")}
+            className="mt-2"
+          />
+          <Textarea
+            placeholder={t.FORM.YOURMEMORY}
+            required
+            autosize
+            minRows={10}
+            maxRows={13}
+            {...form.getInputProps("memory")}
+            className="mt-2"
+          />
+          <Group position="right" mt="md">
+            <Button
+              color="cyan"
+              className="mt-2"
+              type="submit"
+              loading={isLoading}
+            >
+              {t.POST}
+            </Button>
+          </Group>
+        </form>
+      </div>
     </div>
   );
 };

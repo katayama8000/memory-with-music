@@ -49,28 +49,30 @@ const Home: CustomNextPage = () => {
   );
 
   return (
-    <div className="flex flex-col justify-center">
-      <Box sx={{ maxWidth: 300 }} mx="auto">
-        <form
-          onSubmit={form.onSubmit((values) =>
-            handleSubmit(values, API_lang, API_country)
-          )}
-          className="mt-2 flex gap-x-2"
-        >
-          <TextInput
-            placeholder={t.SEARCH}
-            classNames={{
-              input: "text-base",
-            }}
-            {...form.getInputProps("music")}
-          />
-          <Button type="submit" color="cyan">
-            <FaSearch />
-          </Button>
-        </form>
-      </Box>
-      <div className="mt-5">
-        <SongList songList={songList!} loading={isLoading} />
+    <div className="m-auto max-w-6xl">
+      <div className="flex flex-col justify-center">
+        <Box sx={{ maxWidth: 300 }} mx="auto">
+          <form
+            onSubmit={form.onSubmit((values) =>
+              handleSubmit(values, API_lang, API_country)
+            )}
+            className="mt-2 flex gap-x-2"
+          >
+            <TextInput
+              placeholder={t.SEARCH}
+              classNames={{
+                input: "text-base",
+              }}
+              {...form.getInputProps("music")}
+            />
+            <Button type="submit" color="cyan">
+              <FaSearch />
+            </Button>
+          </form>
+        </Box>
+        <div className="mt-5">
+          <SongList songList={songList!} loading={isLoading} />
+        </div>
       </div>
     </div>
   );
