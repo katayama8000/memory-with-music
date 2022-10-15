@@ -38,51 +38,40 @@ export const SideNav: React.FC<SideNavProps> = memo(() => {
     // },
   ] as const;
 
-  const colorSet = useCallback((url: urlType, pathname: urlType): string => {
-    return url === pathname ? "#0c8599" : "#273030";
-  }, []);
+  const isMacthedUrl = useCallback(
+    (url: urlType): boolean => {
+      return url === pathname;
+    },
+    [pathname]
+  );
   return (
     <div>
       {Links.map((link) => {
         return (
           <div key={link.label}>
-            {color === "dark" ? (
-              <div>
-                {link.url === pathname ? (
-                  <Link href={link.url}>
-                    <div className="my-1 flex cursor-pointer  rounded-lg bg-[#0c8599] py-2  pl-2 text-white">
-                      <span className="mt-[2px] pr-2">{link.icon}</span>
-                      <a className="text-lg">{link.label}</a>
-                    </div>
-                  </Link>
-                ) : (
-                  <Link href={link.url}>
-                    <div className="my-1 flex cursor-pointer  rounded-lg py-2 pl-2  text-lg text-inherit hover:bg-[#232323]">
-                      <span className="mt-[2px] pr-2">{link.icon}</span>
-                      <a className="text-lg">{link.label}</a>
-                    </div>
-                  </Link>
-                )}
-              </div>
-            ) : (
-              <div>
-                {link.url === pathname ? (
-                  <Link href={link.url}>
-                    <div className="my-1 flex cursor-pointer  rounded-lg bg-[#0c8599] py-2  pl-2 text-white">
-                      <span className="mt-[2px] pr-2">{link.icon}</span>
-                      <a className="text-lg">{link.label}</a>
-                    </div>
-                  </Link>
-                ) : (
-                  <Link href={link.url}>
-                    <div className="my-1 flex cursor-pointer  rounded-lg py-2 pl-2  text-lg text-inherit hover:bg-[#f0f0f0]">
-                      <span className="mt-[2px] pr-2">{link.icon}</span>
-                      <a className="text-lg">{link.label}</a>
-                    </div>
-                  </Link>
-                )}
-              </div>
-            )}
+            <div>
+              <Link href={link.url}>
+                <div
+                  className={`my-1 flex cursor-pointer  rounded-lg  py-2 pl-2 ${
+                    color === "dark"
+                      ? `text-white ${
+                          isMacthedUrl(link.url)
+                            ? "bg-[#0c8599]"
+                            : "hover:bg-[#232323]"
+                        }`
+                      : `
+                      ${
+                        isMacthedUrl(link.url)
+                          ? "bg-[#0c8599] text-white"
+                          : "text-inherit hover:bg-[#f0f0f0]"
+                      }`
+                  }`}
+                >
+                  <span className="mt-[2px] pr-2">{link.icon}</span>
+                  <a className="text-lg">{link.label}</a>
+                </div>
+              </Link>
+            </div>
           </div>
         );
       })}
