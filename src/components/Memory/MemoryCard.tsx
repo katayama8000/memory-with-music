@@ -65,14 +65,14 @@ export const SkeletonCard: React.FC = memo(() => {
           <div>
             <Skeleton
               height={20}
-              width={360}
+              width={450}
               mt={8}
               radius="md"
               className="mr-5"
             />
             <Skeleton
               height={20}
-              width={360}
+              width={450}
               mt={8}
               radius="md"
               className="mr-5"

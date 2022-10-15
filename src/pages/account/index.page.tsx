@@ -58,7 +58,7 @@ const Account: CustomNextPage = () => {
   });
 
   return (
-    <div>
+    <div className="m-auto max-w-7xl">
       <div className="flex justify-between px-2">
         <div className="flex items-center">
           <div>

@@ -12,34 +12,33 @@ const Articles: CustomNextPage = () => {
 
   return (
     <div>
-      <div>
+      <div className="m-auto max-w-7xl ">
         <Grid>
-          {isLoading &&
-            NUMBER_OF_SKELETONS.map((item) => {
-              return (
-                <Grid.Col xs={6} className="mx-1 sm:mx-0" key={item}>
-                  <div className="px-1 sm:mx-0">
-                    <SkeletonCard />
-                  </div>
-                </Grid.Col>
-              );
-            })}
-
-          {articles?.map((item) => {
-            return (
-              <Grid.Col xs={6} key={item.id}>
-                <div className="m-auto px-2">
-                  <MemoryCard
-                    id={item.id}
-                    song={item.song}
-                    image={item?.image}
-                    artist={item.artist}
-                    memory={item.memory}
-                  />
-                </div>
-              </Grid.Col>
-            );
-          })}
+          {isLoading
+            ? NUMBER_OF_SKELETONS.map((item) => {
+                return (
+                  <Grid.Col xs={6} className="mx-1 sm:mx-0" key={item}>
+                    <div className="px-1 sm:mx-0">
+                      <SkeletonCard />
+                    </div>
+                  </Grid.Col>
+                );
+              })
+            : articles?.map((item) => {
+                return (
+                  <Grid.Col xs={6} className="mx-1 sm:mx-0" key={item.id}>
+                    <div className="px-1">
+                      <MemoryCard
+                        id={item.id}
+                        song={item.song}
+                        image={item?.image}
+                        artist={item.artist}
+                        memory={item.memory}
+                      />
+                    </div>
+                  </Grid.Col>
+                );
+              })}
         </Grid>
       </div>
     </div>
@@ -48,6 +47,3 @@ const Articles: CustomNextPage = () => {
 
 Articles.getLayout = DashboardLayout;
 export default Articles;
-function useGetApi(): { songList: any; isLoading: any } {
-  throw new Error("Function not implemented.");
-}

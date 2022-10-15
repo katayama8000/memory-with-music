@@ -30,7 +30,7 @@ const App: CustomAppPage = ({ Component, pageProps }) => {
         emotionCache={myCache}
       >
         <NotificationsProvider position="bottom-right" zIndex={2077}>
-          <main className="m-auto mt-[50px] max-w-7xl" role="main">
+          <main className="mt-[50px]" role="main">
             {getLayout(<Component {...pageProps} />)}
           </main>
         </NotificationsProvider>
