@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useCallback, useMemo } from "react";
 import { useLocale } from "@hooks/useLocale";
 import Link from "next/link";
 import { FaSearch, FaRegListAlt } from "react-icons/fa";
@@ -19,6 +19,7 @@ export const SideNav: React.FC<SideNavProps> = memo(() => {
   const { color } = useSnapshot(state);
   const { t } = useLocale();
   const { pathname } = useRouter();
+  type urlType = typeof Links[number]["url"];
   const Links = [
     { url: "/", label: t.LINKS.SEACRCH, icon: <FaSearch /> },
     { url: "/write-article", label: t.LINKS.FORM, icon: <AiOutlineForm /> },
@@ -37,9 +38,9 @@ export const SideNav: React.FC<SideNavProps> = memo(() => {
     // },
   ] as const;
 
-  const colorSet = (url: string, pathname: string): string => {
+  const colorSet = useCallback((url: urlType, pathname: urlType): string => {
     return url === pathname ? "#0c8599" : "#273030";
-  };
+  }, []);
   return (
     <div>
       {Links.map((link) => {
