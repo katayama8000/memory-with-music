@@ -49,37 +49,29 @@ export const SideNav: React.FC<SideNavProps> = memo(() => {
       {Links.map((link) => {
         return (
           <div key={link.label}>
-            {color === "dark" ? (
-              <div>
-                <Link href={link.url}>
-                  <div
-                    className={`my-1 flex cursor-pointer  rounded-lg ${
-                      color === "dark"
-                    } bg-[${
-                      isMacthedUrl(link.url) ? "#0c8599" : "hover:bg-[#232323]"
-                    }] py-2  pl-2 text-white `}
-                  >
-                    <span className="mt-[2px] pr-2">{link.icon}</span>
-                    <a className="text-lg">{link.label}</a>
-                  </div>
-                </Link>
-              </div>
-            ) : (
-              <div>
-                <Link href={link.url}>
-                  <div
-                    className={`my-1 flex cursor-pointer  rounded-lg  py-2  pl-2  ${
-                      isMacthedUrl(link.url)
-                        ? "bg-[#0c8599] text-white"
-                        : "text-inherit hover:bg-[#f0f0f0]"
-                    }`}
-                  >
-                    <span className="mt-[2px] pr-2">{link.icon}</span>
-                    <a className="text-lg">{link.label}</a>
-                  </div>
-                </Link>
-              </div>
-            )}
+            <div>
+              <Link href={link.url}>
+                <div
+                  className={`my-1 flex cursor-pointer  rounded-lg  py-2 pl-2 ${
+                    color === "dark"
+                      ? `text-white ${
+                          isMacthedUrl(link.url)
+                            ? "bg-[#0c8599]"
+                            : "hover:bg-[#232323]"
+                        }`
+                      : `
+                      ${
+                        isMacthedUrl(link.url)
+                          ? "bg-[#0c8599] text-white"
+                          : "text-inherit hover:bg-[#f0f0f0]"
+                      }`
+                  }`}
+                >
+                  <span className="mt-[2px] pr-2">{link.icon}</span>
+                  <a className="text-lg">{link.label}</a>
+                </div>
+              </Link>
+            </div>
           </div>
         );
       })}
