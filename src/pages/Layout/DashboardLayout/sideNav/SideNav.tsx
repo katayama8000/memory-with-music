@@ -1,15 +1,12 @@
-import React, { memo, useCallback, useMemo } from 'react';
 import { useLocale } from '@hooks/useLocale';
-import Link from 'next/link';
-import { FaSearch, FaRegListAlt } from 'react-icons/fa';
-import { AiOutlineForm } from 'react-icons/ai';
-import { MdOutlineArticle } from 'react-icons/md';
-import { BiLogIn } from 'react-icons/bi';
-import { MdManageAccounts } from 'react-icons/md';
-import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
-import { useRouter } from 'next/router';
-import { useSnapshot } from 'valtio';
 import { state } from '@state/state';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { memo, useCallback } from 'react';
+import { AiOutlineForm } from 'react-icons/ai';
+import { FaRegListAlt, FaSearch } from 'react-icons/fa';
+import { MdManageAccounts } from 'react-icons/md';
+import { useSnapshot } from 'valtio';
 
 type SideNavProps = {
   color?: 'light' | 'dark';
@@ -21,10 +18,10 @@ export const SideNav: React.FC<SideNavProps> = memo(() => {
   const { pathname } = useRouter();
   type urlType = typeof Links[number]['url'];
   const Links = [
-    { url: '/', label: t.LINKS.SEACRCH, icon: <FaSearch /> },
-    { url: '/write-article', label: t.LINKS.FORM, icon: <AiOutlineForm /> },
-    { url: '/articles', label: t.LINKS.LIST, icon: <FaRegListAlt /> },
-    { url: '/account', label: t.LINKS.ACCOUNT, icon: <MdManageAccounts /> },
+    { icon: <FaSearch />, label: t.LINKS.SEACRCH, url: '/' },
+    { icon: <AiOutlineForm />, label: t.LINKS.FORM, url: '/write-article' },
+    { icon: <FaRegListAlt />, label: t.LINKS.LIST, url: '/articles' },
+    { icon: <MdManageAccounts />, label: t.LINKS.ACCOUNT, url: '/account' },
     // {
     //   url: "/articles/article-content",
     //   label: t.LINKS.ARTICLE + "(開発中)",

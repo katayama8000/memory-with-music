@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
-import { ChevronRight, ChevronLeft } from 'tabler-icons-react';
-import { UnstyledButton, Group, Avatar, Text, Box, useMantineTheme } from '@mantine/core';
 import { useGetUserName } from '@hooks/useGetUserName';
+import { Avatar, Box, Group, Text, UnstyledButton, useMantineTheme } from '@mantine/core';
+import { memo } from 'react';
+import { ChevronLeft, ChevronRight } from 'tabler-icons-react';
 
 export const User = memo(() => {
   const theme = useMantineTheme();
@@ -10,21 +10,20 @@ export const User = memo(() => {
   return (
     <Box
       sx={{
-        paddingTop: theme.spacing.sm,
         borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]}`,
+        paddingTop: theme.spacing.sm,
       }}
     >
       <UnstyledButton
         sx={{
-          display: 'block',
-          width: '100%',
-          padding: theme.spacing.xs,
-          borderRadius: theme.radius.sm,
-          color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
-
           '&:hover': {
             backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
           },
+          borderRadius: theme.radius.sm,
+          color: theme.colorScheme === 'dark' ? theme.colors.dark[0] : theme.black,
+          display: 'block',
+          padding: theme.spacing.xs,
+          width: '100%',
         }}
       >
         <Group>
