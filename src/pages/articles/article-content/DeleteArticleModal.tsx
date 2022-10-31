@@ -1,24 +1,29 @@
-import React from "react";
-import { Button, Group, Modal } from "@mantine/core";
+import { Button, Group, Modal } from '@mantine/core';
 
 type DeleteArticleModalType = {
+  handleDelete: () => Promise<void>;
   opened: boolean;
   setOpened: React.Dispatch<React.SetStateAction<boolean>>;
-  handleDelete: () => Promise<void>;
 };
 
-export const DeleteArticleModal: React.FC<DeleteArticleModalType> = ({
-  opened,
-  setOpened,
-  handleDelete,
-}) => {
+export const DeleteArticleModal: React.FC<DeleteArticleModalType> = ({ handleDelete, opened, setOpened }) => {
   return (
-    <Modal opened={opened} onClose={() => setOpened(false)} size={500}>
-      <Group position="center">
-        <div className="text-xl font-bold">
-          Are you sure you want to delete this article?
-        </div>
-        <Button color="red" className="m-3 w-20" onClick={() => handleDelete()}>
+    <Modal
+      opened={opened}
+      onClose={() => {
+        return setOpened(false);
+      }}
+      size={500}
+    >
+      <Group position='center'>
+        <div className='text-xl font-bold'>Are you sure you want to delete this article?</div>
+        <Button
+          color='red'
+          className='m-3 w-20'
+          onClick={() => {
+            return handleDelete();
+          }}
+        >
           delete
         </Button>
       </Group>

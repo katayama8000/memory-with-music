@@ -1,5 +1,5 @@
-import { ColorTheme } from "./ColorTheme";
-import { Lang } from "./Lang";
-import { HeaderComp } from "./HeaderComp";
+import { ColorTheme } from './ColorTheme';
+import { HeaderComp } from './HeaderComp';
+import { Lang } from './Lang';
 
-export { ColorTheme, Lang, HeaderComp };
+export { ColorTheme, HeaderComp, Lang };

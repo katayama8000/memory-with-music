@@ -1,16 +1,13 @@
-import { toast } from "@function/toast";
-import { useGetUserId } from "@hooks/useGetUserId";
-import { state } from "@state/state";
-import { Session } from "@supabase/supabase-js";
-import { SongModel } from "@type/article.model";
-import { useCallback, useEffect, useState } from "react";
-import { supabase } from "src/lib/supabase/supabase";
-import { useSnapshot } from "valtio";
+import { toast } from '@function/toast';
+import { useGetUserId } from '@hooks/useGetUserId';
+import type { SongModel } from '@type/article.model';
+import { useEffect, useState } from 'react';
+import { supabase } from 'src/lib/supabase/supabase';
 
 export const useGetUserSongs = (): {
-  songList: SongModel[];
-  loadingFlag: boolean;
   getUserSongs: () => void;
+  loadingFlag: boolean;
+  songList: SongModel[];
 } => {
   const [songList, setSongList] = useState<SongModel[]>([]);
   const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
@@ -19,17 +16,17 @@ export const useGetUserSongs = (): {
     setLoadingFlag(true);
     try {
       const { data, error } = await supabase
-        .from<SongModel>("songs")
-        .select("id,song, artist,image,memory")
+        .from<SongModel>('songs')
+        .select('id,song, artist,image,memory')
         .match({ userId: userID });
       if (data) {
         setSongList(data);
       }
       if (error || !data) {
-        toast("Error", error.message + "try again later", "red");
+        toast('Error', error.message + 'try again later', 'red');
       }
     } catch {
-      toast("Error", "try again later", "red");
+      toast('Error', 'try again later', 'red');
     } finally {
       setLoadingFlag(false);
     }
@@ -39,5 +36,5 @@ export const useGetUserSongs = (): {
     getUserSongs();
   }, []);
 
-  return { songList, loadingFlag, getUserSongs };
+  return { getUserSongs, loadingFlag, songList };
 };

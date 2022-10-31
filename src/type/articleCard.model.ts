@@ -1,7 +1,7 @@
 export type Props = {
-  url: string;
   artistName: string;
-  trackName: string;
-  releaseDate: string;
   loading: boolean;
+  releaseDate: string;
+  trackName: string;
+  url: string;
 };

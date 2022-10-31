@@ -1,30 +1,30 @@
-import React, { memo, useCallback, useMemo } from "react";
-import { useLocale } from "@hooks/useLocale";
-import Link from "next/link";
-import { FaSearch, FaRegListAlt } from "react-icons/fa";
-import { AiOutlineForm } from "react-icons/ai";
-import { MdOutlineArticle } from "react-icons/md";
-import { BiLogIn } from "react-icons/bi";
-import { MdManageAccounts } from "react-icons/md";
-import { FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
-import { useRouter } from "next/router";
-import { useSnapshot } from "valtio";
-import { state } from "@state/state";
+import React, { memo, useCallback, useMemo } from 'react';
+import { useLocale } from '@hooks/useLocale';
+import Link from 'next/link';
+import { FaSearch, FaRegListAlt } from 'react-icons/fa';
+import { AiOutlineForm } from 'react-icons/ai';
+import { MdOutlineArticle } from 'react-icons/md';
+import { BiLogIn } from 'react-icons/bi';
+import { MdManageAccounts } from 'react-icons/md';
+import { FaSignInAlt, FaSignOutAlt } from 'react-icons/fa';
+import { useRouter } from 'next/router';
+import { useSnapshot } from 'valtio';
+import { state } from '@state/state';
 
 type SideNavProps = {
-  color?: "light" | "dark";
+  color?: 'light' | 'dark';
 };
 
 export const SideNav: React.FC<SideNavProps> = memo(() => {
   const { color } = useSnapshot(state);
   const { t } = useLocale();
   const { pathname } = useRouter();
-  type urlType = typeof Links[number]["url"];
+  type urlType = typeof Links[number]['url'];
   const Links = [
-    { url: "/", label: t.LINKS.SEACRCH, icon: <FaSearch /> },
-    { url: "/write-article", label: t.LINKS.FORM, icon: <AiOutlineForm /> },
-    { url: "/articles", label: t.LINKS.LIST, icon: <FaRegListAlt /> },
-    { url: "/account", label: t.LINKS.ACCOUNT, icon: <MdManageAccounts /> },
+    { url: '/', label: t.LINKS.SEACRCH, icon: <FaSearch /> },
+    { url: '/write-article', label: t.LINKS.FORM, icon: <AiOutlineForm /> },
+    { url: '/articles', label: t.LINKS.LIST, icon: <FaRegListAlt /> },
+    { url: '/account', label: t.LINKS.ACCOUNT, icon: <MdManageAccounts /> },
     // {
     //   url: "/articles/article-content",
     //   label: t.LINKS.ARTICLE + "(開発中)",
@@ -53,22 +53,14 @@ export const SideNav: React.FC<SideNavProps> = memo(() => {
               <Link href={link.url}>
                 <div
                   className={`my-1 flex cursor-pointer  rounded-lg  py-2 pl-2 ${
-                    color === "dark"
-                      ? `text-white ${
-                          isMacthedUrl(link.url)
-                            ? "bg-[#0c8599]"
-                            : "hover:bg-[#232323]"
-                        }`
+                    color === 'dark'
+                      ? `text-white ${isMacthedUrl(link.url) ? 'bg-[#0c8599]' : 'hover:bg-[#232323]'}`
                       : `
-                      ${
-                        isMacthedUrl(link.url)
-                          ? "bg-[#0c8599] text-white"
-                          : "text-inherit hover:bg-[#f0f0f0]"
-                      }`
+                      ${isMacthedUrl(link.url) ? 'bg-[#0c8599] text-white' : 'text-inherit hover:bg-[#f0f0f0]'}`
                   }`}
                 >
-                  <span className="mt-[2px] pr-2">{link.icon}</span>
-                  <a className="text-lg">{link.label}</a>
+                  <span className='mt-[2px] pr-2'>{link.icon}</span>
+                  <a className='text-lg'>{link.label}</a>
                 </div>
               </Link>
             </div>
@@ -79,4 +71,4 @@ export const SideNav: React.FC<SideNavProps> = memo(() => {
   );
 });
 
-SideNav.displayName = "SideNav";
+SideNav.displayName = 'SideNav';

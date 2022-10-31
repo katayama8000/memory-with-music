@@ -1,13 +1,14 @@
-import React from "react";
-import { Grid } from "@mantine/core";
-import { SongCard } from "@components/home/SongCard";
-import { useLocale } from "@hooks/useLocale";
-import { ResultModel } from "@type/result.model";
-import dynamic from "next/dynamic";
+import { SongCard } from '@components/home/SongCard';
+import { useLocale } from '@hooks/useLocale';
+import { Grid } from '@mantine/core';
+import type { ResultModel } from '@type/result.model';
+import dynamic from 'next/dynamic';
 
-const SkeletonCard = dynamic(() =>
-  import("./SongCard").then((module) => module.SkeletonCard)
-);
+const SkeletonCard = dynamic(() => {
+  return import('./SongCard').then((module) => {
+    return module.SkeletonCard;
+  });
+});
 
 type Props = {
   loading: boolean;
@@ -16,7 +17,7 @@ type Props = {
 
 const NUMBER_OF_SKELETONS = Array.from(Array(9).keys());
 
-export const SongList: React.FC<Props> = ({ songList, loading }) => {
+export const SongList: React.FC<Props> = ({ loading, songList }) => {
   const { t } = useLocale();
   return (
     <div>
@@ -26,8 +27,8 @@ export const SongList: React.FC<Props> = ({ songList, loading }) => {
             {loading &&
               NUMBER_OF_SKELETONS.map((item) => {
                 return (
-                  <Grid.Col xs={6} sm={4} className="mx-1 sm:mx-0" key={item}>
-                    <div className="px-1 sm:mx-0">
+                  <Grid.Col xs={6} sm={4} className='mx-1 sm:mx-0' key={item}>
+                    <div className='px-1 sm:mx-0'>
                       <SkeletonCard />
                     </div>
                   </Grid.Col>
@@ -36,7 +37,7 @@ export const SongList: React.FC<Props> = ({ songList, loading }) => {
             {songList?.results?.map((song, index) => {
               return (
                 <Grid.Col xs={6} sm={4} key={index}>
-                  <div className="px-1 sm:mx-0">
+                  <div className='px-1 sm:mx-0'>
                     <SongCard
                       url={song.artworkUrl100}
                       artistName={song.artistName}
@@ -51,7 +52,7 @@ export const SongList: React.FC<Props> = ({ songList, loading }) => {
           </Grid>
         </div>
       ) : (
-        <div className="pt-10 text-center text-xl font-bold">{t.NOSONG}</div>
+        <div className='pt-10 text-center text-xl font-bold'>{t.NOSONG}</div>
       )}
     </div>
   );

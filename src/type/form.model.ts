@@ -1,5 +1,5 @@
 export type FormModel = {
-  name?: string;
   email: string;
+  name?: string;
   password: string;
 };

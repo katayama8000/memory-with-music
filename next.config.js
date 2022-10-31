@@ -1,10 +1,10 @@
 /** @type {import('next').NextConfig} */
 module.exports = {
-  swcMinify: true,
-  reactStrictMode: true,
   i18n: {
-    locales: ["en", "ja"],
-    defaultLocale: "ja",
+    defaultLocale: 'ja',
+    locales: ['en', 'ja'],
   },
-  pageExtensions: ["page.tsx", "page.ts"],
+  pageExtensions: ['page.tsx', 'page.ts'],
+  reactStrictMode: true,
+  swcMinify: true,
 };

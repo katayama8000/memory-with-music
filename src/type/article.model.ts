@@ -1,9 +1,9 @@
 export type SongModel = {
   id: number;
-  created_at?: string;
-  song: string;
-  image: string;
   artist: string;
+  created_at?: string;
+  image: string;
   memory: string;
+  song: string;
   userId?: string;
 };
