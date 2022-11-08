@@ -11,9 +11,6 @@ import { useRouter } from 'next/router';
 import { useCallback, useState } from 'react';
 import { FaSearch } from 'react-icons/fa';
 
-let API_lang: LangModel = 'en_us';
-let API_country: CountryModel = 'us';
-
 const Home: CustomNextPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [songList, setSongList] = useState<ResultModel>();
@@ -27,10 +24,19 @@ const Home: CustomNextPage = () => {
     },
   });
 
-  if (router.locale === 'ja') {
-    API_lang = 'ja_jp';
-    API_country = 'jp';
-  }
+  const { API_country, API_lang } = (() => {
+    const { locale } = router;
+    if (locale === 'en') {
+      return {
+        API_country: 'us',
+        API_lang: 'en_us',
+      };
+    }
+    return {
+      API_country: 'jp',
+      API_lang: 'ja_jp',
+    };
+  })() as { API_country: CountryModel; API_lang: LangModel };
 
   const handleSubmit = useCallback(
     async (values: { music: string }, lang: LangModel, country: CountryModel): Promise<void> => {
