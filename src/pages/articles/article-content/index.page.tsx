@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { toast } from '@function/toast';
 import { useGetUserId } from '@hooks/useGetUserId';
-import { Tooltip, TypographyStylesProvider } from '@mantine/core';
+import { TypographyStylesProvider } from '@mantine/core';
 import { DashboardLayout } from '@pages/_Layout';
 import type { SongModel } from '@type/article.model';
 import type { UserModel } from '@type/user.model';
@@ -9,11 +9,11 @@ import type { CustomNextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import { FiEdit } from 'react-icons/fi';
-import { RiDeleteBin6Line } from 'react-icons/ri';
 import { supabase } from 'src/lib/supabase/supabase';
 
 import { DeleteArticleModal } from './DeleteArticleModal';
+import { DeleteIcon } from './tooltip/deleteIcon';
+import { EditIcon } from './tooltip/editIcon';
 
 const Article: CustomNextPage = () => {
   const [opened, setOpened] = useState<boolean>(false);
@@ -110,14 +110,7 @@ const Article: CustomNextPage = () => {
           {isMyArticle && (
             <div className='flex px-4'>
               <div className='mx-1'>
-                <Tooltip withArrow label='Delete this Article'>
-                  <RiDeleteBin6Line
-                    className='h-8 w-8 '
-                    onClick={() => {
-                      return setOpened(true);
-                    }}
-                  />
-                </Tooltip>
+                <DeleteIcon setOpened={setOpened} />
               </div>
               <Link
                 href={{
@@ -132,13 +125,9 @@ const Article: CustomNextPage = () => {
                   },
                 }}
               >
-                <a className='text-inherit'>
-                  <div className='mx-1'>
-                    <Tooltip withArrow label='Edit this Article'>
-                      <FiEdit className='h-8 w-8 ' />
-                    </Tooltip>
-                  </div>
-                </a>
+                <div className='mx-1 text-inherit'>
+                  <EditIcon />
+                </div>
               </Link>
             </div>
           )}
