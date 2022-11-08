@@ -48,7 +48,7 @@ const UserMenu: FC = memo(() => {
         <Menu.Label>Application</Menu.Label>
         <Menu.Item icon={<IconSettings size={14} />}>
           <Link href='account' className='text-inherit'>
-            <a>Settings</a>
+            Settings
           </Link>
         </Menu.Item>
         <Menu.Item icon={<IconMessageCircle size={14} />}>

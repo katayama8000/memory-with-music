@@ -57,7 +57,7 @@ export const SideNav: React.FC<SideNavProps> = memo(() => {
                   }`}
                 >
                   <span className='mt-[2px] pr-2'>{link.icon}</span>
-                  <a className='text-lg'>{link.label}</a>
+                  <span className='text-lg'>{link.label}</span>
                 </div>
               </Link>
             </div>

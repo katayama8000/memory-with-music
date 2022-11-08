@@ -26,18 +26,16 @@ export const MemoryCard: React.FC<Props> = memo(({ id, artist, image, memory, so
             },
           }}
         >
-          <a className='text-inherit no-underline'>
-            <div className='flex '>
-              {image && (
-                <Image src={image} alt={artist} height={60} width={80} radius='md' withPlaceholder className='mr-5' />
-              )}
-              <div className='truncate'>
-                {song}/{artist}
-                <br />
-                {memory}
-              </div>
+          <div className='flex'>
+            {image && (
+              <Image src={image} alt={artist} height={60} width={80} radius='md' withPlaceholder className='mr-5' />
+            )}
+            <div className='truncate'>
+              {song}/{artist}
+              <br />
+              {memory}
             </div>
-          </a>
+          </div>
         </Link>
       </Card>
     </div>

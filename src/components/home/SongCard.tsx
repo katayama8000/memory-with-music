@@ -31,11 +31,9 @@ export const SongCard: React.FC<Props> = memo(({ artistName, releaseDate, trackN
             },
           }}
         >
-          <a className='no-underline'>
-            <Button variant='light' color='cyan' fullWidth radius='md' className='mt-2'>
-              {t.SONGCARDBUTTON}
-            </Button>
-          </a>
+          <Button variant='light' color='cyan' fullWidth radius='md' className='mt-2 '>
+            {t.SONGCARDBUTTON}
+          </Button>
         </Link>
       </Card>
     </div>
