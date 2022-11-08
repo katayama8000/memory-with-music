@@ -1,3 +1,4 @@
+import { MemoryCard } from '@components/Memory/MemoryCard';
 import { toast } from '@function/toast';
 import { useGetUserId } from '@hooks/useGetUserId';
 import { useGetUserName } from '@hooks/useGetUserName';
@@ -11,8 +12,6 @@ import { useCallback, useState } from 'react';
 import { AiTwotoneSetting } from 'react-icons/ai';
 import { supabase } from 'src/lib/supabase/supabase';
 
-import { MemoryCard } from '../../components/Memory/MemoryCard';
-
 const Account: CustomNextPage = () => {
   const [opened, setOpened] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -21,28 +20,31 @@ const Account: CustomNextPage = () => {
   const { songList } = useGetUserSongs();
   const { t } = useLocale();
 
-  const handleEdit = useCallback(async (value: { name: string | null }): Promise<void> => {
-    setIsLoading(true);
-    const { data, error } = await supabase
-      .from<{ userName: string }>('users')
-      .update({ userName: value.name! })
-      .match({ userId: userID });
+  const handleEdit = useCallback(
+    async (value: { name: string }): Promise<void> => {
+      setIsLoading(true);
+      const { data, error } = await supabase
+        .from<{ userName: string }>('users')
+        .update({ userName: value.name })
+        .match({ userId: userID });
 
-    if (data) {
-      toast('success', '編集しました', 'cyan');
-      // 改善を考える
-      window.location.reload();
-    }
-    if (error) {
-      toast('error', error.message, 'red');
-    }
-    setIsLoading(false);
-    setOpened(false);
-  }, []);
+      if (data) {
+        toast('success', '編集しました', 'cyan');
+        // 改善を考える
+        window.location.reload();
+      }
+      if (error) {
+        toast('error', error.message, 'red');
+      }
+      setIsLoading(false);
+      setOpened(false);
+    },
+    [userID]
+  );
 
   const form = useForm({
     initialValues: {
-      name: userName,
+      name: userName!,
     },
   });
 
@@ -81,6 +83,9 @@ const Account: CustomNextPage = () => {
       >
         <form
           onSubmit={form.onSubmit((values) => {
+            if (values.name !== '') {
+              return;
+            }
             return handleEdit(values);
           })}
         >

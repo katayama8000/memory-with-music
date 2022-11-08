@@ -1,12 +1,13 @@
 import { Button, Group, Modal } from '@mantine/core';
+import type { FC } from 'react';
 
-type DeleteArticleModalType = {
+type DeleteArticleModaProps = {
   handleDelete: () => Promise<void>;
   opened: boolean;
   setOpened: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const DeleteArticleModal: React.FC<DeleteArticleModalType> = ({ handleDelete, opened, setOpened }) => {
+export const DeleteArticleModal: FC<DeleteArticleModaProps> = ({ handleDelete, opened, setOpened }) => {
   return (
     <Modal
       opened={opened}

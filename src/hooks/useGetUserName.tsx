@@ -15,7 +15,7 @@ export const useGetUserName = (): {
         .select('userName')
         .match({ userId: userID });
       if (data) {
-        const userName = data![0].userName;
+        const userName = data?.[0].userName;
         setUserName(userName);
       }
       if (error || !data) {
@@ -28,7 +28,7 @@ export const useGetUserName = (): {
 
   useEffect(() => {
     getUserName();
-  }, []);
+  }, [getUserName]);
 
   return { getUserName, userName };
 };

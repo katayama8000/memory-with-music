@@ -1,19 +1,19 @@
 import { toast } from '@function/toast';
 import { useGetUserId } from '@hooks/useGetUserId';
 import type { SongModel } from '@type/article.model';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { supabase } from 'src/lib/supabase/supabase';
 
 export const useGetUserSongs = (): {
   getUserSongs: () => void;
-  loadingFlag: boolean;
+  isLoading: boolean;
   songList: SongModel[];
 } => {
   const [songList, setSongList] = useState<SongModel[]>([]);
-  const [loadingFlag, setLoadingFlag] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const userID = useGetUserId();
-  const getUserSongs = async () => {
-    setLoadingFlag(true);
+  const getUserSongs = useCallback(async () => {
+    setIsLoading(true);
     try {
       const { data, error } = await supabase
         .from<SongModel>('songs')
@@ -28,13 +28,13 @@ export const useGetUserSongs = (): {
     } catch {
       toast('Error', 'try again later', 'red');
     } finally {
-      setLoadingFlag(false);
+      setIsLoading(false);
     }
-  };
+  }, [userID]);
 
   useEffect(() => {
     getUserSongs();
-  }, []);
+  }, [getUserSongs]);
 
-  return { getUserSongs, loadingFlag, songList };
+  return { getUserSongs, isLoading, songList };
 };
