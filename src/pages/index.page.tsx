@@ -2,7 +2,7 @@ import { SongList } from '@components/home/SongList';
 import { useLocale } from '@hooks/useLocale';
 import { Box, Button, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { DashboardLayout } from '@pages/Layout';
+import { DashboardLayout } from '@pages/_Layout';
 import type { CountryModel, LangModel } from '@type/i18n.model';
 import type { ResultModel } from '@type/result.model';
 import axios from 'axios';

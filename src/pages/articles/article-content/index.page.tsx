@@ -2,7 +2,7 @@
 import { toast } from '@function/toast';
 import { useGetUserId } from '@hooks/useGetUserId';
 import { Tooltip, TypographyStylesProvider } from '@mantine/core';
-import { DashboardLayout } from '@pages/Layout';
+import { DashboardLayout } from '@pages/_Layout';
 import type { SongModel } from '@type/article.model';
 import type { UserModel } from '@type/user.model';
 import type { CustomNextPage } from 'next';

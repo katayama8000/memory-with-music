@@ -1,5 +1,5 @@
 import { useGetArticles } from '@hooks/useGetArticles';
-import { AuthLayout } from '@pages/Layout';
+import { AuthLayout } from '@pages/_Layout';
 import type { CustomNextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';

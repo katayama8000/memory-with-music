@@ -1,6 +1,6 @@
 import { useIsLoggedIn } from '@hooks/useIsLoggedIn';
 import { AppShell, Header, Navbar } from '@mantine/core';
-import { LayoutErrorBoundary } from '@pages/Layout/LayoutErrorBoundary';
+import { LayoutErrorBoundary } from '@pages/_Layout/LayoutErrorBoundary';
 import type { CustomLayout } from 'next';
 import dynamic from 'next/dynamic';
 import { Suspense } from 'react';

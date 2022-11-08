@@ -1,7 +1,7 @@
 import { MemoryCard, SkeletonCard } from '@components/Memory/MemoryCard';
 import { useGetArticles } from '@hooks/useGetArticles';
 import { Grid } from '@mantine/core';
-import { DashboardLayout } from '@pages/Layout';
+import { DashboardLayout } from '@pages/_Layout';
 import type { CustomNextPage } from 'next';
 
 const NUMBER_OF_SKELETONS = Array.from(Array(20).keys());

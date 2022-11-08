@@ -1,7 +1,7 @@
 import { toast } from '@function/toast';
 import { Box, Button, Group, PasswordInput, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { AuthLayout } from '@pages/Layout';
+import { AuthLayout } from '@pages/_Layout';
 import type { FormModel } from '@type/form.model';
 import type { CustomNextPage } from 'next';
 import Link from 'next/link';

@@ -5,7 +5,7 @@ import { useGetUserSongs } from '@hooks/useGetUserSongs';
 import { useLocale } from '@hooks/useLocale';
 import { Avatar, Button, Grid, Group, Modal, Spoiler, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { DashboardLayout } from '@pages/Layout';
+import { DashboardLayout } from '@pages/_Layout';
 import type { CustomNextPage } from 'next';
 import { useCallback, useState } from 'react';
 import { AiTwotoneSetting } from 'react-icons/ai';

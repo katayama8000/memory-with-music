@@ -4,7 +4,7 @@ import { useGetUserId } from '@hooks/useGetUserId';
 import { useLocale } from '@hooks/useLocale';
 import { Button, Group, Textarea, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
-import { DashboardLayout } from '@pages/Layout';
+import { DashboardLayout } from '@pages/_Layout';
 import type { SongModel } from '@type/article.model';
 import type { CustomNextPage } from 'next';
 import { useRouter } from 'next/router';

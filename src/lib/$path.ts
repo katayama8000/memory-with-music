@@ -1,42 +1,26 @@
 export const pagesPath = {
-  $url: (url?: { hash?: string }) => {
-    return { hash: url?.hash, pathname: '/' as const };
+  "account": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/account' as const, hash: url?.hash })
   },
-  account: {
-    $url: (url?: { hash?: string }) => {
-      return { hash: url?.hash, pathname: '/account' as const };
+  "articles": {
+    "article_content": {
+      $url: (url?: { hash?: string }) => ({ pathname: '/articles/article-content' as const, hash: url?.hash })
     },
+    $url: (url?: { hash?: string }) => ({ pathname: '/articles' as const, hash: url?.hash })
   },
-  articles: {
-    $url: (url?: { hash?: string }) => {
-      return { hash: url?.hash, pathname: '/articles' as const };
-    },
-    article_content: {
-      $url: (url?: { hash?: string }) => {
-        return { hash: url?.hash, pathname: '/articles/article-content' as const };
-      },
-    },
+  "demo": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/demo' as const, hash: url?.hash })
   },
-  demo: {
-    $url: (url?: { hash?: string }) => {
-      return { hash: url?.hash, pathname: '/demo' as const };
-    },
+  "sign_in": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/sign-in' as const, hash: url?.hash })
   },
-  sign_in: {
-    $url: (url?: { hash?: string }) => {
-      return { hash: url?.hash, pathname: '/sign-in' as const };
-    },
+  "sign_up": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/sign-up' as const, hash: url?.hash })
   },
-  sign_up: {
-    $url: (url?: { hash?: string }) => {
-      return { hash: url?.hash, pathname: '/sign-up' as const };
-    },
+  "write_article": {
+    $url: (url?: { hash?: string }) => ({ pathname: '/write-article' as const, hash: url?.hash })
   },
-  write_article: {
-    $url: (url?: { hash?: string }) => {
-      return { hash: url?.hash, pathname: '/write-article' as const };
-    },
-  },
-};
+  $url: (url?: { hash?: string }) => ({ pathname: '/' as const, hash: url?.hash })
+}
 
-export type PagesPath = typeof pagesPath;
+export type PagesPath = typeof pagesPath
