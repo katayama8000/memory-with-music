@@ -25,17 +25,7 @@ const Home: CustomNextPage = () => {
   });
 
   const { API_country, API_lang } = (() => {
-    const { locale } = router;
-    if (locale === 'en') {
-      return {
-        API_country: 'us',
-        API_lang: 'en_us',
-      };
-    }
-    return {
-      API_country: 'jp',
-      API_lang: 'ja_jp',
-    };
+    return router.locale === 'en' ? { API_country: 'us', API_lang: 'en_us' } : { API_country: 'jp', API_lang: 'ja_jp' };
   })() as { API_country: CountryModel; API_lang: LangModel };
 
   const handleSubmit = useCallback(
