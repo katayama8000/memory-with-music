@@ -1,11 +1,11 @@
-import React, { memo, useCallback } from "react";
-import { useRouter } from "next/router";
-import { SegmentedControl } from "@mantine/core";
+import { SegmentedControl } from '@mantine/core';
+import { useRouter } from 'next/router';
+import { memo, useCallback } from 'react';
 
 export const Lang: React.FC = memo(() => {
   const router = useRouter();
   const switchLanguage = useCallback(
-    (lang: "ja" | "en"): void => {
+    (lang: 'ja' | 'en'): void => {
       router.push(router.pathname, router.pathname, {
         locale: lang,
       });
@@ -15,17 +15,19 @@ export const Lang: React.FC = memo(() => {
   return (
     <div>
       <SegmentedControl
-        color="cyan"
+        color='cyan'
         defaultValue={router.locale}
         value={router.locale}
         data={[
-          { value: "ja", label: "ja" },
-          { value: "en", label: "en" },
+          { label: 'ja', value: 'ja' },
+          { label: 'en', value: 'en' },
         ]}
-        onChange={(lang: "en" | "ja") => switchLanguage(lang)}
+        onChange={(lang: 'en' | 'ja') => {
+          return switchLanguage(lang);
+        }}
       />
     </div>
   );
 });
 
-Lang.displayName = "Lang";
+Lang.displayName = 'Lang';

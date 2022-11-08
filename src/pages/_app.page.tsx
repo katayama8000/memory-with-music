@@ -1,14 +1,13 @@
-import "src/lib/tailwind.css";
-import { createEmotionCache, MantineProvider } from "@mantine/core";
-import { HeadContents } from "@components/head/HeadContents";
-import { state } from "@state/state";
-import { NotificationsProvider } from "@mantine/notifications";
-import type { CustomAppPage } from "next/app";
-import { useSnapshot } from "valtio";
-import { useEffect } from "react";
-import { useRouter } from "next/router";
+import 'src/lib/tailwind.css';
 
-const myCache = createEmotionCache({ key: "mantine" });
+import { HeadContents } from '@components/head/HeadContents';
+import { createEmotionCache, MantineProvider } from '@mantine/core';
+import { NotificationsProvider } from '@mantine/notifications';
+import { state } from '@state/state';
+import type { CustomAppPage } from 'next/app';
+import { useSnapshot } from 'valtio';
+
+const myCache = createEmotionCache({ key: 'mantine' });
 
 const App: CustomAppPage = ({ Component, pageProps }) => {
   const { color } = useSnapshot(state);
@@ -29,8 +28,8 @@ const App: CustomAppPage = ({ Component, pageProps }) => {
         withNormalizeCSS
         emotionCache={myCache}
       >
-        <NotificationsProvider position="bottom-right" zIndex={2077}>
-          <main className="mt-[50px]" role="main">
+        <NotificationsProvider position='bottom-right' zIndex={2077}>
+          <main className='mt-[50px]' role='main'>
             {getLayout(<Component {...pageProps} />)}
           </main>
         </NotificationsProvider>

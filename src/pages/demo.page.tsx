@@ -1,27 +1,24 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-import { useGetArticles } from "@hooks/useGetArticles";
-import { AuthLayout } from "@pages/Layout";
-import { CustomNextPage } from "next";
-import { useRouter } from "next/router";
-import { useEffect } from "react";
+import { useGetArticles } from '@hooks/useGetArticles';
+import { AuthLayout } from '@pages/_Layout';
+import type { CustomNextPage } from 'next';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 const Demo: CustomNextPage = () => {
-  const { articles, isError, isLoading } = useGetArticles();
+  const { articles } = useGetArticles();
   const router = useRouter();
 
   const pageChangeHandler = () => {
-    const answer = window.confirm(
-      "コメント内容がリセットされます、本当にページ遷移しますか？"
-    );
+    const answer = window.confirm('コメント内容がリセットされます、本当にページ遷移しますか？');
     if (!answer) {
-      throw "Abort route";
+      throw 'Abort route';
     }
   };
 
   useEffect(() => {
-    router.events.on("routeChangeStart", pageChangeHandler);
+    router.events.on('routeChangeStart', pageChangeHandler);
     return () => {
-      router.events.off("routeChangeStart", pageChangeHandler);
+      router.events.off('routeChangeStart', pageChangeHandler);
     };
   }, []);
 

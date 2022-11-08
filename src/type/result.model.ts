@@ -4,9 +4,9 @@ export type ResultModel = {
     artistId: number;
     artistName: string;
     artistViewUrl: string;
+    artworkUrl100: string;
     artworkUrl30: string;
     artworkUrl60: string;
-    artworkUrl100: string;
     collectionExplicitness: string;
     collectionPrice: number;
     country: string;

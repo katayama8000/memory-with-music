@@ -1,7 +1,7 @@
 {
   "[typescript]": { "editor.defaultFormatter": "esbenp.prettier-vscode" },
   "css.validate": false,
-  "editor.codeActionsOnSave": ["source.fixAll.eslint"],
+  "editor.codeActionsOnSave": ["source.addMissingImports", "source.fixAll.eslint"],
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.quickSuggestions": { "strings": true },
@@ -9,5 +9,6 @@
   "files.encoding": "utf8",
   "files.eol": "\n",
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "typescript.tsdk": "node_modules/typescript/lib"
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "eslint.useESLintClass": true
 }
