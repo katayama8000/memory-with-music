@@ -39,7 +39,7 @@ const Article: CustomNextPage = () => {
       } else {
         setIsMyArticle(false);
       }
-      setUserIdRelatedArticle(data[0].userId!);
+      setUserIdRelatedArticle(data[0].userId);
     }
 
     if (error) {
@@ -68,21 +68,13 @@ const Article: CustomNextPage = () => {
 
   useEffect(() => {
     if (router.isReady) {
-      if (
-        typeof router.query.id === 'string' &&
-        typeof router.query.artist === 'string' &&
-        typeof router.query.song === 'string' &&
-        typeof router.query.image === 'string' &&
-        typeof router.query.memory === 'string'
-      ) {
-        setInitArticle({
-          id: router.query.id as unknown as number,
-          artist: router.query.artist,
-          image: router.query.image,
-          memory: router.query.memory,
-          song: router.query.song,
-        });
-      }
+      setInitArticle({
+        id: Number(router.query.id),
+        artist: router.query.artist as string,
+        image: router.query.image as string,
+        memory: router.query.memory as string,
+        song: router.query.song as string,
+      });
       compareUserIdRelatedToArticle();
     }
   }, [router]);
