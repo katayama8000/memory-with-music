@@ -3,7 +3,7 @@ import { toast } from '@function/toast';
 import { useGetUserId } from '@hooks/useGetUserId';
 import { TypographyStylesProvider } from '@mantine/core';
 import { DashboardLayout } from '@pages/_Layout';
-import type { SongModel } from '@type/article.model';
+import type { ArticleModel } from '@type/article.model';
 import type { UserModel } from '@type/user.model';
 import type { CustomNextPage } from 'next';
 import Link from 'next/link';
@@ -31,7 +31,7 @@ const Article: CustomNextPage = () => {
   });
 
   const compareUserIdRelatedToArticle = useCallback(async () => {
-    const { data, error } = await supabase.from<SongModel>('songs').select('userId').match({ id: router.query.id });
+    const { data, error } = await supabase.from<ArticleModel>('songs').select('userId').match({ id: router.query.id });
 
     if (data) {
       if (data[0].userId === userId) {
@@ -88,7 +88,7 @@ const Article: CustomNextPage = () => {
   }, [router]);
 
   const handleDelete = useCallback(async (): Promise<void> => {
-    const { data, error } = await supabase.from<SongModel>('songs').delete().match({ id: router.query.id });
+    const { data, error } = await supabase.from<ArticleModel>('songs').delete().match({ id: router.query.id });
 
     if (data) {
       toast('成功', '削除しました', 'cyan');

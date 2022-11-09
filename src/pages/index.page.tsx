@@ -31,7 +31,7 @@ const Home: CustomNextPage = () => {
   const handleSubmit = useCallback(
     async (values: { music: string }, lang: LangModel, country: CountryModel): Promise<void> => {
       setIsLoading(true);
-      const { data } = await axios.get(
+      const { data } = await axios.get<ResultModel>(
         `//itunes.apple.com/search?term=${values.music}&country=${country}&lang=${lang}&media=music&limit=51&offset=0`
       );
       setSongList(data);
@@ -63,7 +63,7 @@ const Home: CustomNextPage = () => {
           </form>
         </Box>
         <div className='mt-5'>
-          <SongList songList={songList!} loading={isLoading} />
+          <SongList songList={songList} isLoading={isLoading} />
         </div>
       </div>
     </div>

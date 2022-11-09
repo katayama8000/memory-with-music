@@ -1,4 +1,4 @@
-import type { SongModel } from '@type/article.model';
+import type { ArticleModel } from '@type/article.model';
 import useSWR from 'swr';
 
 const fetcher = async (args: string) => {
@@ -6,7 +6,7 @@ const fetcher = async (args: string) => {
   return ret.json();
 };
 export const useGetArticles = () => {
-  const { data, error } = useSWR<SongModel[]>('./api/articles', fetcher);
+  const { data, error } = useSWR<ArticleModel[]>('./api/articles', fetcher);
   return {
     articles: data,
     isError: error,

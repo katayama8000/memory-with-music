@@ -11,20 +11,20 @@ const SkeletonCard = dynamic(() => {
 });
 
 type Props = {
-  loading: boolean;
-  songList: ResultModel;
+  isLoading: boolean;
+  songList?: ResultModel;
 };
 
 const NUMBER_OF_SKELETONS = Array.from(Array(9).keys());
 
-export const SongList: React.FC<Props> = ({ loading, songList }) => {
+export const SongList: React.FC<Props> = ({ isLoading, songList }) => {
   const { t } = useLocale();
   return (
     <div>
       {songList?.resultCount !== 0 ? (
         <div>
           <Grid>
-            {loading &&
+            {isLoading &&
               NUMBER_OF_SKELETONS.map((item) => {
                 return (
                   <Grid.Col xs={6} sm={4} className='mx-1 sm:mx-0' key={item}>
@@ -43,7 +43,7 @@ export const SongList: React.FC<Props> = ({ loading, songList }) => {
                       artistName={song.artistName}
                       trackName={song.trackName}
                       releaseDate={song.releaseDate}
-                      loading={loading}
+                      isLoading={isLoading}
                     />
                   </div>
                 </Grid.Col>

@@ -1,4 +1,4 @@
-import { MemoryCard } from '@components/Memory/MemoryCard';
+import { ArticleCard } from '@components/Article/ArticleCard';
 import { toast } from '@function/toast';
 import { useGetUserId } from '@hooks/useGetUserId';
 import { useGetUserName } from '@hooks/useGetUserName';
@@ -44,7 +44,7 @@ const Account: CustomNextPage = () => {
 
   const form = useForm({
     initialValues: {
-      name: userName!,
+      name: userName,
     },
   });
 
@@ -106,7 +106,7 @@ const Account: CustomNextPage = () => {
                   return (
                     <Grid.Col xs={6} key={item.id}>
                       <div className='m-auto px-2'>
-                        <MemoryCard
+                        <ArticleCard
                           id={item.id}
                           song={item.song}
                           image={item.image}

@@ -1,6 +1,6 @@
 import { useLocale } from '@hooks/useLocale';
 import { Button, Card, Image, Skeleton } from '@mantine/core';
-import type { Props } from '@type/articleCard.model';
+import type { SongCardModel } from '@type/card.model';
 import Link from 'next/link';
 import { memo } from 'react';
 
@@ -9,7 +9,7 @@ const getYear = (releaseDate: string): number => {
   return date.getFullYear();
 };
 
-export const SongCard: React.FC<Props> = memo(({ artistName, releaseDate, trackName, url }) => {
+export const SongCard: React.FC<SongCardModel> = memo(({ artistName, releaseDate, trackName, url }) => {
   const { t } = useLocale();
   return (
     <div>

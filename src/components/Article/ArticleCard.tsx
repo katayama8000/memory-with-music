@@ -1,16 +1,9 @@
 import { Card, Image, Skeleton } from '@mantine/core';
+import type { ArticleCardModel } from '@type/card.model';
 import Link from 'next/link';
 import { memo } from 'react';
 
-type Props = {
-  id: number;
-  artist: string;
-  image: string;
-  memory: string;
-  song: string;
-};
-
-export const MemoryCard: React.FC<Props> = memo(({ id, artist, image, memory, song }) => {
+export const ArticleCard: React.FC<ArticleCardModel> = memo(({ id, artist, image, memory, song }) => {
   return (
     <div>
       <Card withBorder={true} className='hover:opacity-70 sm:m-0 '>
@@ -42,7 +35,7 @@ export const MemoryCard: React.FC<Props> = memo(({ id, artist, image, memory, so
   );
 });
 
-MemoryCard.displayName = 'MemoryCard';
+ArticleCard.displayName = 'ArticleCard';
 
 export const SkeletonCard: React.FC = memo(() => {
   return (

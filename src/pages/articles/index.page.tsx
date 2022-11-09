@@ -1,4 +1,4 @@
-import { MemoryCard, SkeletonCard } from '@components/Memory/MemoryCard';
+import { ArticleCard, SkeletonCard } from '@components/Article/ArticleCard';
 import { useGetArticles } from '@hooks/useGetArticles';
 import { Grid } from '@mantine/core';
 import { DashboardLayout } from '@pages/_Layout';
@@ -27,7 +27,7 @@ const Articles: CustomNextPage = () => {
                 return (
                   <Grid.Col xs={6} className='mx-1 sm:mx-0' key={item.id}>
                     <div className='px-1'>
-                      <MemoryCard
+                      <ArticleCard
                         id={item.id}
                         song={item.song}
                         image={item?.image}

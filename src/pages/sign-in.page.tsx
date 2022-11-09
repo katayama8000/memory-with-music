@@ -12,7 +12,8 @@ import { supabase } from '../lib/supabase/supabase';
 
 const SignIn: CustomNextPage = () => {
   const router = useRouter();
-  const handleSignin = async (value: FormModel) => {
+
+  const handleSignin = async (value: Omit<FormModel, 'name'>) => {
     const { error, session, user } = await supabase.auth.signIn({
       email: value.email,
       password: value.password,

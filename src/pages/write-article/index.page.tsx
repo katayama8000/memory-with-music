@@ -5,7 +5,7 @@ import { useLocale } from '@hooks/useLocale';
 import { Button, Group, Textarea, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { DashboardLayout } from '@pages/_Layout';
-import type { SongModel } from '@type/article.model';
+import type { ArticleModel } from '@type/article.model';
 import type { CustomNextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -100,8 +100,8 @@ const WriteArticle: CustomNextPage = () => {
     setIsLoading(false);
   };
 
-  const handleUpDateArticle = async (values: { artist: string; memory: string; song: string }) => {
-    const { data, error } = await supabase.from<SongModel>('songs').update({ memory: values.memory }).match({
+  const handleUpDateArticle = async (values: Pick<ArticleModel, 'artist' | 'memory' | 'song'>) => {
+    const { data, error } = await supabase.from<ArticleModel>('songs').update({ memory: values.memory }).match({
       artist: values.artist,
       song: values.song,
       userId: userID,
@@ -119,7 +119,7 @@ const WriteArticle: CustomNextPage = () => {
     }
   };
 
-  const handleSubmit = (values: { artist: string; image: string; memory: string; song: string }) => {
+  const handleSubmit = (values: Omit<ArticleModel, 'id' | 'created_at' | 'userId'>) => {
     initForm.isEdit === 'true' ? handleUpDateArticle(values) : handleAddArticle(values);
   };
 

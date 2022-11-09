@@ -1,9 +1,9 @@
-import type { SongModel } from '@type/article.model';
+import type { ArticleModel } from '@type/article.model';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { supabase } from 'src/lib/supabase/supabase';
 
 const getUsersAPI = async (req: NextApiRequest, res: NextApiResponse) => {
-  const { data, error } = await supabase.from<SongModel>('songs').select();
+  const { data, error } = await supabase.from<ArticleModel>('songs').select();
   if (error) {
     return res.status(401).json({ error: error.message });
   }
