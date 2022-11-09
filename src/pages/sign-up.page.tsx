@@ -3,6 +3,7 @@ import { Box, Button, Group, PasswordInput, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { AuthLayout } from '@pages/_Layout';
 import type { FormModel } from '@type/form.model';
+import type { UserModel } from '@type/user.model';
 import type { CustomNextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -10,7 +11,7 @@ import { useState } from 'react';
 
 import { supabase } from '../lib/supabase/supabase';
 
-//emailで認証しなければならないらしい
+//emailで認証しなければならない
 const SignUp: CustomNextPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const { push } = useRouter();
@@ -23,7 +24,7 @@ const SignUp: CustomNextPage = () => {
 
     if (user) {
       toast('success', 'ユーザー登録に成功しました', 'cyan');
-      registerUserName(value.name!, user.id, value.email);
+      registerUserName({ userEmail: value.email, userId: user.id, userName: value.name });
       push('/');
     }
     if (session) {
@@ -36,12 +37,12 @@ const SignUp: CustomNextPage = () => {
     setIsLoading(false);
   };
 
-  const registerUserName = async (userName: string, userId: string, userEmail: string) => {
+  const registerUserName = async (value: Pick<UserModel, 'userEmail' | 'userId' | 'userName'>) => {
     await supabase.from<{ userEmail: string; userId: string; userName: string }>('users').insert([
       {
-        userEmail: userEmail,
-        userId: userId,
-        userName: userName,
+        userEmail: value.userEmail,
+        userId: value.userId,
+        userName: value.userName,
       },
     ]);
   };

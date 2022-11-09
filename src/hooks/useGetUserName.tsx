@@ -4,9 +4,9 @@ import { supabase } from 'src/lib/supabase/supabase';
 
 export const useGetUserName = (): {
   getUserName: () => void;
-  userName: string | null;
+  userName: string;
 } => {
-  const [userName, setUserName] = useState<string | null>(null);
+  const [userName, setUserName] = useState<string>('');
   const userID = useGetUserId();
   const getUserName = useCallback(async (): Promise<void> => {
     try {
@@ -15,7 +15,7 @@ export const useGetUserName = (): {
         .select('userName')
         .match({ userId: userID });
       if (data) {
-        const userName = data?.[0].userName;
+        const userName = data[0].userName;
         setUserName(userName);
       }
       if (error || !data) {

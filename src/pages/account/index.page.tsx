@@ -44,7 +44,7 @@ const Account: CustomNextPage = () => {
 
   const form = useForm({
     initialValues: {
-      name: userName!,
+      name: userName,
     },
   });
 

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useGetArticles } from '@hooks/useGetArticles';
 import { AuthLayout } from '@pages/_Layout';
 import type { CustomNextPage } from 'next';
