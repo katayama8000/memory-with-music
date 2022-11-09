@@ -43,7 +43,7 @@ export const SongList: React.FC<Props> = ({ isLoading, songList }) => {
                       artistName={song.artistName}
                       trackName={song.trackName}
                       releaseDate={song.releaseDate}
-                      loading={isLoading}
+                      isLoading={isLoading}
                     />
                   </div>
                 </Grid.Col>
