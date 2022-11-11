@@ -1,6 +1,7 @@
 import { Card, Image, Skeleton } from '@mantine/core';
 import type { ArticleCardModel } from '@type/card.model';
 import Link from 'next/link';
+import type { FC } from 'react';
 import { memo } from 'react';
 
 export const ArticleCard: React.FC<ArticleCardModel> = memo(({ id, artist, image, memory, song }) => {
@@ -37,7 +38,7 @@ export const ArticleCard: React.FC<ArticleCardModel> = memo(({ id, artist, image
 
 ArticleCard.displayName = 'ArticleCard';
 
-export const SkeletonCard: React.FC = memo(() => {
+export const SkeletonCard: FC = memo(() => {
   return (
     <div>
       <Card withBorder={true} className='hover:opacity-70 sm:m-0 '>
