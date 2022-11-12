@@ -7,16 +7,25 @@ import { Suspense } from 'react';
 
 const HeaderComp = dynamic(async () => {
   const { HeaderComp } = await import('./Header');
+  await new Promise((resolve) => {
+    return setTimeout(resolve, 2000);
+  });
   return HeaderComp;
 });
 
 const SideNav = dynamic(async () => {
   const { SideNav } = await import('./sideNav/SideNav');
+  await new Promise((resolve) => {
+    return setTimeout(resolve, 1000);
+  });
   return SideNav;
 });
 
 const User = dynamic(async () => {
   const { User } = await import('./sideNav/User');
+  await new Promise((resolve) => {
+    return setTimeout(resolve, 1000);
+  });
   return User;
 });
 
