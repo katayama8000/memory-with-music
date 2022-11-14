@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { FC } from 'react';
 import { memo } from 'react';
 
-export const ArticleCard: React.FC<ArticleCardModel> = memo(({ id, artist, image, memory, song }) => {
+export const ArticleCard: FC<ArticleCardModel> = memo(({ id, artist, image, memory, song }) => {
   return (
     <div>
       <Card withBorder={true} className='hover:opacity-70 sm:m-0 '>
@@ -25,9 +25,9 @@ export const ArticleCard: React.FC<ArticleCardModel> = memo(({ id, artist, image
               <Image src={image} alt={artist} height={60} width={80} radius='md' withPlaceholder className='mr-5' />
             )}
             <div className='truncate'>
-              {song}/{artist}
+              <span>{song}</span>/<span>{artist}</span>
               <br />
-              {memory}
+              <span>{memory}</span>
             </div>
           </div>
         </Link>
