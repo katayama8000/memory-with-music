@@ -5,15 +5,13 @@ describe('Home', () => {
   it('renders a heading', () => {
     render(<HogeComp />);
 
-    const heading1 = screen.getByRole('heading', {
-      name: /This is h1/i,
-    });
-
-    const heading2 = screen.getByRole('heading', {
-      name: /This is h2/i,
-    });
-
-    expect(heading1).toBeInTheDocument;
-    expect(heading2).toBeInTheDocument;
+    screen.debug(screen.getByRole('heading'));
+    expect(screen.getByRole('heading')).toBeTruthy();
+    expect(screen.getByRole('textbox')).toBeTruthy();
+    expect(screen.getAllByRole('button')[0]).toBeTruthy();
+    expect(screen.getAllByRole('button')[1]).toBeTruthy();
+    expect(screen.getByText('Udemy')).toBeTruthy();
+    expect(screen.queryByText('Udemyyy')).toBeNull();
+    expect(screen.getByTestId('copyright')).toBeTruthy();
   });
 });
