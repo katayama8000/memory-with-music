@@ -4,7 +4,7 @@ import Link from 'next/link';
 import type { FC } from 'react';
 import { memo } from 'react';
 
-export const ArticleCard: React.FC<ArticleCardModel> = memo(({ id, artist, image, memory, song }) => {
+export const ArticleCard: FC<ArticleCardModel> = memo(({ id, artist, image, memory, song }) => {
   return (
     <div>
       <Card withBorder={true} className='hover:opacity-70 sm:m-0 '>
