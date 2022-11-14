@@ -25,9 +25,9 @@ export const ArticleCard: FC<ArticleCardModel> = memo(({ id, artist, image, memo
               <Image src={image} alt={artist} height={60} width={80} radius='md' withPlaceholder className='mr-5' />
             )}
             <div className='truncate'>
-              {song}/{artist}
+              <span>{song}</span>/<span>{artist}</span>
               <br />
-              {memory}
+              <span>{memory}</span>
             </div>
           </div>
         </Link>
