@@ -2,7 +2,6 @@ import type { ArticleModel } from './article.model';
 import type { results } from './result.model';
 
 type SongCardModel = Pick<results, 'artistName' | 'releaseDate' | 'trackName'> & {
-  isLoading: boolean;
   url: string;
 };
 

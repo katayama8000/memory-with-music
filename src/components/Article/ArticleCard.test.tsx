@@ -1,10 +1,11 @@
 import { render, screen } from '@testing-library/react';
+import type { ArticleCardModel } from '@type/card.model';
 
 import { ArticleCard, SkeletonCard } from './ArticleCard';
 
 describe('rendering', () => {
   it('should render SongCard', () => {
-    const ArticleMock = {
+    const ArticleMock: ArticleCardModel = {
       id: 1,
       artist: 'katayama',
       image: 'https://twitter.com/',
@@ -24,11 +25,11 @@ describe('rendering', () => {
     expect(screen.getByText('your song')).toBeTruthy;
     expect(screen.getByText('katayama')).toBeTruthy;
     expect(screen.getByText('honoka')).toBeTruthy;
-    screen.debug(screen.getByText('your song'));
+    //screen.debug(screen.getByText('your song'));
   });
 
   it('should render SkeletonCard', () => {
     render(<SkeletonCard />);
-    screen.debug();
+    //screen.debug();
   });
 });
