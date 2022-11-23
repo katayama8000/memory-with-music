@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unescaped-entities */
-import { toast } from '@function/toast';
 import { Box, Button, Group, PasswordInput, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { AuthLayout } from '@pages/_Layout';
@@ -7,6 +6,7 @@ import type { FormModel } from '@type/form.model';
 import type { CustomNextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
+import { toast } from 'src/lib/function/toast';
 
 import { supabase } from '../lib/supabase/supabase';
 

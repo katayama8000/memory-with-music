@@ -1,7 +1,7 @@
-import { toast } from '@function/toast';
 import { useGetUserId } from '@hooks/useGetUserId';
 import type { ArticleModel } from '@type/article.model';
 import { useCallback, useEffect, useState } from 'react';
+import { toast } from 'src/lib/function/toast';
 import { supabase } from 'src/lib/supabase/supabase';
 
 export const useGetUserSongs = (): {

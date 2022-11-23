@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { toast } from '@function/toast';
 import { useGetUserId } from '@hooks/useGetUserId';
 import { useLocale } from '@hooks/useLocale';
 import { Button, Group, Textarea, TextInput } from '@mantine/core';
@@ -9,6 +8,7 @@ import type { ArticleModel } from '@type/article.model';
 import type { CustomNextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { toast } from 'src/lib/function/toast';
 
 import { supabase } from '../../lib/supabase/supabase';
 

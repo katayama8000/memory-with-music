@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { toast } from '@function/toast';
 import { useGetUserId } from '@hooks/useGetUserId';
 import { TypographyStylesProvider } from '@mantine/core';
 import { DashboardLayout } from '@pages/_Layout';
@@ -8,6 +7,7 @@ import type { CustomNextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import { toast } from 'src/lib/function/toast';
 import { supabase } from 'src/lib/supabase/supabase';
 
 import { GoodIcon } from '../good/goodIcon';
