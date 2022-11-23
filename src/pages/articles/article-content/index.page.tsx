@@ -1,12 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useGetUserId } from '@hooks/useGetUserId';
-import { TypographyStylesProvider } from '@mantine/core';
+import { Button, TypographyStylesProvider } from '@mantine/core';
 import { DashboardLayout } from '@pages/_Layout';
 import type { ArticleModel, UserModel } from '@type/index';
 import type { CustomNextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import { TABLE } from 'src/constant/table.const';
 import { toast } from 'src/lib/function/toast';
 import { supabase } from 'src/lib/supabase/supabase';
 
@@ -82,6 +83,24 @@ const Article: CustomNextPage = () => {
   }, [router]);
 
   const [isGood, setIsGood] = useState<boolean>(false);
+  const handleClickGood = useCallback(async () => {
+    const { data, error } = await supabase
+      .from(TABLE.GOODS)
+      .select('id')
+      .match({ articleId: Number(router.query.id), userId });
+    console.log(data, error);
+    if (data) {
+      if (data.length === 0) {
+        await supabase.from(TABLE.GOODS).insert({ articleId: Number(router.query.id), userId });
+        setIsGood(true);
+      } else {
+        await supabase.from(TABLE.GOODS).delete().match({ id: data[0].id });
+        setIsGood(false);
+      }
+    }
+
+    if (error) toast('error', error.message, 'red');
+  }, [router.query.id, userId]);
 
   return (
     <article className='m-auto max-w-4xl px-2'>
@@ -95,6 +114,7 @@ const Article: CustomNextPage = () => {
           </span>
           <span className='font-medium'>2</span>
         </div>
+        <Button onClick={handleClickGood}>supabase click</Button>
         <div>
           {isMyArticle && (
             <div className='flex px-4'>

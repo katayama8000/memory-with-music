@@ -1,13 +1,14 @@
 import { useGetUserId } from '@hooks/useGetUserId';
 import { Button } from '@mantine/core';
 import { useEffect } from 'react';
+import { TABLE } from 'src/constant/table.const';
 import { supabase } from 'src/lib/supabase/supabase';
 
 const Demo2 = () => {
   const userId = useGetUserId();
   const mySubscription = () => {
     return supabase
-      .from('goods')
+      .from(TABLE.GOODS)
       .on('INSERT', (payload: any) => {
         console.log('Change received!', payload);
       })

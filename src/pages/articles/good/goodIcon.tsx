@@ -16,11 +16,11 @@ export const GoodIcon: FC<Props> = memo(({ isGood, setIsGood, size }) => {
       width={size}
       height={size}
       viewBox='0 0 24 24'
-      stroke-width='1.5'
+      strokeWidth='1.5'
       stroke='#2c3e50'
       fill={color}
-      stroke-linecap='round'
-      stroke-linejoin='round'
+      strokeLinecap='round'
+      strokeLinejoin='round'
       onClick={() => {
         if (setIsGood) {
           setIsGood(!isGood);
