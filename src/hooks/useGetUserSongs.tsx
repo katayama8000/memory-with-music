@@ -5,7 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { supabase } from 'src/lib/supabase/supabase';
 
 export const useGetUserSongs = (): {
-  getUserSongs: () => void;
+  getUserSongs: () => Promise<void>;
   isLoading: boolean;
   songList: ArticleModel[];
 } => {

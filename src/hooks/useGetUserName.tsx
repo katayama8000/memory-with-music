@@ -5,7 +5,7 @@ import { supabase } from 'src/lib/supabase/supabase';
 
 export const useGetUserName = (): {
   getUserName: () => void;
-  userName: string;
+  userName: UserModel['userName'];
 } => {
   const [userName, setUserName] = useState<string>('');
   const userID = useGetUserId();
