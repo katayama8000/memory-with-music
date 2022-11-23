@@ -6,7 +6,7 @@
 - TypeScript
 - Next.js
 - Mantine
-- supabase
+- supabase([docs](https://www.supabase.jp/docs/))
 - valtio
 
 
