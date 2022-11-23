@@ -1,7 +1,7 @@
 import { ArticleCard } from '@components/Article/ArticleCard';
+import { useGetUserSongs } from '@hooks/useGetUserArticle';
 import { useGetUserId } from '@hooks/useGetUserId';
 import { useGetUserName } from '@hooks/useGetUserName';
-import { useGetUserSongs } from '@hooks/useGetUserSongs';
 import { useLocale } from '@hooks/useLocale';
 import { Avatar, Button, Grid, Group, Modal, Spoiler, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
