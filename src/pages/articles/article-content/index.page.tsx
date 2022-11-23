@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 import { supabase } from 'src/lib/supabase/supabase';
 
+import { GoodIcon } from '../good/goodIcon';
 import { DeleteArticleModal } from './DeleteArticleModal';
 import { DeleteIcon } from './tooltip/deleteIcon';
 import { EditIcon } from './tooltip/editIcon';
@@ -92,12 +93,21 @@ const Article: CustomNextPage = () => {
     setOpened(false);
   }, [router]);
 
+  const [isGood, setIsGood] = useState<boolean>(false);
+
   return (
-    <div className='m-auto max-w-4xl px-2'>
-      <div className='flex justify-between py-4'>
-        <div className='truncate text-3xl font-extrabold'>
-          {initArticle.song}/{initArticle.artist}
+    <article className='m-auto max-w-4xl px-2'>
+      <div className='flex items-center justify-between py-4'>
+        <div className='flex truncate text-3xl font-extrabold'>
+          <span>
+            {initArticle.song}/{initArticle.artist}
+          </span>
+          <span className='ml-2 pt-1'>
+            <GoodIcon isGood={isGood} size={30} setIsGood={setIsGood} />
+          </span>
+          <span className='font-medium'>2</span>
         </div>
+        <div></div>
         <div>
           {isMyArticle && (
             <div className='flex px-4'>
@@ -132,7 +142,7 @@ const Article: CustomNextPage = () => {
         </TypographyStylesProvider>
       </div>
       <DeleteArticleModal opened={opened} setOpened={setOpened} handleDelete={handleDelete} />
-    </div>
+    </article>
   );
 };
 
