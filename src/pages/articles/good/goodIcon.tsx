@@ -3,7 +3,7 @@ import { memo } from 'react';
 
 type Props = {
   isGood: boolean;
-  setIsGood: Dispatch<SetStateAction<boolean>>;
+  setIsGood?: Dispatch<SetStateAction<boolean>>;
   size: number;
 };
 
@@ -22,7 +22,9 @@ export const GoodIcon: FC<Props> = memo(({ isGood, setIsGood, size }) => {
       stroke-linecap='round'
       stroke-linejoin='round'
       onClick={() => {
-        setIsGood(!isGood);
+        if (setIsGood) {
+          setIsGood(!isGood);
+        }
       }}
     >
       <path stroke='none' d='M0 0h24v24H0z' fill='none' />

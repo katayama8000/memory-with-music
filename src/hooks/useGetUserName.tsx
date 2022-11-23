@@ -1,4 +1,5 @@
 import { useGetUserId } from '@hooks/useGetUserId';
+import type { UserModel } from '@type/user.model';
 import { useCallback, useEffect, useState } from 'react';
 import { supabase } from 'src/lib/supabase/supabase';
 
@@ -11,7 +12,7 @@ export const useGetUserName = (): {
   const getUserName = useCallback(async (): Promise<void> => {
     try {
       const { data, error } = await supabase
-        .from<{ userName: string }>('users')
+        .from<{ userName: UserModel['userName'] }>('users')
         .select('userName')
         .match({ userId: userID });
       if (data) {

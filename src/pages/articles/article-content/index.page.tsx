@@ -3,8 +3,7 @@ import { toast } from '@function/toast';
 import { useGetUserId } from '@hooks/useGetUserId';
 import { TypographyStylesProvider } from '@mantine/core';
 import { DashboardLayout } from '@pages/_Layout';
-import type { ArticleModel } from '@type/article.model';
-import type { UserModel } from '@type/user.model';
+import type { ArticleModel, UserModel } from '@type/index';
 import type { CustomNextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -35,15 +34,11 @@ const Article: CustomNextPage = () => {
     const { data, error } = await supabase.from<ArticleModel>('songs').select('userId').match({ id: router.query.id });
 
     if (data) {
-      if (data[0].userId === userId) {
-        setIsMyArticle(true);
-      } else {
-        setIsMyArticle(false);
-      }
+      data[0].userId === userId ? setIsMyArticle(true) : setIsMyArticle(false);
       setUserIdRelatedArticle(data[0].userId);
     }
 
-    if (error) {
+    if (error || !data) {
       toast('error', error.message, 'red');
     }
   }, [router.query.id, userId]);

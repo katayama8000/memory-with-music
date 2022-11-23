@@ -7,6 +7,7 @@ import { useLocale } from '@hooks/useLocale';
 import { Avatar, Button, Grid, Group, Modal, Spoiler, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { DashboardLayout } from '@pages/_Layout';
+import type { UserModel } from '@type/user.model';
 import type { CustomNextPage } from 'next';
 import { useCallback, useState } from 'react';
 import { AiTwotoneSetting } from 'react-icons/ai';
@@ -24,7 +25,7 @@ const Account: CustomNextPage = () => {
     async (value: { name: string }): Promise<void> => {
       setIsLoading(true);
       const { data, error } = await supabase
-        .from<{ userName: string }>('users')
+        .from<{ userName: UserModel['userName'] }>('users')
         .update({ userName: value.name })
         .match({ userId: userID });
 
