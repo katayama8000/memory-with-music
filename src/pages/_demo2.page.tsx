@@ -8,7 +8,7 @@ const Demo2 = () => {
   const mySubscription = () => {
     return supabase
       .from('goods')
-      .on('INSERT', (payload) => {
+      .on('INSERT', (payload: any) => {
         console.log('Change received!', payload);
       })
       .subscribe();

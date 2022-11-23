@@ -1,11 +1,11 @@
 import { proxy } from 'valtio';
 
-export const state = proxy<{
-  color: 'light' | 'dark';
-}>({
+type themeModel = 'light' | ' dark';
+
+export const state = proxy<{ color: themeModel }>({
   color: 'light',
 });
 
-export const toggleColor = (color: 'light' | 'dark') => {
+export const toggleColor = (color: themeModel): void => {
   state.color = color;
 };
