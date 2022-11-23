@@ -30,7 +30,7 @@ const Article: CustomNextPage = () => {
     song: '',
   });
 
-  const compareUserIdRelatedToArticle = useCallback(async () => {
+  const compareUserIdRelatedToArticle = useCallback(async (): Promise<void> => {
     const { data, error } = await supabase.from<ArticleModel>('songs').select('userId').match({ id: router.query.id });
 
     if (data) {
@@ -38,24 +38,18 @@ const Article: CustomNextPage = () => {
       setUserIdRelatedArticle(data[0].userId);
     }
 
-    if (error || !data) {
-      toast('error', error.message, 'red');
-    }
+    if (error || !data) toast('error', error.message, 'red');
   }, [router.query.id, userId]);
 
-  const getUserNameRelatedToArticle = useCallback(async () => {
+  const getUserNameRelatedToArticle = useCallback(async (): Promise<void> => {
     const { data, error } = await supabase
       .from<UserModel>('users')
       .select('userName')
       .match({ userId: userIdRelatedArticle });
 
-    if (data) {
-      setUserName(data[0]?.userName);
-    }
+    if (data) setUserName(data[0]?.userName);
 
-    if (error) {
-      toast('error', error.message, 'red');
-    }
+    if (error) toast('error', error.message, 'red');
   }, [userIdRelatedArticle]);
 
   useEffect(() => {
@@ -82,9 +76,8 @@ const Article: CustomNextPage = () => {
       toast('成功', '削除しました', 'cyan');
       router.push('/articles');
     }
-    if (error) {
-      toast('error', error.message, 'red');
-    }
+    if (error) toast('error', error.message, 'red');
+
     setOpened(false);
   }, [router]);
 
@@ -102,7 +95,6 @@ const Article: CustomNextPage = () => {
           </span>
           <span className='font-medium'>2</span>
         </div>
-        <div></div>
         <div>
           {isMyArticle && (
             <div className='flex px-4'>

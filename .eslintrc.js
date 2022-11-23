@@ -42,7 +42,7 @@ module.exports = {
         // アロー関数で一行省略の禁止
         "arrow-body-style": ["error", "always"],
         // ブロックの中括弧（{}）を省略しない
-        curly: "error",
+        //curly: "error",
         // アロー関数の使用を強制
         "func-style": ["error", "expression"],
 
