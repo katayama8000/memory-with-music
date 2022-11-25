@@ -1,8 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useCountGood } from '@hooks/useCountGood';
 import { useGetUserId } from '@hooks/useGetUserId';
-import { useIsGoodRelatedToUserId } from '@hooks/useIsGoodRelatedToUserId';
-import { Button, TypographyStylesProvider } from '@mantine/core';
+import { useHandleGood } from '@hooks/useHandleGood';
+import { TypographyStylesProvider } from '@mantine/core';
 import { DashboardLayout } from '@pages/_Layout';
 import { GoodIcon } from '@pages/articles/good/goodIcon';
 import type { ArticleModel, UserModel } from '@type/index';
@@ -32,9 +31,7 @@ const Article: CustomNextPage = () => {
   });
   const router = useRouter();
   const userId = useGetUserId();
-  const { countGood } = useCountGood();
-  const { isGood } = useIsGoodRelatedToUserId();
-  console.log('isGood', isGood);
+  const { countGood, handleToggleGood, isGood } = useHandleGood();
 
   const compareUserIdRelatedToArticle = useCallback(async (): Promise<void> => {
     const { data, error } = await supabase
@@ -90,23 +87,6 @@ const Article: CustomNextPage = () => {
     setOpened(false);
   }, [router]);
 
-  const handleClickGood = useCallback(async () => {
-    const { data, error } = await supabase
-      .from(TABLE.GOODS)
-      .select('id')
-      .match({ articleId: Number(router.query.id), userId });
-    console.log(data, error);
-    if (data) {
-      if (data.length === 0) {
-        await supabase.from(TABLE.GOODS).insert({ articleId: Number(router.query.id), userId });
-      } else {
-        await supabase.from(TABLE.GOODS).delete().match({ id: data[0].id });
-      }
-    }
-
-    if (error) toast('error', error.message, 'red');
-  }, [router.query.id, userId]);
-
   return (
     <article className='m-auto max-w-4xl px-2'>
       <div className='flex items-center justify-between py-4'>
@@ -115,11 +95,10 @@ const Article: CustomNextPage = () => {
             {initArticle.song}/{initArticle.artist}
           </span>
           <span className='ml-2 pt-1'>
-            <GoodIcon isGood={isGood} size={30} />
+            <GoodIcon isGood={isGood} size={30} handleToggleGood={handleToggleGood} />
           </span>
           <span className='font-medium'>{countGood}</span>
         </div>
-        <Button onClick={handleClickGood}>supabase click</Button>
         <div>
           {isMyArticle && (
             <div className='flex px-4'>

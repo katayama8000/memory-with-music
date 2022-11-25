@@ -1,13 +1,13 @@
-import type { Dispatch, FC, SetStateAction } from 'react';
+import type { FC } from 'react';
 import { memo } from 'react';
 
 type Props = {
+  handleToggleGood: () => Promise<void>;
   isGood: boolean;
-  setIsGood?: Dispatch<SetStateAction<boolean>>;
   size: number;
 };
 
-export const GoodIcon: FC<Props> = memo(({ isGood, setIsGood, size }) => {
+export const GoodIcon: FC<Props> = memo(({ handleToggleGood, isGood, size }) => {
   const color = isGood ? '#ff2825' : 'none';
   return (
     <svg
@@ -21,11 +21,7 @@ export const GoodIcon: FC<Props> = memo(({ isGood, setIsGood, size }) => {
       fill={color}
       strokeLinecap='round'
       strokeLinejoin='round'
-      onClick={() => {
-        if (setIsGood) {
-          setIsGood(!isGood);
-        }
-      }}
+      onClick={handleToggleGood}
     >
       <path stroke='none' d='M0 0h24v24H0z' fill='none' />
       <path d='M19.5 13.572l-7.5 7.428l-7.5 -7.428m0 0a5 5 0 1 1 7.5 -6.566a5 5 0 1 1 7.5 6.572' />
