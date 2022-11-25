@@ -1,15 +1,16 @@
 import { ArticleCard } from '@components/Article/ArticleCard';
-import { toast } from '@function/toast';
+import { useGetUserSongs } from '@hooks/useGetUserArticle';
 import { useGetUserId } from '@hooks/useGetUserId';
 import { useGetUserName } from '@hooks/useGetUserName';
-import { useGetUserSongs } from '@hooks/useGetUserSongs';
 import { useLocale } from '@hooks/useLocale';
 import { Avatar, Button, Grid, Group, Modal, Spoiler, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { DashboardLayout } from '@pages/_Layout';
+import type { UserModel } from '@type/user.model';
 import type { CustomNextPage } from 'next';
 import { useCallback, useState } from 'react';
 import { AiTwotoneSetting } from 'react-icons/ai';
+import { toast } from 'src/lib/function/toast';
 import { supabase } from 'src/lib/supabase/supabase';
 
 const Account: CustomNextPage = () => {
@@ -24,7 +25,7 @@ const Account: CustomNextPage = () => {
     async (value: { name: string }): Promise<void> => {
       setIsLoading(true);
       const { data, error } = await supabase
-        .from<{ userName: string }>('users')
+        .from<{ userName: UserModel['userName'] }>('users')
         .update({ userName: value.name })
         .match({ userId: userID });
 

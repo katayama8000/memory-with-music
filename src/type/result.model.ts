@@ -1,9 +1,9 @@
-export type ResultModel = {
+type ResultModel = {
   resultCount: number;
   results: results[];
 };
 
-export type results = {
+type results = {
   artistId: number;
   artistName: string;
   artistViewUrl: string;
@@ -27,3 +27,5 @@ export type results = {
   trackViewUrl: string;
   wrapperType: string;
 };
+
+export type { ResultModel, results };

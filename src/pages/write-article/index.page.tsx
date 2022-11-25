@@ -1,5 +1,4 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { toast } from '@function/toast';
 import { useGetUserId } from '@hooks/useGetUserId';
 import { useLocale } from '@hooks/useLocale';
 import { Button, Group, Textarea, TextInput } from '@mantine/core';
@@ -9,6 +8,8 @@ import type { ArticleModel } from '@type/article.model';
 import type { CustomNextPage } from 'next';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { TABLE } from 'src/constant/table.const';
+import { toast } from 'src/lib/function/toast';
 
 import { supabase } from '../../lib/supabase/supabase';
 
@@ -71,20 +72,20 @@ const WriteArticle: CustomNextPage = () => {
   }, [initForm]);
 
   const handleAddArticle = async (values: {
-    artist: string | string[] | undefined;
-    image: string | string[] | undefined;
-    memory: string | string[] | undefined;
-    song: string | string[] | undefined;
+    artist: string;
+    image: string;
+    memory: string;
+    song: string;
   }): Promise<void> => {
     setIsLoading(true);
 
-    const { data, error } = await supabase.from('songs').insert([
+    const { data, error } = await supabase.from<ArticleModel>(TABLE.SONGS).insert([
       {
         artist: values.artist,
         image: values.image,
         memory: values.memory,
         song: values.song,
-        userId: userID,
+        userId: userID as string,
       },
     ]);
 
@@ -101,7 +102,7 @@ const WriteArticle: CustomNextPage = () => {
   };
 
   const handleUpDateArticle = async (values: Pick<ArticleModel, 'artist' | 'memory' | 'song'>) => {
-    const { data, error } = await supabase.from<ArticleModel>('songs').update({ memory: values.memory }).match({
+    const { data, error } = await supabase.from<ArticleModel>(TABLE.SONGS).update({ memory: values.memory }).match({
       artist: values.artist,
       song: values.song,
       userId: userID,

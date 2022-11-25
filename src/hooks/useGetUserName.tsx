@@ -1,17 +1,19 @@
 import { useGetUserId } from '@hooks/useGetUserId';
+import type { UserModel } from '@type/user.model';
 import { useCallback, useEffect, useState } from 'react';
+import { TABLE } from 'src/constant/table.const';
 import { supabase } from 'src/lib/supabase/supabase';
 
 export const useGetUserName = (): {
   getUserName: () => void;
-  userName: string;
+  userName: UserModel['userName'];
 } => {
   const [userName, setUserName] = useState<string>('');
   const userID = useGetUserId();
   const getUserName = useCallback(async (): Promise<void> => {
     try {
       const { data, error } = await supabase
-        .from<{ userName: string }>('users')
+        .from<{ userName: UserModel['userName'] }>(TABLE.USERS)
         .select('userName')
         .match({ userId: userID });
       if (data) {

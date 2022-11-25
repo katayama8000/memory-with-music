@@ -1,14 +1,16 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { toast } from '@function/toast';
 import { useGetUserId } from '@hooks/useGetUserId';
+import { useHandleGood } from '@hooks/useHandleGood';
 import { TypographyStylesProvider } from '@mantine/core';
 import { DashboardLayout } from '@pages/_Layout';
-import type { ArticleModel } from '@type/article.model';
-import type { UserModel } from '@type/user.model';
+import { GoodIcon } from '@pages/articles/good/goodIcon';
+import type { ArticleModel, UserModel } from '@type/index';
 import type { CustomNextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
+import { TABLE } from 'src/constant/table.const';
+import { toast } from 'src/lib/function/toast';
 import { supabase } from 'src/lib/supabase/supabase';
 
 import { DeleteArticleModal } from './DeleteArticleModal';
@@ -19,8 +21,6 @@ const Article: CustomNextPage = () => {
   const [opened, setOpened] = useState<boolean>(false);
   const [userIdRelatedArticle, setUserIdRelatedArticle] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
-  const router = useRouter();
-  const userId = useGetUserId();
   const [isMyArticle, setIsMyArticle] = useState<boolean>(false);
   const [initArticle, setInitArticle] = useState({
     id: 0,
@@ -29,37 +29,33 @@ const Article: CustomNextPage = () => {
     memory: '',
     song: '',
   });
+  const router = useRouter();
+  const userId = useGetUserId();
+  const { countGood, handleToggleGood, isGood } = useHandleGood();
 
-  const compareUserIdRelatedToArticle = useCallback(async () => {
-    const { data, error } = await supabase.from<ArticleModel>('songs').select('userId').match({ id: router.query.id });
+  const compareUserIdRelatedToArticle = useCallback(async (): Promise<void> => {
+    const { data, error } = await supabase
+      .from<ArticleModel>(TABLE.SONGS)
+      .select('userId')
+      .match({ id: router.query.id });
 
     if (data) {
-      if (data[0].userId === userId) {
-        setIsMyArticle(true);
-      } else {
-        setIsMyArticle(false);
-      }
+      data[0].userId === userId ? setIsMyArticle(true) : setIsMyArticle(false);
       setUserIdRelatedArticle(data[0].userId);
     }
 
-    if (error) {
-      toast('error', error.message, 'red');
-    }
+    if (error || !data) toast('error', error.message, 'red');
   }, [router.query.id, userId]);
 
-  const getUserNameRelatedToArticle = useCallback(async () => {
+  const getUserNameRelatedToArticle = useCallback(async (): Promise<void> => {
     const { data, error } = await supabase
-      .from<UserModel>('users')
+      .from<{ userName: UserModel['userName'] }>(TABLE.USERS)
       .select('userName')
       .match({ userId: userIdRelatedArticle });
 
-    if (data) {
-      setUserName(data[0]?.userName);
-    }
+    if (data) setUserName(data[0]?.userName);
 
-    if (error) {
-      toast('error', error.message, 'red');
-    }
+    if (error) toast('error', error.message, 'red');
   }, [userIdRelatedArticle]);
 
   useEffect(() => {
@@ -80,23 +76,28 @@ const Article: CustomNextPage = () => {
   }, [router]);
 
   const handleDelete = useCallback(async (): Promise<void> => {
-    const { data, error } = await supabase.from<ArticleModel>('songs').delete().match({ id: router.query.id });
+    const { data, error } = await supabase.from<ArticleModel>(TABLE.SONGS).delete().match({ id: router.query.id });
 
     if (data) {
       toast('成功', '削除しました', 'cyan');
       router.push('/articles');
     }
-    if (error) {
-      toast('error', error.message, 'red');
-    }
+    if (error) toast('error', error.message, 'red');
+
     setOpened(false);
   }, [router]);
 
   return (
-    <div className='m-auto max-w-4xl px-2'>
-      <div className='flex justify-between py-4'>
-        <div className='truncate text-3xl font-extrabold'>
-          {initArticle.song}/{initArticle.artist}
+    <article className='m-auto max-w-4xl px-2'>
+      <div className='flex items-center justify-between py-4'>
+        <div className='flex truncate text-3xl font-extrabold'>
+          <span>
+            {initArticle.song}/{initArticle.artist}
+          </span>
+          <span className='ml-2 pt-1'>
+            <GoodIcon isGood={isGood} size={30} handleToggleGood={handleToggleGood} />
+          </span>
+          <span className='font-medium'>{countGood}</span>
         </div>
         <div>
           {isMyArticle && (
@@ -132,7 +133,7 @@ const Article: CustomNextPage = () => {
         </TypographyStylesProvider>
       </div>
       <DeleteArticleModal opened={opened} setOpened={setOpened} handleDelete={handleDelete} />
-    </div>
+    </article>
   );
 };
 

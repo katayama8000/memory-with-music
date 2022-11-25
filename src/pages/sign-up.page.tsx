@@ -1,15 +1,16 @@
-import { toast } from '@function/toast';
 import { Box, Button, Group, PasswordInput, TextInput } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { AuthLayout } from '@pages/_Layout';
-import type { FormModel } from '@type/form.model';
-import type { UserModel } from '@type/user.model';
+import type { FormModel, UserModel } from '@type/index';
 import type { CustomNextPage } from 'next';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
+import { toast } from 'src/lib/function/toast';
 
 import { supabase } from '../lib/supabase/supabase';
+
+type registerUserNameType = Pick<UserModel, 'userEmail' | 'userId' | 'userName'>;
 
 //emailで認証しなければならない
 const SignUp: CustomNextPage = () => {
@@ -37,8 +38,8 @@ const SignUp: CustomNextPage = () => {
     setIsLoading(false);
   };
 
-  const registerUserName = async (value: Pick<UserModel, 'userEmail' | 'userId' | 'userName'>) => {
-    await supabase.from<{ userEmail: string; userId: string; userName: string }>('users').insert([
+  const registerUserName = async (value: registerUserNameType) => {
+    await supabase.from<registerUserNameType>('users').insert([
       {
         userEmail: value.userEmail,
         userId: value.userId,

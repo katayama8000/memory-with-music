@@ -1,11 +1,12 @@
-import { toast } from '@function/toast';
 import { useGetUserId } from '@hooks/useGetUserId';
 import type { ArticleModel } from '@type/article.model';
 import { useCallback, useEffect, useState } from 'react';
+import { TABLE } from 'src/constant/table.const';
+import { toast } from 'src/lib/function/toast';
 import { supabase } from 'src/lib/supabase/supabase';
 
 export const useGetUserSongs = (): {
-  getUserSongs: () => void;
+  getUserSongs: () => Promise<void>;
   isLoading: boolean;
   songList: ArticleModel[];
 } => {
@@ -16,7 +17,7 @@ export const useGetUserSongs = (): {
     setIsLoading(true);
     try {
       const { data, error } = await supabase
-        .from<ArticleModel>('songs')
+        .from<ArticleModel>(TABLE.SONGS)
         .select('id,song, artist,image,memory')
         .match({ userId: userID });
       if (data) {
