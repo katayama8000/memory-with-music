@@ -1,4 +1,5 @@
 /* eslint-disable react-hooks/exhaustive-deps */
+import { useCountGood } from '@hooks/useCountGood';
 import { useGetUserId } from '@hooks/useGetUserId';
 import { Button, TypographyStylesProvider } from '@mantine/core';
 import { DashboardLayout } from '@pages/_Layout';
@@ -20,8 +21,6 @@ const Article: CustomNextPage = () => {
   const [opened, setOpened] = useState<boolean>(false);
   const [userIdRelatedArticle, setUserIdRelatedArticle] = useState<string>('');
   const [userName, setUserName] = useState<string>('');
-  const router = useRouter();
-  const userId = useGetUserId();
   const [isMyArticle, setIsMyArticle] = useState<boolean>(false);
   const [initArticle, setInitArticle] = useState({
     id: 0,
@@ -30,6 +29,9 @@ const Article: CustomNextPage = () => {
     memory: '',
     song: '',
   });
+  const router = useRouter();
+  const userId = useGetUserId();
+  const { countGood } = useCountGood();
 
   const compareUserIdRelatedToArticle = useCallback(async (): Promise<void> => {
     const { data, error } = await supabase
@@ -115,7 +117,7 @@ const Article: CustomNextPage = () => {
           <span className='ml-2 pt-1'>
             <GoodIcon isGood={isGood} size={30} setIsGood={setIsGood} />
           </span>
-          <span className='font-medium'>2</span>
+          <span className='font-medium'>{countGood}</span>
         </div>
         <Button onClick={handleClickGood}>supabase click</Button>
         <div>
