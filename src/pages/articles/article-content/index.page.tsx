@@ -1,8 +1,10 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useCountGood } from '@hooks/useCountGood';
 import { useGetUserId } from '@hooks/useGetUserId';
+import { useIsGoodRelatedToUserId } from '@hooks/useIsGoodRelatedToUserId';
 import { Button, TypographyStylesProvider } from '@mantine/core';
 import { DashboardLayout } from '@pages/_Layout';
+import { GoodIcon } from '@pages/articles/good/goodIcon';
 import type { ArticleModel, UserModel } from '@type/index';
 import type { CustomNextPage } from 'next';
 import Link from 'next/link';
@@ -12,7 +14,6 @@ import { TABLE } from 'src/constant/table.const';
 import { toast } from 'src/lib/function/toast';
 import { supabase } from 'src/lib/supabase/supabase';
 
-import { GoodIcon } from '../good/goodIcon';
 import { DeleteArticleModal } from './DeleteArticleModal';
 import { DeleteIcon } from './tooltip/deleteIcon';
 import { EditIcon } from './tooltip/editIcon';
@@ -32,6 +33,8 @@ const Article: CustomNextPage = () => {
   const router = useRouter();
   const userId = useGetUserId();
   const { countGood } = useCountGood();
+  const { isGood } = useIsGoodRelatedToUserId();
+  console.log('isGood', isGood);
 
   const compareUserIdRelatedToArticle = useCallback(async (): Promise<void> => {
     const { data, error } = await supabase
@@ -87,7 +90,6 @@ const Article: CustomNextPage = () => {
     setOpened(false);
   }, [router]);
 
-  const [isGood, setIsGood] = useState<boolean>(false);
   const handleClickGood = useCallback(async () => {
     const { data, error } = await supabase
       .from(TABLE.GOODS)
@@ -97,10 +99,8 @@ const Article: CustomNextPage = () => {
     if (data) {
       if (data.length === 0) {
         await supabase.from(TABLE.GOODS).insert({ articleId: Number(router.query.id), userId });
-        setIsGood(true);
       } else {
         await supabase.from(TABLE.GOODS).delete().match({ id: data[0].id });
-        setIsGood(false);
       }
     }
 
@@ -115,7 +115,7 @@ const Article: CustomNextPage = () => {
             {initArticle.song}/{initArticle.artist}
           </span>
           <span className='ml-2 pt-1'>
-            <GoodIcon isGood={isGood} size={30} setIsGood={setIsGood} />
+            <GoodIcon isGood={isGood} size={30} />
           </span>
           <span className='font-medium'>{countGood}</span>
         </div>

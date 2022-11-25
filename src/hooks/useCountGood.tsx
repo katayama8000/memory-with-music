@@ -13,12 +13,8 @@ export const useCountGood = (): {
 
   const countGoodsRelatedToArticle = async (articleId: GoodModel['articleId']) => {
     const { data, error } = await supabase.from<GoodModel>(TABLE.GOODS).select('id').match({ articleId });
-    if (data) {
-      setCountGood(data.length);
-    }
-    if (error) {
-      toast('Error', error.message + 'try again later', 'red');
-    }
+    if (data) setCountGood(data.length);
+    if (error) toast('Error', error.message + 'try again later', 'red');
   };
 
   useEffect(() => {
