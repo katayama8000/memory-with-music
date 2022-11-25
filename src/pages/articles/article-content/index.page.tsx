@@ -51,7 +51,7 @@ const Article: CustomNextPage = () => {
       .select('userName')
       .match({ userId: userIdRelatedArticle });
 
-    if (data) setUserName(data[0].userName);
+    if (data) setUserName(data[0]?.userName);
 
     if (error) toast('error', error.message, 'red');
   }, [userIdRelatedArticle]);
