@@ -32,7 +32,10 @@ const Article: CustomNextPage = () => {
   });
 
   const compareUserIdRelatedToArticle = useCallback(async (): Promise<void> => {
-    const { data, error } = await supabase.from<ArticleModel>('songs').select('userId').match({ id: router.query.id });
+    const { data, error } = await supabase
+      .from<ArticleModel>(TABLE.SONGS)
+      .select('userId')
+      .match({ id: router.query.id });
 
     if (data) {
       data[0].userId === userId ? setIsMyArticle(true) : setIsMyArticle(false);
@@ -44,11 +47,11 @@ const Article: CustomNextPage = () => {
 
   const getUserNameRelatedToArticle = useCallback(async (): Promise<void> => {
     const { data, error } = await supabase
-      .from<UserModel>('users')
+      .from<{ userName: UserModel['userName'] }>(TABLE.USERS)
       .select('userName')
       .match({ userId: userIdRelatedArticle });
 
-    if (data) setUserName(data[0]?.userName);
+    if (data) setUserName(data[0].userName);
 
     if (error) toast('error', error.message, 'red');
   }, [userIdRelatedArticle]);
@@ -71,7 +74,7 @@ const Article: CustomNextPage = () => {
   }, [router]);
 
   const handleDelete = useCallback(async (): Promise<void> => {
-    const { data, error } = await supabase.from<ArticleModel>('songs').delete().match({ id: router.query.id });
+    const { data, error } = await supabase.from<ArticleModel>(TABLE.SONGS).delete().match({ id: router.query.id });
 
     if (data) {
       toast('成功', '削除しました', 'cyan');

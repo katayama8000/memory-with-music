@@ -1,6 +1,7 @@
 import { useGetUserId } from '@hooks/useGetUserId';
 import type { UserModel } from '@type/user.model';
 import { useCallback, useEffect, useState } from 'react';
+import { TABLE } from 'src/constant/table.const';
 import { supabase } from 'src/lib/supabase/supabase';
 
 export const useGetUserName = (): {
@@ -12,7 +13,7 @@ export const useGetUserName = (): {
   const getUserName = useCallback(async (): Promise<void> => {
     try {
       const { data, error } = await supabase
-        .from<{ userName: UserModel['userName'] }>('users')
+        .from<{ userName: UserModel['userName'] }>(TABLE.USERS)
         .select('userName')
         .match({ userId: userID });
       if (data) {
