@@ -1,5 +1,5 @@
 export const TABLE = {
+  ARTICLES: 'articles',
   GOODS: 'goods',
-  SONGS: 'songs',
   USERS: 'users',
 } as const;

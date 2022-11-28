@@ -79,7 +79,7 @@ const WriteArticle: CustomNextPage = () => {
   }): Promise<void> => {
     setIsLoading(true);
 
-    const { data, error } = await supabase.from<ArticleModel>(TABLE.SONGS).insert([
+    const { data, error } = await supabase.from<ArticleModel>(TABLE.ARTICLES).insert([
       {
         artist: values.artist,
         image: values.image,
@@ -102,7 +102,7 @@ const WriteArticle: CustomNextPage = () => {
   };
 
   const handleUpDateArticle = async (values: Pick<ArticleModel, 'artist' | 'memory' | 'song'>) => {
-    const { data, error } = await supabase.from<ArticleModel>(TABLE.SONGS).update({ memory: values.memory }).match({
+    const { data, error } = await supabase.from<ArticleModel>(TABLE.ARTICLES).update({ memory: values.memory }).match({
       artist: values.artist,
       song: values.song,
       userId: userID,
