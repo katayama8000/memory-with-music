@@ -17,7 +17,7 @@ export const useGetUserSongs = (): {
     setIsLoading(true);
     try {
       const { data, error } = await supabase
-        .from<ArticleModel>(TABLE.SONGS)
+        .from<ArticleModel>(TABLE.ARTICLES)
         .select('id,song, artist,image,memory')
         .match({ userId: userID });
       if (data) {

@@ -35,7 +35,7 @@ const Article: CustomNextPage = () => {
 
   const compareUserIdRelatedToArticle = useCallback(async (): Promise<void> => {
     const { data, error } = await supabase
-      .from<ArticleModel>(TABLE.SONGS)
+      .from<ArticleModel>(TABLE.ARTICLES)
       .select('userId')
       .match({ id: router.query.id });
 
@@ -76,7 +76,7 @@ const Article: CustomNextPage = () => {
   }, [router]);
 
   const handleDelete = useCallback(async (): Promise<void> => {
-    const { data, error } = await supabase.from<ArticleModel>(TABLE.SONGS).delete().match({ id: router.query.id });
+    const { data, error } = await supabase.from<ArticleModel>(TABLE.ARTICLES).delete().match({ id: router.query.id });
 
     if (data) {
       toast('成功', '削除しました', 'cyan');
