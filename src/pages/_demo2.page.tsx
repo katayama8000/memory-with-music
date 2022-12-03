@@ -25,7 +25,7 @@ const Demo2 = () => {
   };
   return (
     <div>
-      <h1>demo2</h1>
+      <h1>this is demo2</h1>
       <Button onClick={handleClickChatRoom}>handleClickChatRoom</Button>
       <Button onClick={handleClickMessage}>handleClickMessage</Button>
     </div>
