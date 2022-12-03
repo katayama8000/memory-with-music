@@ -18,6 +18,7 @@ export default {
   LINKS: {
     ACCOUNT: 'Account',
     ARTICLE: 'Article',
+    CHAT: 'Chat',
     FORM: 'Form',
     LIST: 'List',
     SEACRCH: 'Search',

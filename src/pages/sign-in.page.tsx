@@ -84,5 +84,4 @@ const SignIn: CustomNextPage = () => {
 };
 
 SignIn.getLayout = AuthLayout;
-
 export default SignIn;
