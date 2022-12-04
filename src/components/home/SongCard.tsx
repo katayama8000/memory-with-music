@@ -42,7 +42,7 @@ export const SongCard: FC<SongCardModel> = memo(({ artistName, releaseDate, trac
 });
 SongCard.displayName = 'SongCard';
 
-export const SkeletonCard: React.FC = memo(() => {
+export const SkeletonCard: FC = memo(() => {
   return (
     <div>
       <Card radius='md' withBorder={true} className='h-[320px]'>
