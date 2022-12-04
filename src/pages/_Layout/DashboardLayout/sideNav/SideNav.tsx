@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { memo, useCallback } from 'react';
 import { AiOutlineForm } from 'react-icons/ai';
+import { BsFillChatDotsFill } from 'react-icons/bs';
 import { FaRegListAlt, FaSearch } from 'react-icons/fa';
 import { MdManageAccounts } from 'react-icons/md';
 import { useSnapshot } from 'valtio';
@@ -22,6 +23,7 @@ export const SideNav: React.FC<SideNavProps> = memo(() => {
     { icon: <AiOutlineForm />, label: t.LINKS.FORM, url: '/write-article' },
     { icon: <FaRegListAlt />, label: t.LINKS.LIST, url: '/articles' },
     { icon: <MdManageAccounts />, label: t.LINKS.ACCOUNT, url: '/account' },
+    { icon: <BsFillChatDotsFill />, label: t.LINKS.CHAT, url: '/chat' },
     // {
     //   url: "/articles/article-content",
     //   label: t.LINKS.ARTICLE + "(開発中)",

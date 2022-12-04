@@ -18,6 +18,7 @@ export default {
   LINKS: {
     ACCOUNT: 'アカウント',
     ARTICLE: '記事',
+    CHAT: 'チャット',
     FORM: '入力',
     LIST: '記事一覧',
     SEACRCH: '検索',
