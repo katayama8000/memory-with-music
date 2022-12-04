@@ -14,8 +14,8 @@ import { toast } from 'src/lib/function/toast';
 import { supabase } from 'src/lib/supabase/supabase';
 
 const Account: CustomNextPage = () => {
-  const [opened, setOpened] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [opened, setOpened] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const userID = useGetUserId();
   const { userName } = useGetUserName();
   const { articleList } = useGetUserArticles();
