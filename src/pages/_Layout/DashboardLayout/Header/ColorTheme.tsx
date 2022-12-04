@@ -1,26 +1,21 @@
 import { ActionIcon } from '@mantine/core';
-import { state, toggleColor } from '@state/state';
+import { themeAtom } from '@state/jotai';
+import { useAtom } from 'jotai';
 import { memo } from 'react';
 import { MoonStars, Sun } from 'tabler-icons-react';
-import { useSnapshot } from 'valtio';
-
-const changeColorTheme = (color: 'dark' | 'light') => {
-  const theme = color === 'dark' ? 'light' : 'dark';
-  toggleColor(theme);
-};
 
 export const ColorTheme: React.FC = memo(() => {
-  const { color } = useSnapshot(state);
+  const [theme, setTheme] = useAtom(themeAtom);
   return (
     <ActionIcon
       variant='outline'
-      color={color === 'light' ? 'yellow' : 'blue'}
+      color={theme === 'light' ? 'yellow' : 'blue'}
       onClick={() => {
-        return changeColorTheme(color);
+        return setTheme(theme === 'light' ? 'dark' : 'light');
       }}
       title='Toggle color scheme'
     >
-      {color === 'light' ? <Sun size={18} /> : <MoonStars size={18} />}
+      {theme === 'light' ? <Sun size={18} /> : <MoonStars size={18} />}
     </ActionIcon>
   );
 });
