@@ -41,15 +41,12 @@ export const useHandleGood = (): {
       .match({ articleId: Number(router.query.id), userId });
     console.log(data, error);
     if (data) {
-      if (data.length === 0) {
-        await supabase.from(TABLE.GOODS).insert({ articleId: Number(router.query.id), userId });
-        countGoodsRelatedToArticle(Number(router.query.id));
-        isGoodRelatedToUserId(Number(router.query.id));
-      } else {
-        await supabase.from(TABLE.GOODS).delete().match({ id: data[0].id });
-        countGoodsRelatedToArticle(Number(router.query.id));
-        isGoodRelatedToUserId(Number(router.query.id));
-      }
+      data.length === 0
+        ? await supabase.from(TABLE.GOODS).insert({ articleId: Number(router.query.id), userId })
+        : await supabase.from(TABLE.GOODS).delete().match({ id: data[0].id });
+
+      countGoodsRelatedToArticle(Number(router.query.id));
+      isGoodRelatedToUserId(Number(router.query.id));
     }
 
     if (error) toast('error', error.message, 'red');

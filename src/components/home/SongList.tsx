@@ -3,11 +3,11 @@ import { useLocale } from '@hooks/useLocale';
 import { Grid } from '@mantine/core';
 import type { ResultModel } from '@type/result.model';
 import dynamic from 'next/dynamic';
+import type { FC } from 'react';
 
-const SkeletonCard = dynamic(() => {
-  return import('./SongCard').then((module) => {
-    return module.SkeletonCard;
-  });
+const SkeletonCard = dynamic(async () => {
+  const { SkeletonCard } = await import('./SongCard');
+  return SkeletonCard;
 });
 
 type Props = {
@@ -17,7 +17,7 @@ type Props = {
 
 const NUMBER_OF_SKELETONS = Array.from(Array(9).keys());
 
-export const SongList: React.FC<Props> = ({ isLoading, songList }) => {
+export const SongList: FC<Props> = ({ isLoading, songList }) => {
   const { t } = useLocale();
   return (
     <div>

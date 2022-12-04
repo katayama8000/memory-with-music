@@ -126,7 +126,7 @@ const Article: CustomNextPage = () => {
           )}
         </div>
       </div>
-      <div>written by : {userName}</div>
+      <div>written by : {userName || 'unknown'}</div>
       <div className='mt-10 whitespace-pre-wrap'>
         <TypographyStylesProvider>
           <div dangerouslySetInnerHTML={{ __html: initArticle.memory }} />

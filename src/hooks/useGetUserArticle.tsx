@@ -5,15 +5,15 @@ import { TABLE } from 'src/constant/table.const';
 import { toast } from 'src/lib/function/toast';
 import { supabase } from 'src/lib/supabase/supabase';
 
-export const useGetUserSongs = (): {
-  getUserSongs: () => Promise<void>;
+export const useGetUserArticles = (): {
+  articleList: ArticleModel[];
+  getUserArticles: () => Promise<void>;
   isLoading: boolean;
-  songList: ArticleModel[];
 } => {
-  const [songList, setSongList] = useState<ArticleModel[]>([]);
+  const [articleList, setArticleList] = useState<ArticleModel[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const userID = useGetUserId();
-  const getUserSongs = useCallback(async () => {
+  const getUserArticles = useCallback(async () => {
     setIsLoading(true);
     try {
       const { data, error } = await supabase
@@ -21,7 +21,7 @@ export const useGetUserSongs = (): {
         .select('id,song, artist,image,memory')
         .match({ userId: userID });
       if (data) {
-        setSongList(data);
+        setArticleList(data);
       }
       if (error || !data) {
         toast('Error', error.message + 'try again later', 'red');
@@ -34,8 +34,8 @@ export const useGetUserSongs = (): {
   }, [userID]);
 
   useEffect(() => {
-    getUserSongs();
-  }, [getUserSongs]);
+    getUserArticles();
+  }, [getUserArticles]);
 
-  return { getUserSongs, isLoading, songList };
+  return { articleList, getUserArticles, isLoading };
 };

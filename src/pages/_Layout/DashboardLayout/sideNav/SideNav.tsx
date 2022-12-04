@@ -1,5 +1,6 @@
 import { useLocale } from '@hooks/useLocale';
-import { state } from '@state/state';
+import { themeAtom } from '@state/jotai';
+import { useAtom } from 'jotai';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { memo, useCallback } from 'react';
@@ -7,14 +8,13 @@ import { AiOutlineForm } from 'react-icons/ai';
 import { BsFillChatDotsFill } from 'react-icons/bs';
 import { FaRegListAlt, FaSearch } from 'react-icons/fa';
 import { MdManageAccounts } from 'react-icons/md';
-import { useSnapshot } from 'valtio';
 
 type SideNavProps = {
   color?: 'light' | 'dark';
 };
 
 export const SideNav: React.FC<SideNavProps> = memo(() => {
-  const { color } = useSnapshot(state);
+  const [theme] = useAtom(themeAtom);
   const { t } = useLocale();
   const { pathname } = useRouter();
   type urlType = typeof Links[number]['url'];
@@ -52,7 +52,7 @@ export const SideNav: React.FC<SideNavProps> = memo(() => {
               <Link href={link.url}>
                 <div
                   className={`my-1 flex cursor-pointer  rounded-lg  py-2 pl-2 ${
-                    color === 'dark'
+                    theme === 'dark'
                       ? `text-white ${isMacthedUrl(link.url) ? 'bg-[#0c8599]' : 'hover:bg-[#232323]'}`
                       : `
                       ${isMacthedUrl(link.url) ? 'bg-[#0c8599] text-white' : 'text-inherit hover:bg-[#f0f0f0]'}`
