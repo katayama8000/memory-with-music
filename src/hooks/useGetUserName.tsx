@@ -24,7 +24,9 @@ export const useGetUserName = (): {
         console.log(error);
       }
     } catch (error) {
-      console.log(error);
+      if (error instanceof Error) {
+        console.log(error.message);
+      }
     }
   }, [userID]);
 
