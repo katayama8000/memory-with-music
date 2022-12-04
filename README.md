@@ -7,7 +7,7 @@
 - Next.js
 - Mantine
 - supabase([docs](https://www.supabase.jp/docs/))
-- valtio
+- jotai
 
 
 [Save Your Memory :)](https://memory-with-music.vercel.app/)
