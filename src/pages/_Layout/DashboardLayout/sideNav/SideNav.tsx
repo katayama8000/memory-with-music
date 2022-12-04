@@ -4,7 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { memo, useCallback } from 'react';
 import { AiOutlineForm } from 'react-icons/ai';
-import { BsFillChatDotsFill } from 'react-icons/Bs';
+import { BsFillChatDotsFill } from 'react-icons/bs';
 import { FaRegListAlt, FaSearch } from 'react-icons/fa';
 import { MdManageAccounts } from 'react-icons/md';
 import { useSnapshot } from 'valtio';
