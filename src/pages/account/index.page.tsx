@@ -22,11 +22,11 @@ const Account: CustomNextPage = () => {
   const { t } = useLocale();
 
   const handleEdit = useCallback(
-    async (value: { name: string }): Promise<void> => {
+    async (userName: UserModel['userName']): Promise<void> => {
       setIsLoading(true);
       const { data, error } = await supabase
         .from<{ userName: UserModel['userName'] }>('users')
-        .update({ userName: value.name })
+        .update({ userName })
         .match({ userId: userID });
 
       if (data) {
@@ -45,7 +45,7 @@ const Account: CustomNextPage = () => {
 
   const form = useForm({
     initialValues: {
-      name: userName,
+      userName,
     },
   });
 
@@ -84,13 +84,19 @@ const Account: CustomNextPage = () => {
       >
         <form
           onSubmit={form.onSubmit((values) => {
-            if (values.name !== '') {
+            if (values.userName !== '') {
               return;
             }
-            return handleEdit(values);
+            return handleEdit(values.userName);
           })}
         >
-          <TextInput label='Name' placeholder={userName} {...form.getInputProps('name')} className='my-4' required />
+          <TextInput
+            label='Name'
+            placeholder={userName}
+            {...form.getInputProps('userName')}
+            className='my-4'
+            required
+          />
           <Group position='center' mt='xl'>
             <Button type='submit' color='cyan' loading={isLoading}>
               save
