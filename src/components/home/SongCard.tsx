@@ -2,6 +2,7 @@ import { useLocale } from '@hooks/useLocale';
 import { Button, Card, Image, Skeleton } from '@mantine/core';
 import type { SongCardModel } from '@type/card.model';
 import Link from 'next/link';
+import type { FC } from 'react';
 import { memo } from 'react';
 
 const getYear = (releaseDate: string): number => {
@@ -9,11 +10,11 @@ const getYear = (releaseDate: string): number => {
   return date.getFullYear();
 };
 
-export const SongCard: React.FC<SongCardModel> = memo(({ artistName, releaseDate, trackName, url }) => {
+export const SongCard: FC<SongCardModel> = memo(({ artistName, releaseDate, trackName, url }) => {
   const { t } = useLocale();
   return (
     <div>
-      <Card radius='md' withBorder={true} className=' hover:opacity-70'>
+      <Card radius='md' withBorder={true} className='hover:opacity-70'>
         <Card.Section className='mx-auto pb-4'>
           <Image src={url} alt={artistName} radius='xs' height={120} withPlaceholder />
         </Card.Section>
