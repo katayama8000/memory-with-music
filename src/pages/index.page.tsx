@@ -14,6 +14,7 @@ import { FaSearch } from 'react-icons/fa';
 const Home: CustomNextPage = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [songList, setSongList] = useState<ResultModel>();
+  const [error, setError] = useState<boolean>(false);
   const router = useRouter();
 
   const { t } = useLocale();
@@ -36,7 +37,7 @@ const Home: CustomNextPage = () => {
       );
       setSongList(data);
     } catch {
-      setSongList(undefined);
+      setError(true);
     } finally {
       setIsLoading(false);
     }
@@ -68,9 +69,10 @@ const Home: CustomNextPage = () => {
           {songList ? (
             <SongList songList={songList} isLoading={isLoading} />
           ) : (
-            <div className='text-center'>もう一度検索してください</div>
+            error && <p className='text-center text-red-500'>もう一度検索してください</p>
           )}
         </div>
+        <div className='mt-5'></div>
       </div>
     </div>
   );
