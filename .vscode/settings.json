@@ -5,10 +5,8 @@
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "editor.formatOnSave": true,
   "editor.quickSuggestions": { "strings": true },
-  "eslint.workingDirectories": [{ "mode": "auto" }],
   "files.encoding": "utf8",
   "files.eol": "\n",
   "typescript.preferences.importModuleSpecifier": "non-relative",
-  "typescript.tsdk": "node_modules/typescript/lib",
-  "eslint.useESLintClass": true
+  "typescript.tsdk": "node_modules/typescript/lib"
 }
