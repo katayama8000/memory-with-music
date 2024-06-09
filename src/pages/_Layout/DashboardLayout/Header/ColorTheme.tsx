@@ -1,5 +1,5 @@
 import { ActionIcon } from '@mantine/core';
-import { themeAtom } from '@state/jotai';
+import { themeAtom } from '@state/theme';
 import { useAtom } from 'jotai';
 import { memo } from 'react';
 import { MoonStars, Sun } from 'tabler-icons-react';

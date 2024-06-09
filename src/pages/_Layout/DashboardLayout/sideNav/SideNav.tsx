@@ -1,5 +1,5 @@
 import { useLocale } from '@hooks/useLocale';
-import { themeAtom } from '@state/jotai';
+import { themeAtom } from '@state/theme';
 import { useAtom } from 'jotai';
 import Link from 'next/link';
 import { useRouter } from 'next/router';

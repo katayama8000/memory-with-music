@@ -3,7 +3,7 @@ import 'src/lib/tailwind.css';
 import { HeadContents } from '@components/head/HeadContents';
 import { createEmotionCache, MantineProvider } from '@mantine/core';
 import { NotificationsProvider } from '@mantine/notifications';
-import { themeAtom } from '@state/jotai';
+import { themeAtom } from '@state/theme';
 import { useAtom } from 'jotai';
 import type { CustomAppPage } from 'next/app';
 
